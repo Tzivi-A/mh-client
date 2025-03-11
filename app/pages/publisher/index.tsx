@@ -6,11 +6,13 @@ import logo from '~/assets/images/LogoMevaker.png'
 export const PublisherPage = () => {
   return (
     <div>
-      <Card>Publisher</Card>{' '}
-      <Button onClick={() => window.alert('Hello! I am the Mevaker!')} type="submit">
-        Click the Mevaker
-      </Button>
-      <Image src={logo} alt="placeholder" />
+      <Card>
+        Publisher
+        <Button onClick={() => window.alert('Hello! I am the Mevaker!')} type="submit">
+          Click the Mevaker
+        </Button>
+        <Image src={logo} alt="mevaker" />
+      </Card>
     </div>
   )
 }
