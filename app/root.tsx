@@ -28,9 +28,11 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-export default function App() {
+const App = () => {
   return <Outlet />;
-}
+};
+
+export default App;
 
 export const ErrorBoundary = ({ error }: Route.ErrorBoundaryProps) => {
   let message = 'Oops!';

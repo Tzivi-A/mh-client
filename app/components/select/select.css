@@ -1,0 +1,9 @@
+.select .ant-select-selector {
+  direction: rtl;
+  text-align: right;
+}
+
+.select .ant-select-arrow {
+  left: 11px;
+  right: auto;
+}
