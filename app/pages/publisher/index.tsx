@@ -1,7 +1,7 @@
-import { Button } from '~/components/button/button'
-import { Card } from '~/components/card/card'
-import { Image } from '~/components/image/image'
-import logo from '~/assets/images/LogoMevaker.png'
+import { Button } from '~/components/button/button';
+import { Card } from '~/components/card/card';
+import { Image } from '~/components/image/image';
+import logo from '~/assets/images/LogoMevaker.png';
 
 export const PublisherPage = () => {
   return (
@@ -14,5 +14,5 @@ export const PublisherPage = () => {
         <Image src={logo} alt="mevaker" />
       </Card>
     </div>
-  )
-}
+  );
+};
