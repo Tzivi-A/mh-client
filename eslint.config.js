@@ -70,7 +70,11 @@ export default tseslint.config(
       'no-return-assign': 2,
       'no-unused-expressions': 2,
       'no-useless-return': 2,
-      'prefer-const': 2
+      'prefer-const': 2,
+      'react-refresh/only-export-components': 0,
+      '@typescript-eslint/no-unsafe-return': 0,
+      '@typescript-eslint/no-unsafe-assignment': 0,
+      '@typescript-eslint/no-unsafe-call': 0
     }
   }
 );

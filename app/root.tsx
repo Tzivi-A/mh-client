@@ -9,6 +9,7 @@ import {
 
 import type { Route } from './+types/root';
 import './app.css';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 export const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -27,9 +28,13 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
     </html>
   );
 };
-
+const queryClient = new QueryClient();
 const App = () => {
-  return <Outlet />;
+  return (
+    <QueryClientProvider client={queryClient}>
+      <Outlet />
+    </QueryClientProvider>
+  );
 };
 
 export default App;

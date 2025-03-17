@@ -1,0 +1,38 @@
+.select .ant-select-selector {
+  direction: rtl !important;
+  text-align: right !important;
+}
+
+/* Align dropdown options to RTL */
+.select .ant-select-dropdown {
+  direction: rtl !important;
+  text-align: right !important;
+}
+
+/* Ensure the arrow remains on the left */
+.select .ant-select-arrow {
+  left: 11px !important;
+  right: auto !important;
+}
+
+/* Ensure the container follows RTL */
+.custom-select-container {
+  position: relative;
+  width: 250px;
+  display: flex;
+  flex-direction: column;
+  direction: rtl; /* Force right-to-left */
+}
+
+.custom-select-container .ant-select-selector {
+  height: 40px !important;
+  display: flex;
+  align-items: center;
+  padding-left: 12px !important;
+}
+
+/* Ensure dropdown menu items align right */
+.ant-select-dropdown .ant-select-item {
+  direction: rtl !important;
+  text-align: right !important;
+}
