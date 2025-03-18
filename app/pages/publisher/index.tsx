@@ -2,15 +2,9 @@ import { Button } from '~/components/button/button';
 import { Card } from '~/components/card/card';
 import { Image } from '~/components/image/image';
 import logo from '~/assets/images/LogoMevaker.png';
-import MHSelect from '~/components/input/select/select';
+import Select from '~/components/input/select/select';
 import { useQuery } from '~/api/use-query';
-
-const options = [
-  { value: 'option1', label: 'ירושלים' },
-  { value: 'option2', label: 'ביתר' },
-  { value: 'option3', label: 'מודיעין עילית' },
-  { value: 'option4', label: 'בני ברק' }
-];
+import { CitiesOptions } from '~/api/mock/select-option';
 
 export const PublisherPage = () => {
   const handleChange = (value: string) => {
@@ -29,7 +23,7 @@ export const PublisherPage = () => {
           </Button>
         </div>
         <Image src={logo} alt="mevaker" />
-        <MHSelect options={options} onChange={handleChange} label="ערים" id="cities" />
+        <Select options={CitiesOptions} onChange={handleChange} label="ערים" id="cities" />
       </Card>
     </div>
   );

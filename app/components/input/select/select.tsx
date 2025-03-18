@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Select } from 'antd';
+import { Select as AntSelect } from 'antd';
 import 'antd/dist/reset.css';
 import './select.css';
 import InputWrapper from '../input-wrapper/input-wrapper';
@@ -12,7 +12,7 @@ interface SelectProps {
   onChange?: (value: string) => void;
 }
 
-export const MHSelect = ({ label, id, options, defaultValue, onChange }: SelectProps) => {
+export const Select = ({ label, id, options, defaultValue, onChange }: SelectProps) => {
   const [isFocused, setIsFocused] = useState(!!defaultValue);
   const [selectedValue, setSelectedValue] = useState<string | undefined>(defaultValue);
 
@@ -27,7 +27,7 @@ export const MHSelect = ({ label, id, options, defaultValue, onChange }: SelectP
 
   return (
     <InputWrapper label={label} id={`${id}`}>
-      <Select
+      <AntSelect
         id={id}
         defaultValue={defaultValue}
         onChange={handleChange}
@@ -36,13 +36,13 @@ export const MHSelect = ({ label, id, options, defaultValue, onChange }: SelectP
         className="custom-select"
       >
         {options.map(option => (
-          <Select.Option key={option.value} value={option.value}>
+          <AntSelect.Option key={option.value} value={option.value}>
             {option.label}
-          </Select.Option>
+          </AntSelect.Option>
         ))}
-      </Select>
+      </AntSelect>
     </InputWrapper>
   );
 };
 
-export default MHSelect;
+export default Select;

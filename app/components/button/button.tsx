@@ -9,7 +9,7 @@ interface ButtonProps {
 
 export const Button = ({ children, onClick, type = 'button' }: ButtonProps) => {
   return (
-    <button type={type === 'submit' ? 'submit' : 'button'} onClick={onClick} className="button">
+    <button type={type} onClick={onClick} className="button">
       {children}
     </button>
   );
