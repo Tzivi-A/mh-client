@@ -6,12 +6,13 @@ import InputWrapper from '../input-wrapper/input-wrapper';
 
 interface SelectProps {
   label: string;
+  id: string;
   options: { value: string; label: string }[];
   defaultValue?: string;
   onChange?: (value: string) => void;
 }
 
-export const MHSelect = ({ label, options, defaultValue, onChange }: SelectProps) => {
+export const MHSelect = ({ label, id, options, defaultValue, onChange }: SelectProps) => {
   const [isFocused, setIsFocused] = useState(!!defaultValue);
   const [selectedValue, setSelectedValue] = useState<string | undefined>(defaultValue);
 
@@ -25,14 +26,14 @@ export const MHSelect = ({ label, options, defaultValue, onChange }: SelectProps
   };
 
   return (
-    <InputWrapper label="ערים">
+    <InputWrapper label={label} id={`${id}`}>
       <Select
+        id={id}
         defaultValue={defaultValue}
         onChange={handleChange}
         onFocus={handleFocus}
         onBlur={handleBlur}
         className="custom-select"
-        style={{ width: '100%' }}
       >
         {options.map(option => (
           <Select.Option key={option.value} value={option.value}>

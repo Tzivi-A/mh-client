@@ -29,7 +29,7 @@ export const PublisherPage = () => {
           </Button>
         </div>
         <Image src={logo} alt="mevaker" />
-        <MHSelect options={options} onChange={handleChange} label="ערים" />
+        <MHSelect options={options} onChange={handleChange} label="ערים" id="cities" />
       </Card>
     </div>
   );
