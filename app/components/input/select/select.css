@@ -24,13 +24,6 @@
   direction: rtl; /* Force right-to-left */
 }
 
-.custom-select-container .ant-select-selector {
-  height: 40px !important;
-  display: flex;
-  align-items: center;
-  padding-left: 12px !important;
-}
-
 /* Ensure dropdown menu items align right */
 .ant-select-dropdown .ant-select-item {
   direction: rtl !important;

@@ -13,28 +13,9 @@ interface SelectProps {
 }
 
 export const Select = ({ label, id, options, defaultValue, onChange }: SelectProps) => {
-  const [isFocused, setIsFocused] = useState(!!defaultValue);
-  const [selectedValue, setSelectedValue] = useState<string | undefined>(defaultValue);
-
-  const handleFocus = () => setIsFocused(true);
-  const handleBlur = () => {
-    if (!selectedValue) setIsFocused(false);
-  };
-  const handleChange = (value: string) => {
-    setSelectedValue(value);
-    onChange?.(value);
-  };
-
   return (
     <InputWrapper label={label} id={`${id}`}>
-      <AntSelect
-        id={id}
-        defaultValue={defaultValue}
-        onChange={handleChange}
-        onFocus={handleFocus}
-        onBlur={handleBlur}
-        className="custom-select"
-      >
+      <AntSelect id={id} defaultValue={defaultValue} className="custom-select">
         {options.map(option => (
           <AntSelect.Option key={option.value} value={option.value}>
             {option.label}

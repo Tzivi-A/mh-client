@@ -74,7 +74,8 @@ export default tseslint.config(
       'react-refresh/only-export-components': 0,
       '@typescript-eslint/no-unsafe-return': 0,
       '@typescript-eslint/no-unsafe-assignment': 0,
-      '@typescript-eslint/no-unsafe-call': 0
+      '@typescript-eslint/no-unsafe-call': 0,
+      '@typescript-eslint/no-unsafe-member-access': 0
     }
   }
 );
