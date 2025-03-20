@@ -5,29 +5,21 @@ import './input-wrapper.css';
 interface InputWrapperProps {
   label: React.ReactNode;
   id: string;
+  value: string | undefined;
   children: ReactElement;
 }
 
-const InputWrapper = ({ label, id, children }: InputWrapperProps) => {
+const InputWrapper = ({ label, id, children, value }: InputWrapperProps) => {
   const [isFocused, setIsFocused] = useState(false);
-  const [hasValue, setHasValue] = useState(false);
-  const inputRef = useRef<HTMLElement | null>(null);
 
-  const checkValue = () => {
-    if (!inputRef.current) return;
-    const value = 'value' in inputRef.current ? (inputRef.current as HTMLInputElement).value : '';
-    setHasValue(!!value);
+  const checkValue = () => {  
+    return !!value;
   };
-
-  useEffect(() => {
-    checkValue(); // Check initial value on mount
-  }, []);
 
   const handleFocus = () => setIsFocused(true);
 
-  const handleBlur = () => {
-    checkValue();
-    if (!hasValue) setIsFocused(false);
+  const handleBlur = () => {    
+    if (!checkValue()) setIsFocused(false);
   };
 
   return (
