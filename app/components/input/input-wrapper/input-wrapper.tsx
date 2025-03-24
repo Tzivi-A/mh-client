@@ -10,8 +10,8 @@ interface InputWrapperProps {
 
 const InputWrapper = ({ label, id, children, value }: InputWrapperProps) => {
   return (
-    <div className={`custom-select-container ${value ? 'focused' : ''}`}>
-      <label htmlFor={id} className="custom-label">
+    <div className={`malam-select-container ${value ? 'focused' : ''}`}>
+      <label htmlFor={id} className="malam-label">
         {label}
       </label>
       {children}

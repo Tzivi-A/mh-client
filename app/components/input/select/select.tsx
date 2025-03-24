@@ -15,7 +15,7 @@ interface SelectProps {
 export const Select = ({ label, id, options, defaultValue, onChange, value }: SelectProps) => {
   return (
     <InputWrapper label={label} id={`${id}`} value={value}>
-      <AntSelect id={id} defaultValue={defaultValue} className="custom-select" onChange={onChange}>
+      <AntSelect id={id} defaultValue={defaultValue} className="malam-select" onChange={onChange}>
         {options.map(option => (
           <AntSelect.Option key={option.value} value={option.value}>
             {option.label}

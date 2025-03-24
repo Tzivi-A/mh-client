@@ -1,5 +1,5 @@
 /* Move the label to the right */
-.custom-label {
+.malam-label {
   position: absolute;
   top: 50%;
   right: 12px; /* Move to right */
@@ -14,8 +14,8 @@
   z-index: 2;
 }
 
-.custom-select-container.focused .custom-label,
-.custom-select-container .ant-select-selection-item {
+.malam-select-container.focused .malam-label,
+.malam-select-container .ant-select-selection-item {
   top: 5px;
   right: 10px; /* Adjust to right */
   left: auto;

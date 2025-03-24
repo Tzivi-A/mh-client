@@ -16,7 +16,7 @@
 }
 
 /* Ensure the container follows RTL */
-.custom-select-container {
+.malam-select-container {
   position: relative;
   width: 250px;
   display: flex;
