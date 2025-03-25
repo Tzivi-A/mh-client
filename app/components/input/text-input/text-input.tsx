@@ -1,4 +1,4 @@
-import './input.css';
+import '../input.css';
 import InputWrapper from '../input-wrapper/input-wrapper';
 export interface TextInputProps {
   value: string;
