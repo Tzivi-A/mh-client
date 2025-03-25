@@ -23,3 +23,8 @@
   color: #888;
   text-align: right;
 }
+
+.error {
+  font-size: 13px;
+  color: red;
+}
