@@ -1,51 +1,81 @@
-// eslint.config.js
+import eslint from '@eslint/js';
+import tseslint from 'typescript-eslint';
+import reactPlugin from 'eslint-plugin-react';
+import jsxA11y from 'eslint-plugin-jsx-a11y';
+import globals from 'globals';
+import reactRefresh from 'eslint-plugin-react-refresh';
+import reactHooks from 'eslint-plugin-react-hooks';
+import prettierRecommended from 'eslint-plugin-prettier/recommended';
 
-import js from '@eslint/js'
-import globals from 'globals'
-import tseslint from 'typescript-eslint'
-import reactPlugin from 'eslint-plugin-react'
-import reactHooksPlugin from 'eslint-plugin-react-hooks'
-import reactRefreshPlugin from 'eslint-plugin-react-refresh'
-import importPlugin from 'eslint-plugin-import'
-import jsxA11y from 'eslint-plugin-jsx-a11y'
-import prettierPlugin from 'eslint-plugin-prettier/recommended'
-
-export default [
+export default tseslint.config(
   {
-    ignores: ['dist', 'node_modules', '.react-router']
+    ignores: ['node_modules', 'dist', 'build', 'eslint.config.js', '.react-router']
   },
-  js.configs.recommended,
-  ...tseslint.configs.recommended,
-  //eslintPluginPrettier,
-  reactPlugin.configs.flat.recommended,
-  ...tseslint.configs.recommendedTypeChecked,
-  prettierPlugin,
+  {
+    files: ['**/*.ts', '**/*.tsx']
+  },
+  eslint.configs.recommended,
+  tseslint.configs.recommendedTypeChecked,
   {
     languageOptions: {
-      ecmaVersion: 2023,
-      globals: globals.browser, // ✅ Allows window, document, etc.
-      parser: tseslint.parser,
       parserOptions: {
-        project: true,
-        tsconfigRootDir: import.meta.dirname // For TypeScript plugin to resolve imports
+        projectService: true,
+        tsconfigRootDir: import.meta.dirname,
+        ecmaFeatures: {
+          jsx: true
+        }
+      },
+      globals: {
+        ...globals.browser,
+        ...globals.node
+      }
+    }
+  },
+  reactPlugin.configs.flat.recommended,
+  reactPlugin.configs.flat['jsx-runtime'],
+  jsxA11y.flatConfigs.recommended,
+  reactRefresh.configs.vite,
+  prettierRecommended,
+  {
+    settings: {
+      react: {
+        version: 'detect'
       }
     },
     plugins: {
-      react: reactPlugin,
-      '@typescript-eslint': tseslint.plugin
-    },
-    settings: {
-      react: {
-        version: 'detect' // Auto-detect React version
-      }
+      'react-hooks': reactHooks
     },
     rules: {
-      'no-console': 'warn',
-      'react/button-has-type': 'error',
-      'react/react-in-jsx-scope': 'off',
-      'prettier/prettier': 0,
-      'func-style': ['error', 'expression'], // ✅ Enforce arrow function expressions
-      'no-empty-pattern': 0 // ✅ Allow empty object destructuring
+      ...reactHooks.configs.recommended.rules,
+      'prettier/prettier': ['error'],
+      'react/self-closing-comp': 'error',
+      'react/function-component-definition': [2, { namedComponents: 'arrow-function' }],
+      'react/jsx-pascal-case': 2,
+      'react/no-array-index-key': 2,
+      'react/prop-types': 0,
+      'react-hooks/rules-of-hooks': 'error',
+      'react-hooks/exhaustive-deps': 0,
+      'react/jsx-props-no-spreading': 0,
+      'react/require-default-props': 0,
+      'react/void-dom-elements-no-children': 2,
+      'react/jsx-no-useless-fragment': ['error', { allowExpressions: true }],
+      'react/no-unstable-nested-components': 0,
+      'no-duplicate-imports': 2,
+      'no-useless-assignment': 2,
+      camelcase: 2,
+      eqeqeq: 2,
+      'no-console': 1,
+      'no-else-return': 0,
+      'no-nested-ternary': 2,
+      'no-return-assign': 2,
+      'no-unused-expressions': 2,
+      'no-useless-return': 2,
+      'prefer-const': 2,
+      'react-refresh/only-export-components': 0,
+      '@typescript-eslint/no-unsafe-return': 0,
+      '@typescript-eslint/no-unsafe-assignment': 0,
+      '@typescript-eslint/no-unsafe-call': 0,
+      '@typescript-eslint/no-unsafe-member-access': 0
     }
   }
-]
+);
