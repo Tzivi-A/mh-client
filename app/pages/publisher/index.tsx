@@ -2,17 +2,19 @@ import { Button } from '~/components/button/button';
 import { Card } from '~/components/card/card';
 import { Image } from '~/components/image/image';
 import logo from '~/assets/images/LogoMevaker.png';
-import { AppFormSelect as Select } from '~/components/input/select/app-form-select';
 import { useQuery } from '~/api/use-query';
 import { CitiesOptions } from '~/api/mock/select-option';
 import useAppForm from '~/hooks/use-app-form';
+import TextInput from '~/components/input/text-input/text-input';
+import { useState } from 'react';
 
 export const PublisherPage = () => {
   const query = useQuery('https://jsonplaceholder.typicode.com/todos/1');
   //const [value, setValue] = useState('');
   const form = useAppForm({
     defaultValues: {
-      city: 'ביתר'
+      city: 'ביתר',
+      name: 'אבי'
     },
     // validators: {
     //   onChange: ({ value }) =>
@@ -22,6 +24,7 @@ export const PublisherPage = () => {
       alert(JSON.stringify(value));
     }
   });
+
   return (
     <main>
       <form
@@ -40,7 +43,11 @@ export const PublisherPage = () => {
               </Button>
             </div>
             <Image src={logo} alt="mevaker" />
-            <form.AppField name="city" children={field => <field.Select label="ערים" options={CitiesOptions} />} />
+            <form.AppField
+              name="city"
+              children={field => <field.Select label="ערים" options={CitiesOptions} />}
+            />
+            <form.AppField name="name" children={field => <field.Input label="שם פרטי" />} />
           </Card>
         </div>
       </form>
