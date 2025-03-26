@@ -13,6 +13,7 @@ export const TextInput = ({ value, onChange, id, onBlur, error, label }: TextInp
   return (
     <InputWrapper id={id} error={error} label={label} value={value}>
       <input
+        className="malam-input"
         id={id}
         onBlur={onBlur}
         value={value}
