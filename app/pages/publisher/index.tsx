@@ -2,8 +2,6 @@ import { Button } from '~/components/button/button';
 import { Card } from '~/components/card/card';
 import { Image } from '~/components/image/image';
 import logo from '~/assets/images/LogoMevaker.png';
-import { AppFormSelect as Select } from '~/components/input/select/app-form-select';
-//import { AppFormSelect as Select } from '~/components/input/select/app-form-select';
 import { useQuery } from '~/api/use-query';
 import { CitiesOptions } from '~/api/mock/select-option';
 import useAppForm from '~/hooks/use-app-form';
@@ -16,7 +14,7 @@ export const PublisherPage = () => {
   const form = useAppForm({
     defaultValues: {
       city: 'ביתר',
-      name: 'אבי',
+      name: 'אבי'
     },
     // validators: {
     //   onChange: ({ value }) =>
@@ -26,8 +24,6 @@ export const PublisherPage = () => {
       alert(JSON.stringify(value));
     }
   });
-  const [firstName, setFirstName] = useState('');
-  const [city, setCity] = useState('');
 
   return (
     <main>
@@ -47,8 +43,11 @@ export const PublisherPage = () => {
               </Button>
             </div>
             <Image src={logo} alt="mevaker" />
-            <form.AppField name="city" children={field => <field.Select label="ערים" options={CitiesOptions} />} />
-            <form.AppField name="name" children={field => <field.Text label="שם פרטי"  } />
+            <form.AppField
+              name="city"
+              children={field => <field.Select label="ערים" options={CitiesOptions} />}
+            />
+            <form.AppField name="name" children={field => <field.Input label="שם פרטי" />} />
           </Card>
         </div>
       </form>
