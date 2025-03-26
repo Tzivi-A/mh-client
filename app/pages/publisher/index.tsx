@@ -15,7 +15,8 @@ export const PublisherPage = () => {
   //const [value, setValue] = useState('');
   const form = useAppForm({
     defaultValues: {
-      city: 'ביתר'
+      city: 'ביתר',
+      name: 'אבי',
     },
     // validators: {
     //   onChange: ({ value }) =>
@@ -47,26 +48,11 @@ export const PublisherPage = () => {
             </div>
             <Image src={logo} alt="mevaker" />
             <form.AppField name="city" children={field => <field.Select label="ערים" options={CitiesOptions} />} />
+            <form.AppField name="name" children={field => <field.Text label="שם פרטי"  } />
           </Card>
         </div>
       </form>
     </main>
-    <div>
-      <Card>
-        <div>Publisher {query?.isPending.toString()}</div>
-        <div>
-          <Button onClick={() => window.alert('Hello! I am the Mevaker!')} type="submit">
-            Click the Mevaker
-          </Button>
-        </div>
-        <Image src={logo} alt="mevaker" />
-        {/* <form.Field name="cities">
-              {() => <Select options={CitiesOptions} label="ערים" />}
-            </form.Field> */}
-        <TextInput id="firstName" value={firstName} label="שם פרטי" onChange={setFirstName} />
-        <Select options={CitiesOptions} label="ערים" id="cities" value={city} onChange={setCity} />
-      </Card>
-    </div>
   );
 };
 
