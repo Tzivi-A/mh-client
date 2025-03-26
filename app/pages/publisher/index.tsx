@@ -12,7 +12,7 @@ export const PublisherPage = () => {
   //const [value, setValue] = useState('');
   const form = useAppForm({
     defaultValues: {
-      cities: 'ביתר'
+      city: 'ביתר'
     },
     // validators: {
     //   onChange: ({ value }) =>
@@ -40,9 +40,7 @@ export const PublisherPage = () => {
               </Button>
             </div>
             <Image src={logo} alt="mevaker" />
-            <form.Field name="cities">
-              {() => <Select options={CitiesOptions} label="ערים" />}
-            </form.Field>
+            <form.AppField name="city" children={field => <field.Select label="ערים" options={CitiesOptions} />} />
           </Card>
         </div>
       </form>
