@@ -5,8 +5,6 @@ import logo from '~/assets/images/LogoMevaker.png';
 import { useQuery } from '~/api/use-query';
 import { CitiesOptions } from '~/api/mock/select-option';
 import useAppForm from '~/hooks/use-app-form';
-import TextInput from '~/components/input/text-input/text-input';
-import { useState } from 'react';
 
 export const PublisherPage = () => {
   const query = useQuery('https://jsonplaceholder.typicode.com/todos/1');

@@ -60,7 +60,7 @@ export default tseslint.config(
       'react/void-dom-elements-no-children': 2,
       'react/jsx-no-useless-fragment': ['error', { allowExpressions: true }],
       'react/no-unstable-nested-components': 0,
-      'react/no-children-props': 0,
+      'react/no-children-prop': 0,
       'no-duplicate-imports': 2,
       'no-useless-assignment': 2,
       camelcase: 2,
