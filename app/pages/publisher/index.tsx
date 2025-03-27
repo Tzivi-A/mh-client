@@ -4,25 +4,24 @@ import { Image } from '~/components/image/image';
 import logo from '~/assets/images/LogoMevaker.png';
 import { useQuery } from '~/api/use-query';
 import { CitiesOptions } from '~/api/mock/select-option';
-import { FormContext, Layout } from '~/components/layout/layout';
-import { useContext } from 'react';
-
+import useAppForm from '~/hooks/use-app-form';
+import Layout from '~/components/layout/layout';
 
 
 export const PublisherPage = () => {
   const query = useQuery('https://jsonplaceholder.typicode.com/todos/1');
-  const form = useContext(FormContext);
   
+  const form = useAppForm({  
+    defaultValues:{
+      city: 'ביתר',
+      name: 'אבי',
+    },
+    onSubmit:({ value }) => {
+      alert(JSON.stringify(value));
+    }});
+
   return (
-    <Layout
-      defaultValues={{
-        city: 'ביתר',
-        name: 'אבי',
-      }}
-      onSubmit={({ value }) => {
-        alert(JSON.stringify(value));
-      }}
-    >
+    <Layout form={form}>
       <div>
         <Card>
           <div>Publisher {query?.isPending.toString()}</div>
@@ -32,10 +31,7 @@ export const PublisherPage = () => {
             </Button>
           </div>
           <Image src={logo} alt="mevaker" />
-          <form.AppField
-            name="city"
-            children={(field) => <field.Select label="ערים" options={CitiesOptions}  />}
-          />
+          <form.AppField name="city" children={(field) => <field.Select label="ערים" options={CitiesOptions}  />}/>
           <form.AppField name="name" children={(field) => <field.Input label="שם פרטי" />} />
         </Card>
       </div>

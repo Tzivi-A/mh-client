@@ -3,7 +3,7 @@ import Select from './select';
 
 export interface AppFormSelectProps {
   label: string;
-  options: { value: string; label: string }[];
+  options: SelectOption[];
 }
 
 export const AppFormSelect = ({ label, options }: AppFormSelectProps) => {
