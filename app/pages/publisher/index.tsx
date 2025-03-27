@@ -31,7 +31,7 @@ export const PublisherPage = () => {
         className="form"
         onSubmit={e => {
           e.preventDefault();
-          void form.handleSubmit();
+          form.handleSubmit();
         }}
       >
         <div>
