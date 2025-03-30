@@ -1,9 +1,12 @@
 import type { Updater } from '@tanstack/react-form';
 import { useFieldContext } from '~/hooks/form-context';
 
-export interface AppFormSelectProps {
-  label: string;
-  InputComponent: React.ElementType;
+export interface AppFormInputProps {
+    label: string;
+}
+
+export interface DynamicFormInputProps extends AppFormInputProps {
+    InputComponent: React.ElementType;
 }
 
 export interface InputProps {
@@ -13,9 +16,9 @@ export interface InputProps {
     onBlur?: () => void;
     error?: string;
     label?: string;
-  }
+}
 
-export const AppFormInput = ({ label, InputComponent }: AppFormSelectProps) => {
+export const AppFormInput = ({ label, InputComponent }: DynamicFormInputProps) => {
   const field = useFieldContext<string>();
   return (
     <InputComponent

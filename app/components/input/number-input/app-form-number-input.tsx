@@ -1,9 +1,5 @@
 import NumberInput from './number-input';
-import { AppFormInput } from '../app-form-input';
-
-export interface AppFormInputProps {
-  label: string;
-}
+import { AppFormInput, type AppFormInputProps } from '../app-form-input';
 
 export const AppFormNumber = ({ label }: AppFormInputProps) => {
   return (
