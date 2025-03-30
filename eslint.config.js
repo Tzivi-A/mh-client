@@ -61,6 +61,7 @@ export default tseslint.config(
       'react/jsx-no-useless-fragment': ['error', { allowExpressions: true }],
       'react/no-unstable-nested-components': 0,
       'react/no-children-prop': 0,
+
       'no-duplicate-imports': 2,
       'no-useless-assignment': 2,
       camelcase: 2,
@@ -76,7 +77,8 @@ export default tseslint.config(
       '@typescript-eslint/no-unsafe-return': 0,
       '@typescript-eslint/no-unsafe-assignment': 0,
       '@typescript-eslint/no-unsafe-call': 0,
-      '@typescript-eslint/no-unsafe-member-access': 0
+      '@typescript-eslint/no-unsafe-member-access': 0,
+      '@typescript-eslint/no-floating-promises': 0
     }
   }
 );
