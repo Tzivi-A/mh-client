@@ -12,8 +12,7 @@ const formatNumber = (value: string): string => {
 export const NumberInput = ({ value, onChange, id, onBlur, error, label }: InputProps) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const rawValue = e.target.value;
-    const cleaned = rawValue.replace(/\D/g, '');
-    const formattedValue = formatNumber(cleaned);
+    const formattedValue = formatNumber(rawValue);
     onChange?.(formattedValue.replace(/,/g, ''));
   };  
   
