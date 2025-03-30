@@ -1,22 +1,15 @@
 import '../input.css';
 import InputWrapper from '../input-wrapper/input-wrapper';
-export interface TextInputProps {
-  value: string;
-  onChange?: (value: string) => void;
-  id: string;
-  onBlur?: () => void;
-  error?: string;
-  label?: string;
-}
+import type { InputProps } from '../app-form-input';
 
-export const TextInput = ({ value, onChange, id, onBlur, error, label }: TextInputProps) => {
+export const TextInput = ({ value, onChange, id, onBlur, error, label }: InputProps) => {
   return (
     <InputWrapper id={id} error={error} label={label} value={value}>
       <input
         className="malam-input"
         id={id}
         onBlur={onBlur}
-        value={value}
+        value={value || ''}
         type="text"
         placeholder={label}
         onChange={e => {

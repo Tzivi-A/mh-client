@@ -1,18 +1,12 @@
-import { useFieldContext } from '~/hooks/form-context';
 import TextInput from './text-input';
+import { AppFormInput } from '../app-form-input';
 
-export interface AppFormSelectProps {
+export interface AppFormInputProps {
   label: string;
 }
 
-export const AppFormText = ({ label }: AppFormSelectProps) => {
-  const field = useFieldContext<string>();
+export const AppFormText = ({ label }: AppFormInputProps) => {
   return (
-    <TextInput
-      id={field.name}
-      label={label}
-      value={field.state.value}
-      onChange={e => field.handleChange(e)}
-    />
+    <AppFormInput label={label} InputComponent={TextInput} />
   );
 };

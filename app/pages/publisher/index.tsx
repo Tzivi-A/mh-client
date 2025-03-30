@@ -10,6 +10,7 @@ interface PublisherFormValues {
   city: string;
   firstName: string;
   lastName?: string;
+  number?: string;
 }
 
 export const PublisherPage = () => {
@@ -52,6 +53,7 @@ export const PublisherPage = () => {
             />
             <form.AppField name="firstName" children={field => <field.Input label="שם פרטי" />} />
             <form.AppField name="lastName" children={field => <field.Input label="שם משפחה" />} />
+            <form.AppField name="number" children={field => <field.Number label="מספר" />} />
           </Card>
         </div>
       </form>
