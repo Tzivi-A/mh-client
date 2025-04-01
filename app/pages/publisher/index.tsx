@@ -59,7 +59,7 @@ export const PublisherPage = () => {
             />
             <form.AppField name="firstName" children={field => <field.Input label="שם פרטי" />} />
             <form.AppField name="lastName" children={field => <field.Input label="שם משפחה" />} />
-            <form.AppField name="number" children={field => <field.Number label="מספר" />} />
+            <form.AppField name="number" children={field => <field.Number label="מספר" max={2} />} />
             <form.AppField name="fromDate" children={field => <field.DatePicker label="מתאריך" inputReadOnly={true} maxDate={form.state.values.toDate}/>} />
             <form.AppField name="toDate" children={field => <field.DatePicker label="עד תאריך" inputReadOnly={false} minDate={form.state.values.fromDate}/>} />
           </Card>

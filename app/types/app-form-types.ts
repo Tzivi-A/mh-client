@@ -13,6 +13,7 @@ export interface AppFormTextInputField extends BaseAppFormField {
 
 export interface AppFormNumberField extends BaseAppFormField {
     fieldType: FieldTypeEnum.NUMBER;
+    min?: number;
     max?: number;
 }
 
