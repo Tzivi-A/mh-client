@@ -21,7 +21,7 @@ export const DatePicker = ({ label, id, onChange, value, inputReadOnly = true, m
     const [isFocused, setIsFocused] = useState<boolean>(!!value);
 
     const handleInputChange: AntDatePickerProps['onChange'] = (date, dateString) => {
-        setSelectedDate(date ? date : null);
+        setSelectedDate(date);
         onChange?.(date);
         setIsFocused(!!dateString);
     };
