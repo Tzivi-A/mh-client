@@ -1,22 +1,31 @@
 import type { ReactNode } from 'react';
 import type { FieldTypeEnum } from '~/enums/field-type';
+import type { DatePickerType } from './date-types';
 
-export interface BaseAppFormField<T extends ReactNode> {
+export interface BaseAppFormField {
     fieldType: FieldTypeEnum;
     label?: ReactNode;
 }
 
-export interface AppFormTextInputField extends BaseAppFormField<string> {
+export interface AppFormTextInputField extends BaseAppFormField {
     fieldType: FieldTypeEnum.TEXT;
 }
-export interface AppFormNumberField extends BaseAppFormField<string> {
+
+export interface AppFormNumberField extends BaseAppFormField {
     fieldType: FieldTypeEnum.NUMBER;
     max?: number;
 }
 
-export interface AppFormSelectField extends BaseAppFormField<string> {
+export interface AppFormSelectField extends BaseAppFormField {
     fieldType: FieldTypeEnum.SELECT;
     options: { value: string; label: string }[];
 }
 
-export type AppFormFieldProps = AppFormTextInputField | AppFormNumberField | AppFormSelectField;
+export interface AppFormDatePickerField extends BaseAppFormField {
+    fieldType: FieldTypeEnum.DATE_PICKER;
+    inputReadOnly?: boolean;
+    minDate?: DatePickerType;
+    maxDate?: DatePickerType;
+}
+
+export type AppFormFieldProps = AppFormTextInputField | AppFormNumberField | AppFormSelectField | AppFormDatePickerField;

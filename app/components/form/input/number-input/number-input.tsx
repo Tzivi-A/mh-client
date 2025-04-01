@@ -1,28 +1,21 @@
 import '../input.css';
 import InputWrapper from '../../input-wrapper/input-wrapper';
-import type { ReactNode } from 'react';
+import type { FormFieldProps } from '~/types/form-types';
 
-export interface NumberProps<T> {
-  value: T;
-  onChange: (value: T) => void;
-  id: string;
-  onBlur?: () => void;
-  error?: string;
-  label?: ReactNode;
-}
+export interface NumberProps extends FormFieldProps<string> {}
 
-export const formatNumber = (value: string): string => {
+export const formatNumber = (value?: string): string => {
   // Remove any non-digit characters
   const cleaned = value?.replace(/\D/g, '');
   // Format the number with commas
-  return cleaned?.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  return cleaned?.replace(/\B(?=(\d{3})+(?!\d))/g, ',') || '';
 };
 
-export const NumberInput = ({ value, onChange, id, onBlur, error, label }: NumberProps<string>) => {
+export const NumberInput = ({ value, onChange, id, onBlur, error, label }: NumberProps) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const rawValue = e.target.value;
     const formattedValue = formatNumber(rawValue);
-    onChange?.(formattedValue.replace(/,/g, ''));
+    onChange?.(formattedValue?.replace(/,/g, ''));
   };  
   
   return (

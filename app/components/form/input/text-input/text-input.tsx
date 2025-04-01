@@ -1,17 +1,10 @@
 import '../input.css';
 import InputWrapper from '../../input-wrapper/input-wrapper';
-import type { ReactNode } from 'react';
+import type { FormFieldProps } from '~/types/form-types';
 
-export interface TextInputProps<T> {
-  value: T;
-  onChange: (value: T) => void;
-  id: string;
-  onBlur?: () => void;
-  error?: string;
-  label?: ReactNode;
-}
+export interface TextInputProps extends FormFieldProps<string> { }
 
-export const TextInput = ({ value, onChange, id, onBlur, error, label }: TextInputProps<string>) => {
+export const TextInput = ({ value, onChange, id, onBlur, error, label }: TextInputProps) => {
   return (
     <InputWrapper id={id} error={error} label={label} value={value}>
       <input
