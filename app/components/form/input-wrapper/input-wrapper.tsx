@@ -1,5 +1,6 @@
 import React from 'react';
 import './input-wrapper.css';
+import { ConfigProvider } from 'antd';
 
 interface InputWrapperProps {
   label: React.ReactNode;
@@ -11,13 +12,15 @@ interface InputWrapperProps {
 
 const InputWrapper = ({ label, id, children, value, error }: InputWrapperProps) => {
   return (
-    <div className={`malam-select-container ${value ? 'focused' : ''}`}>
+    <div className={`malam-input-wrapper-container ${value ? 'focused' : ''}`}>
       <label htmlFor={id} className="malam-label">
         {label}
       </label>
-      {children}
+      <ConfigProvider direction="rtl">
+        {children}
+      </ConfigProvider>
       {error && <div className="error">{error}</div>}
-    </div>
+      </div>
   );
 };
 

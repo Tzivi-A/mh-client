@@ -1,9 +1,9 @@
 //import { lazy } from 'react';
 import { createFormHook } from '@tanstack/react-form';
 import { fieldContext, formContext } from './form-context';
-import { AppFormSelect } from '~/components/input/select/app-form-select';
-import { AppFormText } from '~/components/input/text-input/app-form-text-input';
-import { AppFormNumber } from '~/components/input/number-input/app-form-number-input';
+import { AppFormSelect } from '~/components/form/select/app-form-select';
+import { AppFormNumber } from '~/components/form/input/number-input/app-form-number-input';
+import { AppFormTextInput } from '~/components/form/input/text-input/app-form-text-input';
 
 // const AppFormSelect = lazy(() =>
 //   import('~/components/input/select/app-form-select').then(module => ({
@@ -15,7 +15,7 @@ const { useAppForm, withForm } = createFormHook({
   fieldContext,
   formContext,
   fieldComponents: {
-    Input: AppFormText,
+    Input: AppFormTextInput,
     Number: AppFormNumber,
     Select: AppFormSelect
   },
