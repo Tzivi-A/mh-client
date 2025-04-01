@@ -16,7 +16,7 @@ interface DatePickerProps<T> extends FormFieldProps<T> {
 
 export const toDayjs = (date: DatePickerType | undefined): Dayjs | undefined => typeof date === 'string' ? dayjs(date, 'DD/MM/YYYY') : date;
 
-export const DatePicker = ({ label, id, onChange, value, inputReadOnly = true, minDate, maxDate }: DatePickerProps<DatePickerType>) => {
+export const DatePicker = ({ label, id, error, onChange, value, inputReadOnly = true, minDate, maxDate }: DatePickerProps<DatePickerType>) => {
     const [selectedDate, setSelectedDate] = useState<Dayjs | null>(toDayjs(value) || null);
     const [isFocused, setIsFocused] = useState<boolean>(!!value);
 
@@ -33,7 +33,7 @@ export const DatePicker = ({ label, id, onChange, value, inputReadOnly = true, m
     };
     
     return (  
-        <InputWrapper label={label} id={id} value={selectedDate} focused={isFocused}>
+        <InputWrapper label={label} id={id} value={selectedDate} focused={isFocused} error={error}>
             <AntDatePicker className="malam-input" 
                 value={selectedDate}
                 onChange={handleInputChange}

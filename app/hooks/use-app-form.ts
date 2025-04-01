@@ -5,6 +5,7 @@ import { AppFormSelect } from '~/components/form/select/app-form-select';
 import { AppFormNumber } from '~/components/form/input/number-input/app-form-number-input';
 import { AppFormTextInput } from '~/components/form/input/text-input/app-form-text-input';
 import { AppFormDatePicker } from '~/components/form/date-picker/app-form-date-picker';
+import { AppFormCheckBox } from '~/components/form/check-box/app-form-check-box';
 
 // const AppFormSelect = lazy(() =>
 //   import('~/components/input/select/app-form-select').then(module => ({
@@ -20,6 +21,7 @@ const { useAppForm, withForm } = createFormHook({
     Number: AppFormNumber,
     Select: AppFormSelect,
     DatePicker: AppFormDatePicker,
+    CheckBox: AppFormCheckBox
   },
   formComponents: {}
 });

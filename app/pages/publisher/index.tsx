@@ -14,6 +14,7 @@ interface PublisherFormValues {
   number?: string;
   fromDate?: DatePickerType;
   toDate?: DatePickerType;
+  agreeToTerms?: boolean;
 }
 
 export const PublisherPage = () => {
@@ -62,6 +63,7 @@ export const PublisherPage = () => {
             <form.AppField name="number" children={field => <field.Number label="מספר" max={2} />} />
             <form.AppField name="fromDate" children={field => <field.DatePicker label="מתאריך" inputReadOnly={true} maxDate={form.state.values.toDate}/>} />
             <form.AppField name="toDate" children={field => <field.DatePicker label="עד תאריך" inputReadOnly={false} minDate={form.state.values.fromDate}/>} />
+            <form.AppField name="agreeToTerms" children={field => <field.CheckBox label="מסכים לתנאים" />} />
           </Card>
         </div>
       </form>

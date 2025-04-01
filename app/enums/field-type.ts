@@ -3,4 +3,5 @@ export enum FieldTypeEnum {
     NUMBER = 'number',
     SELECT = 'select',
     DATE_PICKER = 'datePicker',
+    CHECK_BOX = 'checkBox',
 }

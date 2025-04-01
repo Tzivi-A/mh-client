@@ -4,6 +4,7 @@ import type { AppFormFieldProps } from '~/types/app-form-types';
 import { useFieldContext } from '~/hooks/form-context';
 import Select from './select/select';
 import DatePicker from './date-picker/date-picker';
+import { CheckBox } from './check-box/check-box';
 
 export const AppFormField = <T, > ({ label, fieldType, ...props }: AppFormFieldProps) => {
   const field = useFieldContext<T>();
@@ -13,6 +14,7 @@ export const AppFormField = <T, > ({ label, fieldType, ...props }: AppFormFieldP
     number: NumberInput,
     select: Select,
     datePicker: DatePicker,
+    checkBox: CheckBox
   };
 
   const Component = fields[fieldType];

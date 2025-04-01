@@ -22,7 +22,7 @@ const InputWrapper = <T,>({ label, id, children, value, error, focused }: InputW
         {children}
       </ConfigProvider>
       {error && <div className="error">{error}</div>}
-      </div>
+    </div>
   );
 };
 
