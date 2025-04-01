@@ -21,11 +21,7 @@ export const DatePicker = ({ label, id, onChange, value, inputReadOnly = true, m
     const [isFocused, setIsFocused] = useState<boolean>(!!value);
 
     const handleInputChange: AntDatePickerProps['onChange'] = (date, dateString) => {
-        if (date) {
-            setSelectedDate(date);
-        } else {
-            setSelectedDate(null);
-        }
+        setSelectedDate(date ? date : null);
         onChange?.(date);
         setIsFocused(!!dateString);
     };
@@ -50,6 +46,7 @@ export const DatePicker = ({ label, id, onChange, value, inputReadOnly = true, m
                 onBlur={handleInputBlur}
                 minDate={toDayjs(minDate)}
                 maxDate={toDayjs(maxDate)}
+                placeholder=''
             />
         </InputWrapper>
     );
