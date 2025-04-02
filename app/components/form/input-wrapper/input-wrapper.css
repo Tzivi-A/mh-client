@@ -38,10 +38,3 @@
   font-size: 13px;
   color: red;
 }
-
-/* Hide the label when focused and hideLabelOnFocus is true */
-.malam-label.hidden-label {
-  visibility: hidden;
-  opacity: 0;
-  transform: translateY(-10px); /* Optional: Move the label slightly */
-}
