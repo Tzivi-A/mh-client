@@ -7,12 +7,6 @@ import { AppFormTextInput } from '~/components/form/input/text-input/app-form-te
 import { AppFormDatePicker } from '~/components/form/date-picker/app-form-date-picker';
 import { AppFormCheckBox } from '~/components/form/check-box/app-form-check-box';
 
-// const AppFormSelect = lazy(() =>
-//   import('~/components/input/select/app-form-select').then(module => ({
-//     default: module.AppFormSelect
-//   }))
-// );
-
 const { useAppForm, withForm } = createFormHook({
   fieldContext,
   formContext,

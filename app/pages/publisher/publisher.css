@@ -1,0 +1,16 @@
+/* Add spacing between all child elements of the form */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* Add consistent spacing between all form fields */
+  padding: 20px; /* Optional: Add padding around the form */
+}
+
+/* Optional: Style the card for better layout */
+.card {
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
