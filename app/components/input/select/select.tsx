@@ -10,18 +10,32 @@ interface SelectProps {
   defaultValue?: string;
   onChange?: (value: string) => void;
   value: string;
+  error: string;
 }
 
-export const Select = ({ label, id, options, defaultValue, onChange, value }: SelectProps) => {
+export const Select = ({
+  label,
+  id,
+  options,
+  defaultValue,
+  error,
+  onChange,
+  value
+}: SelectProps) => {
   return (
-    <InputWrapper label={label} id={`${id}`} value={value}>
-      <AntSelect id={id} defaultValue={defaultValue} className="malam-select" onChange={onChange}>
-        {options.map(option => (
-          <AntSelect.Option key={option.value} value={option.value}>
-            {option.label}
-          </AntSelect.Option>
-        ))}
-      </AntSelect>
+    <InputWrapper label={label} id={`${id}`} value={value} error={error}>
+      <AntSelect
+        id={id}
+        defaultValue={defaultValue}
+        className="malam-select"
+        onChange={onChange}
+        value={value}
+        showSearch // Enables typing and searching
+        filterOption={(input, option) =>
+          (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
+        } // Filters options based on user input
+        options={options} // Pass options directly to Ant Select
+      />
     </InputWrapper>
   );
 };

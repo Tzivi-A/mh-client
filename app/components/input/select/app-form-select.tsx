@@ -14,6 +14,7 @@ export const AppFormSelect = ({ label, options }: AppFormSelectProps) => {
       label={label}
       options={options}
       value={field.state.value}
+      error={field?.state?.meta?.errors?.join(' ')}
       onChange={e => field.handleChange(e)}
     />
   );

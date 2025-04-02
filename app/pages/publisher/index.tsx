@@ -5,6 +5,8 @@ import logo from '~/assets/images/LogoMevaker.png';
 import { useQuery } from '~/api/use-query';
 import { CitiesOptions } from '~/api/mock/select-option';
 import { useCustomAppForm as useAppForm } from '~/hooks/use-custom-app-form';
+import './publisher.css';
+import { useStore } from '@tanstack/react-form';
 
 interface PublisherFormValues {
   city: string;
@@ -14,9 +16,10 @@ interface PublisherFormValues {
 
 export const PublisherPage = () => {
   const query = useQuery('https://jsonplaceholder.typicode.com/todos/1');
+
   const form = useAppForm<PublisherFormValues>({
     defaultValues: {
-      city: 'ביתר',
+      city: 'option1',
       firstName: 'אבי'
     },
     validators: {
@@ -27,6 +30,8 @@ export const PublisherPage = () => {
       alert(JSON.stringify(value));
     }
   });
+
+  const formErrorMap = useStore(form.store, state => state.errorMap);
 
   return (
     <main>
@@ -46,12 +51,25 @@ export const PublisherPage = () => {
               </Button>
             </div>
             <Image src={logo} alt="mevaker" />
-            <form.AppField
-              name="city"
-              children={field => <field.Select label="ערים" options={CitiesOptions} />}
-            />
+            <form.AppField name="city">
+              {field => <field.Select label="ערים" options={CitiesOptions} />}
+            </form.AppField>
+            <br />
             <form.AppField name="firstName" children={field => <field.Input label="שם פרטי" />} />
-            <form.AppField name="lastName" children={field => <field.Input label="שם משפחה" />} />
+            <br />
+            <form.AppField
+              name="lastName"
+              validators={{
+                onChange: ({ value }) => !value && 'שדה חובה'
+              }}
+              children={field => <field.Input label="שם משפחה" />}
+            />
+
+            {formErrorMap.onChange && (
+              <div>
+                <em>{formErrorMap.onChange}</em>
+              </div>
+            )}
           </Card>
         </div>
       </form>

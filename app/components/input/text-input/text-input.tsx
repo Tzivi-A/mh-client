@@ -1,8 +1,8 @@
 import '../input.css';
 import InputWrapper from '../input-wrapper/input-wrapper';
 export interface TextInputProps {
-  value: string;
-  onChange?: (value: string) => void;
+  value: string | undefined;
+  onChange: (value: string) => void;
   id: string;
   onBlur?: () => void;
   error?: string;
@@ -11,16 +11,16 @@ export interface TextInputProps {
 
 export const TextInput = ({ value, onChange, id, onBlur, error, label }: TextInputProps) => {
   return (
-    <InputWrapper id={id} error={error} label={label} value={value}>
+    <InputWrapper id={id} error={error} label={label} value={value} hideLabelOnFocus={true}>
       <input
         className="malam-input"
         id={id}
         onBlur={onBlur}
-        value={value}
+        value={value || ''}
         type="text"
         placeholder={label}
         onChange={e => {
-          onChange?.(e.target.value);
+          onChange(e.target.value);
         }}
       />
     </InputWrapper>

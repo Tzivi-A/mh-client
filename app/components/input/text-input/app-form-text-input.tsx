@@ -13,6 +13,7 @@ export const AppFormText = ({ label }: AppFormSelectProps) => {
       label={label}
       value={field.state.value}
       onChange={e => field.handleChange(e)}
+      error={field?.state?.meta?.errors?.join(' ')}
     />
   );
 };

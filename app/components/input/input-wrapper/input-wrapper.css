@@ -1,4 +1,3 @@
-/* Move the label to the right */
 .malam-label {
   position: absolute;
   top: 50%;
@@ -27,4 +26,11 @@
 .error {
   font-size: 13px;
   color: red;
+}
+
+/* Hide the label when focused and hideLabelOnFocus is true */
+.malam-label.hidden-label {
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(-10px); /* Optional: Move the label slightly */
 }
