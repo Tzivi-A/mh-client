@@ -2,7 +2,7 @@ import '../input.css';
 import InputWrapper from '../../input-wrapper/input-wrapper';
 import type { FormFieldProps } from '~/types/form-types';
 
-export interface TextInputProps extends FormFieldProps<string> { }
+export type TextInputProps = FormFieldProps<string>;
 
 export const TextInput = ({ value, onChange, id, onBlur, error, label }: TextInputProps) => {
   return (

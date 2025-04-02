@@ -15,14 +15,14 @@ interface InputWrapperProps<T> {
 const InputWrapper = <T,>({ label, id, children, value, error, focused }: InputWrapperProps<T>) => {
   return (
     <div className={`malam-input-wrapper-container ${value || focused ? 'focused' : ''}`}>
-      <label htmlFor={id} className="malam-label">
+      <label id={`${id}-label`} htmlFor={id} className="malam-label">
         {label}
       </label>
       <ConfigProvider direction="rtl" locale={heIL}>
         {children}
       </ConfigProvider>
       {error && <div className="error">{error}</div>}
-      </div>
+    </div>
   );
 };
 
