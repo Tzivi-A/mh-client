@@ -5,6 +5,7 @@ import logo from '~/assets/images/LogoMevaker.png';
 import { useQuery } from '~/api/use-query';
 import { CitiesOptions } from '~/api/mock/select-option';
 import useAppForm from '~/hooks/use-app-form';
+import './publisher.css';
 import type { DatePickerType } from '~/types/date-types';
 
 interface PublisherFormValues {
@@ -17,11 +18,10 @@ interface PublisherFormValues {
 }
 
 export const PublisherPage = () => {
-  
   const query = useQuery('https://jsonplaceholder.typicode.com/todos/1');
   const form = useAppForm({
     defaultValues: {
-      city: 'ביתר',
+      city: 'option1',
       firstName: 'אבי',
       fromDate: '05/03/2025',
       toDate: '25/03/2025'
@@ -53,15 +53,41 @@ export const PublisherPage = () => {
               </Button>
             </div>
             <Image src={logo} alt="mevaker" />
-            <form.AppField
-              name="city"
-              children={field => <field.Select label="ערים" options={CitiesOptions} />}
-            />
+            <form.AppField name="city">
+              {field => <field.Select label="ערים" options={CitiesOptions} />}
+            </form.AppField>
             <form.AppField name="firstName" children={field => <field.Input label="שם פרטי" />} />
-            <form.AppField name="lastName" children={field => <field.Input label="שם משפחה" />} />
-            <form.AppField name="number" children={field => <field.Number label="מספר" max={2} />} />
-            <form.AppField name="fromDate" children={field => <field.DatePicker label="מתאריך" inputReadOnly={true} maxDate={form.state.values.toDate}/>} />
-            <form.AppField name="toDate" children={field => <field.DatePicker label="עד תאריך" inputReadOnly={false} minDate={form.state.values.fromDate}/>} />
+            <form.AppField
+              name="lastName"
+              validators={{
+                onChange: ({ value }) => !value && 'שדה חובה'
+              }}
+              children={field => <field.Input label="שם משפחה" />}
+            />
+            <form.AppField
+              name="number"
+              children={field => <field.Number label="מספר" max={2} />}
+            />
+            <form.AppField
+              name="fromDate"
+              children={field => (
+                <field.DatePicker
+                  label="מתאריך"
+                  inputReadOnly={true}
+                  maxDate={form.state.values.toDate}
+                />
+              )}
+            />
+            <form.AppField
+              name="toDate"
+              children={field => (
+                <field.DatePicker
+                  label="עד תאריך"
+                  inputReadOnly={false}
+                  minDate={form.state.values.fromDate}
+                />
+              )}
+            />
           </Card>
         </div>
       </form>
