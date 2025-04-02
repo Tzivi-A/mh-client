@@ -56,9 +56,7 @@ export const PublisherPage = () => {
             <form.AppField name="city">
               {field => <field.Select label="ערים" options={CitiesOptions} />}
             </form.AppField>
-            <br />
             <form.AppField name="firstName" children={field => <field.Input label="שם פרטי" />} />
-            <br />
             <form.AppField
               name="lastName"
               validators={{

@@ -13,19 +13,18 @@
   z-index: 2;
 }
 
-
 /* Ensure the container follows RTL */
 .malam-input-wrapper-container {
   position: relative;
   width: 250px;
   display: flex;
   flex-direction: column;
-  direction: rtl;  /*Force right-to-left */
+  direction: rtl; /*Force right-to-left */
+  margin: 10px;
 }
 
 .malam-input-wrapper-container.focused .malam-label,
-.malam-input-wrapper-container .ant-select-selection-item 
-{
+.malam-input-wrapper-container .ant-select-selection-item {
   top: 5px;
   right: 10px; /* Adjust to right */
   left: auto;
