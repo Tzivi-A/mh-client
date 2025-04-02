@@ -7,6 +7,9 @@ import { CitiesOptions } from '~/api/mock/select-option';
 import useAppForm from '~/hooks/use-app-form';
 import './publisher.css';
 import type { DatePickerType } from '~/types/date-types';
+import { useOption } from '~/hooks/use-option';
+
+
 
 interface PublisherFormValues {
   city: string;
@@ -19,6 +22,10 @@ interface PublisherFormValues {
 
 export const PublisherPage = () => {
   const query = useQuery('https://jsonplaceholder.typicode.com/todos/1');
+  const { data, error, isLoading } = useOption();
+
+
+
   const form = useAppForm({
     defaultValues: {
       city: 'option1',
@@ -34,6 +41,9 @@ export const PublisherPage = () => {
       alert(JSON.stringify(value));
     }
   });
+
+  if (isLoading) return <p>Loading options data...</p>;
+  if (error) return <p>Error loading options data</p>;
 
   return (
     <main>
@@ -53,9 +63,9 @@ export const PublisherPage = () => {
               </Button>
             </div>
             <Image src={logo} alt="mevaker" />
-            <form.AppField name="city">
-              {field => <field.Select label="ערים" options={CitiesOptions} />}
-            </form.AppField>
+            {data && <form.AppField name="city">
+              {field => <field.Select label="ערים" options={data} />}
+            </form.AppField>}
             <form.AppField name="firstName" children={field => <field.Input label="שם פרטי" />} />
             <form.AppField
               name="lastName"
