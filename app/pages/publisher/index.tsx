@@ -95,8 +95,8 @@ export const PublisherPage = () => {
                 <field.CheckBox
                   label="מסכים לתנאים" 
                 />
-                )}
-              />
+              )}
+            />
           </Card>
         </div>
       </form>
