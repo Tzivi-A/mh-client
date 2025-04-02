@@ -6,7 +6,6 @@ import { useQuery } from '~/api/use-query';
 import { CitiesOptions } from '~/api/mock/select-option';
 import useAppForm from '~/hooks/use-app-form';
 import './publisher.css';
-import { useStore } from '@tanstack/react-form';
 import type { DatePickerType } from '~/types/date-types';
 
 interface PublisherFormValues {
@@ -19,7 +18,6 @@ interface PublisherFormValues {
 }
 
 export const PublisherPage = () => {
-  
   const query = useQuery('https://jsonplaceholder.typicode.com/todos/1');
   const form = useAppForm({
     defaultValues: {
@@ -36,8 +34,6 @@ export const PublisherPage = () => {
       alert(JSON.stringify(value));
     }
   });
-
-  const formErrorMap = useStore(form.store, state => state.errorMap);
 
   return (
     <main>
@@ -70,14 +66,30 @@ export const PublisherPage = () => {
               }}
               children={field => <field.Input label="שם משפחה" />}
             />
-            <form.AppField name="number" children={field => <field.Number label="מספר" max={2} />} />
-            <form.AppField name="fromDate" children={field => <field.DatePicker label="מתאריך" inputReadOnly={true} maxDate={form.state.values.toDate}/>} />
-            <form.AppField name="toDate" children={field => <field.DatePicker label="עד תאריך" inputReadOnly={false} minDate={form.state.values.fromDate}/>} />
-            {formErrorMap.onChange && (
-              <div>
-                <em>{formErrorMap.onChange}</em>
-              </div>
-            )}
+            <form.AppField
+              name="number"
+              children={field => <field.Number label="מספר" max={2} />}
+            />
+            <form.AppField
+              name="fromDate"
+              children={field => (
+                <field.DatePicker
+                  label="מתאריך"
+                  inputReadOnly={true}
+                  maxDate={form.state.values.toDate}
+                />
+              )}
+            />
+            <form.AppField
+              name="toDate"
+              children={field => (
+                <field.DatePicker
+                  label="עד תאריך"
+                  inputReadOnly={false}
+                  minDate={form.state.values.fromDate}
+                />
+              )}
+            />
           </Card>
         </div>
       </form>
