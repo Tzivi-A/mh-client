@@ -4,9 +4,9 @@ import { Image } from '~/components/image/image';
 import logo from '~/assets/images/LogoMevaker.png';
 import { useQuery } from '~/api/use-query';
 import { CitiesOptions } from '~/api/mock/select-option';
+import useAppForm from '~/hooks/use-app-form';
 import './publisher.css';
 import { useStore } from '@tanstack/react-form';
-import useAppForm from '~/hooks/use-app-form';
 import type { DatePickerType } from '~/types/date-types';
 
 interface PublisherFormValues {
@@ -23,7 +23,7 @@ export const PublisherPage = () => {
   const query = useQuery('https://jsonplaceholder.typicode.com/todos/1');
   const form = useAppForm({
     defaultValues: {
-      city: 'ביתר',
+      city: 'option1',
       firstName: 'אבי',
       fromDate: '05/03/2025',
       toDate: '25/03/2025'
