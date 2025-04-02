@@ -4,24 +4,30 @@ import { Image } from '~/components/image/image';
 import logo from '~/assets/images/LogoMevaker.png';
 import { useQuery } from '~/api/use-query';
 import { CitiesOptions } from '~/api/mock/select-option';
-import { useCustomAppForm as useAppForm } from '~/hooks/use-custom-app-form';
 import './publisher.css';
 import { useStore } from '@tanstack/react-form';
+import useAppForm from '~/hooks/use-app-form';
+import type { DatePickerType } from '~/types/date-types';
 
 interface PublisherFormValues {
   city: string;
   firstName: string;
   lastName?: string;
+  number?: string;
+  fromDate?: DatePickerType;
+  toDate?: DatePickerType;
 }
 
 export const PublisherPage = () => {
+  
   const query = useQuery('https://jsonplaceholder.typicode.com/todos/1');
-
-  const form = useAppForm<PublisherFormValues>({
+  const form = useAppForm({
     defaultValues: {
-      city: 'option1',
-      firstName: 'אבי'
-    },
+      city: 'ביתר',
+      firstName: 'אבי',
+      fromDate: '05/03/2025',
+      toDate: '25/03/2025'
+    } as PublisherFormValues,
     validators: {
       onChange: ({ value }) =>
         value.firstName === value.lastName && 'FirstName and Last Name may not be the same'
@@ -64,7 +70,9 @@ export const PublisherPage = () => {
               }}
               children={field => <field.Input label="שם משפחה" />}
             />
-
+            <form.AppField name="number" children={field => <field.Number label="מספר" max={2} />} />
+            <form.AppField name="fromDate" children={field => <field.DatePicker label="מתאריך" inputReadOnly={true} maxDate={form.state.values.toDate}/>} />
+            <form.AppField name="toDate" children={field => <field.DatePicker label="עד תאריך" inputReadOnly={false} minDate={form.state.values.fromDate}/>} />
             {formErrorMap.onChange && (
               <div>
                 <em>{formErrorMap.onChange}</em>

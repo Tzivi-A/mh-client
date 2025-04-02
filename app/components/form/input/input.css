@@ -11,6 +11,10 @@
   height: 45px;
   border: 1px solid rgb(0, 2, 128);
   padding: 0 10px;
+  
+  direction: rtl;
+  text-align: right;
+  unicode-bidi: plaintext;
 }
 
 .malam-input:focus {
