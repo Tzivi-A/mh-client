@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import express, { type Request, type Response } from 'express';
 import bodyParser from 'body-parser';
 import { initializeTempData, loadMockFilesFromTemp, loadMockData } from './utils';
@@ -18,7 +20,7 @@ const saveMockData = (filePath: string, updatedData: any): void => {
   fs.writeFileSync(filePath, JSON.stringify(updatedData, null, 2), 'utf8');
 };
 
-mockFiles.forEach((filePath) => {
+mockFiles.forEach(filePath => {
   const { meta, data } = loadMockData(filePath);
 
   if (!meta || !meta.endpoints) {
