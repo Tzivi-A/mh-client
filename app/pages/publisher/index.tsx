@@ -91,11 +91,7 @@ export const PublisherPage = () => {
             />
             <form.AppField
               name="agreeToTerms"
-              children={field => (
-                <field.CheckBox
-                  label="מסכים לתנאים" 
-                />
-              )}
+              children={field => <field.CheckBox label="מסכים לתנאים" />}
             />
           </Card>
         </div>
