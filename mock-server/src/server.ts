@@ -1,19 +1,25 @@
 /* eslint-disable no-console */
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import * as dotenv from 'dotenv';
+dotenv.config({ path: './environments/.env.mock' });
+
 import express, { type Request, type Response } from 'express';
 import bodyParser from 'body-parser';
+import cors from 'cors';
 import { initializeTempData, loadMockFilesFromTemp, loadMockData } from './utils';
 import fs from 'fs';
 
 const app = express();
-const PORT = 4000;
+const PORT = process.env.VITE_BASE_URL?.split(':').pop() || 4000;
 
+// Enable CORS for all routes
+app.use(cors());
 app.use(bodyParser.json());
 
-// Initialize temporary data files
+// Initialize fresh temporary data files on each server start
 initializeTempData();
 
-// Load all mock files from the temporary folder
+// Load all mock files from the freshly created tempData folder
 const mockFiles = loadMockFilesFromTemp();
 
 const saveMockData = (filePath: string, updatedData: any): void => {
@@ -70,6 +76,6 @@ mockFiles.forEach(filePath => {
   });
 });
 
-app.listen(PORT, () => {
+app.listen(Number(PORT), () => {
   console.log(`Dynamic mock server running at http://localhost:${PORT}`);
 });

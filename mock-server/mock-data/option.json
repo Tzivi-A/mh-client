@@ -1,20 +1,25 @@
 {
-    "meta": {
-      "service": "options",
-      "endpoints": [
-        {
-          "functionName": "getOptions",
-          "method": "GET",
-          "path": "/getOptions",
-          "params": []
-        }
-      ]
-    },
-    "data": [
-        { "value": "option1", "label": "ירושלים" },
-        { "value": "option2", "label": "ביתר" },
-        { "value": "option3", "label": "מודיעין עילית" },
-        { "value": "option4", "label": "בני ברק" }
-      ]
-  }
-  
+  "meta": {
+    "service": "options",
+    "endpoints": [
+      {
+        "functionName": "getOptions",
+        "method": "GET",
+        "path": "/getOptions",
+        "params": []
+      },
+      {
+        "functionName": "createOption",
+        "method": "POST",
+        "path": "/create",
+        "params": ["value", "label"]
+      }
+    ]
+  },
+  "data": [
+    { "value": "option1", "label": "ירושלים" },
+    { "value": "option2", "label": "ביתר" },
+    { "value": "option3", "label": "מודיעין עילית" },
+    { "value": "option4", "label": "בני ברק" }
+  ]
+}

@@ -3,13 +3,12 @@ import { Card } from '~/components/card/card';
 import { Image } from '~/components/image/image';
 import logo from '~/assets/images/LogoMevaker.png';
 import { useQuery } from '~/api/use-query';
-import { CitiesOptions } from '~/api/mock/select-option';
 import useAppForm from '~/hooks/use-app-form';
 import './publisher.css';
 import type { DatePickerType } from '~/types/date-types';
 import { useOption } from '~/hooks/use-option';
-
-
+import { useState } from 'react';
+import type { Option } from '~/types/option';
 
 interface PublisherFormValues {
   city: string;
@@ -21,10 +20,10 @@ interface PublisherFormValues {
 }
 
 export const PublisherPage = () => {
+  const [response, setResponse] = useState<string | null>(null);
+
   const query = useQuery('https://jsonplaceholder.typicode.com/todos/1');
-  const { data, error, isLoading } = useOption();
-
-
+  const { data, error, isLoading, addOption } = useOption();
 
   const form = useAppForm({
     defaultValues: {
@@ -42,30 +41,49 @@ export const PublisherPage = () => {
     }
   });
 
+  const formOptions = useAppForm({
+    defaultValues: {} as Option,
+    onSubmit: ({ value }) => {
+      handleSubmit(value);
+    }
+  });
+
+  const handleSubmit = async (option: Option) => {
+    try {
+      await addOption(option);
+      setResponse('Option added successfully!');
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    } catch (error) {
+      setResponse('Failed to add option');
+    }
+  };
+
   if (isLoading) return <p>Loading options data...</p>;
   if (error) return <p>Error loading options data</p>;
 
   return (
     <main>
-      <form
-        className="form"
-        onSubmit={e => {
-          e.preventDefault();
-          form.handleSubmit();
-        }}
-      >
-        <div>
-          <Card>
-            <div>Publisher {query?.isPending.toString()}</div>
-            <div>
-              <Button onClick={() => window.alert('Hello! I am the Mevaker!')} type="submit">
-                Click the Mevaker
-              </Button>
-            </div>
-            <Image src={logo} alt="mevaker" />
-            {data && <form.AppField name="city">
-              {field => <field.Select label="ערים" options={data} />}
-            </form.AppField>}
+      <div>
+        <Card>
+          <div>Publisher {query?.isPending.toString()}</div>
+          <div>
+            <Button onClick={() => window.alert('Hello! I am the Mevaker!')} type="submit">
+              Click the Mevaker
+            </Button>
+          </div>
+          <Image src={logo} alt="mevaker" />
+          <form
+            className="form"
+            onSubmit={e => {
+              e.preventDefault();
+              form.handleSubmit();
+            }}
+          >
+            {data && (
+              <form.AppField name="city">
+                {field => <field.Select label="ערים" options={data} />}
+              </form.AppField>
+            )}
             <form.AppField name="firstName" children={field => <field.Input label="שם פרטי" />} />
             <form.AppField
               name="lastName"
@@ -98,9 +116,36 @@ export const PublisherPage = () => {
                 />
               )}
             />
-          </Card>
-        </div>
-      </form>
+            <Button type="submit">Submit Form</Button>
+          </form>
+        </Card>
+        <Card>
+          <form
+            className="form"
+            onSubmit={e => {
+              e.preventDefault();
+              formOptions.handleSubmit();
+            }}
+          >
+            <formOptions.AppField
+              name="value"
+              validators={{
+                onChange: ({ value }) => !value && 'שדה חובה'
+              }}
+              children={field => <field.Input label="value" />}
+            />
+            <formOptions.AppField
+              name="label"
+              validators={{
+                onChange: ({ value }) => !value && 'שדה חובה'
+              }}
+              children={field => <field.Input label="label" />}
+            />
+            <Button type="submit">Submit Option</Button>
+          </form>
+          {response && <p>{response}</p>}
+        </Card>
+      </div>
     </main>
   );
 };
