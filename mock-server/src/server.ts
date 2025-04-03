@@ -65,10 +65,39 @@ mockFiles.forEach(filePath => {
 
       if (method === 'POST') {
         const newItem = req.body;
-        newItem.id = data.length ? data[data.length - 1].id + 1 : 1;
+        newItem.value = data.length ? data[data.length - 1].value + 1 : 1;
         data.push(newItem);
         saveMockData(filePath, { meta, data });
         res.status(201).json(newItem);
+      }
+
+      if (method === 'DELETE') {
+        const { id } = req.params;
+        const itemIndex = data.findIndex((item: any) => item.value?.toString() === id);
+
+        if (itemIndex !== -1) {
+          data.splice(itemIndex, 1);
+          saveMockData(filePath, { meta, data });
+          res.status(200).json({ message: `Item with ID ${id} deleted successfully.` });
+        } else {
+          res.status(404).json({ message: `Item with ID ${id} not found.` });
+        }
+      }
+
+      if (method === 'PUT') {
+        const { id } = req.params;
+        const updatedItem = req.body;
+        const itemIndex = data.findIndex((item: any) => item.value?.toString() === id);
+
+        if (itemIndex !== -1) {
+          data[itemIndex] = { ...data[itemIndex], ...updatedItem };
+          saveMockData(filePath, { meta, data });
+          res
+            .status(200)
+            .json({ message: `Item with ID ${id} updated successfully.`, updatedItem });
+        } else {
+          res.status(404).json({ message: `Item with ID ${id} not found.` });
+        }
       }
     });
 

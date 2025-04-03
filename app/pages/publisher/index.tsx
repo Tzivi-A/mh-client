@@ -49,13 +49,8 @@ export const PublisherPage = () => {
   });
 
   const handleSubmit = async (option: Option) => {
-    try {
-      await addOption(option);
-      setResponse('Option added successfully!');
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    } catch (error) {
-      setResponse('Failed to add option');
-    }
+    await addOption(option);
+    setResponse('Option added successfully!');
   };
 
   if (isLoading) return <p>Loading options data...</p>;
@@ -127,13 +122,6 @@ export const PublisherPage = () => {
               formOptions.handleSubmit();
             }}
           >
-            <formOptions.AppField
-              name="value"
-              validators={{
-                onChange: ({ value }) => !value && 'שדה חובה'
-              }}
-              children={field => <field.Input label="value" />}
-            />
             <formOptions.AppField
               name="label"
               validators={{

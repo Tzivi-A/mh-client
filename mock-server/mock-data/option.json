@@ -11,7 +11,19 @@
       {
         "functionName": "createOption",
         "method": "POST",
-        "path": "/create",
+        "path": "/createOption",
+        "params": ["label"]
+      },
+      {
+        "functionName": "deleteOption",
+        "method": "DELETE",
+        "path": "/deleteOption/:value",
+        "params": ["value"]
+      },
+      {
+        "functionName": "updateOption",
+        "method": "PUT",
+        "path": "/updateOption/:value",
         "params": ["value", "label"]
       }
     ]

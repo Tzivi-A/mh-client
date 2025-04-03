@@ -10,7 +10,7 @@ const getOption = async (): Promise<Option[]> => {
 
 // Insert a new option to the server
 const insertNewOption = async (newOption: Option): Promise<Option> => {
-  const response = await axiosInstance.post('/options/create', newOption);
+  const response = await axiosInstance.post('/options/createOption', { label: newOption.label });
   return response.data;
 };
 
