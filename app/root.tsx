@@ -6,10 +6,11 @@ import {
   Scripts,
   ScrollRestoration
 } from 'react-router';
-
 import type { Route } from './+types/root';
 import './app.css';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ConfigProvider } from 'antd';
+import heIL from 'antd/locale/he_IL';
 
 export const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -32,7 +33,9 @@ const queryClient = new QueryClient();
 const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
-      <Outlet />
+      <ConfigProvider direction="rtl" locale={heIL}>
+        <Outlet />
+      </ConfigProvider>
     </QueryClientProvider>
   );
 };
