@@ -13,7 +13,7 @@ const { useAppForm, withForm } = createFormHook({
     Input: AppFormTextInput,
     Number: AppFormNumber,
     Select: AppFormSelect,
-    DatePicker: AppFormDatePicker,
+    DatePicker: AppFormDatePicker
   },
   formComponents: {}
 });

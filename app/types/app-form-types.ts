@@ -4,30 +4,34 @@ import type { DatePickerType } from './date-types';
 import type { Option } from './option';
 
 export interface BaseAppFormField {
-    fieldType: FieldTypeEnum;
-    label?: ReactNode;
+  fieldType: FieldTypeEnum;
+  label?: ReactNode;
 }
 
 export interface AppFormTextInputField extends BaseAppFormField {
-    fieldType: FieldTypeEnum.TEXT;
+  fieldType: FieldTypeEnum.TEXT;
 }
 
 export interface AppFormNumberField extends BaseAppFormField {
-    fieldType: FieldTypeEnum.NUMBER;
-    min?: number;
-    max?: number;
+  fieldType: FieldTypeEnum.NUMBER;
+  min?: number;
+  max?: number;
 }
 
 export interface AppFormSelectField extends BaseAppFormField {
-    fieldType: FieldTypeEnum.SELECT;
-    options: Option[];
+  fieldType: FieldTypeEnum.SELECT;
+  options: Option[];
 }
 
 export interface AppFormDatePickerField extends BaseAppFormField {
-    fieldType: FieldTypeEnum.DATE_PICKER;
-    inputReadOnly?: boolean;
-    minDate?: DatePickerType;
-    maxDate?: DatePickerType;
+  fieldType: FieldTypeEnum.DATE_PICKER;
+  inputReadOnly?: boolean;
+  minDate?: DatePickerType;
+  maxDate?: DatePickerType;
 }
 
-export type AppFormFieldProps = AppFormTextInputField | AppFormNumberField | AppFormSelectField | AppFormDatePickerField;
+export type AppFormFieldProps =
+  | AppFormTextInputField
+  | AppFormNumberField
+  | AppFormSelectField
+  | AppFormDatePickerField;

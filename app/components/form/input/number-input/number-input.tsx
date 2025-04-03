@@ -16,17 +16,26 @@ export const formatNumber = (value?: string): string => {
 
   // Format the number with commas
   const formatted = digits?.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-  
+
   return isNegative ? `-${formatted}` : formatted || '';
 };
 
-export const NumberInput = ({ value, onChange, id, onBlur, error, label, min, max }: NumberProps) => {
+export const NumberInput = ({
+  value,
+  onChange,
+  id,
+  onBlur,
+  error,
+  label,
+  min,
+  max
+}: NumberProps) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const rawValue = e.target.value;
     const formattedValue = formatNumber(rawValue);
     onChange?.(formattedValue?.replace(/,/g, ''));
-  };  
-  
+  };
+
   return (
     <InputWrapper id={id} error={error} label={label} value={value}>
       <input
