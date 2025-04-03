@@ -29,4 +29,8 @@ export interface AppFormDatePickerField extends BaseAppFormField {
     maxDate?: DatePickerType;
 }
 
-export type AppFormFieldProps = AppFormTextInputField | AppFormNumberField | AppFormSelectField | AppFormDatePickerField;
+export type AppFormFieldProps = 
+  | AppFormTextInputField
+  | AppFormNumberField
+  | AppFormSelectField
+  | AppFormDatePickerField;
