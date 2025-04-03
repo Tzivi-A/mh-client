@@ -7,6 +7,7 @@ import { CitiesOptions } from '~/api/mock/select-option';
 import useAppForm from '~/hooks/use-app-form';
 import './publisher.css';
 import type { DatePickerType } from '~/types/date-types';
+import { checkDateRange } from '~/components/form/date-picker/date-picker';
 
 interface PublisherFormValues {
   city: string;
@@ -70,6 +71,11 @@ export const PublisherPage = () => {
             />
             <form.AppField
               name="fromDate"
+              validators={{
+                onChangeListenTo: ['toDate'],
+                onChange: ({ value, fieldApi }) =>
+                  checkDateRange(value, fieldApi.form.getFieldValue('toDate'))
+              }}
               children={field => (
                 <field.DatePicker
                   label="מתאריך"
@@ -80,6 +86,11 @@ export const PublisherPage = () => {
             />
             <form.AppField
               name="toDate"
+              validators={{
+                onChangeListenTo: ['fromDate'],
+                onChange: ({ value, fieldApi }) =>
+                  checkDateRange(fieldApi.form.getFieldValue('fromDate'), value)
+              }}
               children={field => (
                 <field.DatePicker
                   label="עד תאריך"

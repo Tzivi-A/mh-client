@@ -13,8 +13,20 @@ export interface DatePickerProps<T> extends FormFieldProps<T> {
   inputReadOnly?: boolean;
 }
 
-export const toDayjs = (date: DatePickerType | undefined): Dayjs | undefined =>
-  typeof date === 'string' ? dayjs(date, 'DD/MM/YYYY') : date;
+export const toDayjs = (value: DatePickerType): Dayjs | undefined => {
+  if (!value) return undefined;
+  return dayjs.isDayjs(value) ? value : dayjs(value, 'DD/MM/YYYY');
+};
+
+export const checkDateRange = (minDate: DatePickerType, maxDate: DatePickerType) => {
+  const fromDate = toDayjs(minDate);
+  const toDate = toDayjs(maxDate);
+
+  if (fromDate && toDate && fromDate.isAfter(toDate)) {
+    return '"מתאריך" חייב להיות מוקדם מ"עד תאריך"';
+  }
+  return undefined;
+};
 
 export const DatePicker = ({
   label,
@@ -23,7 +35,8 @@ export const DatePicker = ({
   value,
   inputReadOnly = true,
   minDate,
-  maxDate
+  maxDate,
+  error
 }: DatePickerProps<DatePickerType>) => {
   const [selectedDate, setSelectedDate] = useState<Dayjs | null>(toDayjs(value) || null);
   const [isFocused, setIsFocused] = useState<boolean>(!!value);
@@ -41,7 +54,7 @@ export const DatePicker = ({
   };
 
   return (
-    <InputWrapper label={label} id={id} value={selectedDate} focused={isFocused}>
+    <InputWrapper label={label} id={id} value={selectedDate} focused={isFocused} error={error}>
       <AntDatePicker
         className="malam-input"
         value={selectedDate}
