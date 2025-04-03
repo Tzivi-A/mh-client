@@ -1,13 +1,8 @@
 import '../input.css';
-import InputWrapper from '../input-wrapper/input-wrapper';
-export interface TextInputProps {
-  value: string;
-  onChange?: (value: string) => void;
-  id: string;
-  onBlur?: () => void;
-  error?: string;
-  label?: string;
-}
+import InputWrapper from '../../input-wrapper/input-wrapper';
+import type { FormFieldProps } from '~/types/form-types';
+
+export type TextInputProps = FormFieldProps<string>;
 
 export const TextInput = ({ value, onChange, id, onBlur, error, label }: TextInputProps) => {
   return (
@@ -16,12 +11,9 @@ export const TextInput = ({ value, onChange, id, onBlur, error, label }: TextInp
         className="malam-input"
         id={id}
         onBlur={onBlur}
-        value={value}
+        value={value || ''}
         type="text"
-        placeholder={label}
-        onChange={e => {
-          onChange?.(e.target.value);
-        }}
+        onChange={e => onChange?.(e.target.value)}
       />
     </InputWrapper>
   );

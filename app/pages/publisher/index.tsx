@@ -5,37 +5,92 @@ import logo from '~/assets/images/LogoMevaker.png';
 import { useQuery } from '~/api/use-query';
 import { CitiesOptions } from '~/api/mock/select-option';
 import useAppForm from '~/hooks/use-app-form';
-import Layout from '~/components/layout/layout';
+import './publisher.css';
+import type { DatePickerType } from '~/types/date-types';
 
+interface PublisherFormValues {
+  city: string;
+  firstName: string;
+  lastName?: string;
+  number?: string;
+  fromDate?: DatePickerType;
+  toDate?: DatePickerType;
+}
 
 export const PublisherPage = () => {
-  const query = useQuery('todos/1');
-  
-  const form = useAppForm({  
-    defaultValues:{
-      city: 'ביתר',
-      name: 'אבי',
+  const query = useQuery('https://jsonplaceholder.typicode.com/todos/1');
+  const form = useAppForm({
+    defaultValues: {
+      city: 'option1',
+      firstName: 'אבי',
+      fromDate: '05/03/2025',
+      toDate: '25/03/2025'
+    } as PublisherFormValues,
+    validators: {
+      onChange: ({ value }) =>
+        value.firstName === value.lastName && 'FirstName and Last Name may not be the same'
     },
-    onSubmit:({ value }) => {
+    onSubmit: ({ value }) => {
       alert(JSON.stringify(value));
     }});
 
   return (
-    <Layout form={form}>
-      <div>
-        <Card>
-          <div>Publisher {query?.isPending.toString()}</div>
-          <div>
-            <Button onClick={() => window.alert('Hello! I am the Mevaker!')} type="submit">
-              Click the Mevaker
-            </Button>
-          </div>
-          <Image src={logo} alt="mevaker" />
-          <form.AppField name="city" children={(field) => <field.Select label="ערים" options={CitiesOptions}  />}/>
-          <form.AppField name="name" children={(field) => <field.Input label="שם פרטי" />} />
-        </Card>
-      </div>
-    </Layout>
+    <main>
+      <form
+        className="form"
+        onSubmit={e => {
+          e.preventDefault();
+          form.handleSubmit();
+        }}
+      >
+        <div>
+          <Card>
+            <div>Publisher {query?.isPending.toString()}</div>
+            <div>
+              <Button onClick={() => window.alert('Hello! I am the Mevaker!')} type="submit">
+                Click the Mevaker
+              </Button>
+            </div>
+            <Image src={logo} alt="mevaker" />
+            <form.AppField name="city">
+              {field => <field.Select label="ערים" options={CitiesOptions} />}
+            </form.AppField>
+            <form.AppField name="firstName" children={field => <field.Input label="שם פרטי" />} />
+            <form.AppField
+              name="lastName"
+              validators={{
+                onChange: ({ value }) => !value && 'שדה חובה'
+              }}
+              children={field => <field.Input label="שם משפחה" />}
+            />
+            <form.AppField
+              name="number"
+              children={field => <field.Number label="מספר" max={2} />}
+            />
+            <form.AppField
+              name="fromDate"
+              children={field => (
+                <field.DatePicker
+                  label="מתאריך"
+                  inputReadOnly={true}
+                  maxDate={form.state.values.toDate}
+                />
+              )}
+            />
+            <form.AppField
+              name="toDate"
+              children={field => (
+                <field.DatePicker
+                  label="עד תאריך"
+                  inputReadOnly={false}
+                  minDate={form.state.values.fromDate}
+                />
+              )}
+            />
+          </Card>
+        </div>
+      </form>
+    </main>
   );
 };
 
