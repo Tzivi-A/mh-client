@@ -9,7 +9,7 @@ import Layout from '~/components/layout/layout';
 
 
 export const PublisherPage = () => {
-  const query = useQuery('https://jsonplaceholder.typicode.com/todos/1');
+  const query = useQuery('todos/1');
   
   const form = useAppForm({  
     defaultValues:{

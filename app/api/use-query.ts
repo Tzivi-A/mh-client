@@ -6,7 +6,7 @@ export const useQuery = (endpoint: string) => {
     queryKey: [endpoint],
     queryFn: () => {
       //use axios
-      const result = fetch(endpoint).then(res => res.json());
+      const result = fetch(`${import.meta.env.VITE_API_URL}\\${endpoint}`).then(res => res.json());
       return result;
     }
   });
