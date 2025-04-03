@@ -23,8 +23,7 @@ export const DatePicker = ({
   value,
   inputReadOnly = true,
   minDate,
-  maxDate,
-  error
+  maxDate
 }: DatePickerProps<DatePickerType>) => {
   const [selectedDate, setSelectedDate] = useState<Dayjs | null>(toDayjs(value) || null);
   const [isFocused, setIsFocused] = useState<boolean>(!!value);
@@ -42,7 +41,7 @@ export const DatePicker = ({
   };
 
   return (
-    <InputWrapper label={label} id={id} value={selectedDate} focused={isFocused} error={error}>
+    <InputWrapper label={label} id={id} value={selectedDate} focused={isFocused}>
       <AntDatePicker
         className="malam-input"
         value={selectedDate}
