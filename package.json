@@ -12,7 +12,6 @@
   "lint:fix": "eslint . --fix",
   "test": "react-router build --mode test",
   "dev:test": "react-router dev --mode test",
-  "mock": "react-router build --mode mock",
   "dev:mock": "react-router dev --mode mock"
 },
   "dependencies": {
