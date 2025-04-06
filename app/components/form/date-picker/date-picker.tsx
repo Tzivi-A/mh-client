@@ -2,31 +2,17 @@ import { useState } from 'react';
 import { DatePicker as AntDatePicker, type DatePickerProps as AntDatePickerProps } from 'antd';
 import 'antd/dist/reset.css';
 import 'dayjs/locale/he';
-import dayjs, { Dayjs } from 'dayjs';
+import { Dayjs } from 'dayjs';
 import InputWrapper from '../input-wrapper/input-wrapper';
 import type { FormFieldProps } from '~/types/form-types';
 import type { DatePickerType } from '~/types/date-types';
+import { toDayjs } from '~/utils/utils';
 
 export interface DatePickerProps<T> extends FormFieldProps<T> {
   minDate?: DatePickerType;
   maxDate?: DatePickerType;
   inputReadOnly?: boolean;
 }
-
-export const toDayjs = (value: DatePickerType): Dayjs | undefined => {
-  if (!value) return undefined;
-  return dayjs.isDayjs(value) ? value : dayjs(value, 'DD/MM/YYYY');
-};
-
-export const checkDateRange = (minDate: DatePickerType, maxDate: DatePickerType) => {
-  const fromDate = toDayjs(minDate);
-  const toDate = toDayjs(maxDate);
-
-  if (fromDate && toDate && fromDate.isAfter(toDate)) {
-    return '"מתאריך" חייב להיות מוקדם מ"עד תאריך"';
-  }
-  return undefined;
-};
 
 export const DatePicker = ({
   label,
@@ -60,15 +46,12 @@ export const DatePicker = ({
         value={selectedDate}
         onChange={handleInputChange}
         inputReadOnly={inputReadOnly}
-        format={{
-          format: 'DD/MM/YYYY',
-          type: !inputReadOnly ? 'mask' : undefined
-        }}
+        format="DD/MM/YYYY"
         onFocus={handleInputFocus}
         onBlur={handleInputBlur}
         minDate={toDayjs(minDate)}
         maxDate={toDayjs(maxDate)}
-        placeholder=""
+        placeholder={!inputReadOnly ? 'DD/MM/YYYY' : ''}
       />
     </InputWrapper>
   );
