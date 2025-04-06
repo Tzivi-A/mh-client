@@ -18,7 +18,7 @@ interface PublisherFormValues {
 }
 
 export const PublisherPage = () => {
-  const query = useQuery('https://jsonplaceholder.typicode.com/todos/1');
+  const query = useQuery(`todos/1`);
   const form = useAppForm({
     defaultValues: {
       city: 'option1',
@@ -32,7 +32,8 @@ export const PublisherPage = () => {
     },
     onSubmit: ({ value }) => {
       alert(JSON.stringify(value));
-    }});
+    }
+  });
 
   return (
     <main>
