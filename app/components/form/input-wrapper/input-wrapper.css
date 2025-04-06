@@ -1,16 +1,19 @@
-.malam-label {
+.malam-label, .malam-floating-label  {
   position: absolute;
   top: 50%;
   right: 12px; /* Move to right */
   left: auto;
   transform: translateY(-50%);
   transition: all 0.2s ease-in-out;
-  background: white;
-  padding: 0 5px;
   color: gray;
   font-size: 14px;
   pointer-events: none;
   z-index: 2;
+}
+
+.malam-floating-label {
+  padding: 0 5px;
+  background: white;
 }
 
 /* Ensure the container follows RTL */
@@ -20,10 +23,10 @@
   display: flex;
   flex-direction: column;
   direction: rtl; /*Force right-to-left */
-  margin: 10px;
+  margin: 15px;
 }
 
-.malam-input-wrapper-container.focused .malam-label,
+.malam-input-wrapper-container.focused .malam-floating-label,
 .malam-input-wrapper-container .ant-select-selection-item {
   top: 5px;
   right: 10px; /* Adjust to right */
@@ -36,4 +39,10 @@
 .error {
   font-size: 13px;
   color: red;
+  margin-top: 5px;
+  text-align: right;
+  padding-right: 12px;
+  position: absolute; /* Ensure it does not affect the input field's layout */
+  bottom: -15px;
+  right: 0;
 }

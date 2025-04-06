@@ -15,6 +15,7 @@ interface PublisherFormValues {
   number?: string;
   fromDate?: DatePickerType;
   toDate?: DatePickerType;
+  agreeToTerms?: boolean;
 }
 
 export const PublisherPage = () => {
@@ -87,6 +88,10 @@ export const PublisherPage = () => {
                   minDate={form.state.values.fromDate}
                 />
               )}
+            />
+            <form.AppField
+              name="agreeToTerms"
+              children={field => <field.CheckBox label="מסכים לתנאים" />}
             />
           </Card>
         </div>
