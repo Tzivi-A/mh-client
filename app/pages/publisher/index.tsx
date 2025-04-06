@@ -9,6 +9,8 @@ import type { DatePickerType } from '~/types/date-types';
 import { useOption } from '~/hooks/use-option';
 import { useState } from 'react';
 import type { Option } from '~/types/option';
+import { useStore } from '@tanstack/react-form';
+import { validateDateRange } from '~/utils/validators';
 
 interface PublisherFormValues {
   city: string;
@@ -17,6 +19,9 @@ interface PublisherFormValues {
   number?: string;
   fromDate?: DatePickerType;
   toDate?: DatePickerType;
+  validateFromDate?: DatePickerType;
+  validateToDate?: DatePickerType;
+  agreeToTerms?: boolean;
 }
 
 export const PublisherPage = () => {
@@ -34,12 +39,15 @@ export const PublisherPage = () => {
     } as PublisherFormValues,
     validators: {
       onChange: ({ value }) =>
-        value.firstName === value.lastName && 'FirstName and Last Name may not be the same'
+        value.firstName === value.lastName && 'FirstName and LastName may not be the same'
     },
     onSubmit: ({ value }) => {
       alert(JSON.stringify(value));
     }
   });
+
+  const fromDate = useStore(form.store, state => state.values.fromDate);
+  const toDate = useStore(form.store, state => state.values.toDate);
 
   const formOptions = useAppForm({
     defaultValues: {} as Option,
@@ -55,6 +63,9 @@ export const PublisherPage = () => {
 
   if (isLoading) return <p>Loading options data...</p>;
   if (error) return <p>Error loading options data</p>;
+
+  const validateFormDateRange = (fromDate: DatePickerType, toDate: DatePickerType) =>
+    validateDateRange(fromDate, toDate) && '"מתאריך" חייב להיות מוקדם מ"עד תאריך"';
 
   return (
     <main>
@@ -93,23 +104,37 @@ export const PublisherPage = () => {
             />
             <form.AppField
               name="fromDate"
-              children={field => (
-                <field.DatePicker
-                  label="מתאריך"
-                  inputReadOnly={true}
-                  maxDate={form.state.values.toDate}
-                />
-              )}
+              children={field => <field.DatePicker label="מתאריך" maxDate={toDate} />}
             />
             <form.AppField
               name="toDate"
               children={field => (
-                <field.DatePicker
-                  label="עד תאריך"
-                  inputReadOnly={false}
-                  minDate={form.state.values.fromDate}
-                />
+                <field.DatePicker label="עד תאריך" inputReadOnly={false} minDate={fromDate} />
               )}
+            />
+            <form.AppField
+              name="validateFromDate"
+              validators={{
+                onChangeListenTo: ['validateToDate'],
+                onChange: ({ value, fieldApi }) =>
+                  validateFormDateRange(value, fieldApi.form.getFieldValue('validateToDate'))
+              }}
+              children={field => <field.DatePicker label="מתאריך - ולידציה" />}
+            />
+            <form.AppField
+              name="validateToDate"
+              validators={{
+                onChangeListenTo: ['validateFromDate'],
+                onChange: ({ value, fieldApi }) =>
+                  validateFormDateRange(fieldApi.form.getFieldValue('validateFromDate'), value)
+              }}
+              children={field => (
+                <field.DatePicker label="עד תאריך - ולידציה" inputReadOnly={false} />
+              )}
+            />
+            <form.AppField
+              name="agreeToTerms"
+              children={field => <field.CheckBox label="מסכים לתנאים" />}
             />
             <Button type="submit">Submit Form</Button>
           </form>
