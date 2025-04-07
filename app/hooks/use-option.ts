@@ -1,12 +1,7 @@
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import axiosInstance from '../api/axiosInstance';
 import type { SelectOption } from '../types/select-option';
-
-// Fetch options from the server
-const getOption = async (): Promise<SelectOption[]> => {
-  const response = await axiosInstance.get('/api/options/getOptions');
-  return response.data;
-};
+import { useQuery } from '../api/use-query';
 
 // Insert a new option to the server
 const insertNewOption = async (newOption: SelectOption): Promise<SelectOption> => {
@@ -21,10 +16,7 @@ export const useOption = () => {
   const queryClient = useQueryClient();
 
   // Fetching options
-  const optionsQuery = useQuery({
-    queryKey: ['option'],
-    queryFn: () => getOption()
-  });
+  const optionsQuery = useQuery('/api/options/getOptions');
 
   // Mutation for adding a new option
   const addOptionMutation = useMutation({
@@ -36,7 +28,7 @@ export const useOption = () => {
   });
 
   return {
-    ...optionsQuery,
+    optionsQuery,
     addOption: addOptionMutation.mutateAsync
   };
 };

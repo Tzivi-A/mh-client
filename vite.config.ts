@@ -13,7 +13,7 @@ export default defineConfig(({ mode }) => {
       port: 5173,
       proxy: {
         '/api': {
-          target: env.VITE_BASE_URL,
+          target: env.VITE_API_URL,
           changeOrigin: true,
           rewrite: path => path.replace(/^\/api/, '')
         }

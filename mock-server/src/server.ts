@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import * as dotenv from 'dotenv';
-dotenv.config({ path: './environments/.env.mock' });
+dotenv.config({ path: './.env.mock' });
 
 import express, { type Request, type Response } from 'express';
 import bodyParser from 'body-parser';
@@ -10,7 +10,7 @@ import { initializeTempData, loadMockFilesFromTemp, loadMockData, tempDataFolder
 import fs from 'fs';
 
 const app = express();
-const PORT = process.env.VITE_BASE_URL?.split(':').pop() || 4000;
+const PORT = process.env.VITE_API_URL?.split(':').pop() || 4200;
 
 // Enable CORS for all routes
 app.use(cors());

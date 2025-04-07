@@ -28,7 +28,7 @@ export const PublisherPage = () => {
   const [response, setResponse] = useState<string | null>(null);
 
   const query = useQuery('todos/1');
-  const { data, error, isLoading, addOption } = useOption();
+  const { optionsQuery, addOption } = useOption();
 
   const form = useAppForm({
     defaultValues: {
@@ -58,11 +58,13 @@ export const PublisherPage = () => {
 
   const handleSubmit = async (option: SelectOption) => {
     await addOption(option);
+    formOptions.reset();
+    optionsQuery.refetch();
     setResponse('Option added successfully!');
   };
 
-  if (isLoading) return <p>Loading options data...</p>;
-  if (error) return <p>Error loading options data</p>;
+  if (optionsQuery.isLoading) return <p>Loading options data...</p>;
+  if (optionsQuery.error) return <p>Error loading options data</p>;
 
   const validateFormDateRange = (fromDate: DatePickerType, toDate: DatePickerType) =>
     validateDateRange(fromDate, toDate) && '"מתאריך" חייב להיות מוקדם מ"עד תאריך"';
@@ -85,9 +87,9 @@ export const PublisherPage = () => {
               form.handleSubmit();
             }}
           >
-            {data && (
+            {optionsQuery.data && (
               <form.AppField name="city">
-                {field => <field.Select label="ערים" options={data} />}
+                {field => <field.Select label="ערים" options={optionsQuery.data} />}
               </form.AppField>
             )}
             <form.AppField name="firstName" children={field => <field.Input label="שם פרטי" />} />
