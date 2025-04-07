@@ -12,8 +12,7 @@
     "lint:fix": "eslint . --fix",
     "test": "react-router build --mode test",
     "dev:test": "react-router dev --mode test",
-    "dev:mock": "react-router dev --mode mock",
-    "dev-mock": "npm-run-all --parallel mock-server start:react-mock",
+    "dev:mock": "npm-run-all --parallel mock-server start:react-mock",
     "mock-server": "npx tsx mock-server/src/server.ts",
     "start:react-mock": "react-router dev --mode mock"
   },
