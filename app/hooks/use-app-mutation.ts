@@ -19,16 +19,15 @@ export interface UseAppMutationOptions<DATA> {
 
 export const useAppMutation = <DATA>(options: UseAppMutationOptions<DATA>) => {
   const performMutation = async (url: string, method?: string, data?: MutationData) => {
-    console.log('Performing mutation with data:', { url, method, data });
     const route = `${!url.includes('https') ? config.apiUrl : ''}/${url}$`;
-    console.log(`route: ${route}`);
+
     const response = await axios.request({
       method: method || 'POST',
       url: `${route}${data?.queryStringData ? `?${createQueryString(data?.queryStringData)}` : ''}`,
       data: data?.requestData
     });
 
-    return response.data; // Ensure the mutation returns the response data
+    return response.data as DATA;
   };
 
   const mutate = useMutation<DATA, any, MutationData, any>({
