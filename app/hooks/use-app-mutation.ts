@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/restrict-template-expressions */
 import { useMutation, type UseMutationOptions } from '@tanstack/react-query';
 import axios from 'axios';
 import { config } from '~/config/env';
@@ -14,20 +15,39 @@ export interface UseAppMutationOptions<DATA> {
   url: string;
   method?: 'GET' | 'POST' | 'PUT';
   mutationOptions?: Omit<UseMutationOptions<DATA, any, MutationData, any>, 'mutationFn'>;
-  isMock?: boolean;
 }
 
 export const useAppMutation = <DATA>(options: UseAppMutationOptions<DATA>) => {
   const performMutation = async (url: string, method?: string, data?: MutationData) => {
-    const route = `${!url.includes('https') ? config.apiUrl : ''}/${url}`;
+    const route = config.isMock
+      ? `${window.location.origin}/mocks/${url}.json`
+      : `${url.startsWith('http://') || url.startsWith('https://') ? '' : `${config.apiUrl}/`}${url}`;
 
-    const response = await axios.request({
-      method: method || 'POST',
-      url: `${route}${data?.queryStringData ? `?${createQueryString(data?.queryStringData)}` : ''}`,
-      data: data?.requestData
-    });
+    try {
+      if (config.isMock) {
+        // Use fetch for mock data
+        const response = await fetch(
+          `${route}${data?.queryStringData ? `?${createQueryString(data?.queryStringData)}` : ''}`,
+          {
+            method: method || 'POST'
+          }
+        );
 
-    return response.data as DATA;
+        if (!response.ok) throw new Error('Failed to fetch mock data');
+        return (await response.json()) as DATA;
+      } else {
+        // Use axios for real API requests
+        const response = await axios.request({
+          method: method || 'POST',
+          url: `${route}${data?.queryStringData ? `?${createQueryString(data?.queryStringData)}` : ''}`,
+          data: data?.requestData
+        });
+
+        return response.data as DATA;
+      }
+    } catch (error) {
+      throw new Error(`Request failed: ${error}`);
+    }
   };
 
   const mutate = useMutation<DATA, any, MutationData, any>({

@@ -29,18 +29,17 @@ export const PublisherPage = () => {
   const [response, setResponse] = useState<string | null>(null);
 
   const { optionsQuery, addOption } = useOption();
-  // const { mutate } = useAppMutation({
-  //   url: 'https://api.agify.io/?name=meelad',
-  //   mutationOptions: {}
-  // });
 
   const mutation = useAppMutation({
     url: 'https://api.agify.io',
+    method: 'GET',
     mutationOptions: {
       onSuccess: data => {
+        // eslint-disable-next-line no-console
         console.log('Mutation successful:', data);
       },
       onError: error => {
+        // eslint-disable-next-line no-console
         console.error('Mutation failed:', error);
       }
     }
@@ -49,7 +48,7 @@ export const PublisherPage = () => {
   const handleMutation = () => {
     mutation.mutate({
       requestData: { key: 'name' },
-      queryStringData: { param: 'meelad' }
+      queryStringData: { name: 'meelad' }
     });
   };
 
@@ -81,8 +80,8 @@ export const PublisherPage = () => {
     }
   });
 
-  const handleSubmit = async (option: SelectOption) => {
-    await addOption(option);
+  const handleSubmit = (option: SelectOption) => {
+    addOption(option);
     formOptions.reset();
     optionsQuery.refetch();
     setResponse('Option added successfully!');

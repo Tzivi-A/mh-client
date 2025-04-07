@@ -11,7 +11,6 @@ import fs from 'fs';
 
 const app = express();
 const PORT = process.env.VITE_API_URL?.split(':').pop() || 4200;
-
 // Enable CORS for all routes
 app.use(cors());
 app.use(bodyParser.json());

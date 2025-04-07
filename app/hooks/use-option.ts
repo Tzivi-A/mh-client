@@ -2,6 +2,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import type { SelectOption } from '../types/select-option';
 import { useAppQuery } from './use-app-query';
 import { useAppMutation } from './use-app-mutation';
+import { config } from '~/config/env';
 
 // Custom hook for options
 export const useOption = () => {
@@ -11,6 +12,12 @@ export const useOption = () => {
   const optionsQuery = useAppQuery<SelectOption[]>({
     url: 'api/options/getOptions',
     queryData: {}
+  });
+
+  // Mutation for adding a new option using useAppMutation
+  const { mutate } = useAppMutation<SelectOption>({
+    url: 'api/options/createOption',
+    method: 'POST'
   });
 
   // Mutation for adding a new option using useAppMutation
@@ -27,9 +34,20 @@ export const useOption = () => {
 
   return {
     optionsQuery,
-    addOption: (newOption: SelectOption) =>
-      addOptionMutation.mutateAsync({
-        requestData: { label: newOption.label }
-      })
+    addOption: (newOption: SelectOption) => {
+      if (config.isMock) {
+        mutate(
+          { requestData: { label: newOption.label } },
+          {
+            onSuccess: data => alert(data),
+            onError: error => alert(error)
+          }
+        );
+      } else {
+        addOptionMutation.mutateAsync({
+          requestData: { label: newOption.label }
+        });
+      }
+    }
   };
 };
