@@ -2,15 +2,18 @@
   "name": "mevaker-hamedina-client",
   "private": true,
   "type": "module",
-  "scripts": {
-    "build": "react-router build",
-    "dev": "npm-watch dev-build",
-    "dev-build": "react-router dev",
-    "start": "react-router-serve ./build/server/index.js",
-    "typecheck": "react-router typegen && tsc",
-    "lint": "eslint ./app --ext .ts,.tsx",
-    "lint:fix": "eslint . --fix"
-  },
+"scripts": {
+  "build": "react-router build",
+  "dev": "npm-watch dev-build",
+  "dev-build": "react-router dev",
+  "start": "react-router-serve ./build/server/index.js",
+  "typecheck": "react-router typegen && tsc",
+  "lint": "eslint ./app --ext .ts,.tsx",
+  "lint:fix": "eslint . --fix",
+  "test": "react-router build --mode test",
+  "dev:test": "react-router dev --mode test",
+  "dev:mock": "react-router dev --mode mock"
+},
   "dependencies": {
     "@react-router/node": "7.3.0",
     "@react-router/serve": "7.3.0",

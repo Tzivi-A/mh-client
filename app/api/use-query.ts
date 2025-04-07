@@ -1,4 +1,5 @@
 import { useQuery as useTanstackQuery } from '@tanstack/react-query';
+import { config } from '~/config/env';
 //import base
 
 export const useQuery = (endpoint: string) => {
@@ -6,7 +7,7 @@ export const useQuery = (endpoint: string) => {
     queryKey: [endpoint],
     queryFn: () => {
       //use axios
-      const result = fetch(endpoint).then(res => res.json());
+      const result = fetch(`${config.apiUrl}\\${endpoint}`).then(res => res.json());
       return result;
     }
   });
