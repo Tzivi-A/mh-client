@@ -71,22 +71,23 @@ export const PublisherPage = () => {
 
   return (
     <main>
-      <div>
-        <Card>
-          <div>Publisher {query?.isPending.toString()}</div>
-          <div>
-            <Button onClick={() => window.alert('Hello! I am the Mevaker!')} type="submit">
-              Click the Mevaker
-            </Button>
-          </div>
-          <Image src={logo} alt="mevaker" />
-          <form
-            className="form"
-            onSubmit={e => {
-              e.preventDefault();
-              form.handleSubmit();
-            }}
-          >
+      <form
+        className="form"
+        onSubmit={e => {
+          e.preventDefault();
+          form.handleSubmit();
+        }}
+      >
+        <div>
+          <Card>
+            <div>Publisher {query?.isPending.toString()}</div>
+            <div>
+              <Button onClick={() => window.alert('Hello! I am the Mevaker!')} type="submit">
+                Click the Mevaker
+              </Button>
+            </div>
+            <Image src={logo} alt="mevaker" />
+
             {optionsQuery.data && (
               <form.AppField name="city">
                 {field => <field.Select label="ערים" options={optionsQuery.data} />}
@@ -139,28 +140,28 @@ export const PublisherPage = () => {
               children={field => <field.CheckBox label="מסכים לתנאים" />}
             />
             <Button type="submit">Submit Form</Button>
-          </form>
-        </Card>
+          </Card>
+        </div>
+      </form>
+      <form
+        className="form"
+        onSubmit={e => {
+          e.preventDefault();
+          formOptions.handleSubmit();
+        }}
+      >
         <Card>
-          <form
-            className="form"
-            onSubmit={e => {
-              e.preventDefault();
-              formOptions.handleSubmit();
+          <formOptions.AppField
+            name="label"
+            validators={{
+              onChange: ({ value }) => !value && 'שדה חובה'
             }}
-          >
-            <formOptions.AppField
-              name="label"
-              validators={{
-                onChange: ({ value }) => !value && 'שדה חובה'
-              }}
-              children={field => <field.Input label="label" />}
-            />
-            <Button type="submit">Submit Option</Button>
-          </form>
-          {response && <p>{response}</p>}
+            children={field => <field.Input label="label" />}
+          />
+          <Button type="submit">Submit Option</Button>
         </Card>
-      </div>
+      </form>
+      {response && <p>{response}</p>}
     </main>
   );
 };
