@@ -1,67 +1,89 @@
 import { Table as AntTable } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
+import type { ExpandableConfig } from 'antd/es/table/interface';
+import { useState } from 'react';
 
 export interface TableProps<T> {
   data: T[];
   columns: ColumnsType<T>;
   loading?: boolean;
-  pagination?: boolean;
+  pagination?: {
+    current?: number;
+    pageSize?: number;
+    total?: number;
+    showSizeChanger?: boolean;
+    pageSizeOptions?: string[];
+    onShowSizeChange?: (current: number, pageSize: number) => void;
+    onChange?: (current: number, pageSize?: number) => void;
+  };
   onRowClick?: (record: T) => void;
-  onPageChange?: (page: number, pageSize: number) => void;
-  pageSize?: number;
-  page?: number;
   rowKey?: string;
   bordered?: boolean;
-  scroll?: { x?: number; y?: number };
+  scroll?: { x?: number | true | string; y?: number | string };
   size?: 'small' | 'middle' | 'large' | undefined;
   title?: string;
   footer?: string;
   showHeader?: boolean;
   sticky?: boolean;
   className?: string;
+  expandable?: ExpandableConfig<T>;
 }
 
 export const Table = <T,>({
   data,
   columns = Object.keys(data[0] || {}).map(key => ({
-    title: key,
+    title: key.charAt(0).toUpperCase() + key.slice(1),
     dataIndex: key,
     key: key
   })),
-  loading = false,
-  pagination = true,
+  loading,
+  pagination,
   onRowClick,
-  onPageChange,
-  pageSize = 10,
-  page = 1,
   rowKey = 'key',
-  bordered = false,
+  bordered,
   scroll,
   size = 'middle',
   title,
   footer,
-  showHeader = true,
-  sticky = false,
-  className
+  showHeader,
+  sticky,
+  className,
+  expandable
 }: TableProps<T>) => {
+  const [pageSize, setPageSize] = useState(pagination?.pageSize ?? 10);
+  const [currentPage, setCurrentPage] = useState(pagination?.current ?? 1);
+
   const handleRowClick = (record: T) => {
     if (onRowClick) {
       onRowClick(record);
     }
   };
 
-  const handlePageChange = (page: number, pageSize: number) => {
-    if (onPageChange) {
-      onPageChange(page, pageSize);
-    }
-  };
-
   return (
-    <AntTable
+    <AntTable<T>
       dataSource={data}
       columns={columns}
       loading={loading}
-      pagination={pagination ? { pageSize, current: page, onChange: handlePageChange } : false}
+      pagination={
+        pagination
+          ? {
+              current: currentPage,
+              pageSize,
+              total: data.length,
+              showSizeChanger: pagination?.showSizeChanger,
+              pageSizeOptions: pagination?.pageSizeOptions ?? ['10', '20', '50', '100'],
+              onShowSizeChange: (current, size) => {
+                setPageSize(size);
+                setCurrentPage(current);
+                if (pagination?.onShowSizeChange) {
+                  pagination.onShowSizeChange(current, size);
+                }
+              },
+              onChange: page => setCurrentPage(page),
+              hideOnSinglePage: true
+            }
+          : false
+      }
       onRow={record => ({
         onClick: () => handleRowClick(record)
       })}
@@ -74,6 +96,7 @@ export const Table = <T,>({
       showHeader={showHeader}
       sticky={sticky}
       className={className}
+      expandable={expandable}
     />
   );
 };

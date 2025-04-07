@@ -1,4 +1,6 @@
+import { Card } from '~/components/card/card';
 import { Table, type TableProps } from '../../components/table/table';
+import { Tag } from 'antd';
 
 export interface DataType {
   key: string;
@@ -7,56 +9,88 @@ export interface DataType {
   address: string;
   tags: string[];
   description: string;
+  dateTime: string;
   date: string;
   time: string;
   status: string;
 }
 
 export const RegistrationPage = () => {
-  const data = [
-    {
-      key: '1',
-      name: 'John Brown',
-      age: 32,
-      address: '10 Downing Street',
-      tags: ['active'],
-      description: 'A description for John Brown',
-      date: '2023-01-01',
-      time: '10:00 AM',
-      status: 'active'
-    },
-    {
-      key: '2',
-      name: 'Jane Smith',
-      age: 28,
-      address: '20 Oxford Street',
-      tags: ['inactive'],
-      description: 'A description for Jane Smith',
-      date: '2023-01-02',
-      time: '11:00 AM',
-      status: 'inactive'
-    }
-  ] as DataType[];
+  const data = Array.from({ length: 50 }, (_, index) => ({
+    key: (index + 1).toString(),
+    name: `User ${index + 1}`,
+    age: 20 + (index % 30),
+    address: `${index + 1} Example Street`,
+    tags: 20 + (index % 30) > 30 ? ['active'] : ['inactive'],
+    description: `A description for User ${index + 1}`,
+    dateTime: '',
+    date: `2023-01-${String((index % 31) + 1).padStart(2, '0')}`,
+    time: `${(index % 12) + 1}:00 ${index % 2 === 0 ? 'AM' : 'PM'}`,
+    status: 20 + (index % 30) > 30 ? 'active' : 'inactive'
+  })) as DataType[];
 
   const tableProps = {
     data,
+    columns: Object.keys(data[0] || {})
+      .filter(key => !['key', 'date', 'time'].includes(key))
+      .map((key, index) => ({
+        title: key.charAt(0).toUpperCase() + key.slice(1),
+        dataIndex: key,
+        key: (index + 1).toString(),
+        render: (_, record) => {
+          if (key === 'tags') {
+            return (
+              <>
+                {record.tags.map(tag => {
+                  const color = tag === 'inactive' ? 'volcano' : 'green';
+                  return (
+                    <Tag color={color} key={tag}>
+                      {tag.toUpperCase()}
+                    </Tag>
+                  );
+                })}
+              </>
+            );
+          }
+          return <span>{record[key]}</span>;
+        },
+        children:
+          key === 'dateTime'
+            ? [
+                {
+                  title: 'Date',
+                  dataIndex: 'date',
+                  key: ((index + 1) * data.length).toString()
+                },
+                {
+                  title: 'Time',
+                  dataIndex: 'time',
+                  key: ((index + 1) * data.length + 1).toString()
+                }
+              ]
+            : undefined
+      })),
     loading: false,
-    pagination: true,
-    pageSize: 1,
-    page: 2,
+    pagination: {
+      current: 1,
+      pageSize: 5,
+      total: data.length,
+      showSizeChanger: true,
+      pageSizeOptions: ['10', '20', '30', '40']
+    },
+    scroll: { x: 'max-content', y: 510 },
     rowKey: 'key',
-    bordered: false,
-    scroll: { x: 1000, y: 500 },
+    bordered: true,
     size: 'middle',
-    title: 'Registration Table',
-    footer: 'Footer text',
     showHeader: true
   } as TableProps<DataType>;
 
   return (
     <div>
       <h1>Registration Page</h1>
-      <Table {...tableProps} />
+      <Card>
+        <Table {...tableProps} />
+      </Card>
     </div>
   );
 };
