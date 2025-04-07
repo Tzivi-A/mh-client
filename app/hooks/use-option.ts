@@ -1,15 +1,15 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import axiosInstance from '../api/axiosInstance';
-import type { Option } from '../types/option';
+import type { SelectOption } from '../types/select-option';
 
 // Fetch options from the server
-const getOption = async (): Promise<Option[]> => {
+const getOption = async (): Promise<SelectOption[]> => {
   const response = await axiosInstance.get('/api/options/getOptions');
   return response.data;
 };
 
 // Insert a new option to the server
-const insertNewOption = async (newOption: Option): Promise<Option> => {
+const insertNewOption = async (newOption: SelectOption): Promise<SelectOption> => {
   const response = await axiosInstance.post('/api/options/createOption', {
     label: newOption.label
   });

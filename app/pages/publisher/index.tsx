@@ -8,7 +8,7 @@ import './publisher.css';
 import type { DatePickerType } from '~/types/date-types';
 import { useOption } from '~/hooks/use-option';
 import { useState } from 'react';
-import type { Option } from '~/types/option';
+import type { SelectOption } from '~/types/select-option';
 import { useStore } from '@tanstack/react-form';
 import { validateDateRange } from '~/utils/validators';
 
@@ -27,7 +27,7 @@ interface PublisherFormValues {
 export const PublisherPage = () => {
   const [response, setResponse] = useState<string | null>(null);
 
-  const query = useQuery('https://jsonplaceholder.typicode.com/todos/1');
+  const query = useQuery('todos/1');
   const { data, error, isLoading, addOption } = useOption();
 
   const form = useAppForm({
@@ -50,13 +50,13 @@ export const PublisherPage = () => {
   const toDate = useStore(form.store, state => state.values.toDate);
 
   const formOptions = useAppForm({
-    defaultValues: {} as Option,
+    defaultValues: {} as SelectOption,
     onSubmit: ({ value }) => {
       handleSubmit(value);
     }
   });
 
-  const handleSubmit = async (option: Option) => {
+  const handleSubmit = async (option: SelectOption) => {
     await addOption(option);
     setResponse('Option added successfully!');
   };
