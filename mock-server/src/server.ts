@@ -6,7 +6,7 @@ dotenv.config({ path: './environments/.env.mock' });
 import express, { type Request, type Response } from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
-import { initializeTempData, loadMockFilesFromTemp, loadMockData } from './utils';
+import { initializeTempData, loadMockFilesFromTemp, loadMockData, tempDataFolder } from './utils';
 import fs from 'fs';
 
 const app = express();
@@ -26,6 +26,7 @@ const saveMockData = (filePath: string, updatedData: any): void => {
   fs.writeFileSync(filePath, JSON.stringify(updatedData, null, 2), 'utf8');
 };
 
+// Register endpoints dynamically from loaded files
 mockFiles.forEach(filePath => {
   const { meta, data } = loadMockData(filePath);
 
@@ -34,7 +35,11 @@ mockFiles.forEach(filePath => {
     return;
   }
 
-  const servicePrefix = `/${meta.service}`;
+  const relativePath = filePath.replace(/\\/g, '/').split(`/${tempDataFolder}/`)[1];
+  const pathParts = relativePath.split('/');
+  const folderName = pathParts.length > 1 ? pathParts[0] : '';
+  const serviceName = meta.service;
+  const servicePrefix = folderName ? `/${folderName}/${serviceName}` : `/${serviceName}`;
 
   meta.endpoints.forEach((endpoint: any) => {
     const { method, path: endpointPath, params } = endpoint;

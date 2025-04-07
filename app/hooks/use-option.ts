@@ -4,13 +4,15 @@ import type { Option } from '../types/option';
 
 // Fetch options from the server
 const getOption = async (): Promise<Option[]> => {
-  const response = await axiosInstance.get('/options/getOptions');
+  const response = await axiosInstance.get('/api/options/getOptions');
   return response.data;
 };
 
 // Insert a new option to the server
 const insertNewOption = async (newOption: Option): Promise<Option> => {
-  const response = await axiosInstance.post('/options/createOption', { label: newOption.label });
+  const response = await axiosInstance.post('/api/options/createOption', {
+    label: newOption.label
+  });
   return response.data;
 };
 

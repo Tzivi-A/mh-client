@@ -51,7 +51,7 @@ export const DatePicker = ({
         onBlur={handleInputBlur}
         minDate={toDayjs(minDate)}
         maxDate={toDayjs(maxDate)}
-        placeholder={!inputReadOnly ? 'DD/MM/YYYY' : ''}
+        placeholder={isFocused && !inputReadOnly ? 'DD/MM/YYYY' : ''}
       />
     </InputWrapper>
   );
