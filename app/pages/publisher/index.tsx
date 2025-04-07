@@ -2,13 +2,14 @@ import { Button } from '~/components/button/button';
 import { Card } from '~/components/card/card';
 import { Image } from '~/components/image/image';
 import logo from '~/assets/images/LogoMevaker.png';
-import { useQuery } from '~/api/use-query';
 import { CitiesOptions } from '~/api/mock/select-option';
 import useAppForm from '~/hooks/use-app-form';
 import './publisher.css';
 import type { DatePickerType } from '~/types/date-types';
 import { useStore } from '@tanstack/react-form';
 import { validateDateRange } from '~/utils/validators';
+import { useAppQuery } from '~/hooks/use-app-query';
+import { useAppMutation } from '~/hooks/use-app-mutation';
 
 interface PublisherFormValues {
   city: string;
@@ -23,8 +24,11 @@ interface PublisherFormValues {
 }
 
 export const PublisherPage = () => {
-  const query = useQuery('https://jsonplaceholder.typicode.com/todos/1');
-
+  const mutationQuery = useAppMutation({
+    url: 'https://api.agify.io/?name=meelad',
+    mutationOptions: {}
+  });
+  const query = useAppQuery({ url: 'todos/1', queryData: {} });
   const form = useAppForm({
     defaultValues: {
       city: 'option1',
@@ -58,7 +62,10 @@ export const PublisherPage = () => {
       >
         <div>
           <Card>
-            <div>Publisher {query?.isPending.toString()}</div>
+            <div>
+              Publisher Query is pending: {query?.isPending.toString()}, Mutation is pending:
+              {mutationQuery?.isPending.toString()}
+            </div>
             <div>
               <Button onClick={() => window.alert('Hello! I am the Mevaker!')} type="submit">
                 Click the Mevaker
