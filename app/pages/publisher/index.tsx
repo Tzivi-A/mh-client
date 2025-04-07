@@ -53,8 +53,6 @@ export const PublisherPage = () => {
     });
   };
 
-  handleMutation();
-
   const query = useAppQuery({ url: 'todos/1', queryData: {} });
   const form = useAppForm({
     defaultValues: {
@@ -68,6 +66,7 @@ export const PublisherPage = () => {
         value.firstName === value.lastName && 'FirstName and LastName may not be the same'
     },
     onSubmit: ({ value }) => {
+      handleMutation();
       alert(JSON.stringify(value));
     }
   });
@@ -116,7 +115,7 @@ export const PublisherPage = () => {
 
             {optionsQuery.data && (
               <form.AppField name="city">
-                {field => <field.Select label="ערים" options={optionsQuery.data} />}
+                {field => <field.Select label="ערים" options={optionsQuery.data || []} />}
               </form.AppField>
             )}
             <form.AppField name="firstName" children={field => <field.Input label="שם פרטי" />} />

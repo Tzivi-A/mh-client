@@ -19,7 +19,7 @@ export interface UseAppMutationOptions<DATA> {
 
 export const useAppMutation = <DATA>(options: UseAppMutationOptions<DATA>) => {
   const performMutation = async (url: string, method?: string, data?: MutationData) => {
-    const route = `${!url.includes('https') ? config.apiUrl : ''}/${url}$`;
+    const route = `${!url.includes('https') ? config.apiUrl : ''}/${url}`;
 
     const response = await axios.request({
       method: method || 'POST',
