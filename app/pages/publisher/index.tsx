@@ -2,7 +2,6 @@ import { Button } from '~/components/button/button';
 import { Card } from '~/components/card/card';
 import { Image } from '~/components/image/image';
 import logo from '~/assets/images/LogoMevaker.png';
-import { useQuery } from '~/api/use-query';
 import useAppForm from '~/hooks/use-app-form';
 import './publisher.css';
 import type { DatePickerType } from '~/types/date-types';
@@ -11,6 +10,8 @@ import { useState } from 'react';
 import type { SelectOption } from '~/types/select-option';
 import { useStore } from '@tanstack/react-form';
 import { validateDateRange } from '~/utils/validators';
+import { useAppQuery } from '~/hooks/use-app-query';
+import { useAppMutation } from '~/hooks/use-app-mutation';
 
 interface PublisherFormValues {
   city: string;
@@ -27,9 +28,34 @@ interface PublisherFormValues {
 export const PublisherPage = () => {
   const [response, setResponse] = useState<string | null>(null);
 
-  const query = useQuery('todos/1');
   const { optionsQuery, addOption } = useOption();
+  // const { mutate } = useAppMutation({
+  //   url: 'https://api.agify.io/?name=meelad',
+  //   mutationOptions: {}
+  // });
 
+  const mutation = useAppMutation({
+    url: 'https://api.agify.io',
+    mutationOptions: {
+      onSuccess: data => {
+        console.log('Mutation successful:', data);
+      },
+      onError: error => {
+        console.error('Mutation failed:', error);
+      }
+    }
+  });
+
+  const handleMutation = () => {
+    mutation.mutate({
+      requestData: { key: 'name' },
+      queryStringData: { param: 'meelad' }
+    });
+  };
+
+  handleMutation();
+
+  const query = useAppQuery({ url: 'todos/1', queryData: {} });
   const form = useAppForm({
     defaultValues: {
       city: 'option1',
@@ -80,7 +106,7 @@ export const PublisherPage = () => {
       >
         <div>
           <Card>
-            <div>Publisher {query?.isPending.toString()}</div>
+            <div>Publisher Query is pending: {query?.isPending.toString()}</div>
             <div>
               <Button onClick={() => window.alert('Hello! I am the Mevaker!')} type="submit">
                 Click the Mevaker
