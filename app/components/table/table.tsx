@@ -1,26 +1,12 @@
-// create componnet Table by use Table from antd
-import React from 'react';
 import { Table as AntTable } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 
-export interface DataType {
-  key: string;
-  name: string;
-  age: number;
-  address: string;
-  tags: string[];
-  description: string;
-  date: string;
-  time: string;
-  status: string;
-}
-
-export interface TableProps {
-  data: DataType[];
-  columns: ColumnsType<DataType>;
+export interface TableProps<T> {
+  data: T[];
+  columns: ColumnsType<T>;
   loading?: boolean;
   pagination?: boolean;
-  onRowClick?: (record: DataType) => void;
+  onRowClick?: (record: T) => void;
   onPageChange?: (page: number, pageSize: number) => void;
   pageSize?: number;
   page?: number;
@@ -35,9 +21,13 @@ export interface TableProps {
   className?: string;
 }
 
-export const Table: React.FC<TableProps> = ({
+export const Table = <T,>({
   data,
-  columns,
+  columns = Object.keys(data[0] || {}).map(key => ({
+    title: key,
+    dataIndex: key,
+    key: key
+  })),
   loading = false,
   pagination = true,
   onRowClick,
@@ -50,12 +40,11 @@ export const Table: React.FC<TableProps> = ({
   size = 'middle',
   title,
   footer,
-
   showHeader = true,
   sticky = false,
   className
-}) => {
-  const handleRowClick = (record: DataType) => {
+}: TableProps<T>) => {
+  const handleRowClick = (record: T) => {
     if (onRowClick) {
       onRowClick(record);
     }

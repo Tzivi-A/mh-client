@@ -1,5 +1,17 @@
 import { Table, type TableProps } from '../../components/table/table';
 
+export interface DataType {
+  key: string;
+  name: string;
+  age: number;
+  address: string;
+  tags: string[];
+  description: string;
+  date: string;
+  time: string;
+  status: string;
+}
+
 export const RegistrationPage = () => {
   const data = [
     {
@@ -24,29 +36,10 @@ export const RegistrationPage = () => {
       time: '11:00 AM',
       status: 'inactive'
     }
-  ] as TableProps['data'];
-
-  const columns = [
-    {
-      title: 'Name',
-      dataIndex: 'name',
-      key: 'name'
-    },
-    {
-      title: 'Age',
-      dataIndex: 'age',
-      key: 'age'
-    },
-    {
-      title: 'Address',
-      dataIndex: 'address',
-      key: 'address'
-    }
-  ] as TableProps['columns'];
+  ] as DataType[];
 
   const tableProps = {
     data,
-    columns,
     loading: false,
     pagination: true,
     pageSize: 1,
@@ -57,9 +50,8 @@ export const RegistrationPage = () => {
     size: 'middle',
     title: 'Registration Table',
     footer: 'Footer text',
-    showHeader: true,
-    sticky: false
-  } as TableProps;
+    showHeader: true
+  } as TableProps<DataType>;
 
   return (
     <div>
