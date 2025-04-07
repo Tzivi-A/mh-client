@@ -13,21 +13,22 @@ export interface MutationData {
 export interface UseAppMutationOptions<DATA> {
   url: string;
   method?: 'GET' | 'POST' | 'PUT';
-  mutationOptions?: Omit<UseMutationOptions<DATA, unknown, MutationData, unknown>, 'mutationFn'>;
+  mutationOptions?: Omit<UseMutationOptions<DATA, any, MutationData, any>, 'mutationFn'>;
   isMock?: boolean;
 }
 
 export const useAppMutation = <DATA>(options: UseAppMutationOptions<DATA>) => {
   const performMutation = async (url: string, method?: string, data?: MutationData) => {
+    console.log('Performing mutation with data:', { url, method, data });
     const route = `${!url.includes('https') ? config.apiUrl : ''}/${url}$`;
-
+    console.log(`route: ${route}`);
     const response = await axios.request({
       method: method || 'POST',
       url: `${route}${data?.queryStringData ? `?${createQueryString(data?.queryStringData)}` : ''}`,
       data: data?.requestData
     });
 
-    return response.data as DATA;
+    return response.data; // Ensure the mutation returns the response data
   };
 
   const mutate = useMutation<DATA, any, MutationData, any>({

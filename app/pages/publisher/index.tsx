@@ -24,10 +24,32 @@ interface PublisherFormValues {
 }
 
 export const PublisherPage = () => {
-  const mutationQuery = useAppMutation({
-    url: 'https://api.agify.io/?name=meelad',
-    mutationOptions: {}
+  // const { mutate } = useAppMutation({
+  //   url: 'https://api.agify.io/?name=meelad',
+  //   mutationOptions: {}
+  // });
+
+  const mutation = useAppMutation({
+    url: 'https://api.agify.io',
+    mutationOptions: {
+      onSuccess: data => {
+        console.log('Mutation successful:', data);
+      },
+      onError: error => {
+        console.error('Mutation failed:', error);
+      }
+    }
   });
+
+  const handleMutation = () => {
+    mutation.mutate({
+      requestData: { key: 'name' },
+      queryStringData: { param: 'meelad' }
+    });
+  };
+
+  handleMutation();
+
   const query = useAppQuery({ url: 'todos/1', queryData: {} });
   const form = useAppForm({
     defaultValues: {
@@ -62,10 +84,7 @@ export const PublisherPage = () => {
       >
         <div>
           <Card>
-            <div>
-              Publisher Query is pending: {query?.isPending.toString()}, Mutation is pending:
-              {mutationQuery?.isPending.toString()}
-            </div>
+            <div>Publisher Query is pending: {query?.isPending.toString()}</div>
             <div>
               <Button onClick={() => window.alert('Hello! I am the Mevaker!')} type="submit">
                 Click the Mevaker
