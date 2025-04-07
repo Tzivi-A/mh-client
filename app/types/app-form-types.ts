@@ -7,6 +7,8 @@ export interface BaseAppFormField {
   label?: ReactNode;
 }
 
+type AppFormFieldConstraint<T> = T extends BaseAppFormField ? T : never;
+
 export interface AppFormTextInputField extends BaseAppFormField {
   fieldType: FieldTypeEnum.TEXT;
 }
@@ -29,8 +31,14 @@ export interface AppFormDatePickerField extends BaseAppFormField {
   maxDate?: DatePickerType;
 }
 
-export type AppFormFieldProps =
+export interface AppFormCheckBoxField extends BaseAppFormField {
+  fieldType: FieldTypeEnum.CHECK_BOX;
+}
+
+export type AppFormFieldProps = AppFormFieldConstraint<
   | AppFormTextInputField
   | AppFormNumberField
   | AppFormSelectField
-  | AppFormDatePickerField;
+  | AppFormDatePickerField
+  | AppFormCheckBoxField
+>;
