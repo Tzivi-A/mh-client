@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable @typescript-eslint/restrict-template-expressions */
 import { useQuery, type UseQueryOptions } from '@tanstack/react-query';
 import axios from 'axios';
 import { createQueryString, getQueryKey, type QueryDataType } from '~/utils/api';
@@ -19,27 +18,14 @@ export const useAppQuery = <DATA = void>(options: UseAppQueryOptions<DATA>) => {
     queryStringData?: any,
     requestData?: any
   ) => {
-    const route = config.isMock
-      ? `${window.location.origin}/mocks/${url}.json`
-      : `${url.startsWith('http://') || url.startsWith('https://') ? '' : `${config.apiUrl}/`}${url}`;
+    const route = `${!url.startsWith('http') ? `${config.apiUrl}/` : ''}${url}`;
+    const response = await axios.request({
+      method: method || 'GET',
+      url: `${route}${queryStringData ? `?${createQueryString(queryStringData)}` : ''}`,
+      data: requestData
+    });
 
-    try {
-      if (config.isMock) {
-        const response = await fetch(route);
-        if (!response.ok) throw new Error('Failed to fetch mock data');
-        return (await response.json()) as DATA;
-      } else {
-        const response = await axios.request({
-          method: method || 'GET',
-          url: `${route}${queryStringData ? `?${createQueryString(queryStringData)}` : ''}`,
-          data: requestData
-        });
-
-        return response.data as DATA;
-      }
-    } catch (error) {
-      throw new Error(`Request failed: ${error}`);
-    }
+    return response.data as DATA;
   };
 
   const query = useQuery<DATA>({
