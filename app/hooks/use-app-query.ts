@@ -9,7 +9,7 @@ export interface UseAppQueryOptions<DATA> {
   method?: 'GET' | 'POST';
   queryData?: QueryDataType;
   queryOptions?: Omit<UseQueryOptions<DATA>, 'queryKey' | 'queryFn' | 'enabled'>;
-  isNow?: boolean;
+  isRunNow?: boolean;
   isMock?: boolean;
 }
 
@@ -39,7 +39,7 @@ export const useAppQuery = <DATA = void>(options: UseAppQueryOptions<DATA>) => {
         options?.queryData?.queryStringData,
         options?.queryData?.requestData
       ),
-    enabled: options.isNow ?? true,
+    enabled: options.isRunNow ?? true,
     ...(options?.queryOptions || {})
   });
 
