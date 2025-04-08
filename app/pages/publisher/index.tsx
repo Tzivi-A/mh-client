@@ -5,7 +5,6 @@ import logo from '~/assets/images/LogoMevaker.png';
 import useAppForm from '~/hooks/use-app-form';
 import './publisher.css';
 import type { DatePickerType } from '~/types/date-types';
-import { useOption } from '~/hooks/use-option';
 import { useState } from 'react';
 import type { SelectOption } from '~/types/select-option';
 import { useStore } from '@tanstack/react-form';
@@ -28,7 +27,26 @@ interface PublisherFormValues {
 export const PublisherPage = () => {
   const [response, setResponse] = useState<string | null>(null);
 
-  const { optionsQuery, addOption } = useOption();
+  // Fetching options
+  const optionsQuery = useAppQuery<SelectOption[]>({
+    url: 'api/options/getOptions',
+    queryData: {}
+  });
+
+  // Mutation for adding a new option
+  const addOptionMutation = useAppMutation<SelectOption>({
+    url: 'api/options/createOption',
+    method: 'POST',
+    mutationOptions: {
+      onSuccess: () => optionsQuery.refetch()
+    }
+  });
+
+  const addOption = (newOption: SelectOption) => {
+    addOptionMutation.mutateAsync({
+      requestData: { label: newOption.label }
+    });
+  };
 
   const useMutate = useAppMutation({
     url: 'https://api.agify.io',
