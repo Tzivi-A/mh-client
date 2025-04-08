@@ -12,4 +12,4 @@ export const parseDate = (dateString: string): number => {
 };
 
 export const sorterString = (a: string, b: string) => a.localeCompare(b);
-export const sorterStringDate = (a: string, b: string) => parseDate(a) - parseDate(b);
+export const sorterDateString = (a: string, b: string) => parseDate(a) - parseDate(b);

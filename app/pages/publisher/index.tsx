@@ -3,7 +3,7 @@ import { Table, type TableProps } from '../../components/table/table';
 import type { PublishResult } from '~/types/publish-result';
 import { FundingTypeEnum } from '~/enums/funding-type';
 import type { ColumnsType } from 'antd/es/table';
-import { sorterString, sorterStringDate } from '~/utils/utils';
+import { sorterString, sorterDateString } from '~/utils/utils';
 
 export const PublisherPage = () => {
   const data: PublishResult[] = [
@@ -110,7 +110,7 @@ export const PublisherPage = () => {
           dataIndex: 'ElectionDate',
           key: 'electionDate',
           align: 'right',
-          sorter: (a, b) => sorterStringDate(a.ElectionDate, b.ElectionDate)
+          sorter: (a, b) => sorterDateString(a.ElectionDate, b.ElectionDate)
         }
       ]
     },
@@ -152,7 +152,7 @@ export const PublisherPage = () => {
           dataIndex: 'FundingDate',
           key: 'fundingDate',
           align: 'right',
-          sorter: (a, b) => sorterStringDate(a.FundingDate, b.FundingDate)
+          sorter: (a, b) => sorterDateString(a.FundingDate, b.FundingDate)
         },
         {
           title: 'סכום',
