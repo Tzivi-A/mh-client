@@ -1,212 +1,142 @@
+import { Button } from '~/components/button/button';
 import { Card } from '~/components/card/card';
-import { Table, type TableProps } from '../../components/table/table';
-import type { PublishResult } from '~/types/publish-result';
-import { FundingTypeEnum } from '~/enums/funding-type';
-import type { ColumnsType } from 'antd/es/table';
-import { sorterString, sorterStringDate } from '~/utils/utils';
+import { Image } from '~/components/image/image';
+import logo from '~/assets/images/LogoMevaker.png';
+import { CitiesOptions } from '~/api/mock/select-option';
+import useAppForm from '~/hooks/use-app-form';
+import './registration.css';
+import type { DatePickerType } from '~/types/date-types';
+import { useStore } from '@tanstack/react-form';
+import { validateDateRange } from '~/utils/validators';
+import { useAppMutation } from '~/hooks/use-app-mutation';
+import { useAppQuery } from '~/hooks/use-app-query';
+
+interface RegistrationFormValues {
+  city: string;
+  firstName: string;
+  lastName?: string;
+  number?: string;
+  fromDate?: DatePickerType;
+  toDate?: DatePickerType;
+  validateFromDate?: DatePickerType;
+  validateToDate?: DatePickerType;
+  agreeToTerms?: boolean;
+}
 
 export const RegistrationPage = () => {
-  const data: PublishResult[] = [
-    {
-      ID: '1',
-      FundingType: { ID: FundingTypeEnum.Donation, Name: 'תרומה' },
-      Faction: 'יש עתיד',
-      ElectionCity: 'ביתר',
-      ElectionDate: '10/2/2025',
-      FullName: 'אלון פוטרמן',
-      Country: 'אנגליה',
-      EntityCity: 'ישוב אנגלי',
-      FundingDate: '26/12/2022',
-      FundingAmount: 1000.0
-    },
-    {
-      ID: '2',
-      FundingType: { ID: FundingTypeEnum.Loan, Name: 'הלוואה' },
-      Faction: 'המאוחדת',
-      ElectionCity: 'מודיעין עילית',
-      ElectionDate: '18/1/2025',
-      FullName: 'אפרים כץ',
-      Country: 'ישראל',
-      EntityCity: 'בן שמן (מושב)',
-      FundingDate: '1/3/2025',
-      FundingAmount: 1000.2,
-      LoanBalance: 100000.0
-    },
-    {
-      ID: '3',
-      FundingType: { ID: FundingTypeEnum.Guarantee, Name: 'ערבות' },
-      Faction: 'הכי הכי',
-      ElectionCity: 'ירושלים',
-      ElectionDate: '23/10/2024',
-      FullName: 'בנימין דוד',
-      Country: 'ישראל',
-      EntityCity: 'אופקים',
-      FundingDate: '12/03/2023',
-      FundingAmount: 234.0
-    },
-    {
-      ID: '4',
-      FundingType: { ID: FundingTypeEnum.Loan, Name: 'הלוואה' },
-      Faction: 'הסיעה שלנו',
-      ElectionCity: 'בני ברק',
-      ElectionDate: '27/7/2020',
-      FullName: 'משה ברקת',
-      Country: 'ישראל',
-      EntityCity: 'נתניה',
-      FundingDate: '23/02/2025',
-      FundingAmount: 18.0,
-      LoanBalance: 18.0
+  const getUserApi = useAppMutation({
+    url: 'https://reqres.in/api/users',
+    method: 'POST', // Specify POST method
+    mutationOptions: {
+      onSuccess: data => console.log('Mutation successful:', data),
+      onError: error => console.error('Mutation failed:', error)
     }
-  ];
+  });
 
-  const columns: ColumnsType<PublishResult> = [
-    {
-      title: 'סוג מימון',
-      dataIndex: 'FundingType',
-      key: 'fundingType',
-      filters: Array.from(new Set(data.map(d => d.FundingType.Name))).map(name => ({
-        text: name,
-        value: name
-      })),
-      onFilter: (value, record) => record.FundingType.Name === value,
-      sorter: (a, b) => sorterString(a.FundingType.Name, b.FundingType.Name),
-      render: fundingType => {
-        const icons = {
-          [FundingTypeEnum.Donation]: 1,
-          [FundingTypeEnum.Loan]: 2,
-          [FundingTypeEnum.Guarantee]: 3
-        };
-        const icon = icons[fundingType.ID] || -1;
+  const todoApi = useAppQuery({ url: 'todos/1' });
+  const todoApiFuture = useAppQuery({ url: 'todos/3', isRunNow: false });
 
-        return (
-          <span>
-            icon: {icon} {fundingType.Name}
-          </span>
-        );
-      },
-      align: 'right'
+  const form = useAppForm({
+    defaultValues: {
+      city: 'option1',
+      firstName: 'אבי',
+      fromDate: '05/03/2025',
+      toDate: '25/03/2025'
+    } as RegistrationFormValues,
+    validators: {
+      onChange: ({ value }) =>
+        value.firstName === value.lastName && 'FirstName and LastName may not be the same'
     },
-    {
-      title: 'מאפייני בחירות',
-      key: 'electionCharacteristics',
-      align: 'center',
-      children: [
-        {
-          title: 'סיעה',
-          dataIndex: 'Faction',
-          key: 'faction',
-          align: 'right',
-          sorter: (a, b) => sorterString(a.Faction, b.Faction)
-        },
-        {
-          title: 'ישוב',
-          dataIndex: 'ElectionCity',
-          key: 'electionCity',
-          align: 'right',
-          sorter: (a, b) => sorterString(a.ElectionCity, b.ElectionCity)
-        },
-        {
-          title: 'תאריך בחירות',
-          dataIndex: 'ElectionDate',
-          key: 'electionDate',
-          align: 'right',
-          sorter: (a, b) => sorterStringDate(a.ElectionDate, b.ElectionDate)
+    onSubmit: ({ value }) => {
+      alert(JSON.stringify(value));
+      todoApiFuture.refetch();
+
+      // Example of triggering the mutation with POST data
+      getUserApi.mutate({
+        requestData: {
+          name: 'John', // Data to be sent in the POST request body
+          job: 'developer'
         }
-      ]
-    },
-    {
-      title: 'מאפייני התורם/ המלווה/ הערב',
-      key: 'entityCharacteristics',
-      align: 'center',
-      children: [
-        {
-          title: 'שם מלא',
-          dataIndex: 'FullName',
-          key: 'fullName',
-          align: 'right',
-          sorter: (a, b) => sorterString(a.FullName, b.FullName)
-        },
-        {
-          title: 'ארץ',
-          dataIndex: 'Country',
-          key: 'country',
-          align: 'right',
-          sorter: (a, b) => sorterString(a.Country, b.Country)
-        },
-        {
-          title: 'ישוב',
-          dataIndex: 'EntityCity',
-          key: 'entityCity',
-          align: 'right',
-          sorter: (a, b) => sorterString(a.EntityCity, b.EntityCity)
-        }
-      ]
-    },
-    {
-      title: 'מאפייני התרומה/ ההלוואה/ הערבות',
-      key: 'fundingCharacteristics',
-      align: 'center',
-      children: [
-        {
-          title: 'תאריך',
-          dataIndex: 'FundingDate',
-          key: 'fundingDate',
-          align: 'right',
-          sorter: (a, b) => sorterStringDate(a.FundingDate, b.FundingDate)
-        },
-        {
-          title: 'סכום',
-          dataIndex: 'FundingAmount',
-          key: 'fundingAmount',
-          align: 'right',
-          sorter: (a, b) => a.FundingAmount - b.FundingAmount,
-          render: amount =>
-            amount.toLocaleString('he-IL', {
-              style: 'decimal',
-              minimumFractionDigits: 2
-            })
-        },
-        {
-          title: 'יתרת הלוואה',
-          dataIndex: 'LoanBalance',
-          key: 'loanBalance',
-          align: 'right',
-          sorter: (a, b) => (a.LoanBalance ?? 0) - (b.LoanBalance ?? 0),
-          render: balance =>
-            balance &&
-            balance.toLocaleString('he-IL', {
-              style: 'decimal',
-              minimumFractionDigits: 2
-            })
-        }
-      ]
+      });
     }
-  ];
+  });
 
-  const tableProps: TableProps<PublishResult> = {
-    data: data.map(d => ({ ...d, key: d.ID })),
-    columns,
-    loading: false,
-    pagination: {
-      current: 1,
-      pageSize: 10,
-      total: data.length,
-      showSizeChanger: true,
-      pageSizeOptions: ['10', '25', '50', '100']
-    },
-    scroll: { x: 'max-content', y: 510 },
-    rowKey: 'key',
-    bordered: true,
-    size: 'middle',
-    showHeader: true
-  };
+  const fromDate = useStore(form.store, state => state.values.fromDate);
+  const toDate = useStore(form.store, state => state.values.toDate);
+
+  const validateFormDateRange = (fromDate: DatePickerType, toDate: DatePickerType) =>
+    validateDateRange(fromDate, toDate) && '"מתאריך" חייב להיות מוקדם מ"עד תאריך"';
 
   return (
-    <div>
-      <h1>Registration Page</h1>
-      <Card>
-        <Table {...tableProps} />
-      </Card>
-    </div>
+    <main>
+      <form
+        className="form"
+        onSubmit={e => {
+          e.preventDefault();
+          form.handleSubmit();
+        }}
+      >
+        <div>
+          <Card>
+            <div>Publisher Query is pending: {todoApi?.isPending.toString()}</div>
+            <div>
+              <Button type="submit">Click the Mevaker</Button>
+            </div>
+            <Image src={logo} alt="mevaker" />
+            <form.AppField name="city">
+              {field => <field.Select label="ערים" options={CitiesOptions} />}
+            </form.AppField>
+            <form.AppField name="firstName" children={field => <field.Input label="שם פרטי" />} />
+            <form.AppField
+              name="lastName"
+              validators={{
+                onChange: ({ value }) => !value && 'שדה חובה'
+              }}
+              children={field => <field.Input label="שם משפחה" />}
+            />
+            <form.AppField
+              name="number"
+              children={field => <field.Number label="מספר" max={2} />}
+            />
+            <form.AppField
+              name="fromDate"
+              children={field => <field.DatePicker label="מתאריך" maxDate={toDate} />}
+            />
+            <form.AppField
+              name="toDate"
+              children={field => (
+                <field.DatePicker label="עד תאריך" inputReadOnly={false} minDate={fromDate} />
+              )}
+            />
+            <form.AppField
+              name="validateFromDate"
+              validators={{
+                onChangeListenTo: ['validateToDate'],
+                onChange: ({ value, fieldApi }) =>
+                  validateFormDateRange(value, fieldApi.form.getFieldValue('validateToDate'))
+              }}
+              children={field => <field.DatePicker label="מתאריך - ולידציה" />}
+            />
+            <form.AppField
+              name="validateToDate"
+              validators={{
+                onChangeListenTo: ['validateFromDate'],
+                onChange: ({ value, fieldApi }) =>
+                  validateFormDateRange(fieldApi.form.getFieldValue('validateFromDate'), value)
+              }}
+              children={field => (
+                <field.DatePicker label="עד תאריך - ולידציה" inputReadOnly={false} />
+              )}
+            />
+            <form.AppField
+              name="agreeToTerms"
+              children={field => <field.CheckBox label="מסכים לתנאים" />}
+            />
+          </Card>
+        </div>
+      </form>
+    </main>
   );
 };
+
+export default RegistrationPage;

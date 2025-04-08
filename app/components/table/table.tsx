@@ -12,7 +12,7 @@ export interface TableProps<T> {
     pageSize?: number;
     total?: number;
     showSizeChanger?: boolean;
-    pageSizeOptions?: string[];
+    pageSizeOptions?: number[];
     onShowSizeChange?: (current: number, pageSize: number) => void;
     onChange?: (current: number, pageSize?: number) => void;
   };
@@ -71,7 +71,7 @@ export const Table = <T,>({
               pageSize,
               total: data.length,
               showSizeChanger: pagination?.showSizeChanger,
-              pageSizeOptions: pagination?.pageSizeOptions ?? ['10', '20', '50', '100'],
+              pageSizeOptions: pagination?.pageSizeOptions,
               onShowSizeChange: (current, size) => {
                 setPageSize(size);
                 setCurrentPage(current);
