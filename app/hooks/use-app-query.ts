@@ -7,8 +7,10 @@ import { config } from '~/config/env';
 export interface UseAppQueryOptions<DATA> {
   url: string;
   method?: 'GET' | 'POST';
-  queryData: QueryDataType;
-  queryOptions?: Omit<UseQueryOptions<DATA>, 'queryKey' | 'queryFn'>;
+  queryData?: QueryDataType;
+  queryOptions?: Omit<UseQueryOptions<DATA>, 'queryKey' | 'queryFn' | 'enabled'>;
+  isNow?: boolean;
+  isMock?: boolean;
 }
 
 export const useAppQuery = <DATA = void>(options: UseAppQueryOptions<DATA>) => {
@@ -29,15 +31,15 @@ export const useAppQuery = <DATA = void>(options: UseAppQueryOptions<DATA>) => {
   };
 
   const query = useQuery<DATA>({
-    //TODO: think which query key is relevant for us
-    queryKey: getQueryKey(options.url, options.method || 'GET', options.queryData),
+    queryKey: getQueryKey(options.url, options.method || 'GET', options.queryData || {}),
     queryFn: () =>
       performQuery(
         options.url,
         options?.method,
-        options?.queryData.queryStringData,
-        options?.queryData.requestData
+        options?.queryData?.queryStringData,
+        options?.queryData?.requestData
       ),
+    enabled: options.isNow ?? true,
     ...(options?.queryOptions || {})
   });
 

@@ -10,8 +10,8 @@ import { useState } from 'react';
 import type { SelectOption } from '~/types/select-option';
 import { useStore } from '@tanstack/react-form';
 import { validateDateRange } from '~/utils/validators';
-import { useAppQuery } from '~/hooks/use-app-query';
 import { useAppMutation } from '~/hooks/use-app-mutation';
+import { useAppQuery } from '~/hooks/use-app-query';
 
 interface PublisherFormValues {
   city: string;
@@ -30,29 +30,18 @@ export const PublisherPage = () => {
 
   const { optionsQuery, addOption } = useOption();
 
-  const mutation = useAppMutation({
+  const useMutate = useAppMutation({
     url: 'https://api.agify.io',
     method: 'GET',
     mutationOptions: {
-      onSuccess: data => {
-        // eslint-disable-next-line no-console
-        console.log('Mutation successful:', data);
-      },
-      onError: error => {
-        // eslint-disable-next-line no-console
-        console.error('Mutation failed:', error);
-      }
+      onSuccess: data => console.log('Mutation successful:', data),
+      onError: error => console.error('Mutation failed:', error)
     }
   });
 
-  const handleMutation = () => {
-    mutation.mutate({
-      requestData: { key: 'name' },
-      queryStringData: { name: 'meelad' }
-    });
-  };
+  const query = useAppQuery({ url: 'todos/1' });
+  const futureQuery = useAppQuery({ url: 'todos/3', isNow: false });
 
-  const query = useAppQuery({ url: 'todos/1', queryData: {} });
   const form = useAppForm({
     defaultValues: {
       city: 'option1',
@@ -65,8 +54,11 @@ export const PublisherPage = () => {
         value.firstName === value.lastName && 'FirstName and LastName may not be the same'
     },
     onSubmit: ({ value }) => {
-      handleMutation();
       alert(JSON.stringify(value));
+      futureQuery.refetch();
+      useMutate.mutate({
+        queryStringData: { name: 'meelad' }
+      });
     }
   });
 
@@ -106,9 +98,7 @@ export const PublisherPage = () => {
           <Card>
             <div>Publisher Query is pending: {query?.isPending.toString()}</div>
             <div>
-              <Button onClick={() => window.alert('Hello! I am the Mevaker!')} type="submit">
-                Click the Mevaker
-              </Button>
+              <Button type="submit">Click the Mevaker</Button>
             </div>
             <Image src={logo} alt="mevaker" />
 
