@@ -48,17 +48,17 @@ export const PublisherPage = () => {
     });
   };
 
-  const useMutate = useAppMutation({
-    url: 'https://api.agify.io',
-    method: 'GET',
+  const getUserApi = useAppMutation({
+    url: 'https://reqres.in/api/users',
+    method: 'POST', // Specify POST method
     mutationOptions: {
       onSuccess: data => console.log('Mutation successful:', data),
       onError: error => console.error('Mutation failed:', error)
     }
   });
 
-  const query = useAppQuery({ url: 'todos/1' });
-  const futureQuery = useAppQuery({ url: 'todos/3', isNow: false });
+  const todoApi = useAppQuery({ url: 'todos/1' });
+  const todoApiFuture = useAppQuery({ url: 'todos/3', isRunNow: false });
 
   const form = useAppForm({
     defaultValues: {
@@ -73,9 +73,14 @@ export const PublisherPage = () => {
     },
     onSubmit: ({ value }) => {
       alert(JSON.stringify(value));
-      futureQuery.refetch();
-      useMutate.mutate({
-        queryStringData: { name: 'meelad' }
+      todoApiFuture.refetch();
+
+      // Example of triggering the mutation with POST data
+      getUserApi.mutate({
+        requestData: {
+          name: 'John', // Data to be sent in the POST request body
+          job: 'developer'
+        }
       });
     }
   });
@@ -113,7 +118,7 @@ export const PublisherPage = () => {
       >
         <div>
           <Card>
-            <div>Publisher Query is pending: {query?.isPending.toString()}</div>
+            <div>Publisher Query is pending: {todoApi?.isPending.toString()}</div>
             <div>
               <Button type="submit">Click the Mevaker</Button>
             </div>

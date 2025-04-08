@@ -3,16 +3,14 @@ import { useMutation, type UseMutationOptions } from '@tanstack/react-query';
 import axios from 'axios';
 import { config } from '~/config/env';
 import type { DataObject } from '~/types/api';
-import { createQueryString } from '~/utils/api';
 
 export interface MutationData {
-  queryStringData?: DataObject;
   requestData?: DataObject;
 }
 
 export interface UseAppMutationOptions<DATA> {
   url: string;
-  method?: 'GET' | 'POST' | 'PUT';
+  method?: 'POST' | 'PUT';
   mutationOptions?: Omit<UseMutationOptions<DATA, any, MutationData, any>, 'mutationFn'>;
 }
 
@@ -22,7 +20,7 @@ export const useAppMutation = <DATA>(options: UseAppMutationOptions<DATA>) => {
 
     const response = await axios.request({
       method: method || 'POST',
-      url: `${route}${data?.queryStringData ? `?${createQueryString(data?.queryStringData)}` : ''}`,
+      url: route,
       data: data?.requestData
     });
 
