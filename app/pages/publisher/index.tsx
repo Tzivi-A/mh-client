@@ -153,7 +153,6 @@ export const PublisherPage = () => {
               name="agreeToTerms"
               children={field => <field.CheckBox label="מסכים לתנאים" />}
             />
-            <Button type="submit">Submit Form</Button>
           </Card>
         </div>
       </form>
