@@ -8,8 +8,8 @@ import './publisher.css';
 import type { DatePickerType } from '~/types/date-types';
 import { useStore } from '@tanstack/react-form';
 import { validateDateRange } from '~/utils/validators';
-import { useAppQuery } from '~/hooks/use-app-query';
 import { useAppMutation } from '~/hooks/use-app-mutation';
+import { useAppQuery } from '~/hooks/use-app-query';
 
 interface PublisherFormValues {
   city: string;
@@ -24,33 +24,18 @@ interface PublisherFormValues {
 }
 
 export const PublisherPage = () => {
-  // const { mutate } = useAppMutation({
-  //   url: 'https://api.agify.io/?name=meelad',
-  //   mutationOptions: {}
-  // });
-
-  const mutation = useAppMutation({
+  const useMutate = useAppMutation({
     url: 'https://api.agify.io',
+    method: 'GET',
     mutationOptions: {
-      onSuccess: data => {
-        console.log('Mutation successful:', data);
-      },
-      onError: error => {
-        console.error('Mutation failed:', error);
-      }
+      onSuccess: data => console.log('Mutation successful:', data),
+      onError: error => console.error('Mutation failed:', error)
     }
   });
 
-  const handleMutation = () => {
-    mutation.mutate({
-      requestData: { key: 'name' },
-      queryStringData: { param: 'meelad' }
-    });
-  };
+  const query = useAppQuery({ url: 'todos/1' });
+  const futureQuery = useAppQuery({ url: 'todos/3', isNow: false });
 
-  handleMutation();
-
-  const query = useAppQuery({ url: 'todos/1', queryData: {} });
   const form = useAppForm({
     defaultValues: {
       city: 'option1',
@@ -64,6 +49,10 @@ export const PublisherPage = () => {
     },
     onSubmit: ({ value }) => {
       alert(JSON.stringify(value));
+      futureQuery.refetch();
+      useMutate.mutate({
+        queryStringData: { name: 'meelad' }
+      });
     }
   });
 
@@ -86,9 +75,7 @@ export const PublisherPage = () => {
           <Card>
             <div>Publisher Query is pending: {query?.isPending.toString()}</div>
             <div>
-              <Button onClick={() => window.alert('Hello! I am the Mevaker!')} type="submit">
-                Click the Mevaker
-              </Button>
+              <Button type="submit">Click the Mevaker</Button>
             </div>
             <Image src={logo} alt="mevaker" />
             <form.AppField name="city">
