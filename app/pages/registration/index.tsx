@@ -16,7 +16,7 @@ export interface DataType {
 }
 
 export const RegistrationPage = () => {
-  const data = Array.from({ length: 50 }, (_, index) => ({
+  const data: DataType[] = Array.from({ length: 50 }, (_, index) => ({
     key: (index + 1).toString(),
     name: `User ${index + 1}`,
     age: 20 + (index % 30),
@@ -27,9 +27,9 @@ export const RegistrationPage = () => {
     date: `2023-01-${String((index % 31) + 1).padStart(2, '0')}`,
     time: `${(index % 12) + 1}:00 ${index % 2 === 0 ? 'AM' : 'PM'}`,
     status: 20 + (index % 30) > 30 ? 'active' : 'inactive'
-  })) as DataType[];
+  }));
 
-  const tableProps = {
+  const tableProps: TableProps<DataType> = {
     data,
     columns: Object.keys(data[0] || {})
       .filter(key => !['key', 'date', 'time'].includes(key))
@@ -37,6 +37,7 @@ export const RegistrationPage = () => {
         title: key.charAt(0).toUpperCase() + key.slice(1),
         dataIndex: key,
         key: (index + 1).toString(),
+        align: 'center',
         render: (_, record) => {
           if (key === 'tags') {
             return (
@@ -58,14 +59,16 @@ export const RegistrationPage = () => {
           key === 'dateTime'
             ? [
                 {
-                  title: 'Date',
+                  title: 'תאריך',
                   dataIndex: 'date',
-                  key: ((index + 1) * data.length).toString()
+                  key: ((index + 1) * data.length).toString(),
+                  align: 'center'
                 },
                 {
-                  title: 'Time',
+                  title: 'שעה',
                   dataIndex: 'time',
-                  key: ((index + 1) * data.length + 1).toString()
+                  key: ((index + 1) * data.length + 1).toString(),
+                  align: 'center'
                 }
               ]
             : undefined
@@ -73,17 +76,17 @@ export const RegistrationPage = () => {
     loading: false,
     pagination: {
       current: 1,
-      pageSize: 5,
+      pageSize: 10,
       total: data.length,
       showSizeChanger: true,
-      pageSizeOptions: ['10', '20', '30', '40']
+      pageSizeOptions: ['10', '50', '100', '200']
     },
     scroll: { x: 'max-content', y: 510 },
     rowKey: 'key',
     bordered: true,
     size: 'middle',
     showHeader: true
-  } as TableProps<DataType>;
+  };
 
   return (
     <div>

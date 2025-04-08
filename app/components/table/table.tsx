@@ -80,7 +80,7 @@ export const Table = <T,>({
                 }
               },
               onChange: page => setCurrentPage(page),
-              hideOnSinglePage: true
+              hideOnSinglePage: !pagination?.showSizeChanger
             }
           : false
       }
