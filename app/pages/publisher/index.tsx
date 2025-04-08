@@ -75,7 +75,6 @@ export const PublisherPage = () => {
   const handleSubmit = (option: SelectOption) => {
     addOption(option);
     formOptions.reset();
-    optionsQuery.refetch();
     setResponse('Option added successfully!');
   };
 

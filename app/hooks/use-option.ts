@@ -1,12 +1,9 @@
-import { useQueryClient } from '@tanstack/react-query';
 import type { SelectOption } from '../types/select-option';
 import { useAppQuery } from './use-app-query';
 import { useAppMutation } from './use-app-mutation';
 
 // Custom hook for options
 export const useOption = () => {
-  const queryClient = useQueryClient();
-
   // Fetching options
   const optionsQuery = useAppQuery<SelectOption[]>({
     url: 'api/options/getOptions',
@@ -18,10 +15,7 @@ export const useOption = () => {
     url: 'api/options/createOption',
     method: 'POST',
     mutationOptions: {
-      onSuccess: () => {
-        // Invalidate the query to refetch data
-        queryClient.invalidateQueries({ queryKey: ['option'] });
-      }
+      onSuccess: () => optionsQuery.refetch()
     }
   });
 
