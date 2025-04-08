@@ -27,7 +27,7 @@ export const useAppMutation = <DATA>(options: UseAppMutationOptions<DATA>) => {
       data: data?.requestData
     });
 
-    return response.data; // Ensure the mutation returns the response data
+    return response.data as DATA; // Ensure the mutation returns the response data
   };
 
   const mutate = useMutation<DATA, any, MutationData, any>({
