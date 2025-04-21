@@ -3,8 +3,10 @@
     "**/*",
     "**/.server/**/*",
     "**/.client/**/*",
-    ".react-router/types/**/*"
-, "app/environments/.env.ts", "app/environments/.env.prod.ts"  ],
+    ".react-router/types/**/*",
+    "app/environments/.env.ts",
+    "app/environments/.env.prod.ts"
+  ],
   "compilerOptions": {
     "lib": ["DOM", "DOM.Iterable", "ES2022"],
     "types": ["node", "vite/client"],

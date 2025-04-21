@@ -12,7 +12,6 @@ export interface UseAppMutationOptions<DATA> {
   url: string;
   method?: 'POST' | 'PUT';
   mutationOptions?: Omit<UseMutationOptions<DATA, any, MutationData, any>, 'mutationFn'>;
-  isMock?: boolean;
 }
 
 export const useAppMutation = <DATA>(options: UseAppMutationOptions<DATA>) => {
