@@ -1,6 +1,0 @@
-export const CitiesOptions = [
-  { value: 'option1', label: 'ירושלים' },
-  { value: 'option2', label: 'ביתר' },
-  { value: 'option3', label: 'מודיעין עילית' },
-  { value: 'option4', label: 'בני ברק' }
-];

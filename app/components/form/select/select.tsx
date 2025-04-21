@@ -2,9 +2,10 @@ import { Select as AntSelect } from 'antd';
 import 'antd/dist/reset.css';
 import InputWrapper from '../input-wrapper/input-wrapper';
 import type { FormFieldProps } from '~/types/form-types';
+import type { SelectOption } from '~/types/select-option';
 
 export interface SelectProps extends FormFieldProps<string> {
-  options?: { value: string; label: string }[];
+  options?: SelectOption[];
 }
 
 export const Select = ({ label, id, options, onChange, value, error }: SelectProps) => {
