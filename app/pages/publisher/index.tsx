@@ -1,9 +1,7 @@
 import { Card } from '~/components/card/card';
-import { Table, type TableProps } from '../../components/table/table';
+import { Table, type ColumnsType, type TableProps } from '../../components/table/table';
 import type { PublishResult } from '~/types/publish-result';
 import { FundingTypeEnum } from '~/enums/funding-type';
-import type { ColumnsType } from 'antd/es/table';
-import { sorterString, sorterDateString } from '~/utils/utils';
 
 export const PublisherPage = () => {
   const data: PublishResult[] = [
@@ -69,7 +67,8 @@ export const PublisherPage = () => {
         value: name
       })),
       onFilter: (value, record) => record.FundingType.Name === value,
-      sorter: (a, b) => sorterString(a.FundingType.Name, b.FundingType.Name),
+      sorterType: 'string',
+      sorterName: 'FundingType.Name',
       render: fundingType => {
         const icons = {
           [FundingTypeEnum.Donation]: 1,
@@ -96,21 +95,21 @@ export const PublisherPage = () => {
           dataIndex: 'Faction',
           key: 'faction',
           align: 'right',
-          sorter: (a, b) => sorterString(a.Faction, b.Faction)
+          sorterType: 'string'
         },
         {
           title: 'ישוב',
           dataIndex: 'ElectionCity',
           key: 'electionCity',
           align: 'right',
-          sorter: (a, b) => sorterString(a.ElectionCity, b.ElectionCity)
+          sorterType: 'string'
         },
         {
           title: 'תאריך בחירות',
           dataIndex: 'ElectionDate',
           key: 'electionDate',
           align: 'right',
-          sorter: (a, b) => sorterDateString(a.ElectionDate, b.ElectionDate)
+          sorterType: 'date'
         }
       ]
     },
@@ -124,21 +123,21 @@ export const PublisherPage = () => {
           dataIndex: 'FullName',
           key: 'fullName',
           align: 'right',
-          sorter: (a, b) => sorterString(a.FullName, b.FullName)
+          sorterType: 'string'
         },
         {
           title: 'ארץ',
           dataIndex: 'Country',
           key: 'country',
           align: 'right',
-          sorter: (a, b) => sorterString(a.Country, b.Country)
+          sorterType: 'string'
         },
         {
           title: 'ישוב',
           dataIndex: 'EntityCity',
           key: 'entityCity',
           align: 'right',
-          sorter: (a, b) => sorterString(a.EntityCity, b.EntityCity)
+          sorterType: 'string'
         }
       ]
     },
@@ -152,14 +151,14 @@ export const PublisherPage = () => {
           dataIndex: 'FundingDate',
           key: 'fundingDate',
           align: 'right',
-          sorter: (a, b) => sorterDateString(a.FundingDate, b.FundingDate)
+          sorterType: 'date'
         },
         {
           title: 'סכום',
           dataIndex: 'FundingAmount',
           key: 'fundingAmount',
           align: 'right',
-          sorter: (a, b) => a.FundingAmount - b.FundingAmount,
+          sorterType: 'number',
           render: amount =>
             amount.toLocaleString('he-IL', {
               style: 'decimal',
@@ -171,7 +170,7 @@ export const PublisherPage = () => {
           dataIndex: 'LoanBalance',
           key: 'loanBalance',
           align: 'right',
-          sorter: (a, b) => (a.LoanBalance ?? 0) - (b.LoanBalance ?? 0),
+          sorterType: 'number',
           render: balance =>
             balance &&
             balance.toLocaleString('he-IL', {

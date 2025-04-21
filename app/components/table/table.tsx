@@ -1,11 +1,21 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Table as AntTable } from 'antd';
-import type { ColumnsType } from 'antd/es/table';
+import type { ColumnType as AntColumnType } from 'antd/es/table';
 import type { ExpandableConfig } from 'antd/es/table/interface';
 import { useState } from 'react';
+import type { NestedKeyOf } from '~/types/nested-key-of';
+import { parseDate } from '~/utils/utils';
 
-export interface TableProps<T> {
-  data: T[];
-  columns: ColumnsType<T>;
+const sorterFunctions = {
+  string: (a: any, b: any) => a?.toString().localeCompare(b?.toString()),
+  date: (a: any, b: any) => parseDate(a) - parseDate(b),
+  number: (a: any, b: any) => (a ?? 0) - (b ?? 0),
+  undefined: (a: any, b: any) => (a === b ? 1 : 0)
+};
+
+export interface TableProps<RecordType> {
+  data: RecordType[];
+  columns: ColumnsType<RecordType>;
   loading?: boolean;
   pagination?: {
     current?: number;
@@ -16,7 +26,7 @@ export interface TableProps<T> {
     onShowSizeChange?: (current: number, pageSize: number) => void;
     onChange?: (current: number, pageSize?: number) => void;
   };
-  onRowClick?: (record: T) => void;
+  onRowClick?: (record: RecordType) => void;
   rowKey?: string;
   bordered?: boolean;
   scroll?: { x?: number | true | string; y?: number | string };
@@ -26,16 +36,12 @@ export interface TableProps<T> {
   showHeader?: boolean;
   sticky?: boolean;
   className?: string;
-  expandable?: ExpandableConfig<T>;
+  expandable?: ExpandableConfig<RecordType>;
 }
 
-export const Table = <T,>({
+export const Table = <RecordType,>({
   data,
-  columns = Object.keys(data[0] || {}).map(key => ({
-    title: key.charAt(0).toUpperCase() + key.slice(1),
-    dataIndex: key,
-    key: key
-  })),
+  columns,
   loading,
   pagination,
   onRowClick,
@@ -49,20 +55,55 @@ export const Table = <T,>({
   sticky,
   className,
   expandable
-}: TableProps<T>) => {
+}: TableProps<RecordType>) => {
   const [pageSize, setPageSize] = useState(pagination?.pageSize ?? 10);
   const [currentPage, setCurrentPage] = useState(pagination?.current ?? 1);
 
-  const handleRowClick = (record: T) => {
+  const handleRowClick = (record: RecordType) => {
     if (onRowClick) {
       onRowClick(record);
     }
   };
 
+  const isNotColumnGroupType = (
+    column: ColumnType<RecordType> | ColumnGroupType<RecordType>
+  ): column is ColumnType<RecordType> => {
+    return !('children' in column);
+  };
+
+  // Enhance columns with sorting logic based on sorterType and sorterName
+  const processColumns = (columns: ColumnsType<RecordType>): ColumnsType<RecordType> => {
+    return columns.map(column => {
+      const getNestedValue = (obj: RecordType, path: string): any => {
+        return path.split('.').reduce((value, key) => (value ? value[key] : undefined), obj);
+      };
+
+      if (isNotColumnGroupType(column)) {
+        // This is a non-group column
+        if (column.sorterType) {
+          column.sorter = (a, b) => {
+            const valueA = column.sorterName
+              ? getNestedValue(a, column.sorterName as string)
+              : a[column.dataIndex as keyof RecordType];
+            const valueB = column.sorterName
+              ? getNestedValue(b, column.sorterName as string)
+              : b[column.dataIndex as keyof RecordType];
+            return sorterFunctions[column.sorterType ?? 'undefined'](valueA, valueB);
+          };
+        }
+      } else if (column.children) {
+        // Recursively process child columns
+        column.children = processColumns(column.children);
+      }
+      return column;
+    });
+  };
+  const enhancedColumns = processColumns(columns);
+
   return (
-    <AntTable<T>
+    <AntTable<RecordType>
       dataSource={data}
-      columns={columns}
+      columns={enhancedColumns}
       loading={loading}
       pagination={
         pagination
@@ -100,5 +141,16 @@ export const Table = <T,>({
     />
   );
 };
+
+interface ColumnType<RecordType> extends AntColumnType<RecordType> {
+  sorterType?: keyof typeof sorterFunctions;
+  sorterName?: NestedKeyOf<RecordType>;
+}
+
+interface ColumnGroupType<RecordType> extends Omit<ColumnType<RecordType>, 'dataIndex'> {
+  children: ColumnsType<RecordType>;
+}
+
+export type ColumnsType<RecordType> = (ColumnGroupType<RecordType> | ColumnType<RecordType>)[];
 
 export default Table;
