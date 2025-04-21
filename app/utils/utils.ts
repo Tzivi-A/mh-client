@@ -10,6 +10,3 @@ export const parseDate = (dateString: string): number => {
   const [day, month, year] = dateString.split('/').map(Number);
   return new Date(year, month - 1, day).getTime();
 };
-
-export const sorterString = (a: string, b: string) => a.localeCompare(b);
-export const sorterDateString = (a: string, b: string) => parseDate(a) - parseDate(b);
