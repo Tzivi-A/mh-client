@@ -1,68 +1,24 @@
 import { Card } from '~/components/card/card';
-import { Table, type ColumnsType, type TableProps } from '../../components/table/table';
+import { Table } from '../../components/table/table';
 import type { PublishResult } from '~/types/publish-result';
 import { FundingTypeEnum } from '~/enums/funding-type';
+import { useAppQuery } from '~/hooks/use-app-query';
+import type { ColumnsType, TableProps } from '~/types/table';
 
 export const PublisherPage = () => {
-  const data: PublishResult[] = [
-    {
-      ID: '1',
-      FundingType: { ID: FundingTypeEnum.Donation, Name: 'תרומה' },
-      Faction: 'יש עתיד',
-      ElectionCity: 'ביתר',
-      ElectionDate: '10/2/2025',
-      FullName: 'אלון פוטרמן',
-      Country: 'אנגליה',
-      EntityCity: 'ישוב אנגלי',
-      FundingDate: '26/12/2022',
-      FundingAmount: 1000.0
-    },
-    {
-      ID: '2',
-      FundingType: { ID: FundingTypeEnum.Loan, Name: 'הלוואה' },
-      Faction: 'המאוחדת',
-      ElectionCity: 'מודיעין עילית',
-      ElectionDate: '18/1/2025',
-      FullName: 'אפרים כץ',
-      Country: 'ישראל',
-      EntityCity: 'בן שמן (מושב)',
-      FundingDate: '1/3/2025',
-      FundingAmount: 1000.2,
-      LoanBalance: 100000.0
-    },
-    {
-      ID: '3',
-      FundingType: { ID: FundingTypeEnum.Guarantee, Name: 'ערבות' },
-      Faction: 'הכי הכי',
-      ElectionCity: 'ירושלים',
-      ElectionDate: '23/10/2024',
-      FullName: 'בנימין דוד',
-      Country: 'ישראל',
-      EntityCity: 'אופקים',
-      FundingDate: '12/03/2023',
-      FundingAmount: 234.0
-    },
-    {
-      ID: '4',
-      FundingType: { ID: FundingTypeEnum.Loan, Name: 'הלוואה' },
-      Faction: 'הסיעה שלנו',
-      ElectionCity: 'בני ברק',
-      ElectionDate: '27/7/2020',
-      FullName: 'משה ברקת',
-      Country: 'ישראל',
-      EntityCity: 'נתניה',
-      FundingDate: '23/02/2025',
-      FundingAmount: 18.0,
-      LoanBalance: 18.0
-    }
-  ];
+  const publishResult = useAppQuery<PublishResult[]>({
+    url: 'api/publisher/localGuarantyDonationSearch'
+  });
+
+  if (publishResult.isLoading) return <p>Loading publishResult data...</p>;
+  if (publishResult.error) return <p>Error loading publishResult data</p>;
 
   const columns: ColumnsType<PublishResult> = [
     {
       title: 'סוג מימון',
       dataIndex: 'FundingType',
       key: 'fundingType',
-      filters: Array.from(new Set(data.map(d => d.FundingType.Name))).map(name => ({
+      filters: Array.from(new Set(publishResult.data?.map(d => d.FundingType.Name))).map(name => ({
         text: name,
         value: name
       })),
@@ -183,20 +139,19 @@ export const PublisherPage = () => {
   ];
 
   const tableProps: TableProps<PublishResult> = {
-    data: data.map(d => ({ ...d, key: d.ID })),
+    data: (publishResult.data ?? []).map(d => ({ ...d, key: d.ID })),
     columns,
     loading: false,
     pagination: {
       current: 1,
       pageSize: 10,
-      total: data.length,
+      total: publishResult.data?.length,
       showSizeChanger: true,
       pageSizeOptions: [10, 25, 50, 100]
     },
     scroll: { x: 'max-content', y: 510 },
     rowKey: 'key',
     bordered: true,
-    size: 'middle',
     showHeader: true
   };
 

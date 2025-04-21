@@ -3,7 +3,7 @@ import { Card } from '~/components/card/card';
 import { Image } from '~/components/image/image';
 import logo from '~/assets/images/LogoMevaker.png';
 import useAppForm from '~/hooks/use-app-form';
-import './component-overview.css';
+import './component-dashboard.css';
 import type { DatePickerType } from '~/types/date-types';
 import { useState } from 'react';
 import type { SelectOption } from '~/types/select-option';
@@ -11,8 +11,9 @@ import { useStore } from '@tanstack/react-form';
 import { validateDateRange } from '~/utils/validators';
 import { useAppMutation } from '~/hooks/use-app-mutation';
 import { useAppQuery } from '~/hooks/use-app-query';
+import { Flex } from '~/components/flex/flex';
 
-interface ComponentOverviewFormValues {
+interface ComponentDashboardFormValues {
   city: string;
   firstName: string;
   lastName?: string;
@@ -24,13 +25,12 @@ interface ComponentOverviewFormValues {
   agreeToTerms?: boolean;
 }
 
-export const ComponentOverviewPage = () => {
+export const ComponentDashboardPage = () => {
   const [response, setResponse] = useState<string | null>(null);
 
   // Fetching options
   const optionsQuery = useAppQuery<SelectOption[]>({
-    url: 'api/options/getOptions',
-    queryData: {}
+    url: 'api/options/getOptions'
   });
 
   // Mutation for adding a new option
@@ -66,7 +66,7 @@ export const ComponentOverviewPage = () => {
       firstName: 'אבי',
       fromDate: '05/03/2025',
       toDate: '25/03/2025'
-    } as ComponentOverviewFormValues,
+    } as ComponentDashboardFormValues,
     validators: {
       onChange: ({ value }) =>
         value.firstName === value.lastName && 'FirstName and LastName may not be the same'
@@ -123,6 +123,12 @@ export const ComponentOverviewPage = () => {
               <Button type="submit">Click the Mevaker</Button>
             </div>
             <Image src={logo} alt="mevaker" />
+            <Flex direction="column">
+              <div>test</div>
+              <div>test</div>
+              <div>test</div>
+              <div>test</div>
+            </Flex>
 
             {optionsQuery.data && (
               <form.AppField name="city">
@@ -201,4 +207,4 @@ export const ComponentOverviewPage = () => {
   );
 };
 
-export default ComponentOverviewPage;
+export default ComponentDashboardPage;
