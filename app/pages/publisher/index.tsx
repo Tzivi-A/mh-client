@@ -1,7 +1,7 @@
 import { Card } from '~/components/card/card';
 import { Table } from '../../components/table/table';
 import type { PublishResult } from '~/types/publish-result';
-import { FundingTypeEnum } from '~/enums/funding-type';
+import { FundingTypeEnum } from '~/types/enums/funding-type';
 import { useAppQuery } from '~/hooks/use-app-query';
 import type { ColumnsType, TableProps } from '~/types/table';
 

@@ -1,4 +1,4 @@
-import { FieldTypeEnum } from '~/enums/field-type';
+import { FieldTypeEnum } from '~/types/enums/field-type';
 import { AppFormField } from '../../app-form-field';
 import type { AppFormTextInputField } from '~/types/app-form-types';
 

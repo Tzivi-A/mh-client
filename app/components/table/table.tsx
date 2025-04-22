@@ -2,6 +2,7 @@ import { Table as AntTable } from 'antd';
 import { useState } from 'react';
 import type { ColumnGroupType, ColumnsType, ColumnType, TableProps } from '~/types/table';
 import { sorterFunctions } from '~/utils/utils';
+import get from 'lodash/get';
 
 export const Table = <RecordType,>({
   data,
@@ -38,9 +39,7 @@ export const Table = <RecordType,>({
   // Enhance columns with sorting logic based on sorterType and sorterName
   const processColumns = (columns: ColumnsType<RecordType>): ColumnsType<RecordType> => {
     return columns.map(column => {
-      const getNestedValue = (obj: RecordType, path: string): RecordType => {
-        return path.split('.').reduce((value, key) => (value ? value[key] : undefined), obj);
-      };
+      const getNestedValue = (obj: RecordType, path: string): RecordType => get(obj, path);
 
       if (isNotColumnGroupType(column)) {
         if (column.sorterType) {
