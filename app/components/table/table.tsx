@@ -39,16 +39,14 @@ export const Table = <RecordType,>({
   // Enhance columns with sorting logic based on sorterType and sorterName
   const processColumns = (columns: ColumnsType<RecordType>): ColumnsType<RecordType> => {
     return columns.map(column => {
-      const getNestedValue = (obj: RecordType, path: string): RecordType => get(obj, path);
-
       if (isNotColumnGroupType(column)) {
         if (column.sorterType) {
           column.sorter = (a, b) => {
             const valueA = column.sorterName
-              ? getNestedValue(a, column.sorterName as string)
+              ? get(a, column.sorterName as string)
               : a[column.dataIndex as keyof RecordType];
             const valueB = column.sorterName
-              ? getNestedValue(b, column.sorterName as string)
+              ? get(b, column.sorterName as string)
               : b[column.dataIndex as keyof RecordType];
             return sorterFunctions[column.sorterType ?? 'undefined'](valueA, valueB);
           };
