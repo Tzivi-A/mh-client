@@ -1,9 +1,9 @@
-import { Card } from '~/components/card/card';
 import { Table } from '../../components/table/table';
 import type { PublishResult } from '~/types/publish-result';
 import { FundingTypeEnum } from '~/enums/funding-type';
 import { useAppQuery } from '~/hooks/use-app-query';
 import type { ColumnsType, TableProps } from '~/types/table';
+import SideBySideCard from '~/components/side-by-side-card/side-by-side-card';
 
 export const PublisherPage = () => {
   const publishResult = useAppQuery<PublishResult[]>({
@@ -157,10 +157,20 @@ export const PublisherPage = () => {
 
   return (
     <div>
-      <h1>Publishing Page</h1>
-      <Card>
-        <Table {...tableProps} />
-      </Card>
+      <h1>תרומות, ערבויות והלוואות לסיעות בבחירות לרשויות מקומיות</h1>
+      <span>המידע על התרומות מפורסם בהסתמך על הדיווח של המועמד בלבד ועל אחריותו.</span>
+      <h3>חיפוש תרומה/ ערבות/ הלוואה</h3>
+
+      <SideBySideCard>
+        <SideBySideCard.Right>
+          <div>2</div>
+        </SideBySideCard.Right>
+        <SideBySideCard.Left>
+          <div>left</div>
+        </SideBySideCard.Left>
+      </SideBySideCard>
+
+      <Table {...tableProps} />
     </div>
   );
 };
