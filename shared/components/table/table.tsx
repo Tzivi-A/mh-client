@@ -24,10 +24,10 @@ export const Table = <RecordType,>({
   const [pageSize, setPageSize] = useState(pagination?.pageSize ?? 10);
   const [currentPage, setCurrentPage] = useState(pagination?.current ?? 1);
 
-  const handleRowClick = (record: RecordType) => {
-    if (onRowClick) {
-      onRowClick(record);
-    }
+  const handlePageChange = (page: number, pageSize: number) => {
+    setPageSize(pageSize);
+    setCurrentPage(page);
+    pagination?.onPageChange?.(page, pageSize);
   };
 
   const isNotColumnGroupType = (
@@ -71,22 +71,22 @@ export const Table = <RecordType,>({
               current: currentPage,
               pageSize,
               total: data.length,
-              showSizeChanger: pagination?.showSizeChanger,
-              pageSizeOptions: pagination?.pageSizeOptions,
-              onShowSizeChange: (current, size) => {
-                setPageSize(size);
-                setCurrentPage(current);
-                if (pagination?.onShowSizeChange) {
-                  pagination.onShowSizeChange(current, size);
-                }
+              showSizeChanger: pagination.showSizeChanger,
+              pageSizeOptions: pagination.pageSizeOptions,
+              onShowSizeChange: (page: number, pageSize: number) => {
+                handlePageChange(page, pageSize);
+                pagination.onShowSizeChange?.(page, pageSize);
               },
-              onChange: page => setCurrentPage(page),
+              onChange: (page: number, pageSize: number) => {
+                handlePageChange(page, pageSize);
+                pagination.onChange?.(page, pageSize);
+              },
               hideOnSinglePage: !pagination?.showSizeChanger
             }
           : false
       }
       onRow={record => ({
-        onClick: () => handleRowClick(record)
+        onClick: () => onRowClick?.(record)
       })}
       rowKey={rowKey}
       bordered={bordered}
