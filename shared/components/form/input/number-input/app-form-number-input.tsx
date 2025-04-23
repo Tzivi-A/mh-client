@@ -1,6 +1,6 @@
-import { FieldTypeEnum } from '~/types/enums/field-type';
-import { AppFormField } from '../../app-form-field';
-import type { AppFormNumberField } from '~/types/app-form-types';
+import { FieldTypeEnum } from '@app-types/enums/field-type';
+import { AppFormField } from '@ui/form/app-form-field';
+import type { AppFormNumberField } from '@app-types/app-form-types';
 
 export type AppFormNumberProps = Omit<AppFormNumberField, 'fieldType'>;
 

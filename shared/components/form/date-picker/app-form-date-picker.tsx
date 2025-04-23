@@ -1,5 +1,5 @@
-import { FieldTypeEnum } from '~/types/enums/field-type';
-import type { AppFormDatePickerField } from '~/types/app-form-types';
+import { FieldTypeEnum } from '@app-types/enums/field-type';
+import type { AppFormDatePickerField } from '@app-types/app-form-types';
 import { AppFormField } from '../app-form-field';
 
 export type AppFormDatePickerProps = Omit<AppFormDatePickerField, 'fieldType'>;

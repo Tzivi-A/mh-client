@@ -1,5 +1,5 @@
-import { FieldTypeEnum } from '~/types/enums/field-type';
-import type { AppFormCheckBoxField } from '~/types/app-form-types';
+import { FieldTypeEnum } from '@app-types/enums/field-type';
+import type { AppFormCheckBoxField } from '@app-types/app-form-types';
 import { AppFormField } from '../app-form-field';
 
 export type AppFormCheckBoxProps = Omit<AppFormCheckBoxField, 'fieldType'>;
