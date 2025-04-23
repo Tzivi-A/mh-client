@@ -144,7 +144,7 @@ export const PublisherPage = () => {
     loading: false,
     pagination: {
       current: 1,
-      pageSize: 1,
+      pageSize: 10,
       total: publishResult.data?.length,
       showSizeChanger: true,
       pageSizeOptions: [10, 25, 50, 100]
