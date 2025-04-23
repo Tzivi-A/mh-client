@@ -25,6 +25,7 @@ export interface TableProps<RecordType> {
     showSizeChanger?: boolean;
     pageSizeOptions?: number[];
     onShowSizeChange?: (current: number, pageSize: number) => void;
+    onPageChange?: (current: number, pageSize: number) => void;
     onChange?: (current: number, pageSize?: number) => void;
   };
   onRowClick?: (record: RecordType) => void;
