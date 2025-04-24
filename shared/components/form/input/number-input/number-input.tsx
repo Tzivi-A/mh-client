@@ -1,6 +1,6 @@
 import '../input.css';
-import InputWrapper from '../../input-wrapper/input-wrapper';
-import type { FormFieldProps } from '~/types/form-types';
+import InputWrapper from '@ui/form/input-wrapper/input-wrapper';
+import type { FormFieldProps } from '@app-types/form-types';
 
 export interface NumberProps extends FormFieldProps<string> {
   min?: number;
