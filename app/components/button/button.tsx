@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import './button.css';
+import styles from './button.module.css';
 
 interface ButtonProps {
   children: ReactNode;
@@ -9,7 +9,7 @@ interface ButtonProps {
 
 export const Button = ({ children, onClick, type = 'button' }: ButtonProps) => {
   return (
-    <button type={type} onClick={onClick} className="button">
+    <button type={type} onClick={onClick} className={`button ${styles.button}`}>
       {children}
     </button>
   );

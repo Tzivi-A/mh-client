@@ -39,6 +39,7 @@
     "@types/body-parser": "1.19.5",
     "@types/cors": "2.8.17",
     "@types/express": "5.0.1",
+    "@types/lodash": "4.17.16",
     "@types/node": "20",
     "@types/react": "19.0.1",
     "@types/react-dom": "19.0.1",
