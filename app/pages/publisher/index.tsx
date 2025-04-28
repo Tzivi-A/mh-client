@@ -3,7 +3,7 @@ import type { PublishResult } from '~/types/publish-result';
 import { FundingTypeEnum } from '~/types/enums/funding-type';
 import { useAppQuery } from '~/hooks/use-app-query';
 import type { ColumnsType, TableProps } from '@app-types/table';
-import SideBySideCard from '~/components/side-by-side-card/side-by-side-card';
+import SideBySideCard from '@ui/side-by-side-card/side-by-side-card';
 
 export const PublisherPage = () => {
   const publishResult = useAppQuery<PublishResult[]>({

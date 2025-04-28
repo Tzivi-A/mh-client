@@ -6,7 +6,7 @@ import { Dayjs } from 'dayjs';
 import InputWrapper from '../input-wrapper/input-wrapper';
 import type { FormFieldProps } from '@app-types/form-types';
 import type { DatePickerType } from '@app-types/date-types';
-import { toDayjs } from '~/utils/utils';
+import { toDayjs } from '@utils/utils';
 
 export interface DatePickerProps<T> extends FormFieldProps<T> {
   minDate?: DatePickerType;
