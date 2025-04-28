@@ -1,7 +1,8 @@
 import { Table as AntTable } from 'antd';
 import { useState } from 'react';
-import type { ColumnGroupType, ColumnsType, ColumnType, TableProps } from '~/types/table';
+import type { ColumnGroupType, ColumnsType, ColumnType, TableProps } from '@app-types/table';
 import { sorterFunctions } from '~/utils/utils';
+import get from 'lodash/get';
 
 export const Table = <RecordType,>({
   data,
@@ -23,10 +24,10 @@ export const Table = <RecordType,>({
   const [pageSize, setPageSize] = useState(pagination?.pageSize ?? 10);
   const [currentPage, setCurrentPage] = useState(pagination?.current ?? 1);
 
-  const handleRowClick = (record: RecordType) => {
-    if (onRowClick) {
-      onRowClick(record);
-    }
+  const handlePageChange = (page: number, pageSize: number) => {
+    setPageSize(pageSize);
+    setCurrentPage(page);
+    pagination?.onPageChange?.(page, pageSize);
   };
 
   const isNotColumnGroupType = (
@@ -38,18 +39,14 @@ export const Table = <RecordType,>({
   // Enhance columns with sorting logic based on sorterType and sorterName
   const processColumns = (columns: ColumnsType<RecordType>): ColumnsType<RecordType> => {
     return columns.map(column => {
-      const getNestedValue = (obj: RecordType, path: string): RecordType => {
-        return path.split('.').reduce((value, key) => (value ? value[key] : undefined), obj);
-      };
-
       if (isNotColumnGroupType(column)) {
         if (column.sorterType) {
           column.sorter = (a, b) => {
             const valueA = column.sorterName
-              ? getNestedValue(a, column.sorterName as string)
+              ? get(a, column.sorterName as string)
               : a[column.dataIndex as keyof RecordType];
             const valueB = column.sorterName
-              ? getNestedValue(b, column.sorterName as string)
+              ? get(b, column.sorterName as string)
               : b[column.dataIndex as keyof RecordType];
             return sorterFunctions[column.sorterType ?? 'undefined'](valueA, valueB);
           };
@@ -74,22 +71,22 @@ export const Table = <RecordType,>({
               current: currentPage,
               pageSize,
               total: data.length,
-              showSizeChanger: pagination?.showSizeChanger,
-              pageSizeOptions: pagination?.pageSizeOptions,
-              onShowSizeChange: (current, size) => {
-                setPageSize(size);
-                setCurrentPage(current);
-                if (pagination?.onShowSizeChange) {
-                  pagination.onShowSizeChange(current, size);
-                }
+              showSizeChanger: pagination.showSizeChanger,
+              pageSizeOptions: pagination.pageSizeOptions,
+              onShowSizeChange: (page: number, pageSize: number) => {
+                handlePageChange(page, pageSize);
+                pagination.onShowSizeChange?.(page, pageSize);
               },
-              onChange: page => setCurrentPage(page),
+              onChange: (page: number, pageSize: number) => {
+                handlePageChange(page, pageSize);
+                pagination.onChange?.(page, pageSize);
+              },
               hideOnSinglePage: !pagination?.showSizeChanger
             }
           : false
       }
       onRow={record => ({
-        onClick: () => handleRowClick(record)
+        onClick: () => onRowClick?.(record)
       })}
       rowKey={rowKey}
       bordered={bordered}

@@ -1,5 +1,5 @@
-import { FieldTypeEnum } from '~/enums/field-type';
-import type { AppFormSelectField } from '~/types/app-form-types';
+import { FieldTypeEnum } from '@app-types/enums/field-type';
+import type { AppFormSelectField } from '@app-types/app-form-types';
 import { AppFormField } from '../app-form-field';
 
 export type AppFormTextInputProps = Omit<AppFormSelectField, 'fieldType'>;

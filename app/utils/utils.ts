@@ -1,4 +1,4 @@
-import type { DatePickerType } from '~/types/date-types';
+import type { DatePickerType } from '@app-types/date-types';
 import dayjs, { Dayjs } from 'dayjs';
 
 export const toDayjs = (value: DatePickerType): Dayjs | undefined => {

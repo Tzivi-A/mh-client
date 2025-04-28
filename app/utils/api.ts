@@ -1,4 +1,4 @@
-import type { DataObject } from '~/types/api';
+import type { DataObject } from '@app-types/api';
 
 export const createQueryString = (params: DataObject) => {
   if (!params || typeof params !== 'object') {

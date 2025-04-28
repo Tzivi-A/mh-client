@@ -1,4 +1,4 @@
-import type { DatePickerType } from '~/types/date-types';
+import type { DatePickerType } from '@app-types/date-types';
 import { toDayjs } from './utils';
 
 export const validateDateRange = (minDate: DatePickerType, maxDate: DatePickerType) => {

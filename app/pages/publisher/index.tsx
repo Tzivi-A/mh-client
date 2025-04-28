@@ -1,8 +1,8 @@
-import { Table } from '../../components/table/table';
+import { Table } from '@ui/table/table';
 import type { PublishResult } from '~/types/publish-result';
-import { FundingTypeEnum } from '~/enums/funding-type';
+import { FundingTypeEnum } from '~/types/enums/funding-type';
 import { useAppQuery } from '~/hooks/use-app-query';
-import type { ColumnsType, TableProps } from '~/types/table';
+import type { ColumnsType, TableProps } from '@app-types/table';
 import SideBySideCard from '~/components/side-by-side-card/side-by-side-card';
 
 export const PublisherPage = () => {
