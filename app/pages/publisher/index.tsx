@@ -1,9 +1,9 @@
-import { Card } from '~/components/card/card';
-import { Table } from '../../components/table/table';
+import { Card } from '@ui/card/card';
+import { Table } from '@ui/table/table';
 import type { PublishResult } from '~/types/publish-result';
-import { FundingTypeEnum } from '~/enums/funding-type';
+import { FundingTypeEnum } from '~/types/enums/funding-type';
 import { useAppQuery } from '~/hooks/use-app-query';
-import type { ColumnsType, TableProps } from '~/types/table';
+import type { ColumnsType, TableProps } from '@app-types/table';
 
 export const PublisherPage = () => {
   const publishResult = useAppQuery<PublishResult[]>({

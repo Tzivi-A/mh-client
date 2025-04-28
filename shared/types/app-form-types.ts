@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import type { FieldTypeEnum } from '~/enums/field-type';
+import type { FieldTypeEnum } from '@app-types/enums/field-type';
 import type { DatePickerType } from './date-types';
 import type { SelectOption } from './select-option';
 
