@@ -6,7 +6,7 @@ import useAppForm from '~/hooks/use-app-form';
 import './component-dashboard.css';
 import type { DatePickerType } from '@app-types/date-types';
 import { useState } from 'react';
-import type { SelectOption } from '@app-types/select-option';
+import type { Option } from '@app-types/options';
 import { useStore } from '@tanstack/react-form';
 import { validateDateRange } from '~/utils/validators';
 import { useAppMutation } from '~/hooks/use-app-mutation';
@@ -29,12 +29,12 @@ export const ComponentDashboardPage = () => {
   const [response, setResponse] = useState<string | null>(null);
 
   // Fetching options
-  const optionsQuery = useAppQuery<SelectOption[]>({
+  const optionsQuery = useAppQuery<Option[]>({
     url: 'api/options/getOptions'
   });
 
   // Mutation for adding a new option
-  const addOptionMutation = useAppMutation<SelectOption>({
+  const addOptionMutation = useAppMutation<Option>({
     url: 'api/options/createOption',
     method: 'POST',
     mutationOptions: {
@@ -42,7 +42,7 @@ export const ComponentDashboardPage = () => {
     }
   });
 
-  const addOption = (newOption: SelectOption) => {
+  const addOption = (newOption: Option) => {
     addOptionMutation.mutateAsync({
       requestData: { label: newOption.label }
     });
@@ -89,13 +89,13 @@ export const ComponentDashboardPage = () => {
   const toDate = useStore(form.store, state => state.values.toDate);
 
   const formOptions = useAppForm({
-    defaultValues: {} as SelectOption,
+    defaultValues: {} as Option,
     onSubmit: ({ value }) => {
       handleSubmit(value);
     }
   });
 
-  const handleSubmit = (option: SelectOption) => {
+  const handleSubmit = (option: Option) => {
     addOption(option);
     formOptions.reset();
     setResponse('Option added successfully!');
@@ -133,6 +133,11 @@ export const ComponentDashboardPage = () => {
             {optionsQuery.data && (
               <form.AppField name="city">
                 {field => <field.Select label="ערים" options={optionsQuery.data || []} />}
+              </form.AppField>
+            )}
+            {optionsQuery.data && (
+              <form.AppField name="city">
+                {field => <field.RadioButton label="ערים" options={optionsQuery.data || []} />}
               </form.AppField>
             )}
             <form.AppField name="firstName" children={field => <field.Input label="שם פרטי" />} />

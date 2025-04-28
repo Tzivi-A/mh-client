@@ -6,6 +6,7 @@ import { AppFormNumber } from '@ui/form/input/number-input/app-form-number-input
 import { AppFormTextInput } from '@ui/form/input/text-input/app-form-text-input';
 import { AppFormDatePicker } from '@ui/form/date-picker/app-form-date-picker';
 import { AppFormCheckBox } from '@ui/form/check-box/app-form-check-box';
+import { AppFormRadioButton } from '@ui/form/radio-button/app-form-radio-button';
 
 const { useAppForm, withForm } = createFormHook({
   fieldContext,
@@ -15,7 +16,8 @@ const { useAppForm, withForm } = createFormHook({
     Number: AppFormNumber,
     Select: AppFormSelect,
     DatePicker: AppFormDatePicker,
-    CheckBox: AppFormCheckBox
+    CheckBox: AppFormCheckBox,
+    RadioButton : AppFormRadioButton
   },
   formComponents: {}
 });

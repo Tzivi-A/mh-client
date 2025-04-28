@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
 import type { FieldTypeEnum } from '@app-types/enums/field-type';
 import type { DatePickerType } from './date-types';
-import type { SelectOption } from './select-option';
+import type { Option } from './options';
 
 export interface BaseAppFormField {
   fieldType: FieldTypeEnum;
@@ -22,7 +22,7 @@ export interface AppFormNumberField extends BaseAppFormField {
 
 export interface AppFormSelectField extends BaseAppFormField {
   fieldType: FieldTypeEnum.SELECT;
-  options: SelectOption[];
+  options: Option[];
 }
 
 export interface AppFormDatePickerField extends BaseAppFormField {
@@ -36,10 +36,16 @@ export interface AppFormCheckBoxField extends BaseAppFormField {
   fieldType: FieldTypeEnum.CHECK_BOX;
 }
 
+export interface AppFormRadioButtonField extends BaseAppFormField {
+  fieldType: FieldTypeEnum.RADIO_BUTTON;
+  options: Option[];
+}
+
 export type AppFormFieldProps = AppFormFieldConstraint<
   | AppFormTextInputField
   | AppFormNumberField
   | AppFormSelectField
   | AppFormDatePickerField
   | AppFormCheckBoxField
+  | AppFormRadioButtonField
 >;

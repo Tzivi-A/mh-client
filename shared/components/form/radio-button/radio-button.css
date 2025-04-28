@@ -1,0 +1,12 @@
+.radio-group {
+    display: 'flex';
+    gap: '1rem';
+}
+
+.radio-option {
+    margin-right: '0.25rem';
+}
+
+.radio-label {
+    cursor: 'pointer';
+}
