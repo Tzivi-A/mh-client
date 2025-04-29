@@ -5,7 +5,7 @@ export interface PublisherSearch {
   PublicationSearchType: FundingTypeEnum;
   ElectionDate?: DatePickerType;
   EntityID?: number;
-  FundingName: string;
+  FullName: string;
   CityID?: number;
   CountryID?: number;
   FromDate?: DatePickerType;

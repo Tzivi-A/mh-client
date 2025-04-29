@@ -8,7 +8,7 @@ export interface SelectProps extends FormFieldProps<string> {
   options?: Option[];
 }
 
-export const Select = ({ label, id, options, onChange, value, error }: SelectProps) => {
+export const Select = ({ label, id, options = [], onChange, value, error }: SelectProps) => {
   return (
     <InputWrapper label={label} id={id} value={value} error={error}>
       <AntSelect

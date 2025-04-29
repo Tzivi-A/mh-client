@@ -21,7 +21,7 @@ export const SideBySideCard = ({ children }: SideBySideCardProps) => {
 
   return (
     <div className="side-by-side-card">
-      <Flex direction="row">
+      <Flex>
         <div className="side-by-side-card_right">{right}</div>
         <div className="side-by-side-card_left">{left}</div>
       </Flex>
