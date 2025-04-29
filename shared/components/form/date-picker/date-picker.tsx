@@ -2,10 +2,9 @@ import { useState } from 'react';
 import { DatePicker as AntDatePicker, type DatePickerProps as AntDatePickerProps } from 'antd';
 import 'antd/dist/reset.css';
 import 'dayjs/locale/he';
-import { Dayjs } from 'dayjs';
 import InputWrapper from '../input-wrapper/input-wrapper';
 import type { FormFieldProps } from '@app-types/form-types';
-import type { DatePickerType } from '@app-types/date-types';
+import type { DatePickerType, Dayjs } from '@app-types/date-types';
 import { toDayjs } from '@utils/utils';
 
 export interface DatePickerProps<T> extends FormFieldProps<T> {
