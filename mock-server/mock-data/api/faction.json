@@ -1,0 +1,75 @@
+{
+  "meta": {
+    "service": "faction",
+    "endpoints": [
+      {
+        "functionName": "cities",
+        "method": "GET",
+        "path": "/cities",
+        "params": ["electionId"]
+      }
+    ]
+  },
+  "data": [
+    {
+      "memberValue": "6040",
+      "Name": "אבו גוש",
+      "ID": 36814,
+      "State": 1,
+      "URL": null,
+      "IsControl": false,
+      "IsUpdate": false,
+      "electionId": 10389
+    },
+    {
+      "memberValue": "10559",
+      "Name": "אבו סנאן",
+      "ID": 36815,
+      "State": 1,
+      "URL": null,
+      "IsControl": false,
+      "IsUpdate": false,
+      "electionId": 10389
+    },
+    {
+      "memberValue": "11071",
+      "Name": "אבן יהודה",
+      "ID": 36806,
+      "State": 1,
+      "URL": null,
+      "IsControl": false,
+      "IsUpdate": false,
+      "electionId": 10388
+    },
+    {
+      "memberValue": "11071",
+      "Name": "אבן יהודה",
+      "ID": 36806,
+      "State": 1,
+      "URL": null,
+      "IsControl": false,
+      "IsUpdate": false,
+      "electionId": 10383
+    },
+    {
+      "memberValue": "25375",
+      "Name": "אופקים",
+      "ID": 36794,
+      "State": 1,
+      "URL": null,
+      "IsControl": false,
+      "IsUpdate": false,
+      "electionId": 10383
+    },
+    {
+      "memberValue": "29531",
+      "Name": "אור יהודה",
+      "ID": 36909,
+      "State": 1,
+      "URL": null,
+      "IsControl": false,
+      "IsUpdate": false,
+      "electionId": 10384
+    }
+  ]
+}

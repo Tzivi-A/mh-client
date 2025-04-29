@@ -10,3 +10,6 @@ export const validateDateRange = (minDate: DatePickerType, maxDate: DatePickerTy
   }
   return undefined;
 };
+
+export const validateNumberRange = (min?: number, max?: number) =>
+  min && max && min.toString() !== '-' && max.toString() !== '-' && min > max ? true : undefined;

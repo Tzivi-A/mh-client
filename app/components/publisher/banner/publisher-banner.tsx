@@ -6,7 +6,12 @@ import useAppForm from '~/hooks/use-app-form';
 import { FundingTypeEnum } from '~/types/enums/funding-type';
 import type { PublisherSearch } from '~/types/publisher-search';
 import logo from '~/assets/images/LogoMevaker.png';
-import { validateFormDateRange } from '~/validators';
+import * as validators from '~/validators/pages/publisher-validators';
+import { useAppQuery } from '~/hooks/use-app-query';
+import type { Option } from '@app-types/options';
+import { mapperCodeEntityToOption } from '~/mappers/select-mapper';
+import type { CodeEntity } from '~/types/code-entity';
+import { useStore } from '@tanstack/react-form';
 
 export const PublisherBanner = () => {
   const form = useAppForm({
@@ -17,6 +22,27 @@ export const PublisherBanner = () => {
       alert(JSON.stringify(value));
     }
   });
+
+  const selectedElectionId = useStore(form.store, state => state.values.ElectionDate);
+
+  const elections = useAppQuery<CodeEntity[], Option[]>({
+    url: 'api/election/activeLocalElections',
+    mapResponse: mapperCodeEntityToOption
+  });
+
+  const cities = useAppQuery<CodeEntity[], Option[]>({
+    url: 'api/faction/cities',
+    isRunNow: !!selectedElectionId,
+    queryData: {
+      queryStringData: { electionId: selectedElectionId ?? '' }
+    },
+    mapResponse: mapperCodeEntityToOption
+  });
+
+  if (elections.isLoading) return <p>Loading elections data...</p>;
+  if (elections.error) return <p>Error loading elections data</p>;
+  if (cities.isLoading) return <p>Loading cities data...</p>;
+  if (cities.error) return <p>Error loading cities data</p>;
 
   return (
     <form
@@ -31,10 +57,11 @@ export const PublisherBanner = () => {
           <h3>מאפייני הבחירות</h3>
           <Flex direction="column">
             <form.AppField name="ElectionDate">
-              {field => <field.DatePicker label="תאריך בחירות" inputReadOnly={false} />}
+              {field => <field.Select label="תאריך בחירות" options={elections.data || []} />}
             </form.AppField>
+
             <form.AppField name="CityID">
-              {field => <field.Select label="ישוב" options={[]} />}
+              {field => <field.Select label="ישוב" options={cities.data || []} />}
             </form.AppField>
             <form.AppField name="EntityID">
               {field => <field.Select label="סיעה" options={[]} />}
@@ -62,7 +89,7 @@ export const PublisherBanner = () => {
                   validators={{
                     onChangeListenTo: ['ToDate'],
                     onChange: ({ value, fieldApi }) =>
-                      validateFormDateRange(value, fieldApi.form.getFieldValue('ToDate'))
+                      validators.validateFromDateRange(value, fieldApi.form.getFieldValue('ToDate'))
                   }}
                 >
                   {field => <field.DatePicker label="מתאריך" inputReadOnly={false} />}
@@ -72,17 +99,31 @@ export const PublisherBanner = () => {
                   validators={{
                     onChangeListenTo: ['FromDate'],
                     onChange: ({ value, fieldApi }) =>
-                      validateFormDateRange(fieldApi.form.getFieldValue('FromDate'), value)
+                      validators.validateToDateRange(fieldApi.form.getFieldValue('FromDate'), value)
                   }}
                 >
                   {field => <field.DatePicker label="עד תאריך" inputReadOnly={false} />}
                 </form.AppField>
               </Flex>
               <Flex>
-                <form.AppField name="FromSum">
+                <form.AppField
+                  name="FromSum"
+                  validators={{
+                    onChangeListenTo: ['ToSum'],
+                    onChange: ({ value, fieldApi }) =>
+                      validators.validateFromSumRange(value, fieldApi.form.getFieldValue('ToSum'))
+                  }}
+                >
                   {field => <field.Number label="מסכום" />}
                 </form.AppField>
-                <form.AppField name="ToSum">
+                <form.AppField
+                  name="ToSum"
+                  validators={{
+                    onChangeListenTo: ['FromSum'],
+                    onChange: ({ value, fieldApi }) =>
+                      validators.validateToSumRange(fieldApi.form.getFieldValue('FromSum'), value)
+                  }}
+                >
                   {field => <field.Number label="עד סכום" />}
                 </form.AppField>
               </Flex>

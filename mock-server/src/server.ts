@@ -50,7 +50,7 @@ mockFiles.forEach(filePath => {
       let filteredData = data;
 
       if (method === 'GET') {
-        const queryParams = req.params;
+        const queryParams = req.query;
 
         if (params.length > 0) {
           filteredData = data.filter((item: any) => {

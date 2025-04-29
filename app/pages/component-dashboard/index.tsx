@@ -8,7 +8,7 @@ import type { DatePickerType } from '@app-types/date-types';
 import { useState } from 'react';
 import type { Option } from '@app-types/options';
 import { useStore } from '@tanstack/react-form';
-import { validateDateRange } from '~/validators/common/date-validators';
+import { validateDateRange } from '~/validators/common/range-validators';
 import { useAppMutation } from '~/hooks/use-app-mutation';
 import { useAppQuery } from '~/hooks/use-app-query';
 import { Flex } from '@ui/layout/flex/flex';

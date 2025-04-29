@@ -2,8 +2,8 @@ import type { DatePickerType } from '@app-types/date-types';
 import type { FundingTypeEnum } from './enums/funding-type';
 
 export interface PublisherSearch {
+  ElectionDate?: string;
   PublicationSearchType: FundingTypeEnum;
-  ElectionDate?: DatePickerType;
   EntityID?: number;
   FullName: string;
   CityID?: number;

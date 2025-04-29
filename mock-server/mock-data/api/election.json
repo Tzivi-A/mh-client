@@ -1,0 +1,47 @@
+{
+  "meta": {
+    "service": "election",
+    "endpoints": [
+      {
+        "functionName": "activeLocalElections",
+        "method": "GET",
+        "path": "/activeLocalElections",
+        "params": []
+      }
+    ]
+  },
+  "data": [
+    {
+      "Name": "10/02/2025",
+      "ID": 10389,
+      "State": 1,
+      "URL": null,
+      "IsControl": false,
+      "IsUpdate": false
+    },
+    {
+      "Name": "09/02/2025",
+      "ID": 10388,
+      "State": 1,
+      "URL": null,
+      "IsControl": false,
+      "IsUpdate": false
+    },
+    {
+      "Name": "07/01/2025",
+      "ID": 10383,
+      "State": 1,
+      "URL": null,
+      "IsControl": false,
+      "IsUpdate": false
+    },
+    {
+      "Name": "05/01/2025",
+      "ID": 10384,
+      "State": 1,
+      "URL": null,
+      "IsControl": false,
+      "IsUpdate": false
+    }
+  ]
+}
