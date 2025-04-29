@@ -6,6 +6,7 @@ import { useFieldContext } from '~/hooks/form-context';
 import Select from './select/select';
 import DatePicker from './date-picker/date-picker';
 import { CheckBox } from './check-box/check-box';
+import { RadioButton } from './radio-button/radio-button';
 
 export const AppFormField = <T,>({ label, fieldType, ...props }: AppFormFieldProps) => {
   const field = useFieldContext<T>();
@@ -15,7 +16,8 @@ export const AppFormField = <T,>({ label, fieldType, ...props }: AppFormFieldPro
     number: NumberInput,
     select: Select,
     datePicker: DatePicker,
-    checkBox: CheckBox
+    checkBox: CheckBox,
+    radioButton: RadioButton
   };
 
   const Component = fields[fieldType];
