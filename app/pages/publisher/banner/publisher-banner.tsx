@@ -6,13 +6,7 @@ import useAppForm from '~/hooks/use-app-form';
 import { FundingTypeEnum } from '~/types/enums/funding-type';
 import type { PublisherSearch } from '~/types/publisher-search';
 import logo from '~/assets/images/LogoMevaker.png';
-import type { DatePickerType } from '@app-types/date-types';
-import { validateDateRange } from '~/utils/validators';
-import { toDayjs } from '@utils/utils';
-
-const validateFormDateRange = (fromDate: DatePickerType, toDate: DatePickerType) =>
-  validateDateRange(fromDate, toDate) &&
-  `יש לבחור בתאריך שווה או גדול מ${toDayjs(fromDate)?.toString()}`;
+import { validateFormDateRange } from '~/validators';
 
 export const PublisherBanner = () => {
   const form = useAppForm({

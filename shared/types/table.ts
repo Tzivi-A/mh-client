@@ -1,7 +1,7 @@
 import type { ColumnType as AntColumnType } from 'antd/es/table';
 import type { ExpandableConfig } from 'antd/es/table/interface';
 import type { NestedKeyOf } from './nested-key-of';
-import type { sorterFunctions } from '@utils/utils';
+import type { sorterFunctions } from '@utils/table-utils';
 
 export interface ColumnType<RecordType> extends AntColumnType<RecordType> {
   sorterType?: keyof typeof sorterFunctions;
