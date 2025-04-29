@@ -3,7 +3,7 @@ import type { PublishResult } from '~/types/publish-result';
 import { FundingTypeEnum } from '~/types/enums/funding-type';
 import { useAppQuery } from '~/hooks/use-app-query';
 import type { ColumnsType, TableProps } from '@app-types/table';
-import SideBySideCard from '@ui/side-by-side-card/side-by-side-card';
+import PublisherBanner from './banner/publisher-banner';
 
 export const PublisherPage = () => {
   const publishResult = useAppQuery<PublishResult[]>({
@@ -160,16 +160,7 @@ export const PublisherPage = () => {
       <h1>תרומות, ערבויות והלוואות לסיעות בבחירות לרשויות מקומיות</h1>
       <span>המידע על התרומות מפורסם בהסתמך על הדיווח של המועמד בלבד ועל אחריותו.</span>
       <h3>חיפוש תרומה/ ערבות/ הלוואה</h3>
-
-      <SideBySideCard>
-        <SideBySideCard.Right>
-          <div>2</div>
-        </SideBySideCard.Right>
-        <SideBySideCard.Left>
-          <div>left</div>
-        </SideBySideCard.Left>
-      </SideBySideCard>
-
+      <PublisherBanner />
       <Table {...tableProps} />
     </div>
   );
