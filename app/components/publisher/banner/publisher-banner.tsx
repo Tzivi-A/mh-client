@@ -14,9 +14,15 @@ import type { CodeEntity } from '~/types/code-entity';
 import { useStore } from '@tanstack/react-form';
 
 export const PublisherBanner = () => {
+  const elections = useAppQuery<CodeEntity[], Option[]>({
+    url: 'api/election/activeLocalElections',
+    mapResponse: mapperCodeEntityToOption
+  });
+
   const form = useAppForm({
     defaultValues: {
-      PublicationSearchType: FundingTypeEnum.Donation
+      PublicationSearchType: FundingTypeEnum.Donation,
+      ElectionDate: elections.data?.[0]?.value
     } as PublisherSearch,
     onSubmit: ({ value }) => {
       alert(JSON.stringify(value));
@@ -24,11 +30,6 @@ export const PublisherBanner = () => {
   });
 
   const selectedElectionId = useStore(form.store, state => state.values.ElectionDate);
-
-  const elections = useAppQuery<CodeEntity[], Option[]>({
-    url: 'api/election/activeLocalElections',
-    mapResponse: mapperCodeEntityToOption
-  });
 
   const cities = useAppQuery<CodeEntity[], Option[]>({
     url: 'api/faction/cities',
