@@ -6,7 +6,7 @@ export const mapperCodeEntityToOption = (
   options: CodeEntity[] | CodeEntityExtended[]
 ): Option[] => {
   return options.map((option: CodeEntity | CodeEntityExtended) => ({
-    value: option.ID.toString(),
-    label: option.Name
+    value: option.id.toString(),
+    label: option.name
   }));
 };

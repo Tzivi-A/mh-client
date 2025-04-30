@@ -21,15 +21,16 @@ export const PublisherBanner = () => {
 
   const form = useAppForm({
     defaultValues: {
-      PublicationSearchType: FundingTypeEnum.Donation,
-      ElectionDate: elections.data?.[0]?.value
+      publicationSearchType: FundingTypeEnum.Donation,
+      electionDate: elections.data?.[0]?.value ?? ''
     } as PublisherSearch,
     onSubmit: ({ value }) => {
       alert(JSON.stringify(value));
     }
   });
 
-  const selectedElectionId = useStore(form.store, state => state.values.ElectionDate);
+  const selectedElectionId = useStore(form.store, state => state.values.electionDate);
+  const selectedCityId = useStore(form.store, state => state.values.cityID);
 
   const cities = useAppQuery<CodeEntity[], Option[]>({
     url: 'api/faction/cities',
@@ -40,10 +41,21 @@ export const PublisherBanner = () => {
     mapResponse: mapperCodeEntityToOption
   });
 
+  const factions = useAppQuery<CodeEntity[], Option[]>({
+    url: 'api/faction/factions',
+    isRunNow: !!selectedCityId,
+    queryData: {
+      queryStringData: { cityId: selectedCityId ?? '' }
+    },
+    mapResponse: mapperCodeEntityToOption
+  });
+
   if (elections.isLoading) return <p>Loading elections data...</p>;
   if (elections.error) return <p>Error loading elections data</p>;
   if (cities.isLoading) return <p>Loading cities data...</p>;
   if (cities.error) return <p>Error loading cities data</p>;
+  if (factions.isLoading) return <p>Loading cities data...</p>;
+  if (factions.error) return <p>Error loading cities data</p>;
 
   return (
     <form
@@ -57,15 +69,15 @@ export const PublisherBanner = () => {
         <SideBySideCard.Right>
           <h3>מאפייני הבחירות</h3>
           <Flex direction="column">
-            <form.AppField name="ElectionDate">
+            <form.AppField name="electionDate">
               {field => <field.Select label="תאריך בחירות" options={elections.data || []} />}
             </form.AppField>
 
-            <form.AppField name="CityID">
+            <form.AppField name="cityID">
               {field => <field.Select label="ישוב" options={cities.data || []} />}
             </form.AppField>
-            <form.AppField name="EntityID">
-              {field => <field.Select label="סיעה" options={[]} />}
+            <form.AppField name="entityID">
+              {field => <field.Select label="סיעה" options={factions.data || []} />}
             </form.AppField>
           </Flex>
         </SideBySideCard.Right>
@@ -74,33 +86,33 @@ export const PublisherBanner = () => {
           <Flex>
             <Flex direction="column">
               <Flex>
-                <form.AppField name="FullName">
+                <form.AppField name="fullName">
                   {field => <field.Input label="שם מלא" />}
                 </form.AppField>
-                <form.AppField name="CityID">
+                <form.AppField name="cityID">
                   {field => <field.Select label="ישוב" options={[]} />}
                 </form.AppField>
-                <form.AppField name="CountryID">
+                <form.AppField name="countryID">
                   {field => <field.Select label="ארץ" options={[]} />}
                 </form.AppField>
               </Flex>
               <Flex>
                 <form.AppField
-                  name="FromDate"
+                  name="fromDate"
                   validators={{
-                    onChangeListenTo: ['ToDate'],
+                    onChangeListenTo: ['toDate'],
                     onChange: ({ value, fieldApi }) =>
-                      validators.validateFromDateRange(value, fieldApi.form.getFieldValue('ToDate'))
+                      validators.validateFromDateRange(value, fieldApi.form.getFieldValue('toDate'))
                   }}
                 >
                   {field => <field.DatePicker label="מתאריך" inputReadOnly={false} />}
                 </form.AppField>
                 <form.AppField
-                  name="ToDate"
+                  name="toDate"
                   validators={{
-                    onChangeListenTo: ['FromDate'],
+                    onChangeListenTo: ['fromDate'],
                     onChange: ({ value, fieldApi }) =>
-                      validators.validateToDateRange(fieldApi.form.getFieldValue('FromDate'), value)
+                      validators.validateToDateRange(fieldApi.form.getFieldValue('fromDate'), value)
                   }}
                 >
                   {field => <field.DatePicker label="עד תאריך" inputReadOnly={false} />}
@@ -108,21 +120,21 @@ export const PublisherBanner = () => {
               </Flex>
               <Flex>
                 <form.AppField
-                  name="FromSum"
+                  name="fromSum"
                   validators={{
-                    onChangeListenTo: ['ToSum'],
+                    onChangeListenTo: ['toSum'],
                     onChange: ({ value, fieldApi }) =>
-                      validators.validateFromSumRange(value, fieldApi.form.getFieldValue('ToSum'))
+                      validators.validateFromSumRange(value, fieldApi.form.getFieldValue('toSum'))
                   }}
                 >
                   {field => <field.Number label="מסכום" />}
                 </form.AppField>
                 <form.AppField
-                  name="ToSum"
+                  name="toSum"
                   validators={{
-                    onChangeListenTo: ['FromSum'],
+                    onChangeListenTo: ['fromSum'],
                     onChange: ({ value, fieldApi }) =>
-                      validators.validateToSumRange(fieldApi.form.getFieldValue('FromSum'), value)
+                      validators.validateToSumRange(fieldApi.form.getFieldValue('fromSum'), value)
                   }}
                 >
                   {field => <field.Number label="עד סכום" />}

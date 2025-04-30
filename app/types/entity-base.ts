@@ -1,7 +1,7 @@
 export interface EntityBase {
-  ID: number;
-  State: number;
-  URL: string;
-  IsControl: boolean;
-  IsUpdate: boolean;
+  id: number;
+  state: number;
+  url: string;
+  isControl: boolean;
+  isUpdate: boolean;
 }
