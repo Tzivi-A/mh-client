@@ -12,36 +12,36 @@
   },
   "data": [
     {
-      "Name": "10/02/2025",
-      "ID": 10389,
-      "State": 1,
-      "URL": null,
-      "IsControl": false,
-      "IsUpdate": false
+      "name": "10/02/2025",
+      "id": 10389,
+      "state": 1,
+      "url": null,
+      "isControl": false,
+      "isUpdate": false
     },
     {
-      "Name": "09/02/2025",
-      "ID": 10388,
-      "State": 1,
-      "URL": null,
-      "IsControl": false,
-      "IsUpdate": false
+      "name": "09/02/2025",
+      "id": 10388,
+      "state": 1,
+      "url": null,
+      "isControl": false,
+      "isUpdate": false
     },
     {
-      "Name": "07/01/2025",
-      "ID": 10383,
-      "State": 1,
-      "URL": null,
-      "IsControl": false,
-      "IsUpdate": false
+      "name": "07/01/2025",
+      "id": 10383,
+      "state": 1,
+      "url": null,
+      "isControl": false,
+      "isUpdate": false
     },
     {
-      "Name": "05/01/2025",
-      "ID": 10384,
-      "State": 1,
-      "URL": null,
-      "IsControl": false,
-      "IsUpdate": false
+      "name": "05/01/2025",
+      "id": 10384,
+      "state": 1,
+      "url": null,
+      "isControl": false,
+      "isUpdate": false
     }
   ]
 }
