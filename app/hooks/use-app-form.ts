@@ -17,7 +17,7 @@ const { useAppForm, withForm } = createFormHook({
     Select: AppFormSelect,
     DatePicker: AppFormDatePicker,
     CheckBox: AppFormCheckBox,
-    RadioButton : AppFormRadioButton
+    RadioButton: AppFormRadioButton
   },
   formComponents: {}
 });

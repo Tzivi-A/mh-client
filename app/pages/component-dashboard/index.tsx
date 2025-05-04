@@ -135,7 +135,7 @@ export const ComponentDashboardPage = () => {
                 {field => <field.Select label="ערים" options={optionsQuery.data || []} />}
               </form.AppField>
             )}
-            
+
             {optionsQuery.data && (
               <form.AppField name="city">
                 {field => <field.RadioButton label="ערים" options={optionsQuery.data || []} />}
