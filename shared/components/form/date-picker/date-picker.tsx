@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { DatePicker as AntDatePicker, type DatePickerProps as AntDatePickerProps } from 'antd';
 import 'antd/dist/reset.css';
 import 'dayjs/locale/he';
@@ -25,6 +25,12 @@ export const DatePicker = ({
 }: DatePickerProps<DatePickerType>) => {
   const [selectedDate, setSelectedDate] = useState<Dayjs | null>(toDayjs(value) || null);
   const [isFocused, setIsFocused] = useState<boolean>(!!value);
+
+  // Synchronize internal state with the `value` prop
+  useEffect(() => {
+    setSelectedDate(toDayjs(value) || null);
+    setIsFocused(!!value);
+  }, [value]);
 
   const handleInputChange: AntDatePickerProps['onChange'] = (date, dateString) => {
     setSelectedDate(date);

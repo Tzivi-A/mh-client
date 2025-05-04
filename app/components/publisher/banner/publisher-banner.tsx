@@ -1,28 +1,21 @@
+import { useEffect } from 'react';
+import { useStore } from '@tanstack/react-form';
 import { Button } from '@ui/button/button';
 import { Image } from '@ui/image/image';
 import { Flex } from '@ui/layout/flex/flex';
 import { SideBySideCard } from '@ui/side-by-side-card/side-by-side-card';
 import useAppForm from '~/hooks/use-app-form';
-import { FundingTypeEnum } from '~/types/enums/funding-type';
+import { usePublisherBannerQueries } from '~/hooks/queries/use-publisher-banner-queries';
 import type { PublisherSearch } from '~/types/publisher-search';
 import logo from '~/assets/images/LogoMevaker.png';
 import * as validators from '~/validators/pages/publisher-validators';
-import { useAppQuery } from '~/hooks/use-app-query';
-import type { Option } from '@app-types/options';
-import { mapperCodeEntityToOption } from '~/mappers/select-mapper';
-import type { CodeEntity } from '~/types/code-entity';
-import { useStore } from '@tanstack/react-form';
 
 export const PublisherBanner = () => {
-  const elections = useAppQuery<CodeEntity[], Option[]>({
-    url: 'api/election/activeLocalElections',
-    mapResponse: mapperCodeEntityToOption
-  });
+  let queries = usePublisherBannerQueries();
 
   const form = useAppForm({
     defaultValues: {
-      publicationSearchType: FundingTypeEnum.Donation,
-      electionDate: elections.data?.[0]?.value ?? ''
+      electionDate: queries.elections.data?.[0]?.value ?? ''
     } as PublisherSearch,
     onSubmit: ({ value }) => {
       alert(JSON.stringify(value));
@@ -30,32 +23,21 @@ export const PublisherBanner = () => {
   });
 
   const selectedElectionId = useStore(form.store, state => state.values.electionDate);
-  const selectedCityId = useStore(form.store, state => state.values.cityID);
+  const selectedCityId = useStore(form.store, state => state.values.electionCityID);
 
-  const cities = useAppQuery<CodeEntity[], Option[]>({
-    url: 'api/faction/cities',
-    isRunNow: !!selectedElectionId,
-    queryData: {
-      queryStringData: { electionId: selectedElectionId ?? '' }
-    },
-    mapResponse: mapperCodeEntityToOption
-  });
+  useEffect(() => {
+    if (selectedElectionId) {
+      form.setFieldValue('electionCityID', undefined);
+    }
+  }, [selectedElectionId, form]);
 
-  const factions = useAppQuery<CodeEntity[], Option[]>({
-    url: 'api/faction/factions',
-    isRunNow: !!selectedCityId,
-    queryData: {
-      queryStringData: { cityId: selectedCityId ?? '' }
-    },
-    mapResponse: mapperCodeEntityToOption
-  });
+  queries = usePublisherBannerQueries(selectedElectionId, selectedCityId);
 
-  if (elections.isLoading) return <p>Loading elections data...</p>;
-  if (elections.error) return <p>Error loading elections data</p>;
-  if (cities.isLoading) return <p>Loading cities data...</p>;
-  if (cities.error) return <p>Error loading cities data</p>;
-  if (factions.isLoading) return <p>Loading cities data...</p>;
-  if (factions.error) return <p>Error loading cities data</p>;
+  const isLoading = Object.values(queries).some(query => query.isLoading);
+  const hasError = Object.values(queries).some(query => query.error);
+
+  if (isLoading) return <p>Loading data...</p>;
+  if (hasError) return <p>Error loading data</p>;
 
   return (
     <form
@@ -70,14 +52,26 @@ export const PublisherBanner = () => {
           <h3>מאפייני הבחירות</h3>
           <Flex direction="column">
             <form.AppField name="electionDate">
-              {field => <field.Select label="תאריך בחירות" options={elections.data || []} />}
+              {field => (
+                <field.Select label="תאריך בחירות" options={queries.elections.data || []} />
+              )}
             </form.AppField>
 
-            <form.AppField name="cityID">
-              {field => <field.Select label="ישוב" options={cities.data || []} />}
+            <form.AppField name="electionCityID">
+              {field => (
+                <field.Select
+                  label="ישוב"
+                  options={selectedElectionId ? queries.citiesByElectionId.data || [] : []}
+                />
+              )}
             </form.AppField>
             <form.AppField name="entityID">
-              {field => <field.Select label="סיעה" options={factions.data || []} />}
+              {field => (
+                <field.Select
+                  label="סיעה"
+                  options={selectedCityId ? queries.factions.data || [] : []}
+                />
+              )}
             </form.AppField>
           </Flex>
         </SideBySideCard.Right>
@@ -90,10 +84,10 @@ export const PublisherBanner = () => {
                   {field => <field.Input label="שם מלא" />}
                 </form.AppField>
                 <form.AppField name="cityID">
-                  {field => <field.Select label="ישוב" options={[]} />}
+                  {field => <field.Select label="ישוב" options={queries.cities.data || []} />}
                 </form.AppField>
                 <form.AppField name="countryID">
-                  {field => <field.Select label="ארץ" options={[]} />}
+                  {field => <field.Select label="ארץ" options={queries.countries.data || []} />}
                 </form.AppField>
               </Flex>
               <Flex>
@@ -142,11 +136,19 @@ export const PublisherBanner = () => {
               </Flex>
             </Flex>
             <Flex>
-              <Button>
+              <Button type="submit">
                 <Image src={logo} alt="search" />
                 סינון
               </Button>
-              <Button>נקה סינון</Button>
+              <Button
+                onClick={() => {
+                  form.reset(undefined, {
+                    keepDefaultValues: true
+                  });
+                }}
+              >
+                נקה סינון
+              </Button>
             </Flex>
           </Flex>
         </SideBySideCard.Left>

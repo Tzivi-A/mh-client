@@ -27,7 +27,8 @@ const saveMockData = (filePath: string, updatedData: any): void => {
 
 // Register endpoints dynamically from loaded files
 mockFiles.forEach(filePath => {
-  const { meta, data } = loadMockData(filePath);
+  const json = loadMockData(filePath);
+  const { meta } = json;
 
   if (!meta || !meta.endpoints) {
     console.warn(`No metadata found in ${filePath}`);
@@ -41,8 +42,12 @@ mockFiles.forEach(filePath => {
   const servicePrefix = folderName ? `/${folderName}/${serviceName}` : `/${serviceName}`;
 
   meta.endpoints.forEach((endpoint: any) => {
-    const { method, path: endpointPath, params } = endpoint;
+    const { functionName, method, path: endpointPath, params } = endpoint;
     const fullPath = `${servicePrefix}${endpointPath}`;
+
+    // Determine data based on functionName or path
+    const key = functionName || endpointPath.replace(/^\//, '').split('?')[0];
+    const data = Array.isArray(json[key]) ? json[key] : (json.data ?? []);
 
     app[method.toLowerCase()](fullPath, (req: Request, res: Response) => {
       console.log(`Handling ${method} request for ${fullPath}`);
