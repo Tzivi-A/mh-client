@@ -4,6 +4,8 @@ import type { PublishResult } from '~/types/publish-result';
 import { FundingTypeEnum } from '~/types/enums/funding-type';
 import { useAppQuery } from '~/hooks/use-app-query';
 import type { ColumnsType, TableProps } from '@app-types/table';
+import {SummaryResults } from '@ui/summary-results/summary-results';
+import { stats } from '@ui/summary-results/summary-results-data';
 
 export const PublisherPage = () => {
   const publishResult = useAppQuery<PublishResult[]>({
@@ -159,6 +161,9 @@ export const PublisherPage = () => {
     <div>
       <h1>Publishing Page</h1>
       <Card>
+        <div style={{ padding: '2rem' }}>
+          <SummaryResults items={stats} />
+        </div>
         <Table {...tableProps} />
       </Card>
     </div>
