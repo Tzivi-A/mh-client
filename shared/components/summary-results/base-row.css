@@ -1,0 +1,17 @@
+/* src/components/BaseRow.css */
+
+.base-row {
+    display: flex;
+    align-items: stretch;
+  }
+  
+  .base-row__cell {
+    flex: 1;
+  }
+  
+  .base-row__divider {
+    width: 1px;
+    background: #e0e0e0;
+    margin: 0 1rem;    /* adjust spacing as you like */
+  }
+  

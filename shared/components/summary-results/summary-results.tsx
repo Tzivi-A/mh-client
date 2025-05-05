@@ -1,27 +1,62 @@
-// DashboardStats.tsx
+// import React from 'react';
+// import './summary-results.css';
+// import type { SummaryResultData } from '~/types/publish-summary-result';
+// import { BaseRow } from './base-row';
+
+// interface SummaryResultProps {
+//   items: SummaryResultData[];
+// }
+
+// export const SummaryResults: React.FC<SummaryResultProps> = ({ items }) => (
+//   <div className="summary-results">
+//     <BaseRow
+//       items={items}
+//       renderItem={({ title, count, sum, iconSrc }) => (
+//         <div className="summary-results__item">
+//           <div className="summary-results__info">
+//             <div className="summary-results__title">
+//               {count != null ? `${count} ${title}` : title}
+//             </div>
+//             <div className="summary-results__sum">
+//               ₪ {sum.toLocaleString(undefined, { minimumFractionDigits: 2 })}
+//             </div>
+//           </div>
+//           <div className="summary-results__icon">
+//             <img src={iconSrc} alt={`${title} icon`} />
+//           </div>
+//         </div>
+//       )}
+//     />
+//   </div>
+// );
+// 
 import React from 'react';
 import './summary-results.css';
-import { Card } from '@ui/card/card';
-import type { SummaryResult } from '~/types/publish-summary-result';
+import type { SummaryResultData } from '~/types/publish-summary-result';
 
 interface SummaryResultProps {
-    items: SummaryResult[];
+    items: SummaryResultData[];
 }
 
 export const SummaryResults: React.FC<SummaryResultProps> = ({ items }) => (
-    <div className="dashboard-stats">
-        {items.map(({ title, count, sum
-            , icon 
-        }) => (
-            <Card key={title}>
-                <div className="stat">
-                    <div>
-                        <div className="stat-title">{count != null && ` ${count}`} {title}</div>
-                        <div className="stat-sum">{sum.toLocaleString(undefined, { minimumFractionDigits: 2 })}</div>
+    <div className="summary-results">
+        {items.map(({ title, count, sum, iconSrc }) => (
+            <div key={title} className="summary-results__item">
+                <div className="summary-results__info">
+                    <div className="summary-results__title">
+                        {count != null
+                            ? `${count} ${title}`
+                            : title
+                        }
                     </div>
-                    <div className="stat-icon">{icon}</div>
+                    <div className="summary-results__sum">
+                        ₪ {sum.toLocaleString(undefined, { minimumFractionDigits: 2 })}
+                    </div>
                 </div>
-            </Card>
+                <div className="summary-results__icon">
+                    <img src={iconSrc} alt={`${title} icon`} />
+                </div>
+            </div>
         ))}
     </div>
-);
+)

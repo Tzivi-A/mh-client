@@ -1,8 +1,6 @@
-import type { ReactNode } from 'react';
-
-export interface SummaryResult {
+export interface SummaryResultData {
   title: string;
   count?: number;
   sum: number;
-  icon: ReactNode;
+  iconSrc: string;
 }
