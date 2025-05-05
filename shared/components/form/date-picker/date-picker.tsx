@@ -23,7 +23,6 @@ export const DatePicker = ({
   maxDate,
   error
 }: DatePickerProps<DatePickerType>) => {
-  const parsedValue = toDayjs(value) || null;
   const [isFocused, setIsFocused] = useState<boolean>(!!value);
 
   const handleInputChange: AntDatePickerProps['onChange'] = (date, dateString) => {
@@ -34,14 +33,14 @@ export const DatePicker = ({
   const handleInputFocus = () => setIsFocused(true);
 
   const handleInputBlur = () => {
-    if (!parsedValue) setIsFocused(false);
+    if (!value) setIsFocused(false);
   };
 
   return (
-    <InputWrapper label={label} id={id} value={parsedValue} focused={isFocused} error={error}>
+    <InputWrapper label={label} id={id} value={value} focused={isFocused} error={error}>
       <AntDatePicker
         className="malam-input"
-        value={parsedValue}
+        value={toDayjs(value) || null}
         onChange={handleInputChange}
         inputReadOnly={inputReadOnly}
         format="DD/MM/YYYY"
