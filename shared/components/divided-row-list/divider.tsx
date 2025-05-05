@@ -1,5 +1,5 @@
+import { DividerType } from '@app-types/enums/divider-type';
 import React from 'react';
-import { DividerType } from '~/types/publish-summary-result';
 import arrowSrc from '~/assets/images/arrow.svg';
 
 const DividerComponents: Record<DividerType, React.FC> = {

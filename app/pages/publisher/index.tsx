@@ -1,8 +1,8 @@
 import { SummaryResults } from '~/components/publisher/summary-result/summary-results';
 import PublisherBanner from '../../components/publisher/banner/publisher-banner';
 import type { SummaryResultData } from "~/types/publish-summary-result";
-import { DividerType } from "~/types/publish-summary-result";
 import DonationIcon from '~/assets/images/DonationIcon.svg';
+import { DividerType } from '@app-types/enums/divider-type';
 
 export const summaryData: SummaryResultData[] = [
   { title: 'רשומות', count: 45, sum: 657416.20, iconSrc: DonationIcon, dividerAfter: DividerType.Line },

@@ -1,7 +1,7 @@
 import React from 'react';
 import './divided-row-list.css'
-import { DividerType } from '~/types/publish-summary-result';
 import { Divider } from './divider';
+import type { DividerType } from '@app-types/enums/divider-type';
 
 export interface HorizontalListProps<T extends { dividerAfter?: DividerType }> {
     items: T[];
