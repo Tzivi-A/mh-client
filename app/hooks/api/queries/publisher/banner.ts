@@ -1,10 +1,10 @@
 import type { CodeEntity } from '~/types/code-entity';
-import { useAppQuery } from '../../../hooks/use-app-query';
 import { mapperCodeEntityToOption, mapperCountryToOption } from '~/mappers/select-mapper';
 import type { Country } from '~/types/country';
 import type { Option } from '@app-types/options';
+import { useAppQuery } from '../use-app-query';
 
-export const PublisherBannerQueries = () => ({
+export const usePublisherBannerQueries = () => ({
   elections: useAppQuery<CodeEntity[], Option[]>({
     url: 'api/election/activeLocalElections',
     queryData: {
@@ -24,7 +24,7 @@ export const PublisherBannerQueries = () => ({
   })
 });
 
-export const CitiesByElectionId = (selectedElectionId?: string) =>
+export const useCitiesByElectionId = (selectedElectionId?: string) =>
   useAppQuery<CodeEntity[], Option[]>({
     url: 'api/faction/cities',
     isRunNow: !!selectedElectionId,
@@ -36,7 +36,7 @@ export const CitiesByElectionId = (selectedElectionId?: string) =>
     mapResponse: mapperCodeEntityToOption
   });
 
-export const Factions = (selectedCityId?: number) =>
+export const useFactions = (selectedCityId?: number) =>
   useAppQuery<CodeEntity[], Option[]>({
     url: 'api/faction/factions',
     isRunNow: !!selectedCityId,

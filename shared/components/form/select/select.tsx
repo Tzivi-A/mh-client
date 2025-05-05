@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import { Select as AntSelect } from 'antd';
 import 'antd/dist/reset.css';
 import InputWrapper from '../input-wrapper/input-wrapper';
@@ -22,36 +21,18 @@ export const Select = ({
   includeEmptyOption = false, // Default to not including an empty option
   emptyOptionLabel = 'בחר...' // Default label for the empty option
 }: SelectProps) => {
-  const [selectedValue, setSelectedValue] = useState<string | undefined>(value);
-
   // Add an empty option if `includeEmptyOption` is true
   const enhancedOptions = includeEmptyOption
     ? [{ value: '', label: emptyOptionLabel }, ...options]
     : options;
 
-  useEffect(() => {
-    // When `options` change, clear selection if the selected value is not in the new options
-    if (!enhancedOptions.find(option => option.value === selectedValue)) {
-      setSelectedValue(undefined);
-    }
-  }, [enhancedOptions]);
-
-  useEffect(() => {
-    setSelectedValue(value);
-  }, [value]);
-
-  const handleChange = (newValue: string) => {
-    setSelectedValue(newValue);
-    onChange?.(newValue);
-  };
-
   return (
     <InputWrapper label={label} id={id} value={value} error={error}>
       <AntSelect
         id={id}
-        value={selectedValue}
+        value={value}
         className="malam-select"
-        onChange={handleChange}
+        onChange={onChange}
         showSearch // Enables typing and searching
         filterOption={(input, option) =>
           (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
