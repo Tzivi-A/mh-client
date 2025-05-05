@@ -1,6 +1,15 @@
+import { SummaryResults } from '~/components/publisher/summary-result/summary-results';
 import PublisherBanner from '../../components/publisher/banner/publisher-banner';
-import { SummaryResults } from '@ui/summary-results/summary-results';
-import { stats } from '@ui/summary-results/summary-results-data';
+import type { SummaryResultData } from "~/types/publish-summary-result";
+import { DividerType } from "~/types/publish-summary-result";
+import DonationIcon from '~/assets/images/DonationIcon.svg';
+
+export const stats: SummaryResultData[] = [
+  { title: 'רשומות', count: 45, sum: 657416.20, iconSrc: DonationIcon, dividerAfter: DividerType.Line },
+  { title: 'הלוואות', count: 9, sum: 53000.00, iconSrc: DonationIcon, dividerAfter: DividerType.Line },
+  { title: 'ערבויות', count: 1, sum: 10000.00, iconSrc: DonationIcon, dividerAfter: DividerType.Arrow },
+  { title: 'תרומות', count: 35, sum: 112416.20, iconSrc: DonationIcon },
+];
 
 export const PublisherPage = () => {
   return (

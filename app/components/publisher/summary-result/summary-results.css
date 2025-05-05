@@ -7,29 +7,22 @@
      overflow: hidden;
    }
 
-   .summary-results__item {
+   .summary-results_item {
      flex: 1;
      display: flex;
      flex-direction: row-reverse;
-     flex-direction: row;
      align-items: center;
      justify-content: space-between;
      padding: 0 1.5rem;
    }
 
-
-   /* vertical divider between items */
-   .summary-results__item:not(:last-child) {
-     border-inline-end: 1px solid #e0e0e0;
-   }
-
-   .summary-results__info {
+   .summary-results_info {
      display: flex;
      flex-direction: column;
      text-align: right;
    }
 
-   .summary-results__title {
+   .summary-results_title {
      font-size: 1rem;
      font-weight: 600;
      color: #0074C8;
@@ -37,14 +30,13 @@
      direction: rtl;
    }
 
-
-   .summary-results__sum {
+   .summary-results_sum {
      font-size: 1.5rem;
      font-weight: bold;
      color: #222;
    }
 
-   .summary-results__icon img {
+   .summary-results_icon img {
      width: 2.5rem;
      height: 2.5rem;
    }
