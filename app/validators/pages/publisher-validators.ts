@@ -1,7 +1,7 @@
 import type { DatePickerType } from '@app-types/date-types';
 import { toDayjs } from '@utils/date-utils';
 import { parseNumber } from '@utils/number-utils';
-import { validateDateRange, validateNumberRange } from '~/validators';
+import { validateDateRange, validateNumberRange } from '~/validators/common';
 
 export const validateFromDateRange = (fromDate: DatePickerType, toDate: DatePickerType) =>
   validateDateRange(fromDate, toDate) &&
