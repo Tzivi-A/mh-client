@@ -15,22 +15,12 @@ import searchIcon from '~/assets/images/search-icon.svg';
 import * as validators from '~/validators/pages/publisher-validators';
 import Section from '@ui/section/section';
 import type { PublishBannerQueries } from '~/types/queries/publish-banner-queries';
-import { useAppQuery } from '~/hooks/use-app-query';
-import type { CodeEntity } from '~/types/code-entity';
-import type { Option } from '@app-types/options';
-import { mapperCodeEntityToOption } from '~/mappers/select-mapper';
 
 export const PublisherBanner = () => {
-  const elections = useAppQuery<CodeEntity[], Option[]>({
-    url: 'api/election/activeLocalElections',
-    mapResponse: mapperCodeEntityToOption
-  });
-
   const queries: PublishBannerQueries = PublisherBannerQueries();
   const form = useAppForm({
     defaultValues: {
-      fullName: 'ddd',
-      electionDate: elections.data?.[0]?.value ?? ''
+      electionDate: queries.elections.data?.find(e => e.value !== '')?.value ?? ''
     } as PublisherSearch,
     onSubmit: ({ value }) => {
       alert(JSON.stringify(value));
@@ -43,13 +33,13 @@ export const PublisherBanner = () => {
   queries.citiesByElectionId = CitiesByElectionId(selectedElectionId);
   queries.factions = Factions(selectedCityId);
 
-  useEffect(() => {
-    form.setFieldValue('electionCityID', undefined);
-  }, [selectedElectionId]);
+  // useEffect(() => {
+  //   form.setFieldValue('electionCityID', undefined);
+  // }, [selectedElectionId]);
 
-  useEffect(() => {
-    form.setFieldValue('entityID', undefined);
-  }, [selectedCityId]);
+  // useEffect(() => {
+  //   form.setFieldValue('entityID', undefined);
+  // }, [selectedCityId]);
 
   const isLoading = Object.values(queries).some(query => query.isLoading);
   const hasError = Object.values(queries).some(query => query.error);

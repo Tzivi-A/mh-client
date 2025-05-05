@@ -12,7 +12,7 @@ export const PublisherBannerQueries = () => ({
         isAddRemark: false
       }
     },
-    mapResponse: data => mapperCodeEntityToOption(data)
+    mapResponse: data => mapperCodeEntityToOption(data, true)
   }),
   countries: useAppQuery<Country[], Option[]>({
     url: 'api/codeTable/countries',
