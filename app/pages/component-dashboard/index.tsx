@@ -9,8 +9,8 @@ import { useState } from 'react';
 import type { Option } from '@app-types/options';
 import { useStore } from '@tanstack/react-form';
 import { validateDateRange } from '~/utils/validators';
-import { useAppMutation } from '~/hooks/use-app-mutation';
-import { useAppQuery } from '~/hooks/use-app-query';
+import { useAppMutation } from '~/hooks/api/mutations/use-app-mutation';
+import { useAppQuery } from '~/hooks/api/queries/use-app-query';
 import { Flex } from '@ui/layout/flex/flex';
 
 interface ComponentDashboardFormValues {

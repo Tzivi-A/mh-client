@@ -6,10 +6,10 @@ import { Flex } from '@ui/layout/flex/flex';
 import { SideBySideCard } from '@ui/side-by-side-card/side-by-side-card';
 import useAppForm from '~/hooks/use-app-form';
 import {
-  CitiesByElectionId,
-  Factions,
-  PublisherBannerQueries
-} from '~/api/queries/publisher/publisher-banner-queries';
+  useCitiesByElectionId,
+  useFactions,
+  usePublisherBannerQueries
+} from '~/hooks/api/queries/publisher/banner';
 import type { PublisherSearch } from '~/types/publisher-search';
 import searchIcon from '~/assets/images/search-icon.svg';
 
@@ -17,7 +17,7 @@ import Section from '@ui/section/section';
 import type { PublishBannerQueries } from '~/types/queries/publisher/publisher-banner-queries';
 
 export const PublisherBanner = () => {
-  const queries: PublishBannerQueries = PublisherBannerQueries();
+  const queries: PublishBannerQueries = usePublisherBannerQueries();
 
   const form = useAppForm({
     defaultValues: {
@@ -31,18 +31,22 @@ export const PublisherBanner = () => {
   const selectedElectionId = useStore(form.store, state => state.values.electionDate);
   const selectedCityId = useStore(form.store, state => state.values.electionCityID);
 
-  queries.citiesByElectionId = CitiesByElectionId(selectedElectionId);
-  queries.factions = Factions(selectedCityId);
+  queries.citiesByElectionId = useCitiesByElectionId(selectedElectionId);
+  queries.factions = useFactions(selectedCityId);
 
   const isFormReady =
     queries.elections.data?.length && (!selectedElectionId || selectedElectionId !== '');
 
   useEffect(() => {
-    if (isFormReady) form.setFieldValue('electionCityID', undefined);
+    if (isFormReady) {
+      form.setFieldValue('electionCityID', undefined);
+    }
   }, [selectedElectionId]);
 
   useEffect(() => {
-    if (isFormReady) form.setFieldValue('entityID', undefined);
+    if (isFormReady) {
+      form.setFieldValue('entityID', undefined);
+    }
   }, [selectedCityId]);
 
   const isLoading = Object.values(queries).some(query => query.isLoading);
