@@ -57,8 +57,11 @@ export const ComponentDashboardPage = () => {
     }
   });
 
-  const todoApi = useAppQuery({ url: 'todos/1' });
-  const todoApiFuture = useAppQuery({ url: 'todos/3', isRunNow: false });
+  const todoApi = useAppQuery({ url: 'https://jsonplaceholder.typicode.com/todos/1' });
+  const todoApiFuture = useAppQuery({
+    url: 'https://jsonplaceholder.typicode.com/todos/3',
+    isRunNow: false
+  });
 
   const form = useAppForm({
     defaultValues: {
