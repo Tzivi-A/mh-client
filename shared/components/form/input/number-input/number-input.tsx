@@ -1,24 +1,12 @@
 import '../input.css';
 import InputWrapper from '@ui/form/input-wrapper/input-wrapper';
 import type { FormFieldProps } from '@app-types/form-types';
+import { formatNumber } from '@utils/number-utils';
 
 export interface NumberProps extends FormFieldProps<string> {
   min?: number;
   max?: number;
 }
-
-export const formatNumber = (value?: string): string => {
-  // Allow a leading minus sign and remove any non-digit characters except for commas
-  const cleaned = value?.replace(/[^0-9,-]/g, '');
-
-  const isNegative = cleaned?.startsWith('-');
-  const digits = cleaned?.replace(/-/g, '').replace(/^0+(?=\d)/, '');
-
-  // Format the number with commas
-  const formatted = digits?.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-
-  return isNegative ? `-${formatted}` : formatted || '';
-};
 
 export const NumberInput = ({
   value,

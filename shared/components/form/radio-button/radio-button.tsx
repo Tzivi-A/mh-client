@@ -7,7 +7,14 @@ export interface RadioFieldProps extends FormFieldProps<string> {
   options?: Option[];
 }
 
-export const RadioButton = ({ id, label, options, value, onChange, error }: RadioFieldProps) => {
+export const RadioButton = ({
+  id,
+  label,
+  options = [],
+  value,
+  onChange,
+  error
+}: RadioFieldProps) => {
   return (
     <InputWrapper id={id} label={label} value={value} error={error} hasFloatingLabel={false}>
       <div role="radiogroup" aria-labelledby={id} className="radio-group">

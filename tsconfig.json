@@ -19,7 +19,8 @@
     "paths": {
       "~/*": ["app/*"],
       "@ui/*": ["shared/components/*"],
-      "@app-types/*": ["shared/types/*"]
+      "@app-types/*": ["shared/types/*"],
+      "@utils/*": ["shared/utils/*"]
     },
     "esModuleInterop": true,
     "verbatimModuleSyntax": true,

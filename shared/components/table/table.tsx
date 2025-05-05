@@ -1,7 +1,7 @@
 import { Table as AntTable } from 'antd';
 import { useState } from 'react';
 import type { ColumnGroupType, ColumnsType, ColumnType, TableProps } from '@app-types/table';
-import { sorterFunctions } from '~/utils/utils';
+import { sorterFunctions } from '@utils/table-utils';
 import get from 'lodash/get';
 
 export const Table = <RecordType,>({
