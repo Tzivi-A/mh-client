@@ -1,13 +1,10 @@
 import type { CodeEntity } from '~/types/code-entity';
-import { useAppQuery } from '../use-app-query';
+import { useAppQuery } from '../../hooks/use-app-query';
 import { mapperCodeEntityToOption, mapperCountryToOption } from '~/mappers/select-mapper';
 import type { Country } from '~/types/country';
 import type { Option } from '@app-types/options';
 
-export const usePublisherBannerQueries = (
-  selectedElectionId?: string,
-  selectedCityId?: number
-) => ({
+export const PublisherBannerQueries = () => ({
   elections: useAppQuery<CodeEntity[], Option[]>({
     url: 'api/election/activeLocalElections',
     queryData: {
@@ -15,27 +12,7 @@ export const usePublisherBannerQueries = (
         isAddRemark: false
       }
     },
-    mapResponse: mapperCodeEntityToOption
-  }),
-  citiesByElectionId: useAppQuery<CodeEntity[], Option[]>({
-    url: 'api/faction/cities',
-    isRunNow: !!selectedElectionId,
-    queryData: {
-      queryStringData: {
-        electionId: selectedElectionId ?? ''
-      }
-    },
-    mapResponse: mapperCodeEntityToOption
-  }),
-  factions: useAppQuery<CodeEntity[], Option[]>({
-    url: 'api/faction/factions',
-    isRunNow: !!selectedCityId,
-    queryData: {
-      queryStringData: {
-        cityId: selectedCityId ?? ''
-      }
-    },
-    mapResponse: mapperCodeEntityToOption
+    mapResponse: data => mapperCodeEntityToOption(data)
   }),
   countries: useAppQuery<Country[], Option[]>({
     url: 'api/codeTable/countries',
@@ -46,3 +23,27 @@ export const usePublisherBannerQueries = (
     mapResponse: mapperCodeEntityToOption
   })
 });
+
+export const CitiesByElectionId = (selectedElectionId?: string) =>
+  useAppQuery<CodeEntity[], Option[]>({
+    url: 'api/faction/cities',
+    isRunNow: !!selectedElectionId,
+    queryData: {
+      queryStringData: {
+        electionId: selectedElectionId ?? ''
+      }
+    },
+    mapResponse: mapperCodeEntityToOption
+  });
+
+export const Factions = (selectedCityId?: number) =>
+  useAppQuery<CodeEntity[], Option[]>({
+    url: 'api/faction/factions',
+    isRunNow: !!selectedCityId,
+    queryData: {
+      queryStringData: {
+        cityId: selectedCityId ?? ''
+      }
+    },
+    mapResponse: mapperCodeEntityToOption
+  });

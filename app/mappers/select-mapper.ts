@@ -4,12 +4,18 @@ import type { CodeEntityExtended } from '~/types/code-entity-extended';
 import type { Country } from '~/types/country';
 
 export const mapperCodeEntityToOption = (
-  options: CodeEntity[] | CodeEntityExtended[]
+  options: CodeEntity[] | CodeEntityExtended[],
+  includeEmptyOption: boolean = false,
+  emptyOptionLabel: string = ''
 ): Option[] => {
-  return options.map((option: CodeEntity | CodeEntityExtended) => ({
+  const mappedOptions = options.map((option: CodeEntity | CodeEntityExtended) => ({
     value: option.id.toString(),
     label: option.name
   }));
+
+  return includeEmptyOption
+    ? [{ value: '', label: emptyOptionLabel }, ...mappedOptions]
+    : mappedOptions;
 };
 
 export const mapperCountryToOption = (options: Country[]): Option[] => {

@@ -7,4 +7,5 @@ export interface FormFieldProps<T> {
   onChange?: (value: T) => void;
   onBlur?: () => void;
   error?: string;
+  disabled?: boolean;
 }

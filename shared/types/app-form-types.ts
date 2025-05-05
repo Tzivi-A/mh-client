@@ -6,6 +6,7 @@ import type { Option } from './options';
 export interface BaseAppFormField {
   fieldType: FieldTypeEnum;
   label?: ReactNode;
+  disabled?: boolean;
 }
 
 type AppFormFieldConstraint<T> = T extends BaseAppFormField ? T : never;
@@ -23,6 +24,8 @@ export interface AppFormNumberField extends BaseAppFormField {
 export interface AppFormSelectField extends BaseAppFormField {
   fieldType: FieldTypeEnum.SELECT;
   options: Option[];
+  includeEmptyOption?: boolean;
+  emptyOptionLabel?: string;
 }
 
 export interface AppFormDatePickerField extends BaseAppFormField {
