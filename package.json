@@ -4,7 +4,6 @@
   "type": "module",
   "scripts": {
     "build": "react-router build",
-    "predev": "npm run generate:validators",
     "dev": "npm-watch dev-build",
     "dev-build": "react-router dev",
     "start": "react-router-serve ./build/server/index.js",
@@ -12,13 +11,10 @@
     "lint": "eslint ./app ./shared --ext .ts,.tsx",
     "lint:fix": "eslint . --fix",
     "test": "react-router build --mode test",
-    "predev:test": "npm run generate:validators",
     "dev:test": "react-router dev --mode test",
-    "predev:mock": "npm run generate:validators",
     "dev:mock": "npm-run-all --parallel mock-server start:react-mock",
     "mock-server": "npx tsx mock-server/src/server.ts",
-    "start:react-mock": "react-router dev --mode mock",
-    "generate:validators": "npx tsx tools/generate-validator-index.ts"
+    "start:react-mock": "react-router dev --mode mock"
   },
   "dependencies": {
     "@react-router/node": "7.3.0",
