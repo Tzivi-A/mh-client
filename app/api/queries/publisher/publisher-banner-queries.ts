@@ -1,5 +1,5 @@
 import type { CodeEntity } from '~/types/code-entity';
-import { useAppQuery } from '../../hooks/use-app-query';
+import { useAppQuery } from '../../../hooks/use-app-query';
 import { mapperCodeEntityToOption, mapperCountryToOption } from '~/mappers/select-mapper';
 import type { Country } from '~/types/country';
 import type { Option } from '@app-types/options';

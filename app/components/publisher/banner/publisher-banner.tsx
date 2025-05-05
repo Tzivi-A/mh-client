@@ -9,15 +9,17 @@ import {
   CitiesByElectionId,
   Factions,
   PublisherBannerQueries
-} from '~/api/queries/publisher-banner-queries';
+} from '~/api/queries/publisher/publisher-banner-queries';
 import type { PublisherSearch } from '~/types/publisher-search';
 import searchIcon from '~/assets/images/search-icon.svg';
 import * as validators from '~/validators/pages/publisher-validators';
+
 import Section from '@ui/section/section';
-import type { PublishBannerQueries } from '~/types/queries/publish-banner-queries';
+import type { PublishBannerQueries } from '~/types/queries/publisher/publisher-banner-queries';
 
 export const PublisherBanner = () => {
   const queries: PublishBannerQueries = PublisherBannerQueries();
+
   const form = useAppForm({
     defaultValues: {
       electionDate: queries.elections.data?.find(e => e.value !== '')?.value ?? ''
@@ -33,13 +35,16 @@ export const PublisherBanner = () => {
   queries.citiesByElectionId = CitiesByElectionId(selectedElectionId);
   queries.factions = Factions(selectedCityId);
 
-  // useEffect(() => {
-  //   form.setFieldValue('electionCityID', undefined);
-  // }, [selectedElectionId]);
+  const isFormReady =
+    queries.elections.data?.length && (!selectedElectionId || selectedElectionId !== '');
 
-  // useEffect(() => {
-  //   form.setFieldValue('entityID', undefined);
-  // }, [selectedCityId]);
+  useEffect(() => {
+    if (isFormReady) form.setFieldValue('electionCityID', undefined);
+  }, [selectedElectionId]);
+
+  useEffect(() => {
+    if (isFormReady) form.setFieldValue('entityID', undefined);
+  }, [selectedCityId]);
 
   const isLoading = Object.values(queries).some(query => query.isLoading);
   const hasError = Object.values(queries).some(query => query.error);
