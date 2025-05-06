@@ -18,9 +18,9 @@
     "baseUrl": ".",
     "paths": {
       "~/*": ["app/*"],
-      "@ui/*": ["shared/components/*"],
-      "@app-types/*": ["shared/types/*"],
-      "@utils/*": ["shared/utils/*"]
+      "@ui/*": ["app/shared/components/*"],
+      "@app-types/*": ["app/shared/types/*"],
+      "@utils/*": ["app/shared/utils/*"]
     },
     "esModuleInterop": true,
     "verbatimModuleSyntax": true,

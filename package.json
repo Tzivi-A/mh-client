@@ -8,7 +8,7 @@
     "dev-build": "react-router dev",
     "start": "react-router-serve ./build/server/index.js",
     "typecheck": "react-router typegen && tsc",
-    "lint": "eslint ./app ./shared --ext .ts,.tsx",
+    "lint": "eslint ./app --ext .ts,.tsx",
     "lint:fix": "eslint . --fix",
     "test": "react-router build --mode test",
     "dev:test": "react-router dev --mode test",
@@ -68,8 +68,7 @@
   "watch": {
     "dev-build": {
       "patterns": [
-        "app/**/*",
-        "shared/**/*"
+        "app/**/*"
       ],
       "extensions": [
         "ts",
