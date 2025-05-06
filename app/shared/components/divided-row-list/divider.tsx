@@ -1,6 +1,6 @@
 import { DividerTypeEnum } from '@app-types/enums/divider-type';
 import React from 'react';
-import arrowSrc from '~/assets/images/arrow.svg';
+import arrowSrc from '~/shared/images/arrow.svg';
 
 const DividerComponents: Record<DividerTypeEnum, React.FC> = {
   [DividerTypeEnum.Line]: () => <div className="divided-row-list-line" />,

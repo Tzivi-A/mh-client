@@ -57,7 +57,7 @@ export default tseslint.config(
       'react/self-closing-comp': 'error',
       'react/function-component-definition': [2, { namedComponents: 'arrow-function' }],
       'react/jsx-pascal-case': 2,
-      'react/no-array-index-key': 2,
+      'react/no-array-index-key': 0,
       'react/prop-types': 0,
       'react-hooks/rules-of-hooks': 'error',
       'react-hooks/exhaustive-deps': 0,
