@@ -1,4 +1,4 @@
-import { PublisherResultSummary } from '~/components/publisher/summary-result/results-summary';
+import { PublisherResultSummary } from '~/components/publisher/results-summary/results-summary';
 import PublisherBanner from '../../components/publisher/banner/publisher-banner';
 import { useAppQuery } from '~/hooks/api/queries/use-app-query';
 import type { PublisherResultSummaryData } from '~/types/publisher/publisher-summary-result';
