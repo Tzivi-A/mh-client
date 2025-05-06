@@ -1,4 +1,4 @@
-export enum DividerType {
+export enum DividerTypeEnum {
   Line = 'line',
   Arrow = 'arrow'
 }

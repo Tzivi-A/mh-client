@@ -2,17 +2,17 @@ export default {
   meta: {
     type: 'problem',
     docs: {
-      description: 'Enforce exported consts in /mappers/ to end with "Mapper"'
+      description: 'Ensure exported consts end with "Mapper" and enums with "Enum" in /mappers/'
     },
     messages: {
-      invalidName: 'Exported const in /mappers/ must end with "Mapper".'
+      invalidConst: 'Exported const in /mappers/ must end with "Mapper".',
+      invalidEnum: 'Exported enum must end with "Enum".'
     },
-    schema: [] // no options
+    schema: []
   },
   create(context) {
     const filename = context.getFilename();
-    const isMappingFolder =
-      filename.includes('/app/mappers/') || filename.includes('\\app\\mappers\\');
+    const isMappingFolder = filename.includes('/mapping/') || filename.includes('\\mapping\\');
 
     return {
       ExportNamedDeclaration(node) {
@@ -23,10 +23,19 @@ export default {
             if (declarator.id?.type === 'Identifier' && !declarator.id.name.endsWith('Mapper')) {
               context.report({
                 node: declarator.id,
-                messageId: 'invalidName'
+                messageId: 'invalidConst'
               });
             }
           }
+        }
+      },
+
+      TSEnumDeclaration(node) {
+        if (!node.id.name.endsWith('Enum')) {
+          context.report({
+            node: node.id,
+            messageId: 'invalidEnum'
+          });
         }
       }
     };

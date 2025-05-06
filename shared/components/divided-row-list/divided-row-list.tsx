@@ -1,15 +1,15 @@
 import React from 'react';
 import './divided-row-list.css';
 import { Divider } from './divider';
-import type { DividerType } from '@app-types/enums/divider-type';
+import type { DividerTypeEnum } from '@app-types/enums/divider-type';
 
-export interface DividedRowListProps<T extends { dividerAfter?: DividerType }> {
+export interface DividedRowListProps<T extends { dividerAfter?: DividerTypeEnum }> {
   items: T[];
   renderItem: (item: T, index: number) => React.ReactNode;
-  defaultDivider?: DividerType;
+  defaultDivider?: DividerTypeEnum;
 }
 
-export const DividedRowList = <T extends { dividerAfter?: DividerType }>({
+export const DividedRowList = <T extends { dividerAfter?: DividerTypeEnum }>({
   items,
   renderItem,
   defaultDivider

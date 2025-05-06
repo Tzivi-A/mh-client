@@ -3,12 +3,12 @@ import PublisherBanner from '../../components/publisher/banner/publisher-banner'
 import { useAppQuery } from '~/hooks/api/queries/use-app-query';
 import type { SummaryResultData } from '~/types/publish-summary-result';
 import type { LocalGuarantyDonationSearch } from '~/types/publisher-search-results';
-import { summaryDataMapper } from '~/mappers/publisher/funding-type-mapper';
+import { mapperSummaryData } from '~/mappers/publisher/funding-type-mapper';
 
 export const PublisherPage = () => {
   const summaryData = useAppQuery<LocalGuarantyDonationSearch, SummaryResultData[]>({
     url: 'api/publisher/localGuarantyDonationSearch',
-    mapResponse: summaryDataMapper
+    mapResponse: mapperSummaryData
   });
   return (
     <div>
