@@ -1,0 +1,153 @@
+{
+  "meta": {
+    "service": "faction",
+    "endpoints": [
+      {
+        "functionName": "cities",
+        "method": "GET",
+        "path": "/cities",
+        "params": ["electionId"]
+      },
+      {
+        "functionName": "factions",
+        "method": "GET",
+        "path": "/factions",
+        "params": ["cityId"]
+      }
+    ]
+  },
+  "data": [
+    {
+      "memberValue": "6040",
+      "name": "אבו גוש",
+      "id": 36814,
+      "state": 1,
+      "url": null,
+      "isControl": false,
+      "isUpdate": false,
+      "electionId": 10389
+    },
+    {
+      "memberValue": "10559",
+      "name": "אבו סנאן",
+      "id": 36815,
+      "state": 1,
+      "url": null,
+      "isControl": false,
+      "isUpdate": false,
+      "electionId": 10389
+    },
+    {
+      "memberValue": "11071",
+      "name": "אבן יהודה",
+      "id": 36806,
+      "state": 1,
+      "url": null,
+      "isControl": false,
+      "isUpdate": false,
+      "electionId": 10388
+    },
+    {
+      "memberValue": "11071",
+      "name": "אבן יהודה",
+      "id": 36807,
+      "state": 1,
+      "url": null,
+      "isControl": false,
+      "isUpdate": false,
+      "electionId": 10383
+    },
+    {
+      "memberValue": "25375",
+      "name": "אופקים",
+      "id": 36794,
+      "state": 1,
+      "url": null,
+      "isControl": false,
+      "isUpdate": false,
+      "electionId": 10383
+    },
+    {
+      "memberValue": "29531",
+      "name": "אור יהודה",
+      "id": 36909,
+      "state": 1,
+      "url": null,
+      "isControl": false,
+      "isUpdate": false,
+      "electionId": 10384
+    },
+    {
+      "name": "אבו גוש המאוחדת",
+      "id": 123,
+      "cityId": 36814,
+      "state": 1,
+      "url": null,
+      "isControl": false,
+      "isUpdate": false
+    },
+    {
+      "name": "אבו סנאן המאוחדת",
+      "id": 456,
+      "cityId": 36815,
+      "state": 1,
+      "url": null,
+      "isControl": false,
+      "isUpdate": false
+    },
+    {
+      "name": "אבן יהודה המאוחדת",
+      "id": 789,
+      "cityId": 36806,
+      "state": 1,
+      "url": null,
+      "isControl": false,
+      "isUpdate": false
+    },
+    {
+      "name": "אבן יהודה הכי",
+      "id": 135,
+      "cityId": 36806,
+      "state": 1,
+      "url": null,
+      "isControl": false,
+      "isUpdate": false
+    },
+    {
+      "name": "אבן יהודה השולטת",
+      "id": 135,
+      "cityId": 36807,
+      "state": 1,
+      "url": null,
+      "isControl": false,
+      "isUpdate": false
+    },
+    {
+      "name": "אופקים המאוחדת",
+      "id": 246,
+      "cityId": 36794,
+      "state": 1,
+      "url": null,
+      "isControl": false,
+      "isUpdate": false
+    },
+    {
+      "name": "אופקים שלנו",
+      "id": 357,
+      "cityId": 36794,
+      "state": 1,
+      "url": null,
+      "isControl": false,
+      "isUpdate": false
+    },
+    {
+      "name": "אור יהודה",
+      "id": 468,
+      "cityId": 36909,
+      "state": 1,
+      "url": null,
+      "isControl": false,
+      "isUpdate": false
+    }
+  ]
+}

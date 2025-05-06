@@ -1,0 +1,19 @@
+.side-by-side-card {
+  border: 1px solid #c4cfe680;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.side-by-side-card_right {
+  width: 30%;
+  background-color: #f5faff;
+  padding: 20px;
+  border-radius: 0 8px 8px 0;
+}
+
+.side-by-side-card_left {
+  width: 70%;
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 8px 0 0 8px;
+}

@@ -9,8 +9,8 @@ import { useState } from 'react';
 import type { Option } from '@app-types/options';
 import { useStore } from '@tanstack/react-form';
 import { validateDateRange } from '~/utils/validators';
-import { useAppMutation } from '~/hooks/use-app-mutation';
-import { useAppQuery } from '~/hooks/use-app-query';
+import { useAppMutation } from '~/hooks/api/mutations/use-app-mutation';
+import { useAppQuery } from '~/hooks/api/queries/use-app-query';
 import { Flex } from '@ui/layout/flex/flex';
 
 interface ComponentDashboardFormValues {
@@ -57,8 +57,11 @@ export const ComponentDashboardPage = () => {
     }
   });
 
-  const todoApi = useAppQuery({ url: 'todos/1' });
-  const todoApiFuture = useAppQuery({ url: 'todos/3', isRunNow: false });
+  const todoApi = useAppQuery({ url: 'https://jsonplaceholder.typicode.com/todos/1' });
+  const todoApiFuture = useAppQuery({
+    url: 'https://jsonplaceholder.typicode.com/todos/3',
+    isRunNow: false
+  });
 
   const form = useAppForm({
     defaultValues: {
@@ -135,34 +138,34 @@ export const ComponentDashboardPage = () => {
                 {field => <field.Select label="ערים" options={optionsQuery.data || []} />}
               </form.AppField>
             )}
-            
+
             {optionsQuery.data && (
               <form.AppField name="city">
                 {field => <field.RadioButton label="ערים" options={optionsQuery.data || []} />}
               </form.AppField>
             )}
-            <form.AppField name="firstName" children={field => <field.Input label="שם פרטי" />} />
+            <form.AppField name="firstName">
+              {field => <field.Input label="שם פרטי" />}
+            </form.AppField>
             <form.AppField
               name="lastName"
               validators={{
                 onChange: ({ value }) => !value && 'שדה חובה'
               }}
-              children={field => <field.Input label="שם משפחה" />}
-            />
-            <form.AppField
-              name="number"
-              children={field => <field.Number label="מספר" max={2} />}
-            />
-            <form.AppField
-              name="fromDate"
-              children={field => <field.DatePicker label="מתאריך" maxDate={toDate} />}
-            />
-            <form.AppField
-              name="toDate"
-              children={field => (
+            >
+              {field => <field.Input label="שם משפחה" />}
+            </form.AppField>
+            <form.AppField name="number">
+              {field => <field.Number label="מספר" max={2} />}
+            </form.AppField>
+            <form.AppField name="fromDate">
+              {field => <field.DatePicker label="מתאריך" maxDate={toDate} />}
+            </form.AppField>
+            <form.AppField name="toDate">
+              {field => (
                 <field.DatePicker label="עד תאריך" inputReadOnly={false} minDate={fromDate} />
               )}
-            />
+            </form.AppField>
             <form.AppField
               name="validateFromDate"
               validators={{
@@ -170,8 +173,9 @@ export const ComponentDashboardPage = () => {
                 onChange: ({ value, fieldApi }) =>
                   validateFormDateRange(value, fieldApi.form.getFieldValue('validateToDate'))
               }}
-              children={field => <field.DatePicker label="מתאריך - ולידציה" />}
-            />
+            >
+              {field => <field.DatePicker label="מתאריך - ולידציה" />}
+            </form.AppField>
             <form.AppField
               name="validateToDate"
               validators={{
@@ -179,14 +183,12 @@ export const ComponentDashboardPage = () => {
                 onChange: ({ value, fieldApi }) =>
                   validateFormDateRange(fieldApi.form.getFieldValue('validateFromDate'), value)
               }}
-              children={field => (
-                <field.DatePicker label="עד תאריך - ולידציה" inputReadOnly={false} />
-              )}
-            />
-            <form.AppField
-              name="agreeToTerms"
-              children={field => <field.CheckBox label="מסכים לתנאים" />}
-            />
+            >
+              {field => <field.DatePicker label="עד תאריך - ולידציה" inputReadOnly={false} />}
+            </form.AppField>
+            <form.AppField name="agreeToTerms">
+              {field => <field.CheckBox label="מסכים לתנאים" />}
+            </form.AppField>
           </Card>
         </div>
       </form>
@@ -203,8 +205,9 @@ export const ComponentDashboardPage = () => {
             validators={{
               onChange: ({ value }) => !value && 'שדה חובה'
             }}
-            children={field => <field.Input label="label" />}
-          />
+          >
+            {field => <field.Input label="label" />}
+          </formOptions.AppField>
           <Button type="submit">Submit Option</Button>
         </Card>
       </form>

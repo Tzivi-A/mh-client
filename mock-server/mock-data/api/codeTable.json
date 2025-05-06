@@ -1,0 +1,80 @@
+{
+  "meta": {
+    "service": "codeTable",
+    "endpoints": [
+      {
+        "functionName": "countries",
+        "method": "GET",
+        "path": "/countries",
+        "params": []
+      },
+      {
+        "functionName": "cities",
+        "method": "GET",
+        "path": "/cities",
+        "params": []
+      }
+    ]
+  },
+  "countries": [
+    {
+      "hebName": "אוזבקיסטן",
+      "engName": "Uzbekistan",
+      "id": 69
+    },
+    {
+      "hebName": "אוסטריה",
+      "engName": "Austria",
+      "id": 6
+    },
+    {
+      "hebName": "אוסטרליה",
+      "engName": "Australia",
+      "id": 8
+    },
+    {
+      "hebName": "אוקראינה",
+      "engName": "Ukraine",
+      "id": 30
+    },
+    {
+      "hebName": "ישראל",
+      "engName": "Israel",
+      "id": 1
+    }
+  ],
+  "cities": [
+    {
+      "name": "אבן יהודה",
+      "id": 182
+    },
+    {
+      "name": "אבן מנחם",
+      "id": 1081
+    },
+    {
+      "name": "אבן ספיר",
+      "id": 783
+    },
+    {
+      "name": "אבן שמואל",
+      "id": 400
+    },
+    {
+      "name": "אבני איתן",
+      "id": 4011
+    },
+    {
+      "name": "אבני חפץ",
+      "id": 3793
+    },
+    {
+      "name": "אבנת",
+      "id": 3786
+    },
+    {
+      "name": "אבשלום",
+      "id": 1311
+    }
+  ]
+}
