@@ -22,6 +22,19 @@ export const PublisherBanner = () => {
     defaultValues: {
       electionDate: queries.elections.data?.find(e => e.value !== '')?.value ?? ''
     } as PublisherSearch,
+    validators: {
+      onSubmit: ({ value }) => {
+        const isAllEmpty =
+          Object.keys(value).length === 0 ||
+          Object.values(value).every(v => v === null || v === undefined || v === '');
+
+        if (isAllEmpty) {
+          return 'יש לבחור מאפיין נוסף לחיפוש';
+        }
+
+        return undefined;
+      }
+    },
     onSubmit: ({ value }) => {
       alert(JSON.stringify(value));
     }
@@ -29,6 +42,7 @@ export const PublisherBanner = () => {
 
   const selectedElectionId = useStore(form.store, state => state.values.electionDate);
   const selectedCityId = useStore(form.store, state => state.values.electionCityID);
+  const formErrorMap = useStore(form.store, state => state.errorMap);
 
   queries.citiesByElectionId = useCitiesByElectionId(selectedElectionId);
   queries.factions = useFactions(selectedCityId);
@@ -94,7 +108,7 @@ export const PublisherBanner = () => {
           </Section>
         </SideBySideCard.Right>
         <SideBySideCard.Left>
-          <Section header="מאפייני התרומה/ הערבות/ ההלוואה">
+          <Section header="מאפייני התרומה/ הערבות/ ההלוואה" error={formErrorMap.onSubmit}>
             <Flex>
               <Flex direction="column">
                 <Flex>
