@@ -10,7 +10,6 @@ export const PublisherPage = () => {
     url: 'api/publisher/localGuarantyDonationSearch',
     mapResponse: mapperSummaryData
   });
-  console.log('summaryData', summaryData.data);
   return (
     <div>
       <h1>תרומות, ערבויות והלוואות לסיעות בבחירות לרשויות מקומיות</h1>
