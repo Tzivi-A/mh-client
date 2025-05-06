@@ -16,7 +16,7 @@ export const SummaryResults: React.FC<SummaryResultsProps> = ({ items }) => {
                 <div className="summary-results_item">
                     <div className="summary-results_info">
                         <div className="summary-results_title">
-                            {count != null ? `${count} ${title}` : title}
+                            {count ? `${count} ${title}` : `0 ${title}`}
                         </div>
                         <div className="summary-results_sum">
                             {ilsFormatter.format(sum)}
