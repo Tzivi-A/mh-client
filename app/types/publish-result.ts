@@ -1,8 +1,8 @@
-import type { Item } from './item';
+import type { CodeEntity } from './code-entity';
 
 export interface PublishResult {
   ID: string;
-  FundingType: Item;
+  FundingType: CodeEntity;
   Faction: string;
   ElectionCity: string;
   ElectionDate: string;
