@@ -10,56 +10,57 @@
       }
     ]
   },
-  "data": [
-    {
-      "ID": "1",
-      "FundingType": { "ID": 1, "Name": "תרומה" },
-      "Faction": "יש עתיד",
-      "ElectionCity": "ביתר",
-      "ElectionDate": "10/2/2025",
-      "FullName": "אלון פוטרמן",
-      "Country": "אנגליה",
-      "EntityCity": "ישוב אנגלי",
-      "FundingDate": "26/12/2022",
-      "FundingAmount": 1000.0
-    },
-    {
-      "ID": "2",
-      "FundingType": { "ID": 2, "Name": "הלוואה" },
-      "Faction": "המאוחדת",
-      "ElectionCity": "מודיעין עילית",
-      "ElectionDate": "18/1/2025",
-      "FullName": "אפרים כץ",
-      "Country": "ישראל",
-      "EntityCity": "בן שמן (מושב)",
-      "FundingDate": "1/3/2025",
-      "FundingAmount": 1000.2,
-      "LoanBalance": 100000.0
-    },
-    {
-      "ID": "3",
-      "FundingType": { "ID": 3, "Name": "ערבות" },
-      "Faction": "הכי הכי",
-      "ElectionCity": "ירושלים",
-      "ElectionDate": "23/10/2024",
-      "FullName": "בנימין דוד",
-      "Country": "ישראל",
-      "EntityCity": "אופקים",
-      "FundingDate": "12/03/2023",
-      "FundingAmount": 234.0
-    },
-    {
-      "ID": "4",
-      "FundingType": { "ID": 2, "Name": "הלוואה" },
-      "Faction": "הסיעה שלנו",
-      "ElectionCity": "בני ברק",
-      "ElectionDate": "27/7/2020",
-      "FullName": "משה ברקת",
-      "Country": "ישראל",
-      "EntityCity": "נתניה",
-      "FundingDate": "23/02/2025",
-      "FundingAmount": 18.0,
-      "LoanBalance": 18.0
-    }
-  ]
+  "localGuarantyDonationSearch": {
+    "results": [
+      {
+        "guaranteeOrDonation": "תרומה",
+        "publisherTypeID": 1,
+        "fundingName": "אלון פוטרמן",
+        "city": "ביתר",
+        "country": "אנגליה",
+        "fundingSum": "1000.00",
+        "sumInCurrency": "$1,000.00",
+        "fundingDate": "2022-12-26T00:00:00",
+        "electionDate": "2025-02-10T00:00:00",
+        "electionCity": "ביתר",
+        "electionFaction": "יש עתיד",
+        "loanReturnSum": ""
+      },
+      {
+        "guaranteeOrDonation": "הלוואה",
+        "publisherTypeID": 2,
+        "fundingName": "אפרים כץ",
+        "city": "מודיעין עילית",
+        "country": "ישראל",
+        "fundingSum": "1000.20",
+        "sumInCurrency": "₪1,000.20",
+        "fundingDate": "2025-03-01T00:00:00",
+        "electionDate": "2025-01-18T00:00:00",
+        "electionCity": "מודיעין עילית",
+        "electionFaction": "המאוחדת",
+        "loanReturnSum": "100000.00"
+      },
+      {
+        "guaranteeOrDonation": "ערבות",
+        "publisherTypeID": 3,
+        "fundingName": "בנימין דוד",
+        "city": "ירושלים",
+        "country": "ישראל",
+        "fundingSum": "234.00",
+        "sumInCurrency": "234.00",
+        "fundingDate": "2023-03-12T00:00:00",
+        "electionDate": "2024-10-23T00:00:00",
+        "electionCity": "ירושלים",
+        "electionFaction": "הכי הכי",
+        "loanReturnSum": ""
+      }
+    ],
+    "numDonations": 2,
+    "numGuarantees": 1,
+    "numLoans": 1,
+    "sumDonations": "1000.00",
+    "sumGuarantees": "234.00",
+    "sumLoans": "1000.20",
+    "isNumRecordsGreaterThanMaxParameter": 0
+  }
 }
