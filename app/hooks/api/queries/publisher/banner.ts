@@ -1,5 +1,5 @@
 import type { CodeEntity } from '~/types/code-entity';
-import { mapperCodeEntityToOption, mapperCountryToOption } from '~/mappers/select-mapper';
+import { codeEntityToOptionMapper, countryToOptionMapper } from '~/mappers/select-mapper';
 import type { Country } from '~/types/country';
 import type { Option } from '@app-types/options';
 import { useAppQuery } from '../use-app-query';
@@ -12,15 +12,15 @@ export const usePublisherBannerQueries = () => ({
         isAddRemark: false
       }
     },
-    mapResponse: data => mapperCodeEntityToOption(data, true)
+    mapResponse: data => codeEntityToOptionMapper(data, true)
   }),
   countries: useAppQuery<Country[], Option[]>({
     url: 'api/codeTable/countries',
-    mapResponse: mapperCountryToOption
+    mapResponse: countryToOptionMapper
   }),
   cities: useAppQuery<CodeEntity[], Option[]>({
     url: 'api/codeTable/cities',
-    mapResponse: mapperCodeEntityToOption
+    mapResponse: codeEntityToOptionMapper
   })
 });
 
@@ -33,7 +33,7 @@ export const useCitiesByElectionId = (selectedElectionId?: string) =>
         electionId: selectedElectionId ?? ''
       }
     },
-    mapResponse: mapperCodeEntityToOption
+    mapResponse: codeEntityToOptionMapper
   });
 
 export const useFactions = (selectedCityId?: number) =>
@@ -45,5 +45,5 @@ export const useFactions = (selectedCityId?: number) =>
         cityId: selectedCityId ?? ''
       }
     },
-    mapResponse: mapperCodeEntityToOption
+    mapResponse: codeEntityToOptionMapper
   });

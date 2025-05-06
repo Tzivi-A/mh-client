@@ -18,7 +18,7 @@ const createHEILFormatter = (opts: Intl.NumberFormatOptions = {}) =>
   new Intl.NumberFormat('he-IL', {
     minimumFractionDigits: 0,
     maximumFractionDigits: 2,
-    ...opts,
+    ...opts
   });
 
 export const parseNumber = (value?: string | number) =>
@@ -26,6 +26,5 @@ export const parseNumber = (value?: string | number) =>
 
 export const ilsFormatter = createHEILFormatter({
   style: 'currency',
-  currency: 'ILS',
+  currency: 'ILS'
 });
-

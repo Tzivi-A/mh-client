@@ -6,11 +6,11 @@ import DonationIcon from '~/assets/images/DonationIcon.svg';
 export const FundingTypeIcons: Record<FundingTypeEnum, string> = {
   [FundingTypeEnum.Donation]: DonationIcon,
   [FundingTypeEnum.Guarantee]: GuaranteeIcon,
-  [FundingTypeEnum.Loan]: LoanIcon,
+  [FundingTypeEnum.Loan]: LoanIcon
 };
 
 export const FundingTypeTitles: Record<FundingTypeEnum, { singular: string; plural: string }> = {
   [FundingTypeEnum.Donation]: { singular: 'תרומה', plural: 'תרומות' },
   [FundingTypeEnum.Guarantee]: { singular: 'ערבות', plural: 'ערבויות' },
-  [FundingTypeEnum.Loan]: { singular: 'הלוואה', plural: 'הלוואות' },
+  [FundingTypeEnum.Loan]: { singular: 'הלוואה', plural: 'הלוואות' }
 };

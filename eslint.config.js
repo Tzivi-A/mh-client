@@ -6,6 +6,7 @@ import globals from 'globals';
 import reactRefresh from 'eslint-plugin-react-refresh';
 import reactHooks from 'eslint-plugin-react-hooks';
 import prettierRecommended from 'eslint-plugin-prettier/recommended';
+import mapperNaming from './eslint-rules/mapper-naming.js';
 
 export default tseslint.config(
   {
@@ -43,7 +44,12 @@ export default tseslint.config(
       }
     },
     plugins: {
-      'react-hooks': reactHooks
+      'react-hooks': reactHooks,
+      local: {
+        rules: {
+          'mapper-naming': mapperNaming
+        }
+      }
     },
     rules: {
       ...reactHooks.configs.recommended.rules,
@@ -78,7 +84,8 @@ export default tseslint.config(
       '@typescript-eslint/no-unsafe-call': 0,
       '@typescript-eslint/no-unsafe-member-access': 0,
       '@typescript-eslint/no-unsafe-argument': 0,
-      '@typescript-eslint/no-floating-promises': 0
+      '@typescript-eslint/no-floating-promises': 0,
+      'local/mapper-naming': 'error'
     }
   }
 );

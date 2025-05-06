@@ -1,4 +1,4 @@
 export enum DividerType {
-  Line  = 'line',
-  Arrow = 'arrow',
+  Line = 'line',
+  Arrow = 'arrow'
 }
