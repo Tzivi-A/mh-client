@@ -25,7 +25,7 @@ export const NumberInput = ({
   };
 
   return (
-    <InputWrapper id={id} error={error} label={label} value={value}>
+    <InputWrapper id={id} error={error} label={label}>
       <input
         max={max}
         min={min}

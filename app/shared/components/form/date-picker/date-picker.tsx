@@ -1,5 +1,4 @@
-import { useState } from 'react';
-import { DatePicker as AntDatePicker, type DatePickerProps as AntDatePickerProps } from 'antd';
+import { DatePicker as AntDatePicker } from 'antd';
 import 'antd/dist/reset.css';
 import 'dayjs/locale/he';
 import InputWrapper from '../input-wrapper/input-wrapper';
@@ -23,32 +22,17 @@ export const DatePicker = ({
   maxDate,
   error
 }: DatePickerProps<DatePickerType>) => {
-  const [isFocused, setIsFocused] = useState<boolean>(!!value);
-
-  const handleInputChange: AntDatePickerProps['onChange'] = (date, dateString) => {
-    onChange?.(date);
-    setIsFocused(!!dateString);
-  };
-
-  const handleInputFocus = () => setIsFocused(true);
-
-  const handleInputBlur = () => {
-    if (!value) setIsFocused(false);
-  };
-
   return (
-    <InputWrapper label={label} id={id} value={value} focused={isFocused} error={error}>
+    <InputWrapper label={label} id={id} error={error}>
       <AntDatePicker
         className="malam-input"
         value={toDayjs(value) || null}
-        onChange={handleInputChange}
+        onChange={onChange}
         inputReadOnly={inputReadOnly}
         format="DD/MM/YYYY"
-        onFocus={handleInputFocus}
-        onBlur={handleInputBlur}
         minDate={toDayjs(minDate)}
         maxDate={toDayjs(maxDate)}
-        placeholder={isFocused && !inputReadOnly ? 'DD/MM/YYYY' : ''}
+        placeholder={!inputReadOnly ? 'DD/MM/YYYY' : ''}
       />
     </InputWrapper>
   );

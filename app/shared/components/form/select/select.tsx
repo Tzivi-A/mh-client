@@ -27,7 +27,7 @@ export const Select = ({
     : options;
 
   return (
-    <InputWrapper label={label} id={id} value={value} error={error}>
+    <InputWrapper label={label} id={id} error={error}>
       <AntSelect
         id={id}
         value={value}
