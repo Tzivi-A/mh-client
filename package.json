@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "lint": "eslint ./app ./shared --ext .ts,.tsx",
+    "lint": "eslint ./app --ext .ts,.tsx",
     "lint:fix": "eslint . --fix",
     "build": "react-router build",
     "dev": "run-s lint dev-build",
@@ -68,8 +68,7 @@
   "watch": {
     "dev-build": {
       "patterns": [
-        "app/**/*",
-        "shared/**/*"
+        "app/**/*"
       ],
       "extensions": [
         "ts",
