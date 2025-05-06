@@ -1,0 +1,30 @@
+.divided-row-list {
+  display: flex;
+  background: #fff;
+  border-radius: 16px;
+  padding: 1rem;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  align-items: center;
+}
+
+.divided-row-list_item {
+  display: flex;
+  align-items: center;
+}
+
+.divided-row-list-line {
+  width: 1px;
+  height: 2.5rem;
+  background-color: #e0e0e0;
+  margin: 0 1rem;
+}
+
+.divided-row-list-arrow {
+  margin: 0 1rem;
+}
+
+.divided-row-list_arrow {
+  font-size: 1.5rem;
+  color: #0074c8;
+}

@@ -47,17 +47,15 @@ mockFiles.forEach(filePath => {
 
     // Determine data based on functionName or path
     const key = functionName || endpointPath.replace(/^\//, '').split('?')[0];
-    const data = Array.isArray(json[key]) ? json[key] : (json.data ?? []);
-
+    const data = json[key] ?? json.data ?? [];
     app[method.toLowerCase()](fullPath, (req: Request, res: Response) => {
       console.log(`Handling ${method} request for ${fullPath}`);
 
       let filteredData = data;
-
       if (method === 'GET') {
         const queryParams = req.query;
 
-        if (params.length > 0) {
+        if (params.length > 0 && Array.isArray(data)) {
           filteredData = data.filter((item: any) => {
             return params.every((param: string) => {
               return item[param]?.toString() === queryParams[param];
@@ -65,7 +63,7 @@ mockFiles.forEach(filePath => {
           });
         }
 
-        if (filteredData.length > 0) {
+        if (typeof filteredData === 'object' && filteredData !== null) {
           res.json(filteredData);
         } else {
           res.status(404).json({ message: `No data found for ${fullPath}` });

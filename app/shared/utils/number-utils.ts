@@ -14,9 +14,17 @@ export const formatNumber = (value?: string | number): string => {
   return isNegative ? `-${formatted}` : formatted || '';
 };
 
-export const parseNumber = (value?: string | number) => {
-  return new Intl.NumberFormat('he-IL', {
+const numberHebrewFormatter = (opts: Intl.NumberFormatOptions = {}) =>
+  new Intl.NumberFormat('he-IL', {
     minimumFractionDigits: 0,
-    maximumFractionDigits: 2
-  }).format(value ? parseFloat(value.toString()) : 0);
-};
+    maximumFractionDigits: 2,
+    ...opts
+  });
+
+export const parseNumber = (value?: string | number) =>
+  numberHebrewFormatter().format(value ? parseFloat(value.toString()) : 0);
+
+export const currencyFormatter = numberHebrewFormatter({
+  style: 'currency',
+  currency: 'ILS'
+});
