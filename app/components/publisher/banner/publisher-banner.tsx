@@ -23,17 +23,7 @@ export const PublisherBanner = () => {
       electionDate: queries.elections.data?.find(e => e.value !== '')?.value ?? ''
     } as PublisherSearch,
     validators: {
-      onSubmit: ({ value }) => {
-        const isAllEmpty =
-          Object.keys(value).length === 0 ||
-          Object.values(value).every(v => v === null || v === undefined || v === '');
-
-        if (isAllEmpty) {
-          return 'יש לבחור מאפיין נוסף לחיפוש';
-        }
-
-        return undefined;
-      }
+      onSubmit: ({ value }) => validators.atLeastOneFieldFilled(value)
     },
     onSubmit: ({ value }) => {
       alert(JSON.stringify(value));
