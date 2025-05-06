@@ -1,7 +1,7 @@
-import LoanIcon from '~/assets/images/LoanIcon.svg';
-import GuaranteeIcon from '~/assets/images/GuaranteeIcon.svg';
+import LoanIcon from '~/assets/images/publisher/loan.svg';
+import GuaranteeIcon from '~/assets/images/publisher/guarantee.svg';
 import { FundingTypeEnum } from '~/types/enums/funding-type';
-import DonationIcon from '~/assets/images/DonationIcon.svg';
+import DonationIcon from '~/assets/images/publisher/donation.svg';
 
 export const FundingTypeIcons: Record<FundingTypeEnum, string> = {
   [FundingTypeEnum.Donation]: DonationIcon,

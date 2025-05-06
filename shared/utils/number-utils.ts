@@ -14,7 +14,7 @@ export const formatNumber = (value?: string | number): string => {
   return isNegative ? `-${formatted}` : formatted || '';
 };
 
-const createHEILFormatter = (opts: Intl.NumberFormatOptions = {}) =>
+const numberHebrewFormatter = (opts: Intl.NumberFormatOptions = {}) =>
   new Intl.NumberFormat('he-IL', {
     minimumFractionDigits: 0,
     maximumFractionDigits: 2,
@@ -22,9 +22,9 @@ const createHEILFormatter = (opts: Intl.NumberFormatOptions = {}) =>
   });
 
 export const parseNumber = (value?: string | number) =>
-  createHEILFormatter().format(value ? parseFloat(value.toString()) : 0);
+  numberHebrewFormatter().format(value ? parseFloat(value.toString()) : 0);
 
-export const ilsFormatter = createHEILFormatter({
+export const currencyFormatter = numberHebrewFormatter({
   style: 'currency',
   currency: 'ILS'
 });

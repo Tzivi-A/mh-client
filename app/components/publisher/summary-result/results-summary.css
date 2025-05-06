@@ -1,4 +1,4 @@
-   .summary-results {
+   .results-summary {
      display: flex;
      background: #fff;
      border-radius: 16px;
@@ -7,7 +7,7 @@
      overflow: hidden;
    }
 
-   .summary-results_item {
+   .results-summary-item {
      flex: 1;
      display: flex;
      flex-direction: row-reverse;
@@ -16,26 +16,26 @@
      padding: 0 1.5rem;
    }
 
-   .summary-results_info {
+   .results-summary-info {
      display: flex;
      flex-direction: column;
      text-align: right;
    }
 
-   .summary-results_title {
+   .results-summary-title {
      font-size: 1rem;
      font-weight: 600;
      margin-bottom: 0.3rem;
      direction: rtl;
    }
 
-   .summary-results_sum {
+   .results-summary-sum {
      font-size: 1.5rem;
      font-weight: bold;
      color: #222;
    }
 
-   .summary-results_icon img {
+   .results-summary-icon img {
      width: 2.5rem;
      height: 2.5rem;
    }

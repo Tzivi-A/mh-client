@@ -1,6 +1,6 @@
 import type { DividerTypeEnum } from '@app-types/enums/divider-type';
 
-export interface SummaryResultData {
+export interface PublisherResultSummaryData {
   fundingType?: number;
   title: string;
   count?: number;
