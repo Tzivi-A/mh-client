@@ -3,7 +3,7 @@ import './divided-row-list.css'
 import { Divider } from './divider';
 import type { DividerType } from '@app-types/enums/divider-type';
 
-export interface HorizontalListProps<T extends { dividerAfter?: DividerType }> {
+export interface DividedRowListProps<T extends { dividerAfter?: DividerType }> {
     items: T[];
     renderItem: (item: T, index: number) => React.ReactNode;
     defaultDivider?: DividerType;
@@ -13,7 +13,7 @@ export const DividedRowList = <T extends { dividerAfter?: DividerType }>({
     items,
     renderItem,
     defaultDivider,
-}: HorizontalListProps<T>) => (
+}: DividedRowListProps<T>) => (
     <div className="divided-row-list">
         {items.map((item, idx) => {
             const isLast = idx === items.length - 1;
