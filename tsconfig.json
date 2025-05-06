@@ -20,7 +20,9 @@
       "~/*": ["app/*"],
       "@ui/*": ["app/shared/components/*"],
       "@app-types/*": ["app/shared/types/*"],
-      "@utils/*": ["app/shared/utils/*"]
+      "@utils/*": ["app/shared/utils/*"],
+      "@image/*": ["app/shared/image/*"],
+      "@hooks/*": ["app/shared/hooks/*"]
     },
     "esModuleInterop": true,
     "verbatimModuleSyntax": true,

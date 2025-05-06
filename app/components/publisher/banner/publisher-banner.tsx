@@ -1,10 +1,9 @@
 import { useEffect } from 'react';
-import { useStore } from '@tanstack/react-form';
 import { Button } from '@ui/button/button';
 import { Image } from '@ui/image/image';
 import { Flex } from '@ui/layout/flex/flex';
 import { SideBySideCard } from '@ui/side-by-side-card/side-by-side-card';
-import useAppForm from '~/hooks/use-app-form';
+import useAppForm, { useStore } from '@hooks/use-app-form';
 import {
   useCitiesByElectionId,
   useFactions,
