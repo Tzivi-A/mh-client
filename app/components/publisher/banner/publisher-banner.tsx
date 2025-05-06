@@ -12,7 +12,7 @@ import {
 } from '~/hooks/api/queries/publisher/banner';
 import type { PublisherSearch } from '~/types/publisher-search';
 import searchIcon from '~/assets/images/search-icon.svg';
-
+import * as validators from '~/validators/pages/publisher-validators';
 import Section from '@ui/section/section';
 import type { PublishBannerQueries } from '~/types/queries/publisher/publisher-banner-queries';
 
@@ -110,18 +110,52 @@ export const PublisherBanner = () => {
                   </form.AppField>
                 </Flex>
                 <Flex>
-                  <form.AppField name="fromDate">
+                  <form.AppField
+                    name="fromDate"
+                    validators={{
+                      onChangeListenTo: ['toDate'],
+                      onChange: ({ value, fieldApi }) =>
+                        validators.validateFromDateRange(
+                          value,
+                          fieldApi.form.getFieldValue('toDate')
+                        )
+                    }}
+                  >
                     {field => <field.DatePicker label="מתאריך" inputReadOnly={false} />}
                   </form.AppField>
-                  <form.AppField name="toDate">
+                  <form.AppField
+                    name="toDate"
+                    validators={{
+                      onChangeListenTo: ['fromDate'],
+                      onChange: ({ value, fieldApi }) =>
+                        validators.validateToDateRange(
+                          fieldApi.form.getFieldValue('fromDate'),
+                          value
+                        )
+                    }}
+                  >
                     {field => <field.DatePicker label="עד תאריך" inputReadOnly={false} />}
                   </form.AppField>
                 </Flex>
                 <Flex>
-                  <form.AppField name="fromSum">
+                  <form.AppField
+                    name="fromSum"
+                    validators={{
+                      onChangeListenTo: ['toSum'],
+                      onChange: ({ value, fieldApi }) =>
+                        validators.validateFromSumRange(value, fieldApi.form.getFieldValue('toSum'))
+                    }}
+                  >
                     {field => <field.Number label="מסכום" />}
                   </form.AppField>
-                  <form.AppField name="toSum">
+                  <form.AppField
+                    name="toSum"
+                    validators={{
+                      onChangeListenTo: ['fromSum'],
+                      onChange: ({ value, fieldApi }) =>
+                        validators.validateToSumRange(fieldApi.form.getFieldValue('fromSum'), value)
+                    }}
+                  >
                     {field => <field.Number label="עד סכום" />}
                   </form.AppField>
                 </Flex>

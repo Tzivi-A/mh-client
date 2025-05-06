@@ -4,17 +4,19 @@
   "type": "module",
   "scripts": {
     "build": "react-router build",
-    "dev": "npm-watch dev-build",
+    "dev": "run-s lint generate:validators dev-build",
     "dev-build": "react-router dev",
     "start": "react-router-serve ./build/server/index.js",
     "typecheck": "react-router typegen && tsc",
     "lint": "eslint ./app --ext .ts,.tsx",
     "lint:fix": "eslint . --fix",
     "test": "react-router build --mode test",
-    "dev:test": "react-router dev --mode test",
-    "dev:mock": "npm-run-all --parallel mock-server start:react-mock",
+    "dev:test": "react-router lint generate:validators dev --mode test",
+    "dev:mock": "npm-run-all lint generate:validators --parallel mock-server start:react-mock",
     "mock-server": "npx tsx mock-server/src/server.ts",
-    "start:react-mock": "react-router dev --mode mock"
+    "start:react-mock": "react-router dev --mode mock",
+    "generate:validators": "npx tsx tools/generate-validator-index.ts"
+
   },
   "dependencies": {
     "@react-router/node": "7.3.0",
