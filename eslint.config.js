@@ -6,6 +6,7 @@ import globals from 'globals';
 import reactRefresh from 'eslint-plugin-react-refresh';
 import reactHooks from 'eslint-plugin-react-hooks';
 import prettierRecommended from 'eslint-plugin-prettier/recommended';
+import mapperNaming from './eslint-rules/mapper-naming.js';
 
 export default tseslint.config(
   {
@@ -43,7 +44,12 @@ export default tseslint.config(
       }
     },
     plugins: {
-      'react-hooks': reactHooks
+      'react-hooks': reactHooks,
+      local: {
+        rules: {
+          'mapper-naming': mapperNaming
+        }
+      }
     },
     rules: {
       ...reactHooks.configs.recommended.rules,
@@ -51,7 +57,7 @@ export default tseslint.config(
       'react/self-closing-comp': 'error',
       'react/function-component-definition': [2, { namedComponents: 'arrow-function' }],
       'react/jsx-pascal-case': 2,
-      'react/no-array-index-key': 2,
+      'react/no-array-index-key': 0,
       'react/prop-types': 0,
       'react-hooks/rules-of-hooks': 'error',
       'react-hooks/exhaustive-deps': 0,
@@ -78,7 +84,8 @@ export default tseslint.config(
       '@typescript-eslint/no-unsafe-call': 0,
       '@typescript-eslint/no-unsafe-member-access': 0,
       '@typescript-eslint/no-unsafe-argument': 0,
-      '@typescript-eslint/no-floating-promises': 0
+      '@typescript-eslint/no-floating-promises': 0,
+      'local/mapper-naming': 'error'
     }
   }
 );

@@ -6,7 +6,7 @@ export type TextInputProps = FormFieldProps<string>;
 
 export const TextInput = ({ value, onChange, id, onBlur, error, label }: TextInputProps) => {
   return (
-    <InputWrapper id={id} error={error} label={label} value={value}>
+    <InputWrapper id={id} error={error} label={label}>
       <input
         className="malam-input"
         id={id}

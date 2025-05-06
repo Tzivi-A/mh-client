@@ -5,8 +5,13 @@ export type CheckBoxProps = FormFieldProps<boolean>;
 
 export const CheckBox = ({ id, label, value, onChange, error }: CheckBoxProps) => {
   return (
-    <InputWrapper id={id} error={error} label={label} value={null} hasFloatingLabel={false}>
-      <input id={id} type="checkbox" checked={value} onChange={e => onChange?.(e.target.checked)} />
+    <InputWrapper id={id} error={error} label={label}>
+      <input
+        id={id}
+        type="checkbox"
+        checked={!!value}
+        onChange={e => onChange?.(e.target.checked)}
+      />
     </InputWrapper>
   );
 };

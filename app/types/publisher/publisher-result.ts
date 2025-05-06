@@ -1,4 +1,4 @@
-import type { CodeEntity } from './code-entity';
+import type { CodeEntity } from '../code-entity';
 
 export interface PublishResult {
   ID: string;

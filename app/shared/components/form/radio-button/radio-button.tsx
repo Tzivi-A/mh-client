@@ -16,7 +16,7 @@ export const RadioButton = ({
   error
 }: RadioFieldProps) => {
   return (
-    <InputWrapper id={id} label={label} value={value} error={error} hasFloatingLabel={false}>
+    <InputWrapper id={id} label={label} error={error}>
       <div role="radiogroup" aria-labelledby={id} className="radio-group">
         {options?.map((opt, index) => {
           const radioId = `${id}-${index}`;

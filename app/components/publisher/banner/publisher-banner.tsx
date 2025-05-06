@@ -10,7 +10,7 @@ import {
   useFactions,
   usePublisherBannerQueries
 } from '~/hooks/api/queries/publisher/banner';
-import type { PublisherSearch } from '~/types/publisher-search';
+import type { PublisherSearch } from '~/types/publisher/publisher-search';
 import searchIcon from '~/assets/images/search-icon.svg';
 import * as validators from '~/validators/pages/publisher-validators';
 import Section from '@ui/section/section';
