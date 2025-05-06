@@ -1,7 +1,7 @@
 import type { DatePickerType } from '@app-types/date-types';
 import { dateToString } from '@utils/date-utils';
 import { parseNumber } from '@utils/number-utils';
-import { validateDateRange, validateNumberRange } from '~/validators/common';
+import { validateDateRange, validateNumberRange } from '~/validators/common/range-validators';
 
 export const validateFromDateRange = (fromDate: DatePickerType, toDate: DatePickerType) =>
   validateDateRange(fromDate, toDate) && `יש לבחור בתאריך שווה או קטן מ ${dateToString(toDate)}`;

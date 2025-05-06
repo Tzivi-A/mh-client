@@ -21,7 +21,7 @@
       "@ui/*": ["app/shared/components/*"],
       "@app-types/*": ["app/shared/types/*"],
       "@utils/*": ["app/shared/utils/*"],
-      "@image/*": ["app/shared/image/*"],
+      "@images/*": ["app/shared/images/*"],
       "@hooks/*": ["app/shared/hooks/*"]
     },
     "esModuleInterop": true,
