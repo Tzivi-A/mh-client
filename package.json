@@ -5,17 +5,16 @@
   "scripts": {
     "lint": "eslint ./app --ext .ts,.tsx",
     "lint:fix": "eslint . --fix",
-    "typecheck": "react-router typegen && tsc",    
     "build": "react-router build",
-    "start": "react-router-serve ./build/server/index.js",
-    "dev-build": "react-router dev",
     "dev": "run-s lint dev-build",
+    "dev-build": "react-router dev",
+    "start": "react-router-serve ./build/server/index.js",
+    "typecheck": "react-router typegen && tsc",
     "test": "react-router build --mode test",
-    "start:dev:test": "react-router dev --mode test",
-    "dev:test": "run-s lint start:dev:test",
+    "dev:test": "react-router dev --mode test",
+    "dev:mock": "npm-run-all lint --parallel mock-server start:react-mock",
     "mock-server": "npx tsx mock-server/src/server.ts",
-    "start:react-mock": "react-router dev --mode mock",
-    "dev:mock": "npm-run-all lint --parallel mock-server start:react-mock"
+    "start:react-mock": "react-router dev --mode mock"
   },
   "dependencies": {
     "@react-router/node": "7.3.0",
