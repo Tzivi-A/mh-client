@@ -58,9 +58,9 @@
     "numDonations": 2,
     "numGuarantees":0,
     "numLoans": 1,
-    "sumDonations": "1000.00",
-    "sumGuarantees": "0",
-    "sumLoans": "1000.20",
+    "sumDonations": 1000.00,
+    "sumGuarantees": 0,
+    "sumLoans": 1000.20,
     "isNumRecordsGreaterThanMaxParameter": 0
   }
 }
