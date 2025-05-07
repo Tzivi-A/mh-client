@@ -1,10 +1,9 @@
 import { useEffect } from 'react';
-import { useStore } from '@tanstack/react-form';
 import { Button } from '@ui/button/button';
 import { Image } from '@ui/image/image';
 import { Flex } from '@ui/layout/flex/flex';
 import { SideBySideCard } from '@ui/side-by-side-card/side-by-side-card';
-import useAppForm from '~/hooks/use-app-form';
+import useAppForm, { useStore } from '@hooks/use-app-form';
 import {
   useCitiesByElectionId,
   useFactions,
@@ -12,7 +11,7 @@ import {
 } from '~/hooks/api/queries/publisher/banner';
 import type { PublisherSearch } from '~/types/publisher/publisher-search';
 import searchIcon from '~/assets/images/search-icon.svg';
-
+import * as validators from '~/validators/pages/publisher-validators';
 import Section from '@ui/section/section';
 import type { PublishBannerQueries } from '~/types/queries/publisher/publisher-banner-queries';
 
@@ -23,6 +22,9 @@ export const PublisherBanner = () => {
     defaultValues: {
       electionDate: queries.elections.data?.find(e => e.value !== '')?.value ?? ''
     } as PublisherSearch,
+    validators: {
+      onSubmit: ({ value }) => validators.atLeastOneFieldFilled(value)
+    },
     onSubmit: ({ value }) => {
       alert(JSON.stringify(value));
     }
@@ -30,6 +32,7 @@ export const PublisherBanner = () => {
 
   const selectedElectionId = useStore(form.store, state => state.values.electionDate);
   const selectedCityId = useStore(form.store, state => state.values.electionCityID);
+  const formErrorMap = useStore(form.store, state => state.errorMap);
 
   queries.citiesByElectionId = useCitiesByElectionId(selectedElectionId);
   queries.factions = useFactions(selectedCityId);
@@ -95,7 +98,7 @@ export const PublisherBanner = () => {
           </Section>
         </SideBySideCard.Right>
         <SideBySideCard.Left>
-          <Section header="מאפייני התרומה/ הערבות/ ההלוואה">
+          <Section header="מאפייני התרומה/ הערבות/ ההלוואה" error={formErrorMap.onSubmit}>
             <Flex>
               <Flex direction="column">
                 <Flex>
@@ -110,18 +113,52 @@ export const PublisherBanner = () => {
                   </form.AppField>
                 </Flex>
                 <Flex>
-                  <form.AppField name="fromDate">
+                  <form.AppField
+                    name="fromDate"
+                    validators={{
+                      onChangeListenTo: ['toDate'],
+                      onChange: ({ value, fieldApi }) =>
+                        validators.validateFromDateRange(
+                          value,
+                          fieldApi.form.getFieldValue('toDate')
+                        )
+                    }}
+                  >
                     {field => <field.DatePicker label="מתאריך" inputReadOnly={false} />}
                   </form.AppField>
-                  <form.AppField name="toDate">
+                  <form.AppField
+                    name="toDate"
+                    validators={{
+                      onChangeListenTo: ['fromDate'],
+                      onChange: ({ value, fieldApi }) =>
+                        validators.validateToDateRange(
+                          fieldApi.form.getFieldValue('fromDate'),
+                          value
+                        )
+                    }}
+                  >
                     {field => <field.DatePicker label="עד תאריך" inputReadOnly={false} />}
                   </form.AppField>
                 </Flex>
                 <Flex>
-                  <form.AppField name="fromSum">
+                  <form.AppField
+                    name="fromSum"
+                    validators={{
+                      onChangeListenTo: ['toSum'],
+                      onChange: ({ value, fieldApi }) =>
+                        validators.validateFromSumRange(value, fieldApi.form.getFieldValue('toSum'))
+                    }}
+                  >
                     {field => <field.Number label="מסכום" />}
                   </form.AppField>
-                  <form.AppField name="toSum">
+                  <form.AppField
+                    name="toSum"
+                    validators={{
+                      onChangeListenTo: ['fromSum'],
+                      onChange: ({ value, fieldApi }) =>
+                        validators.validateToSumRange(fieldApi.form.getFieldValue('fromSum'), value)
+                    }}
+                  >
                     {field => <field.Number label="עד סכום" />}
                   </form.AppField>
                 </Flex>
