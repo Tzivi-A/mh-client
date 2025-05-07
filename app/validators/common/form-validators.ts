@@ -1,4 +1,7 @@
-import { validateAtLeastOneFieldFilled } from '@validators/form-validators';
+import { validateAtLeastOneExtraField as validateExtra } from '@validators/form-validators';
+import type { ValidatorMessageType } from '~/types/validator-message-type';
 
-export const validateAtLeastOneExtraField = <T extends object>(value: T): string | undefined =>
-  validateAtLeastOneFieldFilled(value) && 'יש לבחור מאפיין נוסף לחיפוש';
+export const validateAtLeastOneExtraField = <T extends object>(
+  value: T,
+  excludeKeys: (keyof T)[]
+): ValidatorMessageType => validateExtra(value, excludeKeys) && 'יש לבחור מאפיין נוסף לחיפוש';

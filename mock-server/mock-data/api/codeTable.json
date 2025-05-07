@@ -13,6 +13,12 @@
         "method": "GET",
         "path": "/cities",
         "params": []
+      },
+      {
+        "functionName": "publicationSearch",
+        "method": "GET",
+        "path": "/publicationSearch",
+        "params": []
       }
     ]
   },
@@ -75,6 +81,20 @@
     {
       "name": "אבשלום",
       "id": 1311
+    }
+  ],
+  "publicationSearch": [
+    {
+      "name": "תרומות",
+      "id": 2
+    },
+    {
+      "name": "ערבויות",
+      "id": 3
+    },
+    {
+      "name": "הלוואות",
+      "id": 4
     }
   ]
 }
