@@ -23,7 +23,7 @@ export const PublisherBanner = () => {
   const form = useAppForm({
     defaultValues: {
       electionDate: queries.elections.data?.find(e => e.value !== '')?.value ?? '',
-      publicationSearchType: PublicationSearchEnum.All
+      publicationSearchType: [PublicationSearchEnum.All]
     } as PublisherSearch,
     validators: {
       onSubmit: ({ value }) => validateAtLeastOneExtraField(value)
@@ -172,20 +172,32 @@ export const PublisherBanner = () => {
                   </form.AppField>
                 </Flex>
               </Flex>
-              <Flex>
-                <Button type="submit">
-                  <Image src={searchIcon} alt="search" />
-                  סינון
-                </Button>
-                <Button
-                  onClick={() => {
-                    form.reset(undefined, {
-                      keepDefaultValues: true
-                    });
-                  }}
-                >
-                  נקה סינון
-                </Button>
+              <Flex direction="column">
+                <Flex>
+                  <form.AppField name="publicationSearchType">
+                    {field => (
+                      <field.CheckBoxGroup
+                        label="סוג חיפוש"
+                        options={queries.citiesByElectionId?.data || []}
+                      />
+                    )}
+                  </form.AppField>
+                </Flex>
+                <Flex>
+                  <Button type="submit">
+                    <Image src={searchIcon} alt="search" />
+                    סינון
+                  </Button>
+                  <Button
+                    onClick={() => {
+                      form.reset(undefined, {
+                        keepDefaultValues: true
+                      });
+                    }}
+                  >
+                    נקה סינון
+                  </Button>
+                </Flex>
               </Flex>
             </Flex>
           </Section>

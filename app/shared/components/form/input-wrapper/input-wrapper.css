@@ -23,18 +23,29 @@
   padding-right: 12px;
 }
 
-input[type="checkbox"] {
-  margin: 0;
-  cursor: pointer;
-}
-
-.malam-input-wrapper-container:has(input[type="checkbox"]) {
+/* Single checkbox layout: label right, checkbox left */
+.malam-input-wrapper-container:has(> input[type="checkbox"]) {
   display: flex;
   flex-direction: row-reverse;
   justify-content: flex-end;
   gap: 0.5rem;
 }
 
-.malam-input-wrapper-container:has(input[type="checkbox"]) .malam-label {
-  margin: 0 0.5rem;
+/* Group layout: label above checkboxes */
+.malam-input-wrapper-container:has(.checkbox-group) {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* or flex-end for RTL right alignment */
+}
+
+.malam-input-wrapper-container:has(.checkbox-group) .malam-label {
+  margin-bottom: 0.5rem;
+}
+
+/* Optional spacing for each checkbox in the group */
+.checkbox-group .checkbox-label {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  gap: 0.5rem;
 }
