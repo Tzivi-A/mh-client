@@ -6,7 +6,7 @@ import { FundingTypeIcons, FundingTypeTitles } from '~/utils/consts/publisher/fu
 import SummaryIcon from '~/assets/images/publisher/summary.svg';
 
 export const mapperSummaryData = (
-  result: LocalGuarantyDonationSearch
+  result: LocalGuarantyDonationSearch | undefined
 ): PublisherResultSummaryData[] => {
   const summaryData: PublisherResultSummaryData[] = result
     ? [
