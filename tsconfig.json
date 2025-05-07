@@ -22,7 +22,8 @@
       "@app-types/*": ["app/shared/types/*"],
       "@utils/*": ["app/shared/utils/*"],
       "@images/*": ["app/shared/images/*"],
-      "@hooks/*": ["app/shared/hooks/*"]
+      "@hooks/*": ["app/shared/hooks/*"],
+      "@validators/*": ["app/shared/validators/*"]
     },
     "esModuleInterop": true,
     "verbatimModuleSyntax": true,

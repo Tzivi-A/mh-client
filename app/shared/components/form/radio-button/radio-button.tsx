@@ -1,4 +1,4 @@
-import InputWrapper from '../input-wrapper/input-wrapper';
+import InputWrapper from '@ui/form/input-wrapper/input-wrapper';
 import type { FormFieldProps } from '@app-types/form-types';
 import type { Option } from '@app-types/options';
 import './radio-button.css';

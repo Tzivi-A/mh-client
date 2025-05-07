@@ -1,3 +1,4 @@
 import { Dayjs } from 'dayjs';
 
-export type DatePickerType = string | Dayjs | undefined;
+export type DateType = Dayjs | undefined;
+export type DatePickerType = string | DateType;

@@ -1,15 +1,22 @@
 import type { DatePickerType } from '@app-types/date-types';
-import { toDayjs } from '@utils/date-utils';
+import { dateToString } from '@utils/date-utils';
+import { parseNumber } from '@utils/number-utils';
+import { validateDateRange, validateNumberRange } from '@validators/range-validators';
 
-export const validateDateRange = (minDate: DatePickerType, maxDate: DatePickerType) => {
-  const fromDate = toDayjs(minDate);
-  const toDate = toDayjs(maxDate);
+export const validateFromDateRange = (
+  fromDate: DatePickerType,
+  toDate: DatePickerType
+): string | undefined =>
+  validateDateRange(fromDate, toDate) && `יש לבחור בתאריך שווה או קטן מ ${dateToString(toDate)}`;
 
-  if (fromDate && toDate && fromDate.startOf('day').isAfter(toDate.startOf('day'))) {
-    return true;
-  }
-  return undefined;
-};
+export const validateToDateRange = (
+  fromDate: DatePickerType,
+  toDate: DatePickerType
+): string | undefined =>
+  validateDateRange(fromDate, toDate) && `יש לבחור בתאריך שווה או גדול מ ${dateToString(fromDate)}`;
 
-export const validateNumberRange = (min?: number, max?: number) =>
-  min && max && min.toString() !== '-' && max.toString() !== '-' && min > max ? true : undefined;
+export const validateFromSumRange = (fromSum?: number, toSum?: number): string | undefined =>
+  validateNumberRange(fromSum, toSum) && `אנא הזן ערך קטן או שווה ל ${parseNumber(toSum)}`;
+
+export const validateToSumRange = (fromSum?: number, toSum?: number): string | undefined =>
+  validateNumberRange(fromSum, toSum) && `אנא הזן ערך גדול או שווה ל ${parseNumber(fromSum)}`;
