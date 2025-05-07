@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { TextInput } from './input/text-input/text-input';
 import { NumberInput } from './input/number-input/number-input';
-import type { AppFormFieldProps } from '@app-types/app-form-types';
+import type { AppFormFieldProps } from '@app-types/app-form-type';
 import Select from './select/select';
 import DatePicker from './date-picker/date-picker';
 import { CheckBox } from './check-box/check-box';

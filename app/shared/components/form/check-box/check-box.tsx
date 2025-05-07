@@ -1,5 +1,5 @@
 import InputWrapper from '@ui/form/input-wrapper/input-wrapper';
-import type { FormFieldProps } from '@app-types/form-types';
+import type { FormFieldProps } from '@app-types/form-type';
 
 export type CheckBoxProps = FormFieldProps<boolean>;
 

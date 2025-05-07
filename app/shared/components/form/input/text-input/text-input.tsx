@@ -1,6 +1,6 @@
 import '@ui/form/input/input.css';
 import InputWrapper from '@ui/form/input-wrapper/input-wrapper';
-import type { FormFieldProps } from '@app-types/form-types';
+import type { FormFieldProps } from '@app-types/form-type';
 
 export type TextInputProps = FormFieldProps<string>;
 

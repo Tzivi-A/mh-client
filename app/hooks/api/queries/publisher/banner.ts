@@ -1,7 +1,7 @@
-import type { CodeEntity } from '~/types/code-entity';
+import type { CodeEntity } from '~/types/code-entity-type';
 import { codeEntityToOptionMapper, countryToOptionMapper } from '~/mappers/select-mapper';
-import type { Country } from '~/types/country';
-import type { Option } from '@app-types/options';
+import type { Country } from '~/types/country-type';
+import type { Option } from '@app-types/option-type';
 import { useAppQuery } from '@hooks/use-app-query';
 
 export const usePublisherBannerQueries = () => ({

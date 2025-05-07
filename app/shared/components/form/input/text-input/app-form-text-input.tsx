@@ -1,6 +1,6 @@
 import { FieldTypeEnum } from '@app-types/enums/field-type';
 import { AppFormField } from '@ui/form/app-form-field';
-import type { AppFormTextInputField } from '@app-types/app-form-types';
+import type { AppFormTextInputField } from '@app-types/app-form-type';
 
 export type AppFormTextInputProps = Omit<AppFormTextInputField, 'fieldType'>;
 

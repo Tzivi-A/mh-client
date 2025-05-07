@@ -1,4 +1,4 @@
-import type { DatePickerType } from '@app-types/date-types';
+import type { DatePickerType } from '@app-types/date-type';
 import { dateToString } from '@utils/date-utils';
 import { parseNumber } from '@utils/number-utils';
 import { validateDateRange, validateNumberRange } from '@validators/range-validators';
