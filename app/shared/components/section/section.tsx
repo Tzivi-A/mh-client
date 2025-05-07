@@ -1,16 +1,21 @@
 import type { ReactNode } from 'react';
+import { Flex } from '../layout/flex/flex';
 
 interface SectionProps {
   header: string;
+  error?: string;
   children: ReactNode;
 }
 
-export const Section = ({ header, children }: SectionProps) => {
+export const Section = ({ header, error, children }: SectionProps) => {
   return (
-    <div>
-      <h3>{header}</h3>
+    <Flex direction="column">
+      <Flex>
+        <h3>{header}</h3>
+        <div className="error">{error}</div>
+      </Flex>
       {children}
-    </div>
+    </Flex>
   );
 };
 
