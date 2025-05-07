@@ -11,7 +11,8 @@ import {
 } from '~/hooks/api/queries/publisher/banner';
 import type { PublisherSearch } from '~/types/publisher/publisher-search';
 import searchIcon from '~/assets/images/search-icon.svg';
-import * as validators from '~/validators/pages/publisher-validators';
+import * as rangeValidators from '~/validators/common/range-validators';
+import { validateAtLeastOneExtraField } from '~/validators/common/form-validators';
 import Section from '@ui/section/section';
 import type { PublishBannerQueries } from '~/types/queries/publisher/publisher-banner-queries';
 
@@ -23,7 +24,7 @@ export const PublisherBanner = () => {
       electionDate: queries.elections.data?.find(e => e.value !== '')?.value ?? ''
     } as PublisherSearch,
     validators: {
-      onSubmit: ({ value }) => validators.atLeastOneFieldFilled(value)
+      onSubmit: ({ value }) => validateAtLeastOneExtraField(value)
     },
     onSubmit: ({ value }) => {
       alert(JSON.stringify(value));
@@ -118,7 +119,7 @@ export const PublisherBanner = () => {
                     validators={{
                       onChangeListenTo: ['toDate'],
                       onChange: ({ value, fieldApi }) =>
-                        validators.validateFromDateRange(
+                        rangeValidators.validateFromDateRange(
                           value,
                           fieldApi.form.getFieldValue('toDate')
                         )
@@ -131,7 +132,7 @@ export const PublisherBanner = () => {
                     validators={{
                       onChangeListenTo: ['fromDate'],
                       onChange: ({ value, fieldApi }) =>
-                        validators.validateToDateRange(
+                        rangeValidators.validateToDateRange(
                           fieldApi.form.getFieldValue('fromDate'),
                           value
                         )
@@ -146,7 +147,10 @@ export const PublisherBanner = () => {
                     validators={{
                       onChangeListenTo: ['toSum'],
                       onChange: ({ value, fieldApi }) =>
-                        validators.validateFromSumRange(value, fieldApi.form.getFieldValue('toSum'))
+                        rangeValidators.validateFromSumRange(
+                          value,
+                          fieldApi.form.getFieldValue('toSum')
+                        )
                     }}
                   >
                     {field => <field.Number label="מסכום" />}
@@ -156,7 +160,10 @@ export const PublisherBanner = () => {
                     validators={{
                       onChangeListenTo: ['fromSum'],
                       onChange: ({ value, fieldApi }) =>
-                        validators.validateToSumRange(fieldApi.form.getFieldValue('fromSum'), value)
+                        rangeValidators.validateToSumRange(
+                          fieldApi.form.getFieldValue('fromSum'),
+                          value
+                        )
                     }}
                   >
                     {field => <field.Number label="עד סכום" />}

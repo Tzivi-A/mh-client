@@ -1,16 +1,16 @@
 import { Button } from '@ui/button/button';
 import { Card } from '@ui/card/card';
 import { Image } from '@ui/image/image';
-import logo from '~/assets/images/LogoMevaker.png';
+import logo from '~/assets/images/logo-mevaker.png';
 import useAppForm, { useStore } from '@hooks/use-app-form';
 import './component-dashboard.css';
 import type { DatePickerType } from '@app-types/date-types';
 import { useState } from 'react';
 import type { Option } from '@app-types/options';
-import { validateDateRange } from '~/utils/validators';
-import { useAppMutation } from '~/hooks/api/mutations/use-app-mutation';
-import { useAppQuery } from '~/hooks/api/queries/use-app-query';
+import { useAppMutation } from '@hooks/use-app-mutation';
+import { useAppQuery } from '@hooks/use-app-query';
 import { Flex } from '@ui/layout/flex/flex';
+import { validateDateRange } from '@validators/range-validators';
 
 interface ComponentDashboardFormValues {
   city: string;

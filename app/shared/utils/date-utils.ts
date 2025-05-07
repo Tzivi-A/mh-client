@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
-import type { DatePickerType } from '@app-types/date-types';
+import type { DatePickerType, DateType } from '@app-types/date-types';
 
-export const toDayjs = (value: DatePickerType): dayjs.Dayjs | undefined => {
+export const toDayjs = (value: DatePickerType): DateType => {
   if (!value) return undefined;
   return dayjs.isDayjs(value) ? value : dayjs(value, 'DD/MM/YYYY');
 };

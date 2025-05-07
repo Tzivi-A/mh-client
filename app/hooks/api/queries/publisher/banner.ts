@@ -2,7 +2,7 @@ import type { CodeEntity } from '~/types/code-entity';
 import { codeEntityToOptionMapper, countryToOptionMapper } from '~/mappers/select-mapper';
 import type { Country } from '~/types/country';
 import type { Option } from '@app-types/options';
-import { useAppQuery } from '../use-app-query';
+import { useAppQuery } from '@hooks/use-app-query';
 
 export const usePublisherBannerQueries = () => ({
   elections: useAppQuery<CodeEntity[], Option[]>({
@@ -16,11 +16,11 @@ export const usePublisherBannerQueries = () => ({
   }),
   countries: useAppQuery<Country[], Option[]>({
     url: 'api/codeTable/countries',
-    mapResponse: countryToOptionMapper
+    mapResponse: data => countryToOptionMapper(data, true)
   }),
   cities: useAppQuery<CodeEntity[], Option[]>({
     url: 'api/codeTable/cities',
-    mapResponse: codeEntityToOptionMapper
+    mapResponse: data => codeEntityToOptionMapper(data, true)
   })
 });
 
