@@ -7,10 +7,10 @@ import './component-dashboard.css';
 import type { DatePickerType } from '@app-types/date-types';
 import { useState } from 'react';
 import type { Option } from '@app-types/options';
-import { validateDateRange } from '~/utils/validators';
 import { useAppMutation } from '@hooks/use-app-mutation';
 import { useAppQuery } from '@hooks/use-app-query';
 import { Flex } from '@ui/layout/flex/flex';
+import { validateDateRange } from '@validators/range-validators';
 
 interface ComponentDashboardFormValues {
   city: string;

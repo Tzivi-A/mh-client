@@ -1,1 +1,1 @@
-export type validatorType = true | undefined;
+export type ValidatorType = true | undefined;

@@ -1,11 +1,11 @@
 import type { DatePickerType } from '@app-types/date-types';
 import { toDayjs } from '@utils/date-utils';
-import type { validatorType } from '@app-types/validator';
+import type { ValidatorType } from '@app-types/validator';
 
 export const validateDateRange = (
   minDate: DatePickerType,
   maxDate: DatePickerType
-): validatorType => {
+): ValidatorType => {
   const fromDate = toDayjs(minDate);
   const toDate = toDayjs(maxDate);
 
@@ -15,5 +15,5 @@ export const validateDateRange = (
   return undefined;
 };
 
-export const validateNumberRange = (min?: number, max?: number): validatorType =>
+export const validateNumberRange = (min?: number, max?: number): ValidatorType =>
   min && max && min.toString() !== '-' && max.toString() !== '-' && min > max ? true : undefined;
