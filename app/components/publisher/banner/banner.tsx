@@ -15,13 +15,15 @@ import * as rangeValidators from '~/validators/common/range-validators';
 import { validateAtLeastOneExtraField } from '~/validators/common/form-validators';
 import Section from '@ui/section/section';
 import type { PublishBannerQueries } from '~/types/queries/publisher/publisher-banner-queries';
+import { PublicationSearchEnum } from '~/types/enums/publication-search';
 
 export const PublisherBanner = () => {
   const queries: PublishBannerQueries = usePublisherBannerQueries();
 
   const form = useAppForm({
     defaultValues: {
-      electionDate: queries.elections.data?.find(e => e.value !== '')?.value ?? ''
+      electionDate: queries.elections.data?.find(e => e.value !== '')?.value ?? '',
+      publicationSearchType: PublicationSearchEnum.All
     } as PublisherSearch,
     validators: {
       onSubmit: ({ value }) => validateAtLeastOneExtraField(value)

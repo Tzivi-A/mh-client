@@ -1,12 +1,12 @@
 export interface LocalGuarantyDonationSearchRow {
   guaranteeOrDonation: string;
   publisherTypeID?: number;
-  fundingName: string;
+  publicationSearchName: string;
   city: string;
   country: string;
-  fundingSum: string;
+  publicationSearchSum: string;
   sumInCurrency: string;
-  fundingDate?: string;
+  publicationSearchDate?: string;
   electionDate?: string;
   electionCity: string;
   electionFaction: string;
