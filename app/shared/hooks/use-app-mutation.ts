@@ -2,7 +2,7 @@
 import { useMutation, type UseMutationOptions } from '@tanstack/react-query';
 import axios from 'axios';
 import { config } from '~/config/env';
-import type { DataObject } from '@app-types/api';
+import type { DataObject } from '@app-types/api-type';
 
 export interface MutationData {
   requestData?: DataObject;

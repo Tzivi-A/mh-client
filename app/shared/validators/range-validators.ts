@@ -1,6 +1,6 @@
-import type { DatePickerType } from '@app-types/date-types';
+import type { DatePickerType } from '@app-types/date-type';
 import { toDayjs } from '@utils/date-utils';
-import type { ValidatorType } from '@app-types/validator';
+import type { ValidatorType } from '@app-types/validator-type';
 
 export const validateDateRange = (
   minDate: DatePickerType,

@@ -1,7 +1,7 @@
-import type { Option } from '@app-types/options';
-import type { CodeEntity } from '~/types/code-entity';
-import type { CodeEntityExtended } from '~/types/code-entity-extended';
-import type { Country } from '~/types/country';
+import type { Option } from '@app-types/option-type';
+import type { CodeEntity } from '~/types/code-entity-type';
+import type { CodeEntityExtended } from '~/types/code-entity-extended-type';
+import type { Country } from '~/types/country-type';
 
 const mapWithEmptyOption = (
   mappedOptions: Option[],

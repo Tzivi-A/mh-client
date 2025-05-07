@@ -1,9 +1,9 @@
 import { DividerTypeEnum } from '@app-types/enums/divider-type';
 import { FundingTypeEnum } from '~/types/enums/funding-type';
-import type { PublisherResultSummaryData } from '~/types/publisher/publisher-summary-result';
-import type { LocalGuarantyDonationSearch } from '~/types/publisher/publisher-search-results';
-import { FundingTypeIcons, FundingTypeTitles } from '~/utils/consts/publisher/funding-type';
+import type { PublisherResultSummaryData } from '~/types/publisher/publisher-summary-result-type';
+import type { LocalGuarantyDonationSearch } from '~/types/publisher/publisher-search-results-type';
 import SummaryIcon from '~/assets/images/publisher/summary.svg';
+import { FundingTypeIcons, FundingTypeTitles } from '~/utils/constants/publisher/funding-type';
 
 export const mapperSummaryData = (
   result: LocalGuarantyDonationSearch

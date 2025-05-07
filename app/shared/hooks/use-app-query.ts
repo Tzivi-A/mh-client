@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useQuery, type UseQueryOptions } from '@tanstack/react-query';
 import axios from 'axios';
-import { createQueryString, getQueryKey, type QueryDataType } from '~/utils/api';
+import { createQueryString, getQueryKey, type QueryDataType } from '~/utils/api-utils';
 import { config } from '~/config/env';
 
 export interface UseAppQueryOptions<DATA, MAPPED_DATA = DATA> {

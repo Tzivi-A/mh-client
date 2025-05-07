@@ -1,4 +1,4 @@
-import type { DatePickerType } from '@app-types/date-types';
+import type { DatePickerType } from '@app-types/date-type';
 
 export interface PublisherSearch {
   electionDate?: string;

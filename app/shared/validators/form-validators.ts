@@ -1,4 +1,4 @@
-import type { ValidatorType } from '@app-types/validator';
+import type { ValidatorType } from '@app-types/validator-type';
 
 export const validateAtLeastOneFieldFilled = <T extends object>(value: T): ValidatorType => {
   const isAllEmpty =

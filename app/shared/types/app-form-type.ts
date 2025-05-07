@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
 import type { FieldTypeEnum } from '@app-types/enums/field-type';
-import type { DatePickerType } from './date-types';
-import type { Option } from './options';
+import type { DatePickerType } from './date-type';
+import type { Option } from './option-type';
 
 export interface BaseAppFormField {
   fieldType: FieldTypeEnum;

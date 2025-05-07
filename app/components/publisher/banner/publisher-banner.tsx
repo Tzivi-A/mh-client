@@ -9,7 +9,7 @@ import {
   useFactions,
   usePublisherBannerQueries
 } from '~/hooks/api/queries/publisher/banner';
-import type { PublisherSearch } from '~/types/publisher/publisher-search';
+import type { PublisherSearch } from '~/types/publisher/publisher-search-type';
 import searchIcon from '~/assets/images/search-icon.svg';
 import * as rangeValidators from '~/validators/common/range-validators';
 import { validateAtLeastOneExtraField } from '~/validators/common/form-validators';

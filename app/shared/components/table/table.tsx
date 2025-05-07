@@ -1,6 +1,6 @@
 import { Table as AntTable } from 'antd';
 import { useState } from 'react';
-import type { ColumnGroupType, ColumnsType, ColumnType, TableProps } from '@app-types/table-types';
+import type { ColumnGroupType, ColumnsType, ColumnType, TableProps } from '@app-types/table-type';
 import { sorterFunctions } from '@utils/table-utils';
 import get from 'lodash/get';
 
