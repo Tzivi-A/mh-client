@@ -23,13 +23,13 @@ export const CheckBoxGroup = ({
   return (
     <InputWrapper id={id} label={label} error={error}>
       <div role="group" aria-labelledby={id} className="checkbox-group">
-        {options.map((opt, index) => {
-          const checkboxId = `${id}-${index}`;
+        {options.map(opt => {
+          const checkboxId = `${id}-${opt.value}`;
           return (
             <label key={opt.value} htmlFor={checkboxId} className="checkbox-label">
               <input
                 type="checkbox"
-                id={checkboxId}
+                id={opt.value}
                 name={id}
                 value={opt.value}
                 checked={value.includes(opt.value)}
