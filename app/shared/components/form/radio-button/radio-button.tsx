@@ -13,10 +13,11 @@ export const RadioButton = ({
   options = [],
   value,
   onChange,
-  error
+  error,
+  isRequired
 }: RadioFieldProps) => {
   return (
-    <InputWrapper id={id} label={label} error={error}>
+    <InputWrapper id={id} label={label} error={error} isRequired={isRequired}>
       <div role="radiogroup" aria-labelledby={id} className="radio-group">
         {options?.map(opt => {
           const radioId = `${id}-${opt.value}`;

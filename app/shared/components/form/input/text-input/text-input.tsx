@@ -4,9 +4,17 @@ import type { FormFieldProps } from '@app-types/form-type';
 
 export type TextInputProps = FormFieldProps<string>;
 
-export const TextInput = ({ value, onChange, id, onBlur, error, label }: TextInputProps) => {
+export const TextInput = ({
+  value,
+  onChange,
+  id,
+  onBlur,
+  error,
+  label,
+  isRequired
+}: TextInputProps) => {
   return (
-    <InputWrapper id={id} error={error} label={label}>
+    <InputWrapper id={id} error={error} label={label} isRequired={isRequired}>
       <input
         className="malam-input"
         id={id}

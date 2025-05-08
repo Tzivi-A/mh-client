@@ -5,7 +5,6 @@ import './check-box-group.css';
 
 export interface CheckBoxGroupProps extends FormFieldProps<string[]> {
   options?: Option[];
-  isRequired?: boolean;
 }
 
 export const CheckBoxGroup = ({
@@ -15,7 +14,7 @@ export const CheckBoxGroup = ({
   value = [],
   onChange,
   error,
-  isRequired = true
+  isRequired
 }: CheckBoxGroupProps) => {
   const handleChange = (checked: boolean, optValue: string) => {
     const newValue = checked ? [...value, optValue] : value.filter(v => v !== optValue);

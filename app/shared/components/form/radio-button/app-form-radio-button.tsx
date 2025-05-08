@@ -4,6 +4,13 @@ import { AppFormField } from '@ui/form/app-form-field';
 
 export type AppFormRadioButtonProps = Omit<AppFormRadioButtonField, 'fieldType'>;
 
-export const AppFormRadioButton = ({ label, options }: AppFormRadioButtonProps) => {
-  return <AppFormField label={label} fieldType={FieldTypeEnum.RADIO_BUTTON} options={options} />;
+export const AppFormRadioButton = ({ label, isRequired, options }: AppFormRadioButtonProps) => {
+  return (
+    <AppFormField
+      fieldType={FieldTypeEnum.RADIO_BUTTON}
+      label={label}
+      isRequired={isRequired}
+      options={options}
+    />
+  );
 };

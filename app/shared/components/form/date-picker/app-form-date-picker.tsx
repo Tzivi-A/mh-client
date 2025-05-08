@@ -6,6 +6,7 @@ export type AppFormDatePickerProps = Omit<AppFormDatePickerField, 'fieldType'>;
 
 export const AppFormDatePicker = ({
   label,
+  isRequired,
   minDate,
   maxDate,
   inputReadOnly
@@ -14,6 +15,7 @@ export const AppFormDatePicker = ({
     <AppFormField
       fieldType={FieldTypeEnum.DATE_PICKER}
       label={label}
+      isRequired={isRequired}
       minDate={minDate}
       maxDate={maxDate}
       inputReadOnly={inputReadOnly}

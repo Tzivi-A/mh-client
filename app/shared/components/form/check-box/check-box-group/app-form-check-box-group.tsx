@@ -4,6 +4,13 @@ import { AppFormField } from '@ui/form/app-form-field';
 
 export type AppFormCheckBoxGroupProps = Omit<AppFormCheckBoxGroupField, 'fieldType'>;
 
-export const AppFormCheckBoxGroup = ({ label, options }: AppFormCheckBoxGroupProps) => {
-  return <AppFormField fieldType={FieldTypeEnum.CHECK_BOX_GROUP} label={label} options={options} />;
+export const AppFormCheckBoxGroup = ({ label, isRequired, options }: AppFormCheckBoxGroupProps) => {
+  return (
+    <AppFormField
+      fieldType={FieldTypeEnum.CHECK_BOX_GROUP}
+      label={label}
+      isRequired={isRequired}
+      options={options}
+    />
+  );
 };

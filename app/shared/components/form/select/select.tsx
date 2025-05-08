@@ -18,6 +18,7 @@ export const Select = ({
   onChange,
   value,
   error,
+  isRequired,
   includeEmptyOption = false, // Default to not including an empty option
   emptyOptionLabel = 'בחר...' // Default label for the empty option
 }: SelectProps) => {
@@ -27,7 +28,7 @@ export const Select = ({
     : options;
 
   return (
-    <InputWrapper label={label} id={id} error={error}>
+    <InputWrapper label={label} id={id} error={error} isRequired={isRequired}>
       <AntSelect
         id={id}
         value={value}

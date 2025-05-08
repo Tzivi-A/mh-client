@@ -8,4 +8,5 @@ export interface FormFieldProps<T> {
   onBlur?: () => void;
   error?: string;
   disabled?: boolean;
+  isRequired?: boolean;
 }

@@ -187,6 +187,7 @@ export const PublisherBanner = () => {
                     {field => (
                       <field.CheckBoxGroup
                         label="סוג חיפוש"
+                        isRequired={true}
                         options={queries.publicationSearch.data || []}
                       />
                     )}
