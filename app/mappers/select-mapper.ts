@@ -1,26 +1,35 @@
-import type { Option } from '@app-types/options';
-import type { CodeEntity } from '~/types/code-entity';
-import type { CodeEntityExtended } from '~/types/code-entity-extended';
-import type { Country } from '~/types/country';
+import type { Option } from '@app-types/option-type';
+import type { CodeEntity } from '~/types/code-entity-type';
+import type { CodeEntityExtended } from '~/types/code-entity-extended-type';
+import type { Country } from '~/types/country-type';
+
+const mapWithEmptyOption = (
+  mappedOptions: Option[],
+  includeEmptyOption: boolean,
+  emptyOptionLabel: string
+): Option[] =>
+  includeEmptyOption ? [{ value: '', label: emptyOptionLabel }, ...mappedOptions] : mappedOptions;
 
 export const codeEntityToOptionMapper = (
-  options: CodeEntity[] | CodeEntityExtended[],
-  includeEmptyOption: boolean = false,
-  emptyOptionLabel: string = ''
+  options: (CodeEntity | CodeEntityExtended)[],
+  includeEmptyOption = false,
+  emptyOptionLabel = ''
 ): Option[] => {
-  const mappedOptions = options.map((option: CodeEntity | CodeEntityExtended) => ({
-    value: option.id.toString(),
-    label: option.name
+  const mapped = options.map(({ id, name }) => ({
+    value: id.toString(),
+    label: name
   }));
-
-  return includeEmptyOption
-    ? [{ value: '', label: emptyOptionLabel }, ...mappedOptions]
-    : mappedOptions;
+  return mapWithEmptyOption(mapped, includeEmptyOption, emptyOptionLabel);
 };
 
-export const countryToOptionMapper = (options: Country[]): Option[] => {
-  return options.map((option: Country) => ({
-    value: option.id.toString(),
-    label: option.hebName
+export const countryToOptionMapper = (
+  options: Country[],
+  includeEmptyOption = false,
+  emptyOptionLabel = ''
+): Option[] => {
+  const mapped = options.map(({ id, hebName }) => ({
+    value: id.toString(),
+    label: hebName
   }));
+  return mapWithEmptyOption(mapped, includeEmptyOption, emptyOptionLabel);
 };

@@ -9,21 +9,28 @@ import {
   useFactions,
   usePublisherBannerQueries
 } from '~/hooks/api/queries/publisher/banner';
-import type { PublisherSearch } from '~/types/publisher/publisher-search';
+import type { PublisherSearch } from '~/types/publisher/publisher-search-type';
 import searchIcon from '~/assets/images/search-icon.svg';
-import * as validators from '~/validators/pages/publisher-validators';
+import * as rangeValidators from '~/validators/common/range-validators';
+import { validateAtLeastOneExtraField } from '~/validators/common/form-validators';
 import Section from '@ui/section/section';
-import type { PublishBannerQueries } from '~/types/queries/publisher/publisher-banner-queries';
+import { PublicationSearchEnum } from '~/types/enums/publication-search';
+import { isCheckBoxGroupRequired } from '~/validators/common/requierd-validators';
 
 export const PublisherBanner = () => {
-  const queries: PublishBannerQueries = usePublisherBannerQueries();
+  const queries = usePublisherBannerQueries();
 
   const form = useAppForm({
     defaultValues: {
-      electionDate: queries.elections.data?.find(e => e.value !== '')?.value ?? ''
+      electionDate: queries.elections.data?.find(e => e.value !== '')?.value ?? '',
+      publicationSearchType: [
+        PublicationSearchEnum.Donation,
+        PublicationSearchEnum.Guarantee,
+        PublicationSearchEnum.Loan
+      ]
     } as PublisherSearch,
     validators: {
-      onSubmit: ({ value }) => validators.atLeastOneFieldFilled(value)
+      onSubmit: ({ value }) => validateAtLeastOneExtraField(value, ['publicationSearchType'])
     },
     onSubmit: ({ value }) => {
       alert(JSON.stringify(value));
@@ -118,7 +125,7 @@ export const PublisherBanner = () => {
                     validators={{
                       onChangeListenTo: ['toDate'],
                       onChange: ({ value, fieldApi }) =>
-                        validators.validateFromDateRange(
+                        rangeValidators.validateFromDateRange(
                           value,
                           fieldApi.form.getFieldValue('toDate')
                         )
@@ -131,7 +138,7 @@ export const PublisherBanner = () => {
                     validators={{
                       onChangeListenTo: ['fromDate'],
                       onChange: ({ value, fieldApi }) =>
-                        validators.validateToDateRange(
+                        rangeValidators.validateToDateRange(
                           fieldApi.form.getFieldValue('fromDate'),
                           value
                         )
@@ -146,7 +153,10 @@ export const PublisherBanner = () => {
                     validators={{
                       onChangeListenTo: ['toSum'],
                       onChange: ({ value, fieldApi }) =>
-                        validators.validateFromSumRange(value, fieldApi.form.getFieldValue('toSum'))
+                        rangeValidators.validateFromSumRange(
+                          value,
+                          fieldApi.form.getFieldValue('toSum')
+                        )
                     }}
                   >
                     {field => <field.Number label="מסכום" />}
@@ -156,27 +166,47 @@ export const PublisherBanner = () => {
                     validators={{
                       onChangeListenTo: ['fromSum'],
                       onChange: ({ value, fieldApi }) =>
-                        validators.validateToSumRange(fieldApi.form.getFieldValue('fromSum'), value)
+                        rangeValidators.validateToSumRange(
+                          fieldApi.form.getFieldValue('fromSum'),
+                          value
+                        )
                     }}
                   >
                     {field => <field.Number label="עד סכום" />}
                   </form.AppField>
                 </Flex>
               </Flex>
-              <Flex>
-                <Button type="submit">
-                  <Image src={searchIcon} alt="search" />
-                  סינון
-                </Button>
-                <Button
-                  onClick={() => {
-                    form.reset(undefined, {
-                      keepDefaultValues: true
-                    });
-                  }}
-                >
-                  נקה סינון
-                </Button>
+              <Flex direction="column">
+                <Flex>
+                  <form.AppField
+                    name="publicationSearchType"
+                    validators={{
+                      onChange: ({ value }) => isCheckBoxGroupRequired(value)
+                    }}
+                  >
+                    {field => (
+                      <field.CheckBoxGroup
+                        label="סוג חיפוש"
+                        options={queries.publicationSearch.data || []}
+                      />
+                    )}
+                  </form.AppField>
+                </Flex>
+                <Flex>
+                  <Button type="submit">
+                    <Image src={searchIcon} alt="search" />
+                    חפש
+                  </Button>
+                  <Button
+                    onClick={() => {
+                      form.reset(undefined, {
+                        keepDefaultValues: true
+                      });
+                    }}
+                  >
+                    נקה מאפייני חיפוש
+                  </Button>
+                </Flex>
               </Flex>
             </Flex>
           </Section>

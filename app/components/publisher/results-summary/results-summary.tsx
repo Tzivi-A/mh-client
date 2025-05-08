@@ -1,5 +1,5 @@
 import './results-summary.css';
-import type { PublisherResultSummaryData as PublishResultSummaryData } from '~/types/publisher/publisher-summary-result';
+import type { PublisherResultSummaryData as PublishResultSummaryData } from '~/types/publisher/publisher-summary-result-type';
 import { DividedRowList } from '@ui/divided-row-list/divided-row-list';
 import { currencyFormatter } from '@utils/number-utils';
 import { Image } from '@ui/image/image';

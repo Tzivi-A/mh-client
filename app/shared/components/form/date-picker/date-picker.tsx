@@ -1,9 +1,9 @@
 import { DatePicker as AntDatePicker } from 'antd';
 import 'antd/dist/reset.css';
 import 'dayjs/locale/he';
-import InputWrapper from '../input-wrapper/input-wrapper';
-import type { FormFieldProps } from '@app-types/form-types';
-import type { DatePickerType } from '@app-types/date-types';
+import InputWrapper from '@ui/form/input-wrapper/input-wrapper';
+import type { FormFieldProps } from '@app-types/form-type';
+import type { DatePickerType } from '@app-types/date-type';
 import { toDayjs } from '@utils/date-utils';
 
 export interface DatePickerProps<T> extends FormFieldProps<T> {

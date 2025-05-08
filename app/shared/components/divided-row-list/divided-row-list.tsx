@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 import React from 'react';
 import './divided-row-list.css';
 import { Divider } from './divider';

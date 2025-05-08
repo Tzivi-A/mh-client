@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import { Flex } from '../layout/flex/flex';
+import { Flex } from '@ui/layout/flex/flex';
 
 interface SectionProps {
   header: string;

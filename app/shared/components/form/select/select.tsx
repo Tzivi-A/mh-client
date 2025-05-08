@@ -1,8 +1,8 @@
 import { Select as AntSelect } from 'antd';
 import 'antd/dist/reset.css';
-import InputWrapper from '../input-wrapper/input-wrapper';
-import type { FormFieldProps } from '@app-types/form-types';
-import type { Option } from '@app-types/options';
+import InputWrapper from '@ui/form/input-wrapper/input-wrapper';
+import type { FormFieldProps } from '@app-types/form-type';
+import type { Option } from '@app-types/option-type';
 
 export interface SelectProps extends FormFieldProps<string> {
   options?: Option[];
