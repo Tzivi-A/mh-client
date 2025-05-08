@@ -3,8 +3,9 @@ import { codeEntityToOptionMapper, countryToOptionMapper } from '~/mappers/selec
 import type { Country } from '~/types/country-type';
 import type { Option } from '@app-types/option-type';
 import { useAppQuery } from '@hooks/use-app-query';
+import type { PublishBannerQueries } from '~/types/queries/publisher/publisher-banner-queries';
 
-export const usePublisherBannerQueries = () => ({
+export const usePublisherBannerQueries = (): PublishBannerQueries => ({
   elections: useAppQuery<CodeEntity[], Option[]>({
     url: 'api/election/activeLocalElections',
     queryData: {
@@ -21,6 +22,10 @@ export const usePublisherBannerQueries = () => ({
   cities: useAppQuery<CodeEntity[], Option[]>({
     url: 'api/codeTable/cities',
     mapResponse: data => codeEntityToOptionMapper(data, true)
+  }),
+  publicationSearch: useAppQuery<CodeEntity[], Option[]>({
+    url: 'api/codeTable/publicationSearch',
+    mapResponse: codeEntityToOptionMapper
   })
 });
 

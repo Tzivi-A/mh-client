@@ -10,7 +10,8 @@ import type { Option } from '@app-types/option-type';
 import { useAppMutation } from '@hooks/use-app-mutation';
 import { useAppQuery } from '@hooks/use-app-query';
 import { Flex } from '@ui/layout/flex/flex';
-import { validateDateRange } from '@validators/range-validators';
+import { isInputRequired } from '~/validators/common/requierd-validators';
+import { validateFromDateRange, validateToDateRange } from '~/validators/common/range-validators';
 
 interface ComponentDashboardFormValues {
   city: string;
@@ -106,9 +107,6 @@ export const ComponentDashboardPage = () => {
   if (optionsQuery.isLoading) return <p>Loading options data...</p>;
   if (optionsQuery.error) return <p>Error loading options data</p>;
 
-  const validateFormDateRange = (fromDate: DatePickerType, toDate: DatePickerType) =>
-    validateDateRange(fromDate, toDate) && '"מתאריך" חייב להיות מוקדם מ"עד תאריך"';
-
   return (
     <main>
       <form
@@ -140,6 +138,12 @@ export const ComponentDashboardPage = () => {
 
             {optionsQuery.data && (
               <form.AppField name="city">
+                {field => <field.CheckBoxGroup label="ערים" options={optionsQuery.data || []} />}
+              </form.AppField>
+            )}
+
+            {optionsQuery.data && (
+              <form.AppField name="city">
                 {field => <field.RadioButton label="ערים" options={optionsQuery.data || []} />}
               </form.AppField>
             )}
@@ -149,7 +153,7 @@ export const ComponentDashboardPage = () => {
             <form.AppField
               name="lastName"
               validators={{
-                onChange: ({ value }) => !value && 'שדה חובה'
+                onChange: ({ value }) => isInputRequired(value)
               }}
             >
               {field => <field.Input label="שם משפחה" />}
@@ -170,7 +174,7 @@ export const ComponentDashboardPage = () => {
               validators={{
                 onChangeListenTo: ['validateToDate'],
                 onChange: ({ value, fieldApi }) =>
-                  validateFormDateRange(value, fieldApi.form.getFieldValue('validateToDate'))
+                  validateFromDateRange(value, fieldApi.form.getFieldValue('validateToDate'))
               }}
             >
               {field => <field.DatePicker label="מתאריך - ולידציה" />}
@@ -180,7 +184,7 @@ export const ComponentDashboardPage = () => {
               validators={{
                 onChangeListenTo: ['validateFromDate'],
                 onChange: ({ value, fieldApi }) =>
-                  validateFormDateRange(fieldApi.form.getFieldValue('validateFromDate'), value)
+                  validateToDateRange(fieldApi.form.getFieldValue('validateFromDate'), value)
               }}
             >
               {field => <field.DatePicker label="עד תאריך - ולידציה" inputReadOnly={false} />}
@@ -202,7 +206,7 @@ export const ComponentDashboardPage = () => {
           <formOptions.AppField
             name="label"
             validators={{
-              onChange: ({ value }) => !value && 'שדה חובה'
+              onChange: ({ value }) => isInputRequired(value)
             }}
           >
             {field => <field.Input label="label" />}

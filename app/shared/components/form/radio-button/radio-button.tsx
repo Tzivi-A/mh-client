@@ -18,14 +18,14 @@ export const RadioButton = ({
   return (
     <InputWrapper id={id} label={label} error={error}>
       <div role="radiogroup" aria-labelledby={id} className="radio-group">
-        {options?.map((opt, index) => {
-          const radioId = `${id}-${index}`;
+        {options?.map(opt => {
+          const radioId = `${id}-${opt.value}`;
           return (
             <label key={opt.value} htmlFor={radioId} className="radio-label">
               <input
                 type="radio"
                 id={radioId}
-                name={radioId}
+                name={opt.value}
                 value={opt.value}
                 checked={value === opt.value}
                 onChange={e => onChange?.(e.target.value)}

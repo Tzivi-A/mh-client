@@ -14,17 +14,23 @@ import searchIcon from '~/assets/images/search-icon.svg';
 import * as rangeValidators from '~/validators/common/range-validators';
 import { validateAtLeastOneExtraField } from '~/validators/common/form-validators';
 import Section from '@ui/section/section';
-import type { PublishBannerQueries } from '~/types/queries/publisher/publisher-banner-queries';
+import { PublicationSearchEnum } from '~/types/enums/publication-search';
+import { isCheckBoxGroupRequired } from '~/validators/common/requierd-validators';
 
 export const PublisherBanner = () => {
-  const queries: PublishBannerQueries = usePublisherBannerQueries();
+  const queries = usePublisherBannerQueries();
 
   const form = useAppForm({
     defaultValues: {
-      electionDate: queries.elections.data?.find(e => e.value !== '')?.value ?? ''
+      electionDate: queries.elections.data?.find(e => e.value !== '')?.value ?? '',
+      publicationSearchType: [
+        PublicationSearchEnum.Donation,
+        PublicationSearchEnum.Guarantee,
+        PublicationSearchEnum.Loan
+      ]
     } as PublisherSearch,
     validators: {
-      onSubmit: ({ value }) => validateAtLeastOneExtraField(value)
+      onSubmit: ({ value }) => validateAtLeastOneExtraField(value, ['publicationSearchType'])
     },
     onSubmit: ({ value }) => {
       alert(JSON.stringify(value));
@@ -170,20 +176,37 @@ export const PublisherBanner = () => {
                   </form.AppField>
                 </Flex>
               </Flex>
-              <Flex>
-                <Button type="submit">
-                  <Image src={searchIcon} alt="search" />
-                  סינון
-                </Button>
-                <Button
-                  onClick={() => {
-                    form.reset(undefined, {
-                      keepDefaultValues: true
-                    });
-                  }}
-                >
-                  נקה סינון
-                </Button>
+              <Flex direction="column">
+                <Flex>
+                  <form.AppField
+                    name="publicationSearchType"
+                    validators={{
+                      onChange: ({ value }) => isCheckBoxGroupRequired(value)
+                    }}
+                  >
+                    {field => (
+                      <field.CheckBoxGroup
+                        label="סוג חיפוש"
+                        options={queries.publicationSearch.data || []}
+                      />
+                    )}
+                  </form.AppField>
+                </Flex>
+                <Flex>
+                  <Button type="submit">
+                    <Image src={searchIcon} alt="search" />
+                    חפש
+                  </Button>
+                  <Button
+                    onClick={() => {
+                      form.reset(undefined, {
+                        keepDefaultValues: true
+                      });
+                    }}
+                  >
+                    נקה מאפייני חיפוש
+                  </Button>
+                </Flex>
               </Flex>
             </Flex>
           </Section>

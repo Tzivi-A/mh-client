@@ -1,9 +1,11 @@
 import { DividerTypeEnum } from '@app-types/enums/divider-type';
-import { FundingTypeEnum } from '~/types/enums/funding-type';
+import { PublicationSearchEnum } from '~/types/enums/publication-search';
 import type { PublisherResultSummaryData } from '~/types/publisher/publisher-summary-result-type';
 import type { LocalGuarantyDonationSearch } from '~/types/publisher/publisher-search-results-type';
-import SummaryIcon from '~/assets/images/publisher/summary.svg';
-import { FundingTypeIcons, FundingTypeTitles } from '~/utils/constants/publisher/funding-type';
+import {
+  PublicationSearchIcons,
+  PublicationSearchTitles
+} from '~/utils/constants/publisher/publication-search';
 
 export const mapperSummaryData = (
   result: LocalGuarantyDonationSearch
@@ -11,34 +13,34 @@ export const mapperSummaryData = (
   const summaryData: PublisherResultSummaryData[] = result
     ? [
         {
-          fundingType: FundingTypeEnum.Donation,
-          title: FundingTypeTitles[FundingTypeEnum.Donation].plural,
+          publicationSearchType: PublicationSearchEnum.Donation,
+          title: PublicationSearchTitles[PublicationSearchEnum.Donation].plural,
           count: result.numDonations,
           sum: parseFloat(result.sumDonations),
-          iconSrc: FundingTypeIcons[FundingTypeEnum.Donation],
+          iconSrc: PublicationSearchIcons[PublicationSearchEnum.Donation],
           dividerAfter: DividerTypeEnum.Line
         },
         {
-          fundingType: FundingTypeEnum.Guarantee,
-          title: FundingTypeTitles[FundingTypeEnum.Guarantee].plural,
+          publicationSearchType: PublicationSearchEnum.Guarantee,
+          title: PublicationSearchTitles[PublicationSearchEnum.Guarantee].plural,
           count: result.numGuarantees,
           sum: parseFloat(result.sumGuarantees),
-          iconSrc: FundingTypeIcons[FundingTypeEnum.Guarantee],
+          iconSrc: PublicationSearchIcons[PublicationSearchEnum.Guarantee],
           dividerAfter: DividerTypeEnum.Line
         },
         {
-          fundingType: FundingTypeEnum.Loan,
-          title: FundingTypeTitles[FundingTypeEnum.Loan].plural,
+          publicationSearchType: PublicationSearchEnum.Loan,
+          title: PublicationSearchTitles[PublicationSearchEnum.Loan].plural,
           count: result.numLoans,
           sum: parseFloat(result.sumLoans),
-          iconSrc: FundingTypeIcons[FundingTypeEnum.Loan],
+          iconSrc: PublicationSearchIcons[PublicationSearchEnum.Loan],
           dividerAfter: DividerTypeEnum.Arrow
         },
         {
-          title: 'רשומות',
+          title: PublicationSearchTitles[PublicationSearchEnum.All].plural,
           count: result.numLoans + result.numGuarantees + result.numDonations,
           sum: parseFloat(result.sumLoans + result.sumGuarantees + result.sumDonations),
-          iconSrc: SummaryIcon
+          iconSrc: PublicationSearchIcons[PublicationSearchEnum.All]
         }
       ]
     : [];
