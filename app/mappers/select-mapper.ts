@@ -16,7 +16,7 @@ export const codeEntityToOptionMapper = (
   emptyOptionLabel = ''
 ): Option[] => {
   const mapped = options.map(({ id, name }) => ({
-    value: id.toString(),
+    value: id,
     label: name
   }));
   return mapWithEmptyOption(mapped, includeEmptyOption, emptyOptionLabel);
@@ -28,7 +28,7 @@ export const countryToOptionMapper = (
   emptyOptionLabel = ''
 ): Option[] => {
   const mapped = options.map(({ id, hebName }) => ({
-    value: id.toString(),
+    value: id,
     label: hebName
   }));
   return mapWithEmptyOption(mapped, includeEmptyOption, emptyOptionLabel);
