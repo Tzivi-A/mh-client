@@ -1,12 +1,12 @@
 import { PublisherResultSummary } from '~/components/publisher/results-summary/results-summary';
 import PublisherResultTable from '~/components/publisher/result-table/result-table';
-import { useAppQuery } from '~/hooks/api/queries/use-app-query';
-import { mapperSummaryData } from '~/mappers/publisher/funding-type-mapper';
+import type { PublisherResultSummaryData } from '~/types/publisher/publisher-summary-result-type';
+import { mapperSummaryData } from '~/mappers/publisher/publication-search-mapper';
+import { useAppQuery } from '~/shared/hooks/use-app-query';
 import type {
   LocalGuarantyDonationSearch,
   LocalGuarantyDonationSearchRow
-} from '~/types/publisher/publisher-search-results';
-import type { PublisherResultSummaryData } from '~/types/publisher/publisher-summary-result';
+} from '~/types/publisher/publisher-search-results-type';
 
 export const PublisherResult = () => {
   const { data, isLoading, error } = useAppQuery<LocalGuarantyDonationSearch>({

@@ -1,7 +1,7 @@
 import { Card } from '@ui/card/card';
 import { Table } from '@ui/table/table';
-import type { ColumnsType, TableProps } from '@app-types/table';
-import type { LocalGuarantyDonationSearchRow } from '~/types/publisher/publisher-search-results';
+import type { ColumnsType, TableProps } from '~/shared/types/table-type';
+import type { LocalGuarantyDonationSearchRow } from '~/types/publisher/publisher-search-results-type';
 
 export interface PublisherResultTableProps {
   data: LocalGuarantyDonationSearchRow[];
@@ -52,8 +52,8 @@ export const PublisherResultTable = ({ data }: PublisherResultTableProps) => {
       children: [
         {
           title: 'שם מלא',
-          dataIndex: 'fundingName',
-          key: 'fundingName',
+          dataIndex: 'publicationSearchName',
+          key: 'publicationSearchName',
           align: 'right',
           sorterType: 'string'
         },
@@ -80,16 +80,16 @@ export const PublisherResultTable = ({ data }: PublisherResultTableProps) => {
       children: [
         {
           title: 'תאריך',
-          dataIndex: 'fundingDate',
-          key: 'fundingDate',
+          dataIndex: 'publicationSearchDate',
+          key: 'publicationSearchDate',
           align: 'right',
           sorterType: 'date',
           render: date => date?.split('T')[0]
         },
         {
           title: 'סכום',
-          dataIndex: 'fundingSum',
-          key: 'fundingSum',
+          dataIndex: 'publicationSearchSum',
+          key: 'publicationSearchSum',
           align: 'right',
           sorterType: 'number',
           render: amount =>

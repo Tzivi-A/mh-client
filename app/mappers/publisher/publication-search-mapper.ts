@@ -8,7 +8,7 @@ import {
 } from '~/utils/constants/publisher/publication-search';
 
 export const mapperSummaryData = (
-  result: LocalGuarantyDonationSearch
+  result: LocalGuarantyDonationSearch | undefined
 ): PublisherResultSummaryData[] => {
   const summaryData: PublisherResultSummaryData[] = result
     ? [

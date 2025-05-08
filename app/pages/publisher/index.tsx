@@ -1,5 +1,5 @@
+import PublisherBanner from '~/components/publisher/banner/banner';
 import PublisherResult from '~/components/publisher/publisher-result/publisher-result';
-import PublisherBanner from '~/components/publisher/banner/publisher-banner';
 
 export const PublisherPage = () => {
   return (
