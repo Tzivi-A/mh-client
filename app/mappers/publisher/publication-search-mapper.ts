@@ -6,6 +6,7 @@ import {
   PublicationSearchIcons,
   PublicationSearchTitles
 } from '~/utils/constants/publisher/publication-search';
+import { pareseNumber } from '~/shared/utils/number-utils';
 
 export const mapperSummaryData = (
   result: LocalGuarantyDonationSearch
@@ -39,7 +40,10 @@ export const mapperSummaryData = (
         {
           title: PublicationSearchTitles[PublicationSearchEnum.All].plural,
           count: result.numLoans + result.numGuarantees + result.numDonations,
-          sum: parseFloat(result.sumLoans + result.sumGuarantees + result.sumDonations),
+          sum:
+            pareseNumber(result.sumLoans) +
+            pareseNumber(result.sumGuarantees) +
+            pareseNumber(result.sumDonations),
           iconSrc: PublicationSearchIcons[PublicationSearchEnum.All]
         }
       ]

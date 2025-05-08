@@ -4,7 +4,7 @@
     "endpoints": [
       {
         "functionName": "localGuarantyDonationSearch",
-        "method": "GET",
+        "method": "POST",
         "path": "/localGuarantyDonationSearch",
         "params": []
       }
@@ -56,7 +56,7 @@
       }
     ],
     "numDonations": 2,
-    "numGuarantees":0,
+    "numGuarantees": 0,
     "numLoans": 1,
     "sumDonations": "1000.00",
     "sumGuarantees": "0",

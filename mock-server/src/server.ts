@@ -71,11 +71,15 @@ mockFiles.forEach(filePath => {
       }
 
       if (method === 'POST') {
-        const newItem = req.body;
-        newItem.value = data.length ? data[data.length - 1].value + 1 : 1;
-        data.push(newItem);
-        saveMockData(filePath, { meta, data });
-        res.status(201).json(newItem);
+        if (Object.keys(req.query).length > 0) {
+          const newItem = req.body;
+          newItem.value = data.length ? data[data.length - 1].value + 1 : 1;
+          data.push(newItem);
+          saveMockData(filePath, { meta, data });
+          res.status(201).json(newItem);
+        } else {
+          res.status(201).json(res.json(data));
+        }
       }
 
       if (method === 'DELETE') {

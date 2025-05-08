@@ -1,7 +1,7 @@
 import './results-summary.css';
 import type { PublisherResultSummaryData as PublishResultSummaryData } from '~/types/publisher/publisher-summary-result-type';
 import { DividedRowList } from '@ui/divided-row-list/divided-row-list';
-import { currencyFormatter } from '@utils/number-utils';
+import { currencyFormatter, formatHebrewNumber } from '@utils/number-utils';
 
 interface PublisherResultsSummaryProps {
   items: PublishResultSummaryData[];
@@ -14,9 +14,7 @@ export const PublisherResultSummary = ({ items }: PublisherResultsSummaryProps) 
       renderItem={({ title, count, sum, iconSrc }) => (
         <div className="results-summary-item">
           <div className="results-summary-info">
-            <div className="results-summary-title">
-              {count ? `${count} ${title}` : `0 ${title}`}
-            </div>
+            <div className="results-summary-title">{`${formatHebrewNumber(count)} ${title}`}</div>
             <div className="results-summary-sum">{currencyFormatter.format(sum)}</div>
           </div>
           <div className="results-summary-icon">

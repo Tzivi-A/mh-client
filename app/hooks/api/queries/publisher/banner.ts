@@ -4,8 +4,13 @@ import type { Country } from '~/types/country-type';
 import type { Option } from '@app-types/option-type';
 import { useAppQuery } from '@hooks/use-app-query';
 import type { PublishBannerQueries } from '~/types/queries/publisher/publisher-banner-queries';
+import type { LocalGuarantyDonationSearch } from '~/types/publisher/publisher-search-results-type';
+import type { PublisherResultSummaryData } from '~/types/publisher/publisher-summary-result-type';
+import { mapperSummaryData } from '~/mappers/publisher/publication-search-mapper';
+import type { PublisherSearch } from '~/types/publisher/publisher-search-type';
+import type { DataObject } from '@app-types/api-type';
 
-export const usePublisherBannerQueries = (): PublishBannerQueries => ({
+export const usePublisherBannerQueries = (data: PublisherSearch): PublishBannerQueries => ({
   elections: useAppQuery<CodeEntity[], Option[]>({
     url: 'api/election/activeLocalElections',
     queryData: {
@@ -26,6 +31,13 @@ export const usePublisherBannerQueries = (): PublishBannerQueries => ({
   publicationSearch: useAppQuery<CodeEntity[], Option[]>({
     url: 'api/codeTable/publicationSearch',
     mapResponse: codeEntityToOptionMapper
+  }),
+  summaryData: useAppQuery<LocalGuarantyDonationSearch, PublisherResultSummaryData[]>({
+    url: 'api/publisher/localGuarantyDonationSearch',
+    method: 'POST',
+    isRunNow: !!data && Object.keys(data).length > 0,
+    queryData: { requestData: data as unknown as DataObject },
+    mapResponse: mapperSummaryData
   })
 });
 

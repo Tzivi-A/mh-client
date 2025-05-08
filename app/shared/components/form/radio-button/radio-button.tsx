@@ -3,7 +3,7 @@ import type { FormFieldProps } from '@app-types/form-type';
 import type { Option } from '@app-types/option-type';
 import './radio-button.css';
 
-export interface RadioFieldProps extends FormFieldProps<string> {
+export interface RadioFieldProps extends FormFieldProps<string | number> {
   options?: Option[];
 }
 
@@ -26,7 +26,7 @@ export const RadioButton = ({
               <input
                 type="radio"
                 id={radioId}
-                name={opt.value}
+                name={opt.value.toString()}
                 value={opt.value}
                 checked={value === opt.value}
                 onChange={e => onChange?.(e.target.value)}

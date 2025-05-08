@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Button } from '@ui/button/button';
 import { Image } from '@ui/image/image';
 import { Flex } from '@ui/layout/flex/flex';
@@ -16,13 +16,25 @@ import { validateAtLeastOneExtraField } from '~/validators/common/form-validator
 import Section from '@ui/section/section';
 import { PublicationSearchEnum } from '~/types/enums/publication-search';
 import { isCheckBoxGroupRequired } from '~/validators/common/requierd-validators';
+import type { PublisherResultSummaryData } from '~/types/publisher/publisher-summary-result-type';
 
-export const PublisherBanner = () => {
-  const queries = usePublisherBannerQueries();
+export interface PublisherBannerProps {
+  setSummaryData: (data: PublisherResultSummaryData[]) => void;
+}
+
+export const PublisherBanner = ({ setSummaryData }: PublisherBannerProps) => {
+  const [formData, setFormData] = useState<PublisherSearch>({} as PublisherSearch);
+  const queries = usePublisherBannerQueries(formData);
+
+  useEffect(() => {
+    if (queries.summaryData.data) {
+      setSummaryData(queries.summaryData.data ?? []);
+    }
+  }, [queries.summaryData.data]);
 
   const form = useAppForm({
     defaultValues: {
-      electionDate: queries.elections.data?.find(e => e.value !== '')?.value ?? '',
+      electionId: queries.elections.data?.find(e => e.value !== '')?.value ?? '',
       publicationSearchType: [
         PublicationSearchEnum.Donation,
         PublicationSearchEnum.Guarantee,
@@ -33,11 +45,19 @@ export const PublisherBanner = () => {
       onSubmit: ({ value }) => validateAtLeastOneExtraField(value, ['publicationSearchType'])
     },
     onSubmit: ({ value }) => {
-      alert(JSON.stringify(value));
+      const data = {
+        ...value,
+        publicationSearchType:
+          value.publicationSearchType.length === 3
+            ? [PublicationSearchEnum.All]
+            : value.publicationSearchType
+      };
+
+      setFormData(data);
     }
   });
 
-  const selectedElectionId = useStore(form.store, state => state.values.electionDate);
+  const selectedElectionId = useStore(form.store, state => state.values.electionId);
   const selectedCityId = useStore(form.store, state => state.values.electionCityID);
   const formErrorMap = useStore(form.store, state => state.errorMap);
 
@@ -77,7 +97,7 @@ export const PublisherBanner = () => {
         <SideBySideCard.Right>
           <Section header="מאפייני הבחירות">
             <Flex direction="column">
-              <form.AppField name="electionDate">
+              <form.AppField name="electionId">
                 {field => (
                   <field.Select label="תאריך בחירות" options={queries.elections.data || []} />
                 )}
@@ -188,7 +208,7 @@ export const PublisherBanner = () => {
                       <field.CheckBoxGroup
                         label="סוג חיפוש"
                         isRequired={true}
-                        options={queries.publicationSearch.data || []}
+                        options={queries.publicationSearch?.data || []}
                       />
                     )}
                   </form.AppField>

@@ -4,7 +4,7 @@ import InputWrapper from '@ui/form/input-wrapper/input-wrapper';
 import type { FormFieldProps } from '@app-types/form-type';
 import type { Option } from '@app-types/option-type';
 
-export interface SelectProps extends FormFieldProps<string> {
+export interface SelectProps extends FormFieldProps<string | number> {
   options?: Option[];
   includeEmptyOption?: boolean; // New prop to control whether to include an empty option
   emptyOptionLabel?: string; // Label for the empty option
