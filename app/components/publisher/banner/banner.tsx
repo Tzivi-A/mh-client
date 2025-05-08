@@ -203,6 +203,7 @@ export const PublisherBanner = () => {
                         keepDefaultValues: true
                       });
                     }}
+                    variant="text"
                   >
                     נקה מאפייני חיפוש
                   </Button>

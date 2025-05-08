@@ -5,6 +5,7 @@ import './check-box-group.css';
 
 export interface CheckBoxGroupProps extends FormFieldProps<string[]> {
   options?: Option[];
+  isRequired?: boolean;
 }
 
 export const CheckBoxGroup = ({
@@ -13,7 +14,8 @@ export const CheckBoxGroup = ({
   options = [],
   value = [],
   onChange,
-  error
+  error,
+  isRequired = true
 }: CheckBoxGroupProps) => {
   const handleChange = (checked: boolean, optValue: string) => {
     const newValue = checked ? [...value, optValue] : value.filter(v => v !== optValue);
@@ -21,7 +23,7 @@ export const CheckBoxGroup = ({
   };
 
   return (
-    <InputWrapper id={id} label={label} error={error}>
+    <InputWrapper id={id} label={label} error={error} isRequired={isRequired}>
       <div role="group" aria-labelledby={id} className="checkbox-group">
         {options.map(opt => {
           const checkboxId = `${id}-${opt.value}`;

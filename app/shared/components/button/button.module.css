@@ -1,17 +1,32 @@
 .button {
-  background-color: #1a2a5e; /* Dark blue */
-  color: white;
   font-size: 16px;
   font-weight: bold;
-  border: none;
   padding: 10px 20px;
   border-radius: 5px;
   cursor: pointer;
   display: inline-block;
   text-align: center;
   direction: rtl; /* Right-to-left for Hebrew */
-}
-
-.button:hover {
-  background-color: #14204a; /* Slightly darker blue */
+  &.btn-solid {
+    border: none;
+    &.btn-default {
+      background-color: white;
+      color: #333;
+    }
+    &.btn-primary {
+      background-color: #1a2a5e;
+      color: white;
+    }
+  }
+  &.btn-text {
+    border: none;
+    background-color: transparent;
+    text-decoration: underline;
+    &.btn-default {
+      color: #333;
+    }
+    &.btn-primary {
+      color: #1a2a5e;
+    }
+  }
 }
