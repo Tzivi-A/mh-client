@@ -10,6 +10,7 @@ import {
 export const mapperSummaryData = (
   result: LocalGuarantyDonationSearch | undefined
 ): PublisherResultSummaryData[] => {
+  const buildTitleWithCount = (label: string, count: number) => `סה"כ ${count} ${label}`;
   const summaryData: PublisherResultSummaryData[] = result
     ? [
         {
@@ -18,6 +19,7 @@ export const mapperSummaryData = (
           count: result.numDonations,
           sum: parseFloat(result.sumDonations),
           iconSrc: PublicationSearchIcons[PublicationSearchEnum.Donation],
+          zeroIconSrc: PublicationSearchIcons[PublicationSearchEnum.Donation],
           dividerAfter: DividerTypeEnum.Line
         },
         {
@@ -26,6 +28,7 @@ export const mapperSummaryData = (
           count: result.numGuarantees,
           sum: parseFloat(result.sumGuarantees),
           iconSrc: PublicationSearchIcons[PublicationSearchEnum.Guarantee],
+          zeroIconSrc: PublicationSearchIcons[PublicationSearchEnum.Guarantee],
           dividerAfter: DividerTypeEnum.Line
         },
         {
@@ -34,13 +37,17 @@ export const mapperSummaryData = (
           count: result.numLoans,
           sum: parseFloat(result.sumLoans),
           iconSrc: PublicationSearchIcons[PublicationSearchEnum.Loan],
+          zeroIconSrc: PublicationSearchIcons[PublicationSearchEnum.Loan],
           dividerAfter: DividerTypeEnum.Arrow
         },
         {
-          title: PublicationSearchTitles[PublicationSearchEnum.All].plural,
-          count: result.numLoans + result.numGuarantees + result.numDonations,
+          title: buildTitleWithCount(
+            PublicationSearchTitles[PublicationSearchEnum.All].plural,
+            result.numLoans + result.numGuarantees + result.numDonations
+          ),
           sum: parseFloat(result.sumLoans + result.sumGuarantees + result.sumDonations),
-          iconSrc: PublicationSearchIcons[PublicationSearchEnum.All]
+          iconSrc: PublicationSearchIcons[PublicationSearchEnum.All],
+          titleIncludesCount: true
         }
       ]
     : [];

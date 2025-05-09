@@ -12,19 +12,24 @@ export const PublisherResultSummary = ({ items }: PublisherResultsSummaryProps) 
   return (
     <DividedRowList
       items={items}
-      renderItem={({ title, count, sum, iconSrc }) => (
-        <div className="results-summary-item">
-          <div className="results-summary-info">
-            <div className="results-summary-title">
-              {count ? `${count} ${title}` : `0 ${title}`}
+      renderItem={({ title, count, sum, iconSrc, zeroIconSrc, titleIncludesCount }) => {
+        const isZero = sum === 0;
+        const displayIcon = isZero && zeroIconSrc ? zeroIconSrc : iconSrc;
+
+        return (
+          <div className="results-summary-item">
+            <div className="results-summary-info">
+              <div className="results-summary-title">
+                {titleIncludesCount ? title : `${count ?? 0} ${title}`}
+              </div>
+              <div className="results-summary-sum">{currencyFormatter.format(sum)}</div>
             </div>
-            <div className="results-summary-sum">{currencyFormatter.format(sum)}</div>
+            <div className="results-summary-icon">
+              <Image src={displayIcon} alt={`${title} icon`} />
+            </div>
           </div>
-          <div className="results-summary-icon">
-            <Image src={iconSrc} alt={`${title} icon`} />
-          </div>
-        </div>
-      )}
+        );
+      }}
     />
   );
 };

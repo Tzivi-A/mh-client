@@ -6,5 +6,7 @@ export interface PublisherResultSummaryData {
   count?: number;
   sum: number;
   iconSrc: string;
+  zeroIconSrc?: string;
   dividerAfter?: DividerTypeEnum;
+  titleIncludesCount?: boolean;
 }
