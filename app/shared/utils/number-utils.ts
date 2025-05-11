@@ -28,3 +28,10 @@ export const currencyFormatter = numberHebrewFormatter({
   style: 'currency',
   currency: 'ILS'
 });
+
+export const parseNullableNumber = (value?: string | number): string =>
+  value
+    ? numberHebrewFormatter({ style: 'decimal', minimumFractionDigits: 2 }).format(
+        parseFloat(value.toString())
+      )
+    : '';

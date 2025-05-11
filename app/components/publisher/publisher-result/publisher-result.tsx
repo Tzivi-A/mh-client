@@ -7,6 +7,7 @@ import type {
   LocalGuarantyDonationSearch,
   LocalGuarantyDonationSearchRow
 } from '~/types/publisher/publisher-search-results-type';
+import type { ColumnsType } from '~/shared/types/table-type';
 
 export const PublisherResult = () => {
   const { data, isLoading, error } = useAppQuery<LocalGuarantyDonationSearch>({
@@ -15,6 +16,30 @@ export const PublisherResult = () => {
 
   const tableData: LocalGuarantyDonationSearchRow[] = data?.results ?? [];
   const summaryData: PublisherResultSummaryData[] = mapperSummaryData(data);
+  const localElectionColumns: ColumnsType<LocalGuarantyDonationSearchRow> = [
+    {
+      title: 'סיעה',
+      dataIndex: 'electionFaction',
+      key: 'electionFaction',
+      align: 'right',
+      sorterType: 'string'
+    },
+    {
+      title: 'ישוב',
+      dataIndex: 'electionCity',
+      key: 'electionCity',
+      align: 'right',
+      sorterType: 'string'
+    },
+    {
+      title: 'תאריך בחירות',
+      dataIndex: 'electionDate',
+      key: 'electionDate',
+      align: 'right',
+      sorterType: 'date',
+      render: date => date?.split('T')[0]
+    }
+  ];
 
   if (isLoading) return <p>טוען נתונים...</p>;
   if (error) return <p>שגיאה בטעינת הנתונים</p>;
@@ -22,7 +47,7 @@ export const PublisherResult = () => {
   return (
     <div>
       <PublisherResultSummary items={summaryData} />
-      <PublisherResultTable data={tableData} />
+      <PublisherResultTable data={tableData} electionColumnsChildren={localElectionColumns} />
     </div>
   );
 };

@@ -13,8 +13,10 @@
   "localGuarantyDonationSearch": {
     "results": [
       {
-        "guaranteeOrDonation": "תרומה",
-        "publisherTypeID": 1,
+        "fundingType": {
+          "id": 2,
+          "name": "תרומה"
+        },
         "publicationSearchName": "אלון פוטרמן",
         "city": "ביתר",
         "country": "אנגליה",
@@ -27,8 +29,10 @@
         "loanReturnSum": ""
       },
       {
-        "guaranteeOrDonation": "הלוואה",
-        "publisherTypeID": 2,
+        "fundingType": {
+          "id": 3,
+          "name": "הלוואה"
+        },
         "publicationSearchName": "אפרים כץ",
         "city": "מודיעין עילית",
         "country": "ישראל",
@@ -41,8 +45,10 @@
         "loanReturnSum": "100000.00"
       },
       {
-        "guaranteeOrDonation": "ערבות",
-        "publisherTypeID": 3,
+        "fundingType": {
+          "id": 4,
+          "name": "ערבות"
+        },
         "publicationSearchName": "בנימין דוד",
         "city": "ירושלים",
         "country": "ישראל",
@@ -56,7 +62,7 @@
       }
     ],
     "numDonations": 2,
-    "numGuarantees":0,
+    "numGuarantees": 0,
     "numLoans": 1,
     "sumDonations": 1000.00,
     "sumGuarantees": 0,

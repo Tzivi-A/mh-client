@@ -1,13 +1,15 @@
+import type { DateType } from '~/shared/types/date-type';
+import type { CodeEntity } from '~/types/code-entity-type';
+
 export interface LocalGuarantyDonationSearchRow {
-  guaranteeOrDonation: string;
-  publisherTypeID?: number;
+  fundingType: CodeEntity;
   publicationSearchName: string;
   city: string;
   country: string;
   publicationSearchSum: string;
   sumInCurrency: string;
   publicationSearchDate?: string;
-  electionDate?: string;
+  electionDate?: DateType;
   electionCity: string;
   electionFaction: string;
   loanReturnSum: string;

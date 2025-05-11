@@ -1,49 +1,44 @@
 import { Card } from '@ui/card/card';
 import { Table } from '@ui/table/table';
 import type { ColumnsType, TableProps } from '~/shared/types/table-type';
+import type { PublicationSearchEnum } from '~/types/enums/publication-search';
 import type { LocalGuarantyDonationSearchRow } from '~/types/publisher/publisher-search-results-type';
+import { PublicationSearchIcons } from '~/utils/constants/publisher/publication-search';
+import { Image } from '@ui/image/image';
+import { parseNullableNumber } from '~/shared/utils/number-utils';
 
 export interface PublisherResultTableProps {
   data: LocalGuarantyDonationSearchRow[];
+  electionColumnsChildren: ColumnsType<LocalGuarantyDonationSearchRow>;
 }
 
-export const PublisherResultTable = ({ data }: PublisherResultTableProps) => {
+export const PublisherResultTable = ({
+  data,
+  electionColumnsChildren
+}: PublisherResultTableProps) => {
   const columns: ColumnsType<LocalGuarantyDonationSearchRow> = [
     {
       title: 'סוג מימון',
-      dataIndex: 'guaranteeOrDonation',
-      key: 'guaranteeOrDonation',
+      key: 'fundingType.id',
+      align: 'right',
       sorterType: 'string',
-      align: 'right'
+      render: (_, record) => {
+        const type = record.fundingType.id as PublicationSearchEnum;
+        const title = record.fundingType.name;
+        const iconSrc = PublicationSearchIcons[type]?.table;
+        return (
+          <div>
+            {iconSrc && <Image src={iconSrc} alt={`${title} icon`} />}
+            <span>{title}</span>
+          </div>
+        );
+      }
     },
     {
       title: 'מאפייני בחירות',
       key: 'electionCharacteristics',
       align: 'center',
-      children: [
-        {
-          title: 'סיעה',
-          dataIndex: 'electionFaction',
-          key: 'electionFaction',
-          align: 'right',
-          sorterType: 'string'
-        },
-        {
-          title: 'ישוב',
-          dataIndex: 'electionCity',
-          key: 'electionCity',
-          align: 'right',
-          sorterType: 'string'
-        },
-        {
-          title: 'תאריך בחירות',
-          dataIndex: 'electionDate',
-          key: 'electionDate',
-          align: 'right',
-          sorterType: 'date',
-          render: date => date?.split('T')[0]
-        }
-      ]
+      children: electionColumnsChildren
     },
     {
       title: 'מאפייני התורם/ המלווה/ הערב',
@@ -92,11 +87,7 @@ export const PublisherResultTable = ({ data }: PublisherResultTableProps) => {
           key: 'publicationSearchSum',
           align: 'right',
           sorterType: 'number',
-          render: amount =>
-            parseFloat(amount).toLocaleString('he-IL', {
-              style: 'decimal',
-              minimumFractionDigits: 2
-            })
+          render: amount => parseNullableNumber(amount)
         },
         {
           title: 'יתרת הלוואה',
@@ -104,13 +95,7 @@ export const PublisherResultTable = ({ data }: PublisherResultTableProps) => {
           key: 'loanReturnSum',
           align: 'right',
           sorterType: 'number',
-          render: value =>
-            value
-              ? parseFloat(value).toLocaleString('he-IL', {
-                  style: 'decimal',
-                  minimumFractionDigits: 2
-                })
-              : ''
+          render: value => parseNullableNumber(value)
         }
       ]
     }

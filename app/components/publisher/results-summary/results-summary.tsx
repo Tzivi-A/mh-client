@@ -3,6 +3,7 @@ import type { PublisherResultSummaryData as PublishResultSummaryData } from '~/t
 import { DividedRowList } from '@ui/divided-row-list/divided-row-list';
 import { currencyFormatter } from '@utils/number-utils';
 import { Image } from '@ui/image/image';
+import { PublicationSearchIcons } from '~/utils/constants/publisher/publication-search';
 
 interface PublisherResultsSummaryProps {
   items: PublishResultSummaryData[];
@@ -12,10 +13,11 @@ export const PublisherResultSummary = ({ items }: PublisherResultsSummaryProps) 
   return (
     <DividedRowList
       items={items}
-      renderItem={({ title, count, sum, iconSrc, zeroIconSrc, titleIncludesCount }) => {
+      renderItem={({ title, count, sum, titleIncludesCount, publicationSearchType }) => {
         const isZero = sum === 0;
-        const displayIcon = isZero && zeroIconSrc ? zeroIconSrc : iconSrc;
-
+        const displayIcon = isZero
+          ? PublicationSearchIcons[publicationSearchType].zero
+          : PublicationSearchIcons[publicationSearchType].normal;
         return (
           <div className="results-summary-item">
             <div className="results-summary-info">
