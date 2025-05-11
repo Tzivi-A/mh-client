@@ -29,14 +29,14 @@ export const PublisherBanner = ({ setSearchData }: PublisherBannerProps) => {
   const form = useAppForm({
     defaultValues: {
       electionId: queries.elections.data?.find(e => e.value !== '')?.value ?? '',
-      publicationSearchType: [
+      publicationSearchTypes: [
         PublicationSearchEnum.Donation,
         PublicationSearchEnum.Guarantee,
         PublicationSearchEnum.Loan
       ]
     } as PublisherSearch,
     validators: {
-      onSubmit: ({ value }) => validateAtLeastOneExtraField(value, ['publicationSearchType'])
+      onSubmit: ({ value }) => validateAtLeastOneExtraField(value, ['publicationSearchTypes'])
     },
     onSubmit: () => {
       queries.searchData?.refetch();
@@ -192,7 +192,7 @@ export const PublisherBanner = ({ setSearchData }: PublisherBannerProps) => {
               <Flex direction="column">
                 <Flex>
                   <form.AppField
-                    name="publicationSearchType"
+                    name="publicationSearchTypes"
                     validators={{
                       onChange: ({ value }) => isCheckBoxGroupRequired(value)
                     }}

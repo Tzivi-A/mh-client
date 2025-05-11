@@ -1,4 +1,4 @@
-export interface LocalGuarantyDonationSearchRow {
+export interface LocalPublicationSearchRow {
   guaranteeOrDonation: string;
   publisherTypeID?: number;
   publicationSearchName: string;
@@ -13,8 +13,8 @@ export interface LocalGuarantyDonationSearchRow {
   loanReturnSum: string;
 }
 
-export interface LocalGuarantyDonationSearch {
-  results: LocalGuarantyDonationSearchRow[];
+export interface LocalPublicationSearch {
+  results: LocalPublicationSearchRow[];
   numDonations: number;
   numGuarantees: number;
   numLoans: number;

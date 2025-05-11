@@ -3,14 +3,14 @@
     "service": "publisher",
     "endpoints": [
       {
-        "functionName": "localGuarantyDonationSearch",
+        "functionName": "localPublicationSearch",
         "method": "POST",
-        "path": "/localGuarantyDonationSearch",
+        "path": "/localPublicationSearch",
         "params": []
       }
     ]
   },
-  "localGuarantyDonationSearch": {
+  "localPublicationSearch": {
     "results": [
       {
         "guaranteeOrDonation": "תרומה",

@@ -2,7 +2,7 @@ import type { DatePickerType } from '@app-types/date-type';
 import type { PublicationSearchEnum } from '~/types/enums/publication-search';
 
 export interface PublisherSearch {
-  publicationSearchType: PublicationSearchEnum[];
+  publicationSearchTypes: PublicationSearchEnum[];
   electionId?: string;
   electionCityID?: number;
   entityID?: number;

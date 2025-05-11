@@ -1,16 +1,14 @@
 import { DividerTypeEnum } from '@app-types/enums/divider-type';
 import { PublicationSearchEnum } from '~/types/enums/publication-search';
 import type { PublisherResultSummaryData } from '~/types/publisher/publisher-summary-result-type';
-import type { LocalGuarantyDonationSearch } from '~/types/publisher/publisher-search-results-type';
+import type { localPublicationSearch } from '~/types/publisher/publisher-search-results-type';
 import {
   PublicationSearchIcons,
   PublicationSearchTitles
 } from '~/utils/constants/publisher/publication-search';
 import { pareseNumber } from '~/shared/utils/number-utils';
 
-export const mapperSummaryData = (
-  result: LocalGuarantyDonationSearch
-): PublisherResultSummaryData[] => {
+export const mapperSummaryData = (result: localPublicationSearch): PublisherResultSummaryData[] => {
   const summaryData: PublisherResultSummaryData[] = result
     ? [
         {
