@@ -1,14 +1,15 @@
 import { DividerTypeEnum } from '@app-types/enums/divider-type';
 import { PublicationSearchEnum } from '~/types/enums/publication-search';
 import type { PublisherResultSummaryData } from '~/types/publisher/publisher-summary-result-type';
-import type { localPublicationSearch } from '~/types/publisher/publisher-search-results-type';
-import {
-  PublicationSearchIcons,
-  PublicationSearchTitles
-} from '~/utils/constants/publisher/publication-search';
-import { pareseNumber } from '~/shared/utils/number-utils';
+import type { LocalPublicationResults } from '~/types/publisher/publisher-search-results-type';
+import { PublicationSearchTitles } from '~/utils/constants/publisher/publication-search';
+import { formatHebrewNumber, pareseNumber } from '@utils/number-utils';
 
-export const mapperSummaryData = (result: localPublicationSearch): PublisherResultSummaryData[] => {
+export const mapperSummaryData = (
+  result?: LocalPublicationResults
+): PublisherResultSummaryData[] => {
+  const buildTitleWithCount = (label: string, count: number) =>
+    `סה"כ ${formatHebrewNumber(count)} ${label}`;
   const summaryData: PublisherResultSummaryData[] = result
     ? [
         {
@@ -16,7 +17,6 @@ export const mapperSummaryData = (result: localPublicationSearch): PublisherResu
           title: PublicationSearchTitles[PublicationSearchEnum.Donation].plural,
           count: result.numDonations,
           sum: parseFloat(result.sumDonations),
-          iconSrc: PublicationSearchIcons[PublicationSearchEnum.Donation],
           dividerAfter: DividerTypeEnum.Line
         },
         {
@@ -24,7 +24,6 @@ export const mapperSummaryData = (result: localPublicationSearch): PublisherResu
           title: PublicationSearchTitles[PublicationSearchEnum.Guarantee].plural,
           count: result.numGuarantees,
           sum: parseFloat(result.sumGuarantees),
-          iconSrc: PublicationSearchIcons[PublicationSearchEnum.Guarantee],
           dividerAfter: DividerTypeEnum.Line
         },
         {
@@ -32,17 +31,18 @@ export const mapperSummaryData = (result: localPublicationSearch): PublisherResu
           title: PublicationSearchTitles[PublicationSearchEnum.Loan].plural,
           count: result.numLoans,
           sum: parseFloat(result.sumLoans),
-          iconSrc: PublicationSearchIcons[PublicationSearchEnum.Loan],
           dividerAfter: DividerTypeEnum.Arrow
         },
         {
-          title: PublicationSearchTitles[PublicationSearchEnum.All].plural,
-          count: result.numLoans + result.numGuarantees + result.numDonations,
-          sum:
+          publicationSearchType: PublicationSearchEnum.All,
+          title: buildTitleWithCount(
+            PublicationSearchTitles[PublicationSearchEnum.All].plural,
             pareseNumber(result.sumLoans) +
-            pareseNumber(result.sumGuarantees) +
-            pareseNumber(result.sumDonations),
-          iconSrc: PublicationSearchIcons[PublicationSearchEnum.All]
+              pareseNumber(result.sumGuarantees) +
+              pareseNumber(result.sumDonations)
+          ),
+          sum: parseFloat(result.sumLoans + result.sumGuarantees + result.sumDonations),
+          titleIncludesCount: true
         }
       ]
     : [];

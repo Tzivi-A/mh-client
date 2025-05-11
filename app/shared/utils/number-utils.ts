@@ -33,3 +33,10 @@ export const pareseNumber = (val: string): number => {
   const num = parseFloat(val);
   return Number.isNaN(num) ? 0 : num;
 };
+
+export const parseNullableNumber = (value?: string | number): string =>
+  value
+    ? numberHebrewFormatter({ style: 'decimal', minimumFractionDigits: 2 }).format(
+        parseFloat(value.toString())
+      )
+    : '';

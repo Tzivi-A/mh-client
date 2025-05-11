@@ -4,11 +4,9 @@ import type { Country } from '~/types/country-type';
 import type { Option } from '@app-types/option-type';
 import { useAppQuery } from '@hooks/use-app-query';
 import type { PublishBannerQueries } from '~/types/queries/publisher/publisher-banner-queries';
-import type { LocalPublicationSearch } from '~/types/publisher/publisher-search-results-type';
-import type { PublisherResultSummaryData } from '~/types/publisher/publisher-summary-result-type';
-import { mapperSummaryData } from '~/mappers/publisher/publication-search-mapper';
 import type { PublisherSearch } from '~/types/publisher/publisher-search-type';
 import type { DataObject } from '@app-types/api-type';
+import type { LocalPublicationResults } from '~/types/publisher/publisher-search-results-type';
 
 export const usePublisherBannerQueries = (): PublishBannerQueries => ({
   elections: useAppQuery<CodeEntity[], Option[]>({
@@ -60,10 +58,9 @@ export const useFactions = (selectedCityId?: number) =>
   });
 
 export const useSearchData = (data: PublisherSearch) =>
-  useAppQuery<LocalPublicationSearch, PublisherResultSummaryData[]>({
+  useAppQuery<LocalPublicationResults>({
     url: 'api/publisher/localPublicationSearch',
     method: 'POST',
     isRunNow: false,
-    queryData: { requestData: data as unknown as DataObject },
-    mapResponse: mapperSummaryData
+    queryData: { requestData: data as unknown as DataObject }
   });

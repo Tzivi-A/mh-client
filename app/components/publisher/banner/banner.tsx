@@ -17,10 +17,10 @@ import { validateAtLeastOneExtraField } from '~/validators/common/form-validator
 import Section from '@ui/section/section';
 import { PublicationSearchEnum } from '~/types/enums/publication-search';
 import { isCheckBoxGroupRequired } from '~/validators/common/requierd-validators';
-import type { PublisherResultSummaryData } from '~/types/publisher/publisher-summary-result-type';
+import type { LocalPublicationResults } from '~/types/publisher/publisher-search-results-type';
 
 export interface PublisherBannerProps {
-  setSearchData: (data: PublisherResultSummaryData[]) => void;
+  setSearchData: (data: LocalPublicationResults) => void;
 }
 
 export const PublisherBanner = ({ setSearchData }: PublisherBannerProps) => {
@@ -68,7 +68,7 @@ export const PublisherBanner = ({ setSearchData }: PublisherBannerProps) => {
 
   useEffect(() => {
     if (queries.searchData?.data) {
-      setSearchData(queries.searchData.data ?? []);
+      setSearchData(queries.searchData.data);
     }
   }, [queries.searchData?.data]);
 
