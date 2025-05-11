@@ -8,6 +8,6 @@ export interface PublishBannerQueries {
   factions?: UseQueryResult<Option[], Error>;
   countries: UseQueryResult<Option[], Error>;
   cities: UseQueryResult<Option[], Error>;
-  publications?: UseQueryResult<Option[], Error>;
+  publications: UseQueryResult<Option[], Error>;
   searchData?: UseQueryResult<LocalPublicationResults, Error>;
 }

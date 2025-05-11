@@ -13,7 +13,9 @@ export const validateAtLeastOneExtraField = <T extends object>(
   excludeKeys: (keyof T)[]
 ): ValidatorType => {
   const isAllExtraEmpty = Object.entries(value).every(([key, val]) => {
-    if (excludeKeys.includes(key as keyof T)) return true;
+    if (excludeKeys.includes(key as keyof T)) {
+      return true;
+    }
     return val === null || val === undefined || val === '';
   });
 

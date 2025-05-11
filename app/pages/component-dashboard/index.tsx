@@ -104,8 +104,12 @@ export const ComponentDashboardPage = () => {
     setResponse('Option added successfully!');
   };
 
-  if (optionsQuery.isLoading) return <p>Loading options data...</p>;
-  if (optionsQuery.error) return <p>Error loading options data</p>;
+  if (optionsQuery.isLoading) {
+    return <p>Loading options data...</p>;
+  }
+  if (optionsQuery.error) {
+    return <p>Error loading options data</p>;
+  }
 
   return (
     <main>

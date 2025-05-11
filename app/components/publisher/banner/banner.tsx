@@ -75,8 +75,12 @@ export const PublisherBanner = ({ setSearchData }: PublisherBannerProps) => {
   const isLoading = Object.values(queries).some(query => query.isLoading);
   const hasError = Object.values(queries).some(query => query.error);
 
-  if (isLoading) return <p>Loading data...</p>;
-  if (hasError) return <p>Error loading data</p>;
+  if (isLoading) {
+    return <p>Loading data...</p>;
+  }
+  if (hasError) {
+    return <p>Error loading data</p>;
+  }
 
   return (
     <form
@@ -201,7 +205,7 @@ export const PublisherBanner = ({ setSearchData }: PublisherBannerProps) => {
                       <field.CheckBoxGroup
                         label="סוג חיפוש"
                         isRequired={true}
-                        options={queries.publications?.data || []}
+                        options={queries.publications.data || []}
                       />
                     )}
                   </form.AppField>

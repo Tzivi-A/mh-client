@@ -1,5 +1,7 @@
 export const formatNumber = (value?: string | number): string => {
-  if (value === undefined || value === null || value === '') return '';
+  if (value === undefined || value === null || value === '') {
+    return '';
+  }
 
   const str = typeof value === 'number' ? value.toString() : value;
   // Allow a leading minus sign and remove any non-digit characters except for commas
