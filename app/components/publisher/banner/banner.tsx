@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { Button } from '@ui/button/button';
 import { Image } from '@ui/image/image';
 import { Flex } from '@ui/layout/flex/flex';
@@ -7,7 +7,8 @@ import useAppForm, { useStore } from '@hooks/use-app-form';
 import {
   useCitiesByElectionId,
   useFactions,
-  usePublisherBannerQueries
+  usePublisherBannerQueries,
+  useSearchData
 } from '~/hooks/api/queries/publisher/banner';
 import type { PublisherSearch } from '~/types/publisher/publisher-search-type';
 import searchIcon from '~/assets/images/search-icon.svg';
@@ -19,18 +20,11 @@ import { isCheckBoxGroupRequired } from '~/validators/common/requierd-validators
 import type { PublisherResultSummaryData } from '~/types/publisher/publisher-summary-result-type';
 
 export interface PublisherBannerProps {
-  setSummaryData: (data: PublisherResultSummaryData[]) => void;
+  setSearchData: (data: PublisherResultSummaryData[]) => void;
 }
 
-export const PublisherBanner = ({ setSummaryData }: PublisherBannerProps) => {
-  const [formData, setFormData] = useState<PublisherSearch>({} as PublisherSearch);
-  const queries = usePublisherBannerQueries(formData);
-
-  useEffect(() => {
-    if (queries.summaryData.data) {
-      setSummaryData(queries.summaryData.data ?? []);
-    }
-  }, [queries.summaryData.data]);
+export const PublisherBanner = ({ setSearchData }: PublisherBannerProps) => {
+  const queries = usePublisherBannerQueries();
 
   const form = useAppForm({
     defaultValues: {
@@ -44,16 +38,8 @@ export const PublisherBanner = ({ setSummaryData }: PublisherBannerProps) => {
     validators: {
       onSubmit: ({ value }) => validateAtLeastOneExtraField(value, ['publicationSearchType'])
     },
-    onSubmit: ({ value }) => {
-      const data = {
-        ...value,
-        publicationSearchType:
-          value.publicationSearchType.length === 3
-            ? [PublicationSearchEnum.All]
-            : value.publicationSearchType
-      };
-
-      setFormData(data);
+    onSubmit: () => {
+      queries.searchData?.refetch();
     }
   });
 
@@ -63,6 +49,7 @@ export const PublisherBanner = ({ setSummaryData }: PublisherBannerProps) => {
 
   queries.citiesByElectionId = useCitiesByElectionId(selectedElectionId);
   queries.factions = useFactions(selectedCityId);
+  queries.searchData = useSearchData(form.store.state.values);
 
   const isFormReady =
     queries.elections.data?.length && (!selectedElectionId || selectedElectionId !== '');
@@ -78,6 +65,12 @@ export const PublisherBanner = ({ setSummaryData }: PublisherBannerProps) => {
       form.setFieldValue('entityID', undefined);
     }
   }, [selectedCityId]);
+
+  useEffect(() => {
+    if (queries.searchData?.data) {
+      setSearchData(queries.searchData.data ?? []);
+    }
+  }, [queries.searchData?.data]);
 
   const isLoading = Object.values(queries).some(query => query.isLoading);
   const hasError = Object.values(queries).some(query => query.error);
@@ -208,7 +201,7 @@ export const PublisherBanner = ({ setSummaryData }: PublisherBannerProps) => {
                       <field.CheckBoxGroup
                         label="סוג חיפוש"
                         isRequired={true}
-                        options={queries.publicationSearch?.data || []}
+                        options={queries.publications?.data || []}
                       />
                     )}
                   </form.AppField>

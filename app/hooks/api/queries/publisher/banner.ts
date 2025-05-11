@@ -10,7 +10,7 @@ import { mapperSummaryData } from '~/mappers/publisher/publication-search-mapper
 import type { PublisherSearch } from '~/types/publisher/publisher-search-type';
 import type { DataObject } from '@app-types/api-type';
 
-export const usePublisherBannerQueries = (data: PublisherSearch): PublishBannerQueries => ({
+export const usePublisherBannerQueries = (): PublishBannerQueries => ({
   elections: useAppQuery<CodeEntity[], Option[]>({
     url: 'api/election/activeLocalElections',
     queryData: {
@@ -28,16 +28,9 @@ export const usePublisherBannerQueries = (data: PublisherSearch): PublishBannerQ
     url: 'api/codeTable/cities',
     mapResponse: data => codeEntityToOptionMapper(data, true)
   }),
-  publicationSearch: useAppQuery<CodeEntity[], Option[]>({
+  publications: useAppQuery<CodeEntity[], Option[]>({
     url: 'api/codeTable/publicationSearch',
     mapResponse: codeEntityToOptionMapper
-  }),
-  summaryData: useAppQuery<LocalGuarantyDonationSearch, PublisherResultSummaryData[]>({
-    url: 'api/publisher/localGuarantyDonationSearch',
-    method: 'POST',
-    isRunNow: !!data && Object.keys(data).length > 0,
-    queryData: { requestData: data as unknown as DataObject },
-    mapResponse: mapperSummaryData
   })
 });
 
@@ -63,4 +56,13 @@ export const useFactions = (selectedCityId?: number) =>
       }
     },
     mapResponse: codeEntityToOptionMapper
+  });
+
+export const useSearchData = (data: PublisherSearch) =>
+  useAppQuery<LocalGuarantyDonationSearch, PublisherResultSummaryData[]>({
+    url: 'api/publisher/localGuarantyDonationSearch',
+    method: 'POST',
+    isRunNow: !!data && Object.keys(data).length > 0,
+    queryData: { requestData: data as unknown as DataObject },
+    mapResponse: mapperSummaryData
   });
