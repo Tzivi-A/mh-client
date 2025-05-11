@@ -7,10 +7,19 @@ import type { PublishBannerQueries } from '~/types/queries/publisher/publisher-b
 import type { PublisherSearch } from '~/types/publisher/publisher-search-type';
 import type { DataObject } from '@app-types/api-type';
 import type { LocalPublicationResults } from '~/types/publisher/publisher-search-results-type';
+import {
+  ACTIVE_LOCAL_ELECTIONS,
+  CITIES,
+  COUNTRIES,
+  FACTION_CITIES,
+  FACTIONS,
+  LOCAL_PUBLICATION_SEARCH,
+  PUBLICATION
+} from '~/utils/constants/api';
 
 export const usePublisherBannerQueries = (): PublishBannerQueries => ({
   elections: useAppQuery<CodeEntity[], Option[]>({
-    url: 'api/election/activeLocalElections',
+    url: ACTIVE_LOCAL_ELECTIONS,
     queryData: {
       queryStringData: {
         isAddRemark: false
@@ -19,23 +28,22 @@ export const usePublisherBannerQueries = (): PublishBannerQueries => ({
     mapResponse: data => codeEntityToOptionMapper(data, true)
   }),
   countries: useAppQuery<Country[], Option[]>({
-    url: 'api/codeTable/countries',
+    url: COUNTRIES,
     mapResponse: data => countryToOptionMapper(data, true)
   }),
   cities: useAppQuery<CodeEntity[], Option[]>({
-    url: 'api/codeTable/cities',
+    url: CITIES,
     mapResponse: data => codeEntityToOptionMapper(data, true)
+  }),
+  publications: useAppQuery<CodeEntity[], Option[]>({
+    url: PUBLICATION,
+    mapResponse: codeEntityToOptionMapper
   })
-  // ,
-  // publications: useAppQuery<CodeEntity[], Option[]>({
-  //   url: 'api/codeTable/publicationSearch',
-  //   mapResponse: codeEntityToOptionMapper
-  // })
 });
 
 export const useCitiesByElectionId = (selectedElectionId?: string) =>
   useAppQuery<CodeEntity[], Option[]>({
-    url: 'api/faction/cities',
+    url: FACTION_CITIES,
     isRunNow: !!selectedElectionId,
     queryData: {
       queryStringData: {
@@ -47,7 +55,7 @@ export const useCitiesByElectionId = (selectedElectionId?: string) =>
 
 export const useFactions = (selectedCityId?: number) =>
   useAppQuery<CodeEntity[], Option[]>({
-    url: 'api/faction/factions',
+    url: FACTIONS,
     isRunNow: !!selectedCityId,
     queryData: {
       queryStringData: {
@@ -59,7 +67,7 @@ export const useFactions = (selectedCityId?: number) =>
 
 export const useSearchData = (data: PublisherSearch) =>
   useAppQuery<LocalPublicationResults>({
-    url: 'api/publisher/localPublicationSearch',
+    url: LOCAL_PUBLICATION_SEARCH,
     method: 'POST',
     isRunNow: false,
     queryData: { requestData: data as unknown as DataObject }
