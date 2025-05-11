@@ -85,7 +85,8 @@ export default tseslint.config(
       '@typescript-eslint/no-unsafe-member-access': 0,
       '@typescript-eslint/no-unsafe-argument': 0,
       '@typescript-eslint/no-floating-promises': 0,
-      'local/mapper-naming': 'error'
+      'local/mapper-naming': 'error',
+      "curly": 2
     }
   }
 );

@@ -1,7 +1,7 @@
 import './results-summary.css';
 import type { PublisherResultSummaryData as PublishResultSummaryData } from '~/types/publisher/publisher-summary-result-type';
 import { DividedRowList } from '@ui/divided-row-list/divided-row-list';
-import { currencyFormatter } from '@utils/number-utils';
+import { currencyFormatter, formatHebrewNumber } from '@utils/number-utils';
 import { Image } from '@ui/image/image';
 import { PublicationSearchIcons } from '~/utils/constants/publisher/publication-search';
 
@@ -22,7 +22,7 @@ export const PublisherResultSummary = ({ items }: PublisherResultsSummaryProps) 
           <div className="results-summary-item">
             <div className="results-summary-info">
               <div className="results-summary-title">
-                {titleIncludesCount ? title : `${count ?? 0} ${title}`}
+                {titleIncludesCount ? title : `${formatHebrewNumber(count ?? 0)} ${title}`}
               </div>
               <div className="results-summary-sum">{currencyFormatter.format(sum)}</div>
             </div>

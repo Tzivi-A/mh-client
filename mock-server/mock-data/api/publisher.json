@@ -3,14 +3,14 @@
     "service": "publisher",
     "endpoints": [
       {
-        "functionName": "localGuarantyDonationSearch",
-        "method": "GET",
-        "path": "/localGuarantyDonationSearch",
+        "functionName": "localPublicationSearch",
+        "method": "POST",
+        "path": "/localPublicationSearch",
         "params": []
       }
     ]
   },
-  "localGuarantyDonationSearch": {
+  "localPublicationSearch": {
     "results": [
       {
         "publicationType": {
@@ -30,7 +30,7 @@
       },
       {
         "publicationType": {
-          "id": 3,
+          "id": 4,
           "name": "הלוואה"
         },
         "publicationSearchName": "אפרים כץ",
@@ -46,7 +46,7 @@
       },
       {
         "publicationType": {
-          "id": 4,
+          "id": 3,
           "name": "ערבות"
         },
         "publicationSearchName": "בנימין דוד",

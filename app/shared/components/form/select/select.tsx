@@ -4,7 +4,7 @@ import InputWrapper from '@ui/form/input-wrapper/input-wrapper';
 import type { FormFieldProps } from '@app-types/form-type';
 import type { Option } from '@app-types/option-type';
 
-export interface SelectProps extends FormFieldProps<string> {
+export interface SelectProps extends FormFieldProps<string | number> {
   options?: Option[];
   includeEmptyOption?: boolean; // New prop to control whether to include an empty option
   emptyOptionLabel?: string; // Label for the empty option
@@ -18,6 +18,7 @@ export const Select = ({
   onChange,
   value,
   error,
+  isRequired,
   includeEmptyOption = false, // Default to not including an empty option
   emptyOptionLabel = 'בחר...' // Default label for the empty option
 }: SelectProps) => {
@@ -27,7 +28,7 @@ export const Select = ({
     : options;
 
   return (
-    <InputWrapper label={label} id={id} error={error}>
+    <InputWrapper label={label} id={id} error={error} isRequired={isRequired}>
       <AntSelect
         id={id}
         value={value}

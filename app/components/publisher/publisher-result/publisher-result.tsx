@@ -2,19 +2,17 @@ import { PublisherResultSummary } from '~/components/publisher/results-summary/r
 import PublisherResultTable from '~/components/publisher/result-table/result-table';
 import type { PublisherResultSummaryData } from '~/types/publisher/publisher-summary-result-type';
 import { mapperSummaryData } from '~/mappers/publisher/publication-search-mapper';
-import { useAppQuery } from '@hooks/use-app-query';
-
 import type { ColumnsType } from '@app-types/table-type';
 import type {
   LocalPublicationResultRow,
   LocalPublicationResults
 } from '~/types/publisher/publisher-search-results-type';
 
-export const PublisherResult = () => {
-  const { data, isLoading, error } = useAppQuery<LocalPublicationResults>({
-    url: 'api/publisher/localGuarantyDonationSearch'
-  });
+export interface PublisherResultProps {
+  data?: LocalPublicationResults;
+}
 
+export const PublisherResult = ({ data }: PublisherResultProps) => {
   const tableData: LocalPublicationResultRow[] = data?.results ?? [];
   const summaryData: PublisherResultSummaryData[] = mapperSummaryData(data);
   const localElectionColumns: ColumnsType<LocalPublicationResultRow> = [
@@ -41,9 +39,6 @@ export const PublisherResult = () => {
       render: date => date?.split('T')[0]
     }
   ];
-
-  if (isLoading) return <p>טוען נתונים...</p>;
-  if (error) return <p>שגיאה בטעינת הנתונים</p>;
 
   return (
     <div>

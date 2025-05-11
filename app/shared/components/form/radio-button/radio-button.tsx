@@ -3,7 +3,7 @@ import type { FormFieldProps } from '@app-types/form-type';
 import type { Option } from '@app-types/option-type';
 import './radio-button.css';
 
-export interface RadioFieldProps extends FormFieldProps<string> {
+export interface RadioFieldProps extends FormFieldProps<string | number> {
   options?: Option[];
 }
 
@@ -13,10 +13,11 @@ export const RadioButton = ({
   options = [],
   value,
   onChange,
-  error
+  error,
+  isRequired
 }: RadioFieldProps) => {
   return (
-    <InputWrapper id={id} label={label} error={error}>
+    <InputWrapper id={id} label={label} error={error} isRequired={isRequired}>
       <div role="radiogroup" aria-labelledby={id} className="radio-group">
         {options?.map(opt => {
           const radioId = `${id}-${opt.value}`;
@@ -25,7 +26,7 @@ export const RadioButton = ({
               <input
                 type="radio"
                 id={radioId}
-                name={opt.value}
+                name={opt.value.toString()}
                 value={opt.value}
                 checked={value === opt.value}
                 onChange={e => onChange?.(e.target.value)}

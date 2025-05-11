@@ -3,7 +3,7 @@ import type { FormFieldProps } from '@app-types/form-type';
 import type { Option } from '@app-types/option-type';
 import './check-box-group.css';
 
-export interface CheckBoxGroupProps extends FormFieldProps<string[]> {
+export interface CheckBoxGroupProps extends FormFieldProps<(string | number)[]> {
   options?: Option[];
 }
 
@@ -13,15 +13,16 @@ export const CheckBoxGroup = ({
   options = [],
   value = [],
   onChange,
-  error
+  error,
+  isRequired
 }: CheckBoxGroupProps) => {
-  const handleChange = (checked: boolean, optValue: string) => {
+  const handleChange = (checked: boolean, optValue: string | number) => {
     const newValue = checked ? [...value, optValue] : value.filter(v => v !== optValue);
     onChange?.(newValue);
   };
 
   return (
-    <InputWrapper id={id} label={label} error={error}>
+    <InputWrapper id={id} label={label} error={error} isRequired={isRequired}>
       <div role="group" aria-labelledby={id} className="checkbox-group">
         {options.map(opt => {
           const checkboxId = `${id}-${opt.value}`;
@@ -29,7 +30,7 @@ export const CheckBoxGroup = ({
             <label key={opt.value} htmlFor={checkboxId} className="checkbox-label">
               <input
                 type="checkbox"
-                id={opt.value}
+                id={opt.value.toString()}
                 name={id}
                 value={opt.value}
                 checked={value.includes(opt.value)}

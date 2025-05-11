@@ -2,7 +2,9 @@ import dayjs from 'dayjs';
 import type { DatePickerType, DateType } from '@app-types/date-type';
 
 export const toDayjs = (value: DatePickerType): DateType => {
-  if (!value) return undefined;
+  if (!value) {
+    return undefined;
+  }
   return dayjs.isDayjs(value) ? value : dayjs(value, 'DD/MM/YYYY');
 };
 
@@ -13,6 +15,8 @@ export const parseDate = (dateString: string): number => {
 
 export const dateToString = (value: DatePickerType): string => {
   const date = toDayjs(value);
-  if (!date || !date.isValid()) return '';
+  if (!date || !date.isValid()) {
+    return '';
+  }
   return date.format('DD/MM/YYYY');
 };

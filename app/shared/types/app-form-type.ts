@@ -7,6 +7,7 @@ export interface BaseAppFormField {
   fieldType: FieldTypeEnum;
   label?: ReactNode;
   disabled?: boolean;
+  isRequired?: boolean;
 }
 
 type AppFormFieldConstraint<T> = T extends BaseAppFormField ? T : never;

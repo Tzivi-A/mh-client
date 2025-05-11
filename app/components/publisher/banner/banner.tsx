@@ -7,7 +7,8 @@ import useAppForm, { useStore } from '@hooks/use-app-form';
 import {
   useCitiesByElectionId,
   useFactions,
-  usePublisherBannerQueries
+  usePublisherBannerQueries,
+  useSearchData
 } from '~/hooks/api/queries/publisher/banner';
 import type { PublisherSearch } from '~/types/publisher/publisher-search-type';
 import searchIcon from '~/assets/images/search-icon.svg';
@@ -16,33 +17,39 @@ import { validateAtLeastOneExtraField } from '~/validators/common/form-validator
 import Section from '@ui/section/section';
 import { PublicationSearchEnum } from '~/types/enums/publication-search';
 import { isCheckBoxGroupRequired } from '~/validators/common/requierd-validators';
+import type { LocalPublicationResults } from '~/types/publisher/publisher-search-results-type';
 
-export const PublisherBanner = () => {
+export interface PublisherBannerProps {
+  setSearchData: (data: LocalPublicationResults) => void;
+}
+
+export const PublisherBanner = ({ setSearchData }: PublisherBannerProps) => {
   const queries = usePublisherBannerQueries();
 
   const form = useAppForm({
     defaultValues: {
-      electionDate: queries.elections.data?.find(e => e.value !== '')?.value ?? '',
-      publicationSearchType: [
+      electionId: queries.elections.data?.find(e => e.value !== '')?.value ?? '',
+      publicationSearchTypes: [
         PublicationSearchEnum.Donation,
         PublicationSearchEnum.Guarantee,
         PublicationSearchEnum.Loan
       ]
     } as PublisherSearch,
     validators: {
-      onSubmit: ({ value }) => validateAtLeastOneExtraField(value, ['publicationSearchType'])
+      onSubmit: ({ value }) => validateAtLeastOneExtraField(value, ['publicationSearchTypes'])
     },
-    onSubmit: ({ value }) => {
-      alert(JSON.stringify(value));
+    onSubmit: () => {
+      queries.searchData?.refetch();
     }
   });
 
-  const selectedElectionId = useStore(form.store, state => state.values.electionDate);
+  const selectedElectionId = useStore(form.store, state => state.values.electionId);
   const selectedCityId = useStore(form.store, state => state.values.electionCityID);
   const formErrorMap = useStore(form.store, state => state.errorMap);
 
   queries.citiesByElectionId = useCitiesByElectionId(selectedElectionId);
   queries.factions = useFactions(selectedCityId);
+  queries.searchData = useSearchData(form.store.state.values);
 
   const isFormReady =
     queries.elections.data?.length && (!selectedElectionId || selectedElectionId !== '');
@@ -59,11 +66,21 @@ export const PublisherBanner = () => {
     }
   }, [selectedCityId]);
 
+  useEffect(() => {
+    if (queries.searchData?.data) {
+      setSearchData(queries.searchData.data);
+    }
+  }, [queries.searchData?.data]);
+
   const isLoading = Object.values(queries).some(query => query.isLoading);
   const hasError = Object.values(queries).some(query => query.error);
 
-  if (isLoading) return <p>Loading data...</p>;
-  if (hasError) return <p>Error loading data</p>;
+  if (isLoading) {
+    return <p>Loading data...</p>;
+  }
+  if (hasError) {
+    return <p>Error loading data</p>;
+  }
 
   return (
     <form
@@ -77,7 +94,7 @@ export const PublisherBanner = () => {
         <SideBySideCard.Right>
           <Section header="מאפייני הבחירות">
             <Flex direction="column">
-              <form.AppField name="electionDate">
+              <form.AppField name="electionId">
                 {field => (
                   <field.Select label="תאריך בחירות" options={queries.elections.data || []} />
                 )}
@@ -179,7 +196,7 @@ export const PublisherBanner = () => {
               <Flex direction="column">
                 <Flex>
                   <form.AppField
-                    name="publicationSearchType"
+                    name="publicationSearchTypes"
                     validators={{
                       onChange: ({ value }) => isCheckBoxGroupRequired(value)
                     }}
@@ -187,7 +204,8 @@ export const PublisherBanner = () => {
                     {field => (
                       <field.CheckBoxGroup
                         label="סוג חיפוש"
-                        options={queries.publicationSearch.data || []}
+                        isRequired={true}
+                        options={queries.publications.data || []}
                       />
                     )}
                   </form.AppField>
@@ -203,6 +221,7 @@ export const PublisherBanner = () => {
                         keepDefaultValues: true
                       });
                     }}
+                    variant="text"
                   >
                     נקה מאפייני חיפוש
                   </Button>

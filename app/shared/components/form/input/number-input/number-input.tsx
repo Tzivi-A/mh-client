@@ -16,7 +16,8 @@ export const NumberInput = ({
   error,
   label,
   min,
-  max
+  max,
+  isRequired
 }: NumberProps) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const rawValue = e.target.value;
@@ -25,7 +26,7 @@ export const NumberInput = ({
   };
 
   return (
-    <InputWrapper id={id} error={error} label={label}>
+    <InputWrapper id={id} error={error} label={label} isRequired={isRequired}>
       <input
         max={max}
         min={min}

@@ -104,8 +104,12 @@ export const ComponentDashboardPage = () => {
     setResponse('Option added successfully!');
   };
 
-  if (optionsQuery.isLoading) return <p>Loading options data...</p>;
-  if (optionsQuery.error) return <p>Error loading options data</p>;
+  if (optionsQuery.isLoading) {
+    return <p>Loading options data...</p>;
+  }
+  if (optionsQuery.error) {
+    return <p>Error loading options data</p>;
+  }
 
   return (
     <main>
@@ -156,7 +160,7 @@ export const ComponentDashboardPage = () => {
                 onChange: ({ value }) => isInputRequired(value)
               }}
             >
-              {field => <field.Input label="שם משפחה" />}
+              {field => <field.Input label="שם משפחה" isRequired={true} />}
             </form.AppField>
             <form.AppField name="number">
               {field => <field.Number label="מספר" max={2} />}
@@ -209,7 +213,7 @@ export const ComponentDashboardPage = () => {
               onChange: ({ value }) => isInputRequired(value)
             }}
           >
-            {field => <field.Input label="label" />}
+            {field => <field.Input label="label" isRequired={true} />}
           </formOptions.AppField>
           <Button type="submit">Submit Option</Button>
         </Card>

@@ -13,7 +13,9 @@ const DividerComponents: Record<DividerTypeEnum, React.FC> = {
 };
 
 export const Divider = ({ type }: { type?: DividerTypeEnum }) => {
-  if (!type || !(type in DividerComponents)) return null;
+  if (!type || !(type in DividerComponents)) {
+    return null;
+  }
   const Comp = DividerComponents[type];
   return <Comp />;
 };

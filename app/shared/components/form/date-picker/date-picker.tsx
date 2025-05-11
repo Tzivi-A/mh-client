@@ -20,10 +20,11 @@ export const DatePicker = ({
   inputReadOnly = true,
   minDate,
   maxDate,
-  error
+  error,
+  isRequired
 }: DatePickerProps<DatePickerType>) => {
   return (
-    <InputWrapper label={label} id={id} error={error}>
+    <InputWrapper label={label} id={id} error={error} isRequired={isRequired}>
       <AntDatePicker
         className="malam-input"
         value={toDayjs(value) || null}
