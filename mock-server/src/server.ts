@@ -71,7 +71,7 @@ mockFiles.forEach(filePath => {
       }
 
       if (method === 'POST') {
-        if (Object.keys(req.query).length > 0) {
+        if (params.length > 0) {
           const newItem = req.body;
           newItem.value = data.length ? data[data.length - 1].value + 1 : 1;
           data.push(newItem);

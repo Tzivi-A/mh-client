@@ -8,18 +8,18 @@ import type { PublisherSearch } from '~/types/publisher/publisher-search-type';
 import type { DataObject } from '@app-types/api-type';
 import type { LocalPublicationResults } from '~/types/publisher/publisher-search-results-type';
 import {
-  ACTIVE_LOCAL_ELECTIONS,
-  CITIES,
-  COUNTRIES,
-  FACTION_CITIES,
-  FACTIONS,
+  GET_ACTIVE_LOCAL_ELECTIONS,
+  GET_CITIES,
+  GET_COUNTRIES,
+  GET_FACTION_CITIES,
+  GET_FACTIONS,
   LOCAL_PUBLICATION_SEARCH,
-  PUBLICATION
+  GET_PUBLICATION
 } from '~/api/api-urls';
 
 export const usePublisherBannerQueries = (): PublishBannerQueries => ({
   elections: useAppQuery<CodeEntity[], Option[]>({
-    url: ACTIVE_LOCAL_ELECTIONS,
+    url: GET_ACTIVE_LOCAL_ELECTIONS,
     queryData: {
       queryStringData: {
         isAddRemark: false
@@ -28,22 +28,22 @@ export const usePublisherBannerQueries = (): PublishBannerQueries => ({
     mapResponse: data => codeEntityToOptionMapper(data, true)
   }),
   countries: useAppQuery<Country[], Option[]>({
-    url: COUNTRIES,
+    url: GET_COUNTRIES,
     mapResponse: data => countryToOptionMapper(data, true)
   }),
   cities: useAppQuery<CodeEntity[], Option[]>({
-    url: CITIES,
+    url: GET_CITIES,
     mapResponse: data => codeEntityToOptionMapper(data, true)
   }),
   publications: useAppQuery<CodeEntity[], Option[]>({
-    url: PUBLICATION,
+    url: GET_PUBLICATION,
     mapResponse: codeEntityToOptionMapper
   })
 });
 
 export const useCitiesByElectionId = (selectedElectionId?: string) =>
   useAppQuery<CodeEntity[], Option[]>({
-    url: FACTION_CITIES,
+    url: GET_FACTION_CITIES,
     isRunNow: !!selectedElectionId,
     queryData: {
       queryStringData: {
@@ -55,7 +55,7 @@ export const useCitiesByElectionId = (selectedElectionId?: string) =>
 
 export const useFactions = (selectedCityId?: number) =>
   useAppQuery<CodeEntity[], Option[]>({
-    url: FACTIONS,
+    url: GET_FACTIONS,
     isRunNow: !!selectedCityId,
     queryData: {
       queryStringData: {
