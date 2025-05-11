@@ -16,23 +16,24 @@ export const PublisherResultTable = ({
   data,
   electionColumnsChildren
 }: PublisherResultTableProps) => {
+  const renderFundingType = (record: LocalGuarantyDonationSearchRow) => {
+    const type = record.fundingType.id as PublicationSearchEnum;
+    const title = record.fundingType.name;
+    const iconSrc = PublicationSearchIcons[type]?.table;
+    return (
+      <div>
+        {iconSrc && <Image src={iconSrc} alt={`${title} icon`} />}
+        <span>{title}</span>
+      </div>
+    );
+  };
   const columns: ColumnsType<LocalGuarantyDonationSearchRow> = [
     {
       title: 'סוג מימון',
       key: 'fundingType.id',
       align: 'right',
       sorterType: 'string',
-      render: (_, record) => {
-        const type = record.fundingType.id as PublicationSearchEnum;
-        const title = record.fundingType.name;
-        const iconSrc = PublicationSearchIcons[type]?.table;
-        return (
-          <div>
-            {iconSrc && <Image src={iconSrc} alt={`${title} icon`} />}
-            <span>{title}</span>
-          </div>
-        );
-      }
+      render: (_, record) => renderFundingType(record)
     },
     {
       title: 'מאפייני בחירות',
