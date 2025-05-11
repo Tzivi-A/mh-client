@@ -1,8 +1,8 @@
-import type { DateType } from '~/shared/types/date-type';
+import type { DateType } from '@app-types/date-type';
 import type { CodeEntity } from '~/types/code-entity-type';
 
-export interface LocalGuarantyDonationSearchRow {
-  fundingType: CodeEntity;
+export interface LocalPublicationResultRow {
+  publicationType: CodeEntity;
   publicationSearchName: string;
   city: string;
   country: string;
@@ -15,8 +15,8 @@ export interface LocalGuarantyDonationSearchRow {
   loanReturnSum: string;
 }
 
-export interface LocalGuarantyDonationSearch {
-  results: LocalGuarantyDonationSearchRow[];
+export interface LocalPublicationResults {
+  results: LocalPublicationResultRow[];
   numDonations: number;
   numGuarantees: number;
   numLoans: number;

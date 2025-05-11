@@ -13,7 +13,7 @@
   "localGuarantyDonationSearch": {
     "results": [
       {
-        "fundingType": {
+        "publicationType": {
           "id": 2,
           "name": "תרומה"
         },
@@ -29,7 +29,7 @@
         "loanReturnSum": ""
       },
       {
-        "fundingType": {
+        "publicationType": {
           "id": 3,
           "name": "הלוואה"
         },
@@ -45,7 +45,7 @@
         "loanReturnSum": "100000.00"
       },
       {
-        "fundingType": {
+        "publicationType": {
           "id": 4,
           "name": "ערבות"
         },

@@ -2,21 +2,22 @@ import { PublisherResultSummary } from '~/components/publisher/results-summary/r
 import PublisherResultTable from '~/components/publisher/result-table/result-table';
 import type { PublisherResultSummaryData } from '~/types/publisher/publisher-summary-result-type';
 import { mapperSummaryData } from '~/mappers/publisher/publication-search-mapper';
-import { useAppQuery } from '~/shared/hooks/use-app-query';
+import { useAppQuery } from '@hooks/use-app-query';
+
+import type { ColumnsType } from '@app-types/table-type';
 import type {
-  LocalGuarantyDonationSearch,
-  LocalGuarantyDonationSearchRow
+  LocalPublicationResultRow,
+  LocalPublicationResults
 } from '~/types/publisher/publisher-search-results-type';
-import type { ColumnsType } from '~/shared/types/table-type';
 
 export const PublisherResult = () => {
-  const { data, isLoading, error } = useAppQuery<LocalGuarantyDonationSearch>({
+  const { data, isLoading, error } = useAppQuery<LocalPublicationResults>({
     url: 'api/publisher/localGuarantyDonationSearch'
   });
 
-  const tableData: LocalGuarantyDonationSearchRow[] = data?.results ?? [];
+  const tableData: LocalPublicationResultRow[] = data?.results ?? [];
   const summaryData: PublisherResultSummaryData[] = mapperSummaryData(data);
-  const localElectionColumns: ColumnsType<LocalGuarantyDonationSearchRow> = [
+  const localElectionColumns: ColumnsType<LocalPublicationResultRow> = [
     {
       title: 'סיעה',
       dataIndex: 'electionFaction',

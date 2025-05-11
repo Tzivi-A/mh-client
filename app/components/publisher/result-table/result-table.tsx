@@ -1,24 +1,24 @@
 import { Card } from '@ui/card/card';
 import { Table } from '@ui/table/table';
-import type { ColumnsType, TableProps } from '~/shared/types/table-type';
+import type { ColumnsType, TableProps } from '@app-types/table-type';
 import type { PublicationSearchEnum } from '~/types/enums/publication-search';
-import type { LocalGuarantyDonationSearchRow } from '~/types/publisher/publisher-search-results-type';
 import { PublicationSearchIcons } from '~/utils/constants/publisher/publication-search';
 import { Image } from '@ui/image/image';
-import { parseNullableNumber } from '~/shared/utils/number-utils';
+import { parseNullableNumber } from '@utils/number-utils';
+import type { LocalPublicationResultRow } from '~/types/publisher/publisher-search-results-type';
 
 export interface PublisherResultTableProps {
-  data: LocalGuarantyDonationSearchRow[];
-  electionColumnsChildren: ColumnsType<LocalGuarantyDonationSearchRow>;
+  data: LocalPublicationResultRow[];
+  electionColumnsChildren: ColumnsType<LocalPublicationResultRow>;
 }
 
 export const PublisherResultTable = ({
   data,
   electionColumnsChildren
 }: PublisherResultTableProps) => {
-  const renderFundingType = (record: LocalGuarantyDonationSearchRow) => {
-    const type = record.fundingType.id as PublicationSearchEnum;
-    const title = record.fundingType.name;
+  const renderPublicationType = (record: LocalPublicationResultRow) => {
+    const type = record.publicationType.id as PublicationSearchEnum;
+    const title = record.publicationType.name;
     const iconSrc = PublicationSearchIcons[type]?.table;
     return (
       <div>
@@ -27,13 +27,13 @@ export const PublisherResultTable = ({
       </div>
     );
   };
-  const columns: ColumnsType<LocalGuarantyDonationSearchRow> = [
+  const columns: ColumnsType<LocalPublicationResultRow> = [
     {
       title: 'סוג מימון',
-      key: 'fundingType.id',
+      key: 'publicationType.id',
       align: 'right',
       sorterType: 'string',
-      render: (_, record) => renderFundingType(record)
+      render: (_, record) => renderPublicationType(record)
     },
     {
       title: 'מאפייני בחירות',
@@ -71,7 +71,7 @@ export const PublisherResultTable = ({
     },
     {
       title: 'מאפייני התרומה/ ההלוואה/ הערבות',
-      key: 'fundingCharacteristics',
+      key: 'publicationCharacteristics',
       align: 'center',
       children: [
         {
@@ -102,7 +102,7 @@ export const PublisherResultTable = ({
     }
   ];
 
-  const tableProps: TableProps<LocalGuarantyDonationSearchRow> = {
+  const tableProps: TableProps<LocalPublicationResultRow> = {
     data: data.map((d, idx) => ({ ...d, key: idx })),
     columns,
     loading: false,
