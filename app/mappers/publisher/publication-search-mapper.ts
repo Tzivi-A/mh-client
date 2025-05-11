@@ -38,19 +38,9 @@ export const mapperSummaryData = (
             result.numLoans + result.numGuarantees + result.numDonations
           ),
           sum: parseFloat(result.sumLoans + result.sumGuarantees + result.sumDonations),
-          // iconSrc: PublicationSearchIcons[PublicationSearchEnum.All],
           titleIncludesCount: true
         }
       ]
     : [];
   return summaryData;
 };
-
-// export const getPublicationIcon = (type: PublicationSearchEnum, isZero: boolean): string => {
-//   const baseIcon = PublicationSearchIcons[type];
-
-//   if (isZero) {
-//     return baseIcon.replace(/\.svg$/, '-zero.svg');
-//   }
-//   return baseIcon;
-// };
