@@ -37,9 +37,7 @@ export const mapperSummaryData = (
           publicationSearchType: PublicationSearchEnum.All,
           title: buildTitleWithCount(
             PublicationSearchTitles[PublicationSearchEnum.All].plural,
-            pareseNumber(result.sumLoans) +
-              pareseNumber(result.sumGuarantees) +
-              pareseNumber(result.sumDonations)
+            result.numLoans + result.numGuarantees + result.numDonations
           ),
           sum: parseFloat(result.sumLoans + result.sumGuarantees + result.sumDonations),
           titleIncludesCount: true
