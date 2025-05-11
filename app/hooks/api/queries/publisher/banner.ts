@@ -15,7 +15,7 @@ import {
   FACTIONS,
   LOCAL_PUBLICATION_SEARCH,
   PUBLICATION
-} from '~/utils/constants/api';
+} from '~/api/api-urls';
 
 export const usePublisherBannerQueries = (): PublishBannerQueries => ({
   elections: useAppQuery<CodeEntity[], Option[]>({
