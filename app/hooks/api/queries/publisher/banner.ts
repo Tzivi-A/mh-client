@@ -62,7 +62,7 @@ export const useSearchData = (data: PublisherSearch) =>
   useAppQuery<LocalGuarantyDonationSearch, PublisherResultSummaryData[]>({
     url: 'api/publisher/localGuarantyDonationSearch',
     method: 'POST',
-    isRunNow: !!data && Object.keys(data).length > 0,
+    isRunNow: false,
     queryData: { requestData: data as unknown as DataObject },
     mapResponse: mapperSummaryData
   });
