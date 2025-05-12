@@ -15,10 +15,10 @@
         "params": []
       },
       {
-        "functionName": "publicationSearch",
+        "functionName": "codeTable",
         "method": "GET",
-        "path": "/publicationSearch",
-        "params": []
+        "path": "/codeTable",
+        "params": ["codeTable"]
       }
     ]
   },
@@ -83,18 +83,21 @@
       "id": 1311
     }
   ],
-  "publicationSearch": [
+  "codeTable": [
     {
       "name": "תרומות",
-      "id": 2
+      "id": 2,
+      "codeTable": 41
     },
     {
       "name": "ערבויות",
-      "id": 3
+      "id": 3,
+      "codeTable": 41
     },
     {
       "name": "הלוואות",
-      "id": 4
+      "id": 4,
+      "codeTable": 41
     }
   ]
 }
