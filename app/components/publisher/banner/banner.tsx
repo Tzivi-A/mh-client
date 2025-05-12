@@ -127,7 +127,7 @@ export const PublisherBanner = ({ setSearchData }: PublisherBannerProps) => {
               <Flex direction="column">
                 <Flex>
                   <form.AppField name="fullName">
-                    {field => <field.Input label="שם מלא" />}
+                    {field => <field.Input label="שם מלא" placeholder="שם התורם/הערב/המלווה" />}
                   </form.AppField>
                   <form.AppField name="cityID">
                     {field => <field.Select label="ישוב" options={queries.cities.data || []} />}
@@ -148,7 +148,13 @@ export const PublisherBanner = ({ setSearchData }: PublisherBannerProps) => {
                         )
                     }}
                   >
-                    {field => <field.DatePicker label="מתאריך" inputReadOnly={false} />}
+                    {field => (
+                      <field.DatePicker
+                        label="מתאריך"
+                        inputReadOnly={false}
+                        placeholder="בחירת תאריך"
+                      />
+                    )}
                   </form.AppField>
                   <form.AppField
                     name="toDate"
@@ -161,7 +167,13 @@ export const PublisherBanner = ({ setSearchData }: PublisherBannerProps) => {
                         )
                     }}
                   >
-                    {field => <field.DatePicker label="עד תאריך" inputReadOnly={false} />}
+                    {field => (
+                      <field.DatePicker
+                        label="עד תאריך"
+                        inputReadOnly={false}
+                        placeholder="בחירת תאריך"
+                      />
+                    )}
                   </form.AppField>
                 </Flex>
                 <Flex>
@@ -176,7 +188,7 @@ export const PublisherBanner = ({ setSearchData }: PublisherBannerProps) => {
                         )
                     }}
                   >
-                    {field => <field.Number label="מסכום" />}
+                    {field => <field.Number label="מסכום" placeholder="סכום מינימלי" />}
                   </form.AppField>
                   <form.AppField
                     name="toSum"
@@ -189,7 +201,7 @@ export const PublisherBanner = ({ setSearchData }: PublisherBannerProps) => {
                         )
                     }}
                   >
-                    {field => <field.Number label="עד סכום" />}
+                    {field => <field.Number label="עד סכום" placeholder="סכום מקסימלי" />}
                   </form.AppField>
                 </Flex>
               </Flex>

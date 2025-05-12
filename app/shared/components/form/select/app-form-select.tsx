@@ -4,7 +4,15 @@ import { AppFormField } from '@ui/form/app-form-field';
 
 export type AppFormSelectProps = Omit<AppFormSelectField, 'fieldType'>;
 
-export const AppFormSelect = ({ label, isRequired, disabled, options }: AppFormSelectProps) => {
+export const AppFormSelect = ({
+  label,
+  isRequired,
+  disabled,
+  options,
+  includeEmptyOption,
+  emptyOptionLabel,
+  placeholder
+}: AppFormSelectProps) => {
   return (
     <AppFormField
       fieldType={FieldTypeEnum.SELECT}
@@ -12,6 +20,9 @@ export const AppFormSelect = ({ label, isRequired, disabled, options }: AppFormS
       disabled={disabled}
       isRequired={isRequired}
       options={options}
+      includeEmptyOption={includeEmptyOption}
+      emptyOptionLabel={emptyOptionLabel}
+      placeholder={placeholder}
     />
   );
 };

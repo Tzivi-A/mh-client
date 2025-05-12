@@ -8,6 +8,7 @@ export interface SelectProps extends FormFieldProps<string | number> {
   options?: Option[];
   includeEmptyOption?: boolean; // New prop to control whether to include an empty option
   emptyOptionLabel?: string; // Label for the empty option
+  placeholder?: string;
 }
 
 export const Select = ({
@@ -20,7 +21,8 @@ export const Select = ({
   error,
   isRequired,
   includeEmptyOption = false, // Default to not including an empty option
-  emptyOptionLabel = 'בחר...' // Default label for the empty option
+  emptyOptionLabel = 'בחר...', // Default label for the empty option
+  placeholder
 }: SelectProps) => {
   // Add an empty option if `includeEmptyOption` is true
   const enhancedOptions = includeEmptyOption
@@ -40,6 +42,7 @@ export const Select = ({
         } // Filters options based on user input
         options={enhancedOptions} // Use enhanced options with the empty option
         disabled={disabled}
+        placeholder={placeholder}
       />
     </InputWrapper>
   );

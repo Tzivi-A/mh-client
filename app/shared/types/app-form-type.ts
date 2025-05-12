@@ -14,16 +14,19 @@ type AppFormFieldConstraint<T> = T extends BaseAppFormField ? T : never;
 
 export interface AppFormTextInputField extends BaseAppFormField {
   fieldType: FieldTypeEnum.TEXT;
+  placeholder?: string;
 }
 
 export interface AppFormNumberField extends BaseAppFormField {
   fieldType: FieldTypeEnum.NUMBER;
+  placeholder?: string;
   min?: number;
   max?: number;
 }
 
 export interface AppFormSelectField extends BaseAppFormField {
   fieldType: FieldTypeEnum.SELECT;
+  placeholder?: string;
   options: Option[];
   includeEmptyOption?: boolean;
   emptyOptionLabel?: string;
@@ -31,6 +34,7 @@ export interface AppFormSelectField extends BaseAppFormField {
 
 export interface AppFormDatePickerField extends BaseAppFormField {
   fieldType: FieldTypeEnum.DATE_PICKER;
+  placeholder?: string;
   inputReadOnly?: boolean;
   minDate?: DatePickerType;
   maxDate?: DatePickerType;

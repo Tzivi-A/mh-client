@@ -5,11 +5,13 @@ import InputWrapper from '@ui/form/input-wrapper/input-wrapper';
 import type { FormFieldProps } from '@app-types/form-type';
 import type { DatePickerType } from '@app-types/date-type';
 import { toDayjs } from '@utils/date-utils';
+import { useState } from 'react';
 
 export interface DatePickerProps<T> extends FormFieldProps<T> {
   minDate?: DatePickerType;
   maxDate?: DatePickerType;
   inputReadOnly?: boolean;
+  placeholder?: string;
 }
 
 export const DatePicker = ({
@@ -21,8 +23,11 @@ export const DatePicker = ({
   minDate,
   maxDate,
   error,
-  isRequired
+  isRequired,
+  placeholder: initialPlaceholder
 }: DatePickerProps<DatePickerType>) => {
+  const [currentPlaceholder, setCurrentPlaceholder] = useState(initialPlaceholder);
+
   return (
     <InputWrapper label={label} id={id} error={error} isRequired={isRequired}>
       <AntDatePicker
@@ -33,7 +38,13 @@ export const DatePicker = ({
         format="DD/MM/YYYY"
         minDate={toDayjs(minDate)}
         maxDate={toDayjs(maxDate)}
-        placeholder={!inputReadOnly ? 'DD/MM/YYYY' : ''}
+        onFocus={() => {
+          if (!inputReadOnly) {
+            setCurrentPlaceholder('DD/MM/YYYY');
+          }
+        }}
+        onBlur={() => setCurrentPlaceholder(initialPlaceholder)}
+        placeholder={currentPlaceholder}
       />
     </InputWrapper>
   );

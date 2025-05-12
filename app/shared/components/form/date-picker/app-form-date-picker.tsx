@@ -9,7 +9,8 @@ export const AppFormDatePicker = ({
   isRequired,
   minDate,
   maxDate,
-  inputReadOnly
+  inputReadOnly,
+  placeholder
 }: AppFormDatePickerProps) => {
   return (
     <AppFormField
@@ -19,6 +20,7 @@ export const AppFormDatePicker = ({
       minDate={minDate}
       maxDate={maxDate}
       inputReadOnly={inputReadOnly}
+      placeholder={placeholder}
     />
   );
 };
