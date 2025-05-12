@@ -1,7 +1,7 @@
 import { Image } from '@ui/image/image';
 import { Flex } from '@ui/layout/flex/flex';
 import Link from '@ui/link/link';
-import Header from '~/components/header/header';
+import MHHeader from '~/components/mh-header/mh-header';
 import LinkIcon from '~/assets/images/external-link.svg';
 import './header.css';
 
@@ -11,7 +11,7 @@ export interface PublisherHeaderProps {
 
 export const PublisherHeader = ({ title }: PublisherHeaderProps) => {
   return (
-    <Header>
+    <MHHeader>
       <Flex justify="space-between">
         <h3>{`תרומות, ערבויות והלוואות ל${title}`}</h3>
         <div className="mh-link">
@@ -26,7 +26,7 @@ export const PublisherHeader = ({ title }: PublisherHeaderProps) => {
           </Link>
         </div>
       </Flex>
-    </Header>
+    </MHHeader>
   );
 };
 

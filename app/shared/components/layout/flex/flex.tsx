@@ -4,24 +4,15 @@ import styles from './flex.module.css';
 export interface FlexProps {
   direction?: 'row' | 'column';
   children: ReactNode;
-  className?: string;
   width?: string | number;
   justify?: React.CSSProperties['justifyContent'];
   align?: React.CSSProperties['alignItems'];
 }
 
-export const Flex = ({
-  children,
-  direction = 'row',
-  className,
-  width = '',
-  justify,
-  align
-}: FlexProps) => {
+export const Flex = ({ children, direction = 'row', width = '', justify, align }: FlexProps) => {
   return (
     <div
-      className={`${styles.flex} ${direction === 'column' ? styles['flex-direction-column'] : ''}
-      ${className}`}
+      className={`${styles.flex} ${direction === 'column' ? styles['flex-direction-column'] : ''}`}
       style={
         {
           '--flex-width': typeof width === 'number' ? `${width}px` : width,
