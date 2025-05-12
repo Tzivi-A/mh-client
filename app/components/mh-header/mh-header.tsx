@@ -12,7 +12,7 @@ export interface HeaderProps {
 
 export const MHHeader = ({ children }: HeaderProps) => {
   return (
-    <Header position="sticky">
+    <Header className="mh-header">
       <Flex align="center">
         <Image src={LogoHeader} alt="logo" />
         <Divider type={DividerTypeEnum.Line} />
