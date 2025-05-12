@@ -1,5 +1,9 @@
 import type { CodeEntity } from '~/types/code-entity-type';
-import { codeEntityToOptionMapper, countryToOptionMapper } from '~/mappers/select-mapper';
+import {
+  codeEntityToOptionMapper,
+  countryToOptionMapper,
+  publicationsSearchTypeToOptionMapper
+} from '~/mappers/option-mapper';
 import type { Country } from '~/types/country-type';
 import type { Option } from '@app-types/option-type';
 import { useAppQuery } from '@hooks/use-app-query';
@@ -14,8 +18,9 @@ import {
   GET_FACTION_CITIES,
   GET_FACTIONS,
   LOCAL_PUBLICATION_SEARCH,
-  GET_PUBLICATION
+  GET_CODE_ENTITY_LIST
 } from '~/api/api-urls';
+import { CodeEntityEnum } from '~/types/enums/code-entity';
 
 export const usePublisherBannerQueries = (): PublishBannerQueries => ({
   elections: useAppQuery<CodeEntity[], Option[]>({
@@ -36,8 +41,13 @@ export const usePublisherBannerQueries = (): PublishBannerQueries => ({
     mapResponse: data => codeEntityToOptionMapper(data, true)
   }),
   publications: useAppQuery<CodeEntity[], Option[]>({
-    url: GET_PUBLICATION,
-    mapResponse: codeEntityToOptionMapper
+    url: GET_CODE_ENTITY_LIST,
+    queryData: {
+      queryStringData: {
+        codeTable: CodeEntityEnum.PublicationSearchType
+      }
+    },
+    mapResponse: publicationsSearchTypeToOptionMapper
   })
 });
 
