@@ -1,7 +1,8 @@
 import { Image } from '@ui/image/image';
 import { Flex } from '@ui/layout/flex/flex';
+import Link from '@ui/link/link';
 import Header from '~/components/header/header';
-import Link from '~/assets/images/external-link.svg';
+import LinkIcon from '~/assets/images/external-link.svg';
 import './header.css';
 
 export interface PublisherHeaderProps {
@@ -14,15 +15,15 @@ export const PublisherHeader = ({ title }: PublisherHeaderProps) => {
       <Flex justify="space-between">
         <h3>{`תרומות, ערבויות והלוואות ל${title}`}</h3>
         <div className="mh-link">
-          <a
+          <Link
             href="https://www.mevaker.gov.il/"
             target="_blank"
             className="link-icon"
             rel="noreferrer"
           >
-            <Image src={Link} alt="Mevaker hamedina link" />
+            <Image src={LinkIcon} alt="Mevaker hamedina link" />
             לאתר מבקר המדינה
-          </a>
+          </Link>
         </div>
       </Flex>
     </Header>
