@@ -2,8 +2,9 @@ import '@ui/form/input/input.css';
 import InputWrapper from '@ui/form/input-wrapper/input-wrapper';
 import type { FormFieldProps } from '@app-types/form-type';
 
-export type TextInputProps = FormFieldProps<string>;
-
+export interface TextInputProps extends FormFieldProps<string> {
+  placeholder?: string;
+}
 export const TextInput = ({
   value,
   onChange,
@@ -11,7 +12,8 @@ export const TextInput = ({
   onBlur,
   error,
   label,
-  isRequired
+  isRequired,
+  placeholder
 }: TextInputProps) => {
   return (
     <InputWrapper id={id} error={error} label={label} isRequired={isRequired}>
@@ -22,6 +24,7 @@ export const TextInput = ({
         value={value || ''}
         type="text"
         onChange={e => onChange?.(e.target.value)}
+        placeholder={placeholder}
       />
     </InputWrapper>
   );

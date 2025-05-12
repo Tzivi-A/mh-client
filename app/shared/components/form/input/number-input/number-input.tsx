@@ -4,6 +4,7 @@ import type { FormFieldProps } from '@app-types/form-type';
 import { formatNumber } from '@utils/number-utils';
 
 export interface NumberProps extends FormFieldProps<string> {
+  placeholder?: string;
   min?: number;
   max?: number;
 }
@@ -17,7 +18,8 @@ export const NumberInput = ({
   label,
   min,
   max,
-  isRequired
+  isRequired,
+  placeholder
 }: NumberProps) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const rawValue = e.target.value;
@@ -38,6 +40,7 @@ export const NumberInput = ({
         onChange={handleChange}
         inputMode="decimal"
         pattern="^-?[0-9,]*"
+        placeholder={placeholder}
       />
     </InputWrapper>
   );
