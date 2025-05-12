@@ -7,6 +7,7 @@ import type {
   LocalPublicationResultRow,
   LocalPublicationResults
 } from '~/types/publisher/publisher-search-results-type';
+import Section from '~/shared/components/section/section';
 
 export interface PublisherResultProps {
   data?: LocalPublicationResults;
@@ -43,7 +44,12 @@ export const PublisherResult = ({ data }: PublisherResultProps) => {
   return (
     <div>
       <PublisherResultSummary items={summaryData} />
-      <PublisherResultTable data={tableData} electionColumnsChildren={localElectionColumns} />
+      <Section
+        header={'שים לב'}
+        children={
+          <PublisherResultTable data={tableData} electionColumnsChildren={localElectionColumns} />
+        }
+      />
     </div>
   );
 };
