@@ -1,0 +1,13 @@
+.mh-link {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+}
+
+.link-icon {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: #003399;
+  text-decoration: none;
+}

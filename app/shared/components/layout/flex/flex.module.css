@@ -1,6 +1,8 @@
 .flex {
   display: flex;
   width: var(--flex-width, '');
+  justify-content: var(--flex-justify, '');
+  align-items: var(--flex-align, '');
   flex-direction: row;
   &.flex-direction-column {
     flex-direction: column;
