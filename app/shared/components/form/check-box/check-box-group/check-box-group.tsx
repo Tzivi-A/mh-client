@@ -3,6 +3,7 @@ import { Flex } from '@ui/layout/flex/flex';
 import type { FormFieldProps } from '@app-types/form-type';
 import type { Option } from '@app-types/option-type';
 import styles from './check-box-group.module.css';
+
 export interface CheckBoxGroupProps extends FormFieldProps<(string | number)[]> {
   options?: Option[];
   flexDirection?: 'row' | 'column';
