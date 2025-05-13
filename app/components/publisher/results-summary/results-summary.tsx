@@ -9,9 +9,6 @@ interface PublisherResultsSummaryProps {
   items: PublishResultSummaryData[];
 }
 
-const getClassName = (baseClass: string, isZero: boolean) =>
-  isZero ? `${baseClass}-zero` : baseClass;
-
 export const PublisherResultSummary = ({ items }: PublisherResultsSummaryProps) => {
   return (
     <DividedRowList
@@ -21,13 +18,15 @@ export const PublisherResultSummary = ({ items }: PublisherResultsSummaryProps) 
         const displayIcon = isZero
           ? PublicationSearchIcons[publicationSearchType].zero
           : PublicationSearchIcons[publicationSearchType].normal;
+        const getClassName = (baseClass: string) => (isZero ? `${baseClass}-zero` : baseClass);
+
         return (
           <div className="results-summary-item">
             <div className="results-summary-info">
-              <div className={getClassName('results-summary-title', isZero)}>
+              <div className={getClassName('results-summary-title')}>
                 {titleIncludesCount ? title : `${formatHebrewNumber(count ?? 0)} ${title}`}
               </div>
-              <div className={getClassName('results-summary-sum', isZero)}>
+              <div className={getClassName('results-summary-sum')}>
                 {currencyFormatter.format(sum)}
               </div>
             </div>

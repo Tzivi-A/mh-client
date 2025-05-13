@@ -48,21 +48,18 @@ export const PublisherResultTable = ({
       children: [
         {
           title: 'שם מלא',
-          dataIndex: 'name',
           key: 'name',
           align: 'right',
           sorterType: 'string'
         },
         {
           title: 'ארץ',
-          dataIndex: 'country',
           key: 'country',
           align: 'right',
           sorterType: 'string'
         },
         {
           title: 'ישוב',
-          dataIndex: 'city',
           key: 'city',
           align: 'right',
           sorterType: 'string'
@@ -76,7 +73,6 @@ export const PublisherResultTable = ({
       children: [
         {
           title: 'תאריך',
-          dataIndex: 'publicationDate',
           key: 'publicationDate',
           align: 'right',
           sorterType: 'date',
@@ -84,7 +80,6 @@ export const PublisherResultTable = ({
         },
         {
           title: 'סכום',
-          dataIndex: 'publicationSum',
           key: 'publicationSum',
           align: 'right',
           sorterType: 'number',
@@ -92,7 +87,6 @@ export const PublisherResultTable = ({
         },
         {
           title: 'יתרת הלוואה',
-          dataIndex: 'loanReturnSum',
           key: 'loanReturnSum',
           align: 'right',
           sorterType: 'number',

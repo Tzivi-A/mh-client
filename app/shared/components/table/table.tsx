@@ -40,6 +40,10 @@ export const Table = <RecordType,>({
   const processColumns = (columns: ColumnsType<RecordType>): ColumnsType<RecordType> => {
     return columns.map(column => {
       if (isNotColumnGroupType(column)) {
+        // If dataIndex is missing, fallback to key
+        if (!column.dataIndex && column.key) {
+          column.dataIndex = column.key as string;
+        }
         if (column.sorterType) {
           column.sorter = (a, b) => {
             const valueA = column.sorterName

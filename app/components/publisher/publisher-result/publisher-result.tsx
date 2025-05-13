@@ -45,7 +45,9 @@ export const PublisherResult = ({ data }: PublisherResultProps) => {
     <div>
       <PublisherResultSummary items={summaryData} />
       <Section
-        header={'שים לב'}
+        header={
+          'שימו לב: ניתן להציג עד 1000 רשומות. מוצגות בטבלה 1000 האחרונות, נא לצמצם את נתוני החיפוש.'
+        }
         children={
           <PublisherResultTable data={tableData} electionColumnsChildren={localElectionColumns} />
         }
