@@ -7,6 +7,7 @@ import {
   ScrollRestoration
 } from 'react-router';
 import type { Route } from './+types/root';
+import './reset.css';
 import './app.css';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ConfigProvider } from 'antd';

@@ -224,8 +224,10 @@ export const PublisherBanner = ({ setSearchData }: PublisherBannerProps) => {
                 </Flex>
                 <Flex>
                   <Button type="submit">
-                    <Image src={searchIcon} alt="search" />
-                    חפש
+                    <Flex>
+                      <Image src={searchIcon} alt="search" />
+                      חפש
+                    </Flex>
                   </Button>
                   <Button
                     onClick={() => {
