@@ -3,12 +3,12 @@ import type { CodeEntity } from '~/types/code-entity-type';
 
 export interface LocalPublicationResultRow {
   publicationType: CodeEntity;
-  publicationSearchName: string;
+  name: string;
   city: string;
   country: string;
-  publicationSearchSum: string;
+  publicationSum: string;
   sumInCurrency: string;
-  publicationSearchDate?: string;
+  publicationDate?: DateType;
   electionDate?: DateType;
   electionCity: string;
   electionFaction: string;

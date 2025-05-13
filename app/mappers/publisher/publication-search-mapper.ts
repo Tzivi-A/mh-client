@@ -14,32 +14,35 @@ export const mapperSummaryData = (
     ? [
         {
           publicationSearchType: PublicationSearchEnum.Donation,
-          title: PublicationSearchTitles[PublicationSearchEnum.Donation].plural,
+          sumTitle: PublicationSearchTitles[PublicationSearchEnum.Donation].plural,
           count: result.numDonations,
           sum: parseFloat(result.sumDonations),
           dividerAfter: DividerTypeEnum.Line
         },
         {
           publicationSearchType: PublicationSearchEnum.Guarantee,
-          title: PublicationSearchTitles[PublicationSearchEnum.Guarantee].plural,
+          sumTitle: PublicationSearchTitles[PublicationSearchEnum.Guarantee].plural,
           count: result.numGuarantees,
           sum: parseFloat(result.sumGuarantees),
           dividerAfter: DividerTypeEnum.Line
         },
         {
           publicationSearchType: PublicationSearchEnum.Loan,
-          title: PublicationSearchTitles[PublicationSearchEnum.Loan].plural,
+          sumTitle: PublicationSearchTitles[PublicationSearchEnum.Loan].plural,
           count: result.numLoans,
           sum: parseFloat(result.sumLoans),
           dividerAfter: DividerTypeEnum.Arrow
         },
         {
           publicationSearchType: PublicationSearchEnum.All,
-          title: buildTitleWithCount(
+          sumTitle: buildTitleWithCount(
             PublicationSearchTitles[PublicationSearchEnum.All].plural,
             result.numLoans + result.numGuarantees + result.numDonations
           ),
-          sum: parseFloat(result.sumLoans + result.sumGuarantees + result.sumDonations),
+          sum:
+            parseFloat(result.sumDonations) +
+            parseFloat(result.sumGuarantees) +
+            parseFloat(result.sumLoans),
           titleIncludesCount: true
         }
       ]

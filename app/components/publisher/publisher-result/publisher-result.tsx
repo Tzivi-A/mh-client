@@ -7,6 +7,7 @@ import type {
   LocalPublicationResultRow,
   LocalPublicationResults
 } from '~/types/publisher/publisher-search-results-type';
+import Section from '@ui/section/section';
 
 export interface PublisherResultProps {
   data?: LocalPublicationResults;
@@ -43,7 +44,14 @@ export const PublisherResult = ({ data }: PublisherResultProps) => {
   return (
     <div>
       <PublisherResultSummary items={summaryData} />
-      <PublisherResultTable data={tableData} electionColumnsChildren={localElectionColumns} />
+      <Section
+        header={
+          'שימו לב: ניתן להציג עד 1000 רשומות. מוצגות בטבלה 1000 האחרונות, נא לצמצם את נתוני החיפוש.'
+        }
+        children={
+          <PublisherResultTable data={tableData} electionColumnsChildren={localElectionColumns} />
+        }
+      />
     </div>
   );
 };

@@ -4,7 +4,7 @@ import type { ColumnsType, TableProps } from '@app-types/table-type';
 import type { PublicationSearchEnum } from '~/types/enums/publication-search';
 import { PublicationSearchIcons } from '~/utils/constants/publisher/publication-search';
 import { Image } from '@ui/image/image';
-import { parseNullableNumber } from '@utils/number-utils';
+import { parseNullableDecimal } from '@utils/number-utils';
 import type { LocalPublicationResultRow } from '~/types/publisher/publisher-search-results-type';
 
 export interface PublisherResultTableProps {
@@ -48,21 +48,18 @@ export const PublisherResultTable = ({
       children: [
         {
           title: 'שם מלא',
-          dataIndex: 'publicationSearchName',
-          key: 'publicationSearchName',
+          key: 'name',
           align: 'right',
           sorterType: 'string'
         },
         {
           title: 'ארץ',
-          dataIndex: 'country',
           key: 'country',
           align: 'right',
           sorterType: 'string'
         },
         {
           title: 'ישוב',
-          dataIndex: 'city',
           key: 'city',
           align: 'right',
           sorterType: 'string'
@@ -76,27 +73,24 @@ export const PublisherResultTable = ({
       children: [
         {
           title: 'תאריך',
-          dataIndex: 'publicationSearchDate',
-          key: 'publicationSearchDate',
+          key: 'publicationDate',
           align: 'right',
           sorterType: 'date',
           render: date => date?.split('T')[0]
         },
         {
           title: 'סכום',
-          dataIndex: 'publicationSearchSum',
-          key: 'publicationSearchSum',
+          key: 'publicationSum',
           align: 'right',
           sorterType: 'number',
-          render: amount => parseNullableNumber(amount)
+          render: amount => parseNullableDecimal(amount)
         },
         {
           title: 'יתרת הלוואה',
-          dataIndex: 'loanReturnSum',
           key: 'loanReturnSum',
           align: 'right',
           sorterType: 'number',
-          render: value => parseNullableNumber(value)
+          render: value => parseNullableDecimal(value)
         }
       ]
     }
