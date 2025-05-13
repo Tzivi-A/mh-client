@@ -7,7 +7,7 @@ import type {
   LocalPublicationResultRow,
   LocalPublicationResults
 } from '~/types/publisher/publisher-search-results-type';
-import Section from '~/shared/components/section/section';
+import Section from '@ui/section/section';
 
 export interface PublisherResultProps {
   data?: LocalPublicationResults;
