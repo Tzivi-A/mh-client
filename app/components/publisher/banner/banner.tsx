@@ -72,15 +72,15 @@ export const PublisherBanner = ({ setSearchData }: PublisherBannerProps) => {
     }
   }, [queries.searchData?.data]);
 
-  const isLoading = Object.values(queries).some(query => query.isLoading);
-  const hasError = Object.values(queries).some(query => query.error);
+  // const isLoading = Object.values(queries).some(query => query.isLoading);
+  // const hasError = Object.values(queries).some(query => query.error);
 
-  if (isLoading) {
-    return <p>Loading data...</p>;
-  }
-  if (hasError) {
-    return <p>Error loading data</p>;
-  }
+  // if (isLoading) {
+  //   return <p>Loading data...</p>;
+  // }
+  // if (hasError) {
+  //   return <p>Error loading data</p>;
+  // }
 
   return (
     <form
