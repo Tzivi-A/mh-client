@@ -36,7 +36,7 @@ export const pareseNumber = (val: string): number => {
   return Number.isNaN(num) ? 0 : num;
 };
 
-export const parseNullableDeciamlNumber = (value?: string | number): string =>
+export const parseNullableDecimal = (value?: string | number): string =>
   value
     ? numberHebrewFormatter({ style: 'decimal', minimumFractionDigits: 2 }).format(
         parseFloat(value.toString())

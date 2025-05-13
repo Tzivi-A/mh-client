@@ -4,7 +4,7 @@ import type { ColumnsType, TableProps } from '@app-types/table-type';
 import type { PublicationSearchEnum } from '~/types/enums/publication-search';
 import { PublicationSearchIcons } from '~/utils/constants/publisher/publication-search';
 import { Image } from '@ui/image/image';
-import { parseNullableDeciamlNumber } from '@utils/number-utils';
+import { parseNullableDecimal } from '@utils/number-utils';
 import type { LocalPublicationResultRow } from '~/types/publisher/publisher-search-results-type';
 
 export interface PublisherResultTableProps {
@@ -83,14 +83,14 @@ export const PublisherResultTable = ({
           key: 'publicationSum',
           align: 'right',
           sorterType: 'number',
-          render: amount => parseNullableDeciamlNumber(amount)
+          render: amount => parseNullableDecimal(amount)
         },
         {
           title: 'יתרת הלוואה',
           key: 'loanReturnSum',
           align: 'right',
           sorterType: 'number',
-          render: value => parseNullableDeciamlNumber(value)
+          render: value => parseNullableDecimal(value)
         }
       ]
     }
