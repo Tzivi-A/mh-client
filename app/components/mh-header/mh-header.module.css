@@ -1,3 +1,16 @@
+.children-header {
+  width: 100%;
+}
+
+.mh-header {
+  top: 0;
+  background-color: white;
+  z-index: 100;
+  border-bottom: 1px solid #ccc;
+  padding: 10px 20px;
+  position: sticky;
+}
+
 .mh-link {
   display: flex;
   align-items: center;
@@ -11,3 +24,4 @@
   color: #003399;
   text-decoration: none;
 }
+
