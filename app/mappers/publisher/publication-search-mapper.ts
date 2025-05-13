@@ -3,7 +3,7 @@ import { PublicationSearchEnum } from '~/types/enums/publication-search';
 import type { PublisherResultSummaryData } from '~/types/publisher/publisher-summary-result-type';
 import type { LocalPublicationResults } from '~/types/publisher/publisher-search-results-type';
 import { PublicationSearchTitles } from '~/utils/constants/publisher/publication-search';
-import { formatHebrewNumber } from '@utils/number-utils';
+import { formatHebrewNumber } from '~/shared/utils/number-utils';
 
 export const mapperSummaryData = (
   result?: LocalPublicationResults
@@ -14,32 +14,35 @@ export const mapperSummaryData = (
     ? [
         {
           publicationSearchType: PublicationSearchEnum.Donation,
-          title: PublicationSearchTitles[PublicationSearchEnum.Donation].plural,
+          sumTitle: PublicationSearchTitles[PublicationSearchEnum.Donation].plural,
           count: result.numDonations,
           sum: parseFloat(result.sumDonations),
           dividerAfter: DividerTypeEnum.Line
         },
         {
           publicationSearchType: PublicationSearchEnum.Guarantee,
-          title: PublicationSearchTitles[PublicationSearchEnum.Guarantee].plural,
+          sumTitle: PublicationSearchTitles[PublicationSearchEnum.Guarantee].plural,
           count: result.numGuarantees,
           sum: parseFloat(result.sumGuarantees),
           dividerAfter: DividerTypeEnum.Line
         },
         {
           publicationSearchType: PublicationSearchEnum.Loan,
-          title: PublicationSearchTitles[PublicationSearchEnum.Loan].plural,
+          sumTitle: PublicationSearchTitles[PublicationSearchEnum.Loan].plural,
           count: result.numLoans,
           sum: parseFloat(result.sumLoans),
           dividerAfter: DividerTypeEnum.Arrow
         },
         {
           publicationSearchType: PublicationSearchEnum.All,
-          title: buildTitleWithCount(
+          sumTitle: buildTitleWithCount(
             PublicationSearchTitles[PublicationSearchEnum.All].plural,
             result.numLoans + result.numGuarantees + result.numDonations
           ),
-          sum: parseFloat(result.sumLoans + result.sumGuarantees + result.sumDonations),
+          sum:
+            parseFloat(result.sumDonations) +
+            parseFloat(result.sumGuarantees) +
+            parseFloat(result.sumLoans),
           titleIncludesCount: true
         }
       ]

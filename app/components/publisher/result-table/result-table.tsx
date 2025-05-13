@@ -48,8 +48,8 @@ export const PublisherResultTable = ({
       children: [
         {
           title: 'שם מלא',
-          dataIndex: 'publicationSearchName',
-          key: 'publicationSearchName',
+          dataIndex: 'name',
+          key: 'name',
           align: 'right',
           sorterType: 'string'
         },
@@ -76,16 +76,16 @@ export const PublisherResultTable = ({
       children: [
         {
           title: 'תאריך',
-          dataIndex: 'publicationSearchDate',
-          key: 'publicationSearchDate',
+          dataIndex: 'publicationDate',
+          key: 'publicationDate',
           align: 'right',
           sorterType: 'date',
           render: date => date?.split('T')[0]
         },
         {
           title: 'סכום',
-          dataIndex: 'publicationSearchSum',
-          key: 'publicationSearchSum',
+          dataIndex: 'publicationSum',
+          key: 'publicationSum',
           align: 'right',
           sorterType: 'number',
           render: amount => parseNullableDeciamlNumber(amount)

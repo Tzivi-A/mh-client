@@ -39,3 +39,18 @@
      width: 2.5rem;
      height: 2.5rem;
    }
+   
+   .results-summary-title-zero {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+    direction: rtl;
+    color: #888; /* or any gray color */
+  }
+  
+  .results-summary-sum-zero {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #888; /* make it match the design */
+  }
+  

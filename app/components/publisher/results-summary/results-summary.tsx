@@ -9,11 +9,14 @@ interface PublisherResultsSummaryProps {
   items: PublishResultSummaryData[];
 }
 
+const getClassName = (baseClass: string, isZero: boolean) =>
+  isZero ? `${baseClass}-zero` : baseClass;
+
 export const PublisherResultSummary = ({ items }: PublisherResultsSummaryProps) => {
   return (
     <DividedRowList
       items={items}
-      renderItem={({ title, count, sum, titleIncludesCount, publicationSearchType }) => {
+      renderItem={({ sumTitle: title, count, sum, titleIncludesCount, publicationSearchType }) => {
         const isZero = sum === 0;
         const displayIcon = isZero
           ? PublicationSearchIcons[publicationSearchType].zero
@@ -21,10 +24,12 @@ export const PublisherResultSummary = ({ items }: PublisherResultsSummaryProps) 
         return (
           <div className="results-summary-item">
             <div className="results-summary-info">
-              <div className="results-summary-title">
+              <div className={getClassName('results-summary-title', isZero)}>
                 {titleIncludesCount ? title : `${formatHebrewNumber(count ?? 0)} ${title}`}
               </div>
-              <div className="results-summary-sum">{currencyFormatter.format(sum)}</div>
+              <div className={getClassName('results-summary-sum', isZero)}>
+                {currencyFormatter.format(sum)}
+              </div>
             </div>
             <div className="results-summary-icon">
               <Image src={displayIcon} alt={`${title} icon`} />
