@@ -23,7 +23,7 @@ export const RegistrationProgress = ({ currentStep }: RegistrationProgressProps)
       return styles.active;
     }
     if (currentStep > stepId) {
-      return styles.non - active;
+      return styles.noactive;
     }
     return '';
   };
