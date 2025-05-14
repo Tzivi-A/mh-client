@@ -13,7 +13,7 @@ export const StepItem = ({ icon, title, subtitle, isActive = false }: StepItemPr
 
   return (
     <div className={containerClassName}>
-      <p>{isActive}</p>
+      <p>efe{isActive}</p>
       <Image src={icon} alt={subtitle} className={styles['step-icon']} />
       <div className={styles['step-text-container']}>
         <span className={styles['step-title']}>{title}</span>
