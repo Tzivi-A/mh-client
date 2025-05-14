@@ -1,5 +1,5 @@
 import { Card } from '@ui/card/card';
-import useAppForm from '@hooks/use-app-form';
+import useAppForm, { useStore } from '@hooks/use-app-form';
 import { Button } from '@ui/button/button';
 import { isInputRequired } from '~/validators/common/requierd-validators';
 import FormSection from '@ui/form-section/form-section';
@@ -27,17 +27,12 @@ interface RegistrationFormValues {
 export const RegistrationForm = () => {
   const form = useAppForm({
     defaultValues: {} as RegistrationFormValues,
-    validators: {
-      onChange: ({ value }) => {
-        if (!value.firstName || !value.lastName || !value.idNumber) {
-          return 'יש למלא את כל שדות החובה';
-        }
-      }
-    },
     onSubmit: ({ value }) => {
       console.log('Form submitted:', value);
     }
   });
+
+  const formErrorMap = useStore(form.store, state => state.errorMap);
 
   return (
     <form
@@ -47,7 +42,7 @@ export const RegistrationForm = () => {
       }}
     >
       <Card>
-        <FormSection title="פרטים אישיים">
+        <FormSection title="פרטים אישיים" error={formErrorMap.onSubmit}>
           <div className={styles['form-row']}>
             <form.AppField
               name="idNumber"
@@ -80,8 +75,13 @@ export const RegistrationForm = () => {
 
         <FormSection title="כתובת דוא״ל">
           <div className={styles['form-row']}>
-            <form.AppField name="email">
-              {field => <field.Input label="דואר אלקטרוני" />}
+            <form.AppField 
+              name="email"
+              validators={{
+                onChange: ({ value }) => isInputRequired(value)
+              }}
+            >
+              {field => <field.Input label="דואר אלקטרוני" isRequired={true} />}
             </form.AppField>
             <form.AppField name="isEmailConfirmed">
               {field => <field.CheckBox label="לאשר קבלת הודעות" />}
@@ -91,10 +91,29 @@ export const RegistrationForm = () => {
 
         <FormSection title="כתובת">
           <div className={styles['form-row']}>
-            <form.AppField name="city">{field => <field.Input label="עיר" />}</form.AppField>
-            <form.AppField name="street">{field => <field.Input label="רחוב" />}</form.AppField>
-            <form.AppField name="houseNumber">
-              {field => <field.Input label="מספר בית" />}
+            <form.AppField 
+              name="city"
+              validators={{
+                onChange: ({ value }) => isInputRequired(value)
+              }}
+            >
+              {field => <field.Input label="עיר" isRequired={true} />}
+            </form.AppField>
+            <form.AppField 
+              name="street"
+              validators={{
+                onChange: ({ value }) => isInputRequired(value)
+              }}
+            >
+              {field => <field.Input label="רחוב" isRequired={true} />}
+            </form.AppField>
+            <form.AppField 
+              name="houseNumber"
+              validators={{
+                onChange: ({ value }) => isInputRequired(value)
+              }}
+            >
+              {field => <field.Input label="מספר בית" isRequired={true} />}
             </form.AppField>
           </div>
           <div className={styles['form-row']}>
@@ -105,8 +124,13 @@ export const RegistrationForm = () => {
 
         <FormSection title="טלפונים">
           <div className={styles['form-row']}>
-            <form.AppField name="primaryPhone">
-              {field => <field.Input label="מספר טלפון ראשי" />}
+            <form.AppField 
+              name="primaryPhone"
+              validators={{
+                onChange: ({ value }) => isInputRequired(value)
+              }}
+            >
+              {field => <field.Input label="מספר טלפון ראשי" isRequired={true} />}
             </form.AppField>
             <form.AppField name="secondaryPhone">
               {field => <field.Input label="מספר טלפון משני" />}
