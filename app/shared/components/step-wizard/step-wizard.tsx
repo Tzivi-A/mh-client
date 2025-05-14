@@ -51,7 +51,7 @@ export const StepWizard = ({ steps, initialStep = 0 }: StepWizardProps) => {
           )}
         </Flex>
       </Flex>
-    </div>
+    </Flex>
   );
 };
 
