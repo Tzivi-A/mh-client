@@ -91,23 +91,15 @@ export const RegistrationForm = () => {
 
         <FormSection title="כתובת">
           <div className={styles['form-row']}>
-            <form.AppField name="city">
-              {field => <field.Input label="עיר" />}
-            </form.AppField>
-            <form.AppField name="street">
-              {field => <field.Input label="רחוב" />}
-            </form.AppField>
+            <form.AppField name="city">{field => <field.Input label="עיר" />}</form.AppField>
+            <form.AppField name="street">{field => <field.Input label="רחוב" />}</form.AppField>
             <form.AppField name="houseNumber">
               {field => <field.Input label="מספר בית" />}
             </form.AppField>
           </div>
           <div className={styles['form-row']}>
-            <form.AppField name="apartment">
-              {field => <field.Input label="דירה" />}
-            </form.AppField>
-            <form.AppField name="zipCode">
-              {field => <field.Input label="מיקוד" />}
-            </form.AppField>
+            <form.AppField name="apartment">{field => <field.Input label="דירה" />}</form.AppField>
+            <form.AppField name="zipCode">{field => <field.Input label="מיקוד" />}</form.AppField>
           </div>
         </FormSection>
 
