@@ -6,7 +6,7 @@ import RegistrationForm from '~/components/registration/registration-form/regist
 import { Instructions, type Step } from '@ui/instructions/instructions';
 
 export const RegistrationPage = () => {
-  const [currentStep] = useState(1);
+  const [currentStep] = useState(0);
 
   const steps: Step[] = [
     {
@@ -35,7 +35,7 @@ export const RegistrationPage = () => {
     <div>
       <MHHeader title="מערכת לניהול חשבונות" isLink={false} />
       <Section header="טופס פניית מועמד לתחילת דיווח">
-        <RegistrationProgress currentStep={currentStep} />
+        <RegistrationProgress currentStep={currentStep + 1} />
         <Instructions steps={steps} initialStep={currentStep} />
       </Section>
     </div>
