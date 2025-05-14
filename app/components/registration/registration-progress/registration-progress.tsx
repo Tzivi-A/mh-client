@@ -1,31 +1,15 @@
-import { Image } from '@ui/image/image';
 import { DividedRowList } from '@ui/divided-row-list/divided-row-list';
 import { DividerTypeEnum } from '@app-types/enums/divider-type';
-import styles from './registration-progress.module.css';
+import { StepItem } from '@ui/step-item/step-item';
 import { registrationStepsMapper } from '~/mappers/registration/registration-progress-mapper';
-
-export interface RegistrationStep {
-  id: number;
-  title: string;
-  subtitle: string;
-  icon: string;
-  inactiveIcon: string;
-  dividerAfter?: DividerTypeEnum;
-}
+import styles from './registration-progress.module.css';
 
 interface RegistrationProgressProps {
   currentStep: number;
 }
 
 export const RegistrationProgress = ({ currentStep }: RegistrationProgressProps) => {
-  const getStepClassName = (stepId: number) => {
-    if (currentStep === stepId) {
-      return styles.active;
-    }
-    return '';
-  };
-
-  const getStepIcon = (step: RegistrationStep) =>
+  const getStepIcon = (step: typeof registrationStepsMapper[0]) =>
     currentStep >= step.id ? step.icon : step.inactiveIcon;
 
   return (
@@ -33,13 +17,12 @@ export const RegistrationProgress = ({ currentStep }: RegistrationProgressProps)
       <DividedRowList
         items={registrationStepsMapper}
         renderItem={step => (
-          <div className={`${styles.step} ${getStepClassName(step.id)}`}>
-            <Image src={getStepIcon(step)} alt={step.subtitle} className={styles['step-icon']} />
-            <div className={styles['step-text-container']}>
-              <span className={styles['step-title']}>{step.title}</span>
-              <span className={styles['step-subtitle']}>{step.subtitle}</span>
-            </div>
-          </div>
+          <StepItem
+            icon={getStepIcon(step)}
+            title={step.title}
+            subtitle={step.subtitle}
+            isActive={currentStep === step.id}
+          />
         )}
       />
     </div>
