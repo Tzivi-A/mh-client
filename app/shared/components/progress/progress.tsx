@@ -26,14 +26,12 @@ export const Progress = ({ steps, currentStep }: ProgressProps) => {
       <DividedRowList
         items={steps}
         renderItem={step => (
-          <>
-                <p>{currentStep }{step.id}</p>
           <StepItem
             icon={getStepIcon(step)}
             title={step.title}
             subtitle={step.subtitle}
             isActive={currentStep === step.id}
-          /></>
+          />
         )}
       />
     </div>

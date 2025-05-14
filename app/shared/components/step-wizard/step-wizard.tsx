@@ -7,20 +7,25 @@ import styles from './step-wizard.module.css';
 interface StepWizardProps {
   steps: Step[];
   initialStep?: number;
+  onStepChange?: (step: number) => void;
 }
 
-export const StepWizard = ({ steps, initialStep = 0 }: StepWizardProps) => {
+export const StepWizard = ({ steps, initialStep = 0, onStepChange }: StepWizardProps) => {
   const [currentStep, setCurrentStep] = useState(initialStep);
 
   const handleNext = () => {
     if (currentStep < steps.length - 1) {
-      setCurrentStep(currentStep + 1);
+      const nextStep = currentStep + 1;
+      setCurrentStep(nextStep);
+      onStepChange?.(nextStep);
     }
   };
 
   const handleBack = () => {
     if (currentStep > 0) {
-      setCurrentStep(currentStep - 1);
+      const prevStep = currentStep - 1;
+      setCurrentStep(prevStep);
+      onStepChange?.(prevStep);
     }
   };
 
