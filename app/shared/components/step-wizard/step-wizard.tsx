@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Button } from '@ui/button/button';
 import { Flex } from '@ui/layout/flex/flex';
-import type { Step } from '~/types/registration/registration-step';
+import type { Step } from '@app-types/step-type';
 import styles from './step-wizard.module.css';
 
 interface StepWizardProps {
@@ -50,5 +50,4 @@ export const StepWizard = ({ steps, initialStep = 0 }: StepWizardProps) => {
   );
 };
 
-export { type Step };
 export default StepWizard;

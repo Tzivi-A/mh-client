@@ -3,7 +3,7 @@ import { RegistrationProgress } from '~/components/registration/registration-pro
 import MHHeader from '~/components/mh-header/mh-header';
 import Section from '@ui/section/section';
 import { StepWizard } from '@ui/step-wizard/step-wizard';
-import type { Step } from '~/types/registration/registration-step';
+import type { Step } from '@app-types/step-type';
 import RegistrationForm from '~/components/registration/registration-form/registration-form';
 import PartyDetails from '~/components/registration/party-details/party-details';
 import ContactDetails from '~/components/registration/contact-details/contact-details';
