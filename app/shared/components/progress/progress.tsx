@@ -18,7 +18,8 @@ interface ProgressProps {
 }
 
 export const Progress = ({ steps, currentStep }: ProgressProps) => {
-  const getStepIcon = (step: ProgressStep) => (currentStep >= step.id ? step.icon : step.inactiveIcon);
+  const getStepIcon = (step: ProgressStep) =>
+    currentStep >= step.id ? step.icon : step.inactiveIcon;
 
   return (
     <div className={styles['progress-container']}>

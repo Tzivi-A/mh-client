@@ -10,7 +10,7 @@ export interface StepItemProps {
 
 export const StepItem = ({ icon, title, subtitle, isActive = false }: StepItemProps) => {
   const containerClassName = `${styles.step} ${isActive ? styles.active : ''}`;
-  
+
   return (
     <div className={containerClassName}>
       <Image src={icon} alt={subtitle} className={styles['step-icon']} />

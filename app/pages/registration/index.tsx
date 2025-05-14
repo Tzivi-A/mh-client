@@ -39,7 +39,11 @@ export const RegistrationPage = () => {
     <div>
       <MHHeader title="מערכת לניהול חשבונות" isLink={false} />
       <Section header="טופס פניית מועמד לתחילת דיווח">
-        <Wizard progressSteps={registrationStepsMapper} wizardSteps={steps} initialStep={currentStep} />
+        <Wizard
+          progressSteps={registrationStepsMapper}
+          wizardSteps={steps}
+          initialStep={currentStep}
+        />
       </Section>
     </div>
   );
