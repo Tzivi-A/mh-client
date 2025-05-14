@@ -31,7 +31,7 @@
   align-items: flex-start;
 }
 
-.non-active .step-title {
+.noactive .step-title {
   font-size: 14px;
   font-weight: bold;
    /* color: #3d90de; */
