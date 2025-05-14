@@ -14,7 +14,7 @@ export const Switch = ({ id, label, value, onChange, error }: SwitchProps) => {
           {label}
         </label>
       )}
-      <AntSwitch id={id} checked={value} onChange={checked => onChange?.(checked)} />
+      <Switch id={id} checked={value} onChange={checked => onChange?.(checked)} />
     </div>
   );
 };
