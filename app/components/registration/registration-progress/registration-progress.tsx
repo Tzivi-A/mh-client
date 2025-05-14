@@ -39,7 +39,7 @@ export const RegistrationProgress = ({ currentStep }: RegistrationProgressProps)
         renderItem={step => (
           <div className={`${styles.step} ${getStepClassName(step.id)}`}>
             <Image src={getStepIcon(step)} alt={step.subtitle} className={styles['step-icon']} />
-            <span className={styles['step-number']}>{step.id}</span>
+          
             <div className={styles['step-text-container']}>
               <span className={styles['step-title']}>{step.title}</span>
               <span className={styles['step-subtitle']}>{step.subtitle}</span>
