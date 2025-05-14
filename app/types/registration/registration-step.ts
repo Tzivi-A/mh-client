@@ -1,7 +1,7 @@
-import type { ComponentType } from 'react';
+import type { ReactNode } from 'react';
 
 export interface Step {
   id: number;
   title: string;
-  component: () => Promise<{ default: ComponentType }>;
+  component: () => ReactNode;
 }

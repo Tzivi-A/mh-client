@@ -1,9 +1,13 @@
-import { Suspense, lazy, useState } from 'react';
+import { useState } from 'react';
 import { RegistrationProgress } from '~/components/registration/registration-progress/registration-progress';
 import MHHeader from '~/components/mh-header/mh-header';
 import Section from '@ui/section/section';
 import { StepWizard } from '@ui/step-wizard/step-wizard';
 import type { Step } from '~/types/registration/registration-step';
+import RegistrationForm from '~/components/registration/registration-form/registration-form';
+import PartyDetails from '~/components/registration/party-details/party-details';
+import ContactDetails from '~/components/registration/contact-details/contact-details';
+import Approval from '~/components/registration/approval/approval';
 
 export const RegistrationPage = () => {
   const [currentStep] = useState(0);
@@ -12,22 +16,22 @@ export const RegistrationPage = () => {
     {
       id: 1,
       title: 'פרטי המועמד והתמודדות',
-      component: () => import('~/components/registration/registration-form/registration-form')
+      component: () => <RegistrationForm />
     },
     {
       id: 2,
       title: 'פרטי הסיעה והבנק',
-      component: () => import('~/components/registration/party-details/party-details')
+      component: () => <PartyDetails />
     },
     {
       id: 3,
       title: 'פרטי איש קשר',
-      component: () => import('~/components/registration/contact-details/contact-details')
+      component: () => <ContactDetails />
     },
     {
       id: 4,
       title: 'אישור פרטים',
-      component: () => import('~/components/registration/approval/approval')
+      component: () => <Approval />
     }
   ];
 
