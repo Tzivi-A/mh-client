@@ -29,16 +29,25 @@ export const Instructions = ({ steps, initialStep = 0 }: InstructionsProps) => {
     }
   };
 
+  const isFirstStep = currentStep === 0;
+  const isLastStep = currentStep === steps.length - 1;
+
   return (
     <div className={styles.instructions}>
       <div className={styles.content}>{steps[currentStep].component}</div>
       <Flex justify="space-between" className={styles.buttons}>
-        <Button onClick={handleBack} variant="text" style="default" type="button">
-          חזרה
-        </Button>
-        <Button onClick={handleNext} type="button">
-          המשך
-        </Button>
+        {!isFirstStep && (
+          <Button onClick={handleBack} variant="text" style="default" type="button">
+            חזרה
+          </Button>
+        )}
+        {isLastStep ? (
+          <Button type="button">סיום</Button>
+        ) : (
+          <Button onClick={handleNext} type="button">
+            המשך
+          </Button>
+        )}
       </Flex>
     </div>
   );
