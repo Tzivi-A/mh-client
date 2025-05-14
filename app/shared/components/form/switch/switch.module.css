@@ -1,14 +1,21 @@
+.switch-container {
+  position: relative;
+  display: inline-block;
+}
+
 .switch {
   position: relative;
   display: inline-block;
   width: 40px;
   height: 20px;
+  cursor: pointer;
 }
 
 .input {
   opacity: 0;
   width: 0;
   height: 0;
+  position: absolute;
 }
 
 .slider {
@@ -35,10 +42,22 @@
   border-radius: 50%;
 }
 
-input:checked + .slider {
+input:checked + .switch .slider {
   background-color: #2196F3;
 }
 
-input:checked + .slider:before {
+input:checked + .switch .slider:before {
   transform: translateX(20px);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
