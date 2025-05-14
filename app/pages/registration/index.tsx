@@ -3,7 +3,7 @@ import { RegistrationProgress } from '~/components/registration/registration-pro
 import MHHeader from '~/components/mh-header/mh-header';
 
 export const RegistrationPage = () => {
-  const [currentStep] = useState(2);
+  const [currentStep] = useState(3);
 
   return (
     <div>
