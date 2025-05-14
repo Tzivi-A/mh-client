@@ -6,7 +6,7 @@ import RegistrationForm from '~/components/registration/registration-form/regist
 import { Instructions, type Step } from '@ui/instructions/instructions';
 
 export const RegistrationPage = () => {
-  const [currentStep] = useState(2);
+  const [currentStep] = useState(1);
 
   const steps: Step[] = [
     {
