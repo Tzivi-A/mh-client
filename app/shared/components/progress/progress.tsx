@@ -23,16 +23,17 @@ export const Progress = ({ steps, currentStep }: ProgressProps) => {
 
   return (
     <div className={styles['progress-container']}>
-      <p>{currentStep }{step.id}</p>
       <DividedRowList
         items={steps}
         renderItem={step => (
+          <>
+                <p>{currentStep }{step.id}</p>
           <StepItem
             icon={getStepIcon(step)}
             title={step.title}
             subtitle={step.subtitle}
             isActive={currentStep === step.id}
-          />
+          /></>
         )}
       />
     </div>
