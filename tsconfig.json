@@ -5,7 +5,8 @@
     "**/.client/**/*",
     ".react-router/types/**/*",
     "app/environments/.env.ts",
-    "app/environments/.env.prod.ts"
+    "app/environments/.env.prod.ts",
+    "eslint-rules/mapper-naming.js"
   ],
   "compilerOptions": {
     "lib": ["DOM", "DOM.Iterable", "ES2022"],
