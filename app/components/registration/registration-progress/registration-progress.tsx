@@ -19,19 +19,19 @@ const steps: RegistrationStep[] = [
     id: 1,
     title: 'פרטי המועמד והתמודדות',
     icon: PersonalIcon,
-    dividerAfter: DividerTypeEnum.Line
+    dividerAfter: DividerTypeEnum.Arrow
   },
   {
     id: 2,
     title: 'פרטי הסיעה והבנק',
     icon: PartyIcon,
-    dividerAfter: DividerTypeEnum.Line
+    dividerAfter: DividerTypeEnum.Arrow
   },
   {
     id: 3,
     title: 'פרטי איש קשר',
     icon: BankIcon,
-    dividerAfter: DividerTypeEnum.Line
+    dividerAfter: DividerTypeEnum.Arrow
   },
   {
     id: 4,
