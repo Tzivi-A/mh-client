@@ -9,7 +9,7 @@ import type { RegistrationFormValues } from '~/types/registration/registration-f
 
 export const RegistrationForm = () => {
   const form = useAppForm({
-    defaultValues: RegistrationFormValues,
+    defaultValues: {} as RegistrationFormValues,
     onSubmit: ({ value }) => {
       console.log('Form submitted:', value);
     }
