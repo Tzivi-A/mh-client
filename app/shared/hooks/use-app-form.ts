@@ -10,6 +10,7 @@ import { AppFormDatePicker } from '@ui/form/date-picker/app-form-date-picker';
 import { AppFormCheckBox } from '@ui/form/check-box/app-form-check-box';
 import { AppFormRadioButton } from '@ui/form/radio-button/app-form-radio-button';
 import { AppFormCheckBoxGroup } from '@ui/form/check-box/check-box-group/app-form-check-box-group';
+import { AppFormSwitch } from '@ui/form/switch/app-form-switch';
 
 export const { fieldContext, useFieldContext, formContext, useFormContext } =
   createFormHookContexts();
@@ -24,7 +25,8 @@ const { useAppForm, withForm } = createFormHook({
     DatePicker: AppFormDatePicker,
     CheckBox: AppFormCheckBox,
     CheckBoxGroup: AppFormCheckBoxGroup,
-    RadioButton: AppFormRadioButton
+    RadioButton: AppFormRadioButton,
+    Switch: AppFormSwitch
   },
   formComponents: {}
 });
