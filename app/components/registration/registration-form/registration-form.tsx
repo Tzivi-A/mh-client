@@ -135,10 +135,10 @@ export const RegistrationForm = () => {
                 onChange: ({ value }) => isInputRequired(value)
               }}
             >
-              {field => <field.Input label="מספר טלפון ראשי" isRequired={true} />}
+              {field => <field.Input label="מספר טלפון נייד" isRequired={true} />}
             </form.AppField>
             <form.AppField name="secondaryPhone">
-              {field => <field.Input label="מספר טלפון משני" />}
+              {field => <field.Input label="מספר טלפון נוסף" />}
             </form.AppField>
           </Flex>
         </FormSection>
