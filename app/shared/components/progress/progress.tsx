@@ -33,7 +33,7 @@ export const Progress = ({ steps, currentStep }: ProgressProps) => {
             title={step.title}
             subtitle={step.subtitle}
             isActive={currentStep === step.id}
-          /></>
+          />
         )}
       />
     </div>
