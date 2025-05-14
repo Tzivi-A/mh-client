@@ -5,25 +5,7 @@ import { isInputRequired } from '~/validators/common/requierd-validators';
 import FormSection from '@ui/form-section/form-section';
 import { Flex } from '@ui/layout/flex/flex';
 import styles from './registration-form.module.css';
-
-interface RegistrationFormValues {
-  // Personal Details
-  idNumber: string;
-  firstName: string;
-  lastName: string;
-  // Contact Details
-  email: string;
-  isEmailConfirmed: boolean;
-  // Address
-  city: string;
-  street: string;
-  houseNumber: string;
-  apartment: string;
-  zipCode: string;
-  // Phone Numbers
-  primaryPhone: string;
-  secondaryPhone: string;
-}
+import type { RegistrationFormValues } from '~/types/registration/registration-form-values';
 
 export const RegistrationForm = () => {
   const form = useAppForm({
