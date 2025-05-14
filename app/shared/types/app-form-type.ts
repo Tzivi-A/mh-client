@@ -54,6 +54,10 @@ export interface AppFormRadioButtonField extends BaseAppFormField {
   options: Option[];
 }
 
+export interface AppFormSwitchField extends BaseAppFormField {
+  fieldType: FieldTypeEnum.SWITCH;
+}
+
 export type AppFormFieldProps = AppFormFieldConstraint<
   | AppFormTextInputField
   | AppFormNumberField
@@ -62,4 +66,5 @@ export type AppFormFieldProps = AppFormFieldConstraint<
   | AppFormCheckBoxField
   | AppFormCheckBoxGroupField
   | AppFormRadioButtonField
+  | AppFormSwitchField
 >;

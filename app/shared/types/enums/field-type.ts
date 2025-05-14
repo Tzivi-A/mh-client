@@ -5,5 +5,6 @@ export enum FieldTypeEnum {
   DATE_PICKER = 'datePicker',
   CHECK_BOX = 'checkBox',
   CHECK_BOX_GROUP = 'checkBoxGroup',
-  RADIO_BUTTON = 'radioButton'
+  RADIO_BUTTON = 'radioButton',
+  SWITCH = 'switch'
 }

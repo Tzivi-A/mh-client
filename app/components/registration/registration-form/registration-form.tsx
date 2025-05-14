@@ -85,7 +85,7 @@ export const RegistrationForm = () => {
               {field => <field.Input label="כתובת דוא''ל'" isRequired={true} />}
             </form.AppField>
             <form.AppField name="isEmailConfirmed">
-              {field => <field.CheckBox label="לאשר קבלת הודעות" />}
+              {field => <field.Switch label="לשלוח סיסמה" />}
             </form.AppField>
           </Flex>
         </FormSection>

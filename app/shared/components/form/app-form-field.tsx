@@ -7,6 +7,7 @@ import DatePicker from './date-picker/date-picker';
 import { CheckBox } from './check-box/check-box';
 import { CheckBoxGroup } from './check-box/check-box-group/check-box-group';
 import { RadioButton } from './radio-button/radio-button';
+import { Switch } from './switch/switch';
 import { useFieldContext } from '@hooks/use-app-form';
 
 export const AppFormField = <T,>({ label, fieldType, ...props }: AppFormFieldProps) => {
@@ -19,7 +20,8 @@ export const AppFormField = <T,>({ label, fieldType, ...props }: AppFormFieldPro
     datePicker: DatePicker,
     checkBox: CheckBox,
     checkBoxGroup: CheckBoxGroup,
-    radioButton: RadioButton
+    radioButton: RadioButton,
+    switch: Switch
   };
 
   const Component = fields[fieldType];
