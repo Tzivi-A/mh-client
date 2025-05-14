@@ -6,7 +6,7 @@ export interface SwitchProps extends FormFieldProps<boolean> {
   label?: string;
 }
 
-export const Switch = ({ id, label, value, onChange, error }: SwitchProps) => {
+export const Switch = ({ id, label, value, onChange }: SwitchProps) => {
   return (
     <div className={styles['switch-wrapper']}>
       {label && (
