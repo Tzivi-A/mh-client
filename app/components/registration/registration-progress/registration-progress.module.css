@@ -1,7 +1,4 @@
 .progress-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   padding: 20px;
   background: white;
   border-radius: 8px;
@@ -16,7 +13,6 @@
   gap: 8px;
   color: #666;
   position: relative;
-  flex: 1;
   justify-content: center;
 }
 
@@ -53,22 +49,6 @@
 .step-text {
   font-size: 14px;
   font-weight: 500;
-}
-
-.divider {
-  flex: 1;
-  height: 2px;
-  background: #eee;
-  margin: 0 10px;
-  max-width: 100px;
-}
-
-.divider.active {
-  background: #003399;
-}
-
-.divider.completed {
-  background: #28a745;
 }
 
 .step-icon {
