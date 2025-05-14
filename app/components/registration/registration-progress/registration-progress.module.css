@@ -41,11 +41,6 @@
   color: white;
 }
 
-.completed .step-number {
-  background: #28a745;
-  color: white;
-}
-
 .step-text-container {
   display: flex;
   flex-direction: column;
