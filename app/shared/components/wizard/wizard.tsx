@@ -8,10 +8,10 @@ interface WizardProps {
   initialStep?: number;
 }
 
-export const Wizard = ({ progressSteps, wizardSteps, initialStep = 0 }: WizardProps) => {
+export const Wizard = ({ progressSteps, wizardSteps, initialStep = 1 }: WizardProps) => {
   return (
     <>
-      <Progress steps={progressSteps} currentStep={initialStep + 1} />
+      <Progress steps={progressSteps} currentStep={initialStep} />
       <StepWizard steps={wizardSteps} initialStep={initialStep} />
     </>
   );
