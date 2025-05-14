@@ -119,7 +119,9 @@ export const RegistrationForm = () => {
               </form.AppField>
             </Flex>
             <Flex direction="row" justify="flex-start" align="flex-start">
-              <form.AppField name="apartment">{field => <field.Input label="דירה" />}</form.AppField>
+              <form.AppField name="apartment">
+                {field => <field.Input label="דירה" />}
+              </form.AppField>
               <form.AppField name="zipCode">{field => <field.Input label="מיקוד" />}</form.AppField>
             </Flex>
           </Flex>
