@@ -46,9 +46,19 @@
   color: white;
 }
 
-.step-text {
+.step-text-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.step-title {
   font-size: 14px;
-  font-weight: 500;
+  font-weight: bold;
+}
+
+.step-subtitle {
+  font-size: 12px;
 }
 
 .step-icon {

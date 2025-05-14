@@ -7,7 +7,9 @@ import { registrationStepsMapper } from '~/mappers/registration/registration-pro
 export interface RegistrationStep {
   id: number;
   title: string;
+  subtitle: string;
   icon: string;
+  inactiveIcon: string;
   dividerAfter?: DividerTypeEnum;
 }
 
@@ -20,7 +22,14 @@ export const RegistrationProgress = ({ currentStep }: RegistrationProgressProps)
     if (currentStep === stepId) {
       return styles.active;
     }
+    if (currentStep > stepId) {
+      return styles.completed;
+    }
     return '';
+  };
+
+  const getStepIcon = (step: RegistrationStep) => {
+    return currentStep >= step.id ? step.icon : step.inactiveIcon;
   };
 
   return (
@@ -29,9 +38,12 @@ export const RegistrationProgress = ({ currentStep }: RegistrationProgressProps)
         items={registrationStepsMapper}
         renderItem={step => (
           <div className={`${styles.step} ${getStepClassName(step.id)}`}>
-            <Image src={step.icon} alt={step.title} className={styles['step-icon']} />
+            <Image src={getStepIcon(step)} alt={step.subtitle} className={styles['step-icon']} />
             <span className={styles['step-number']}>{step.id}</span>
-            <span className={styles['step-text']}>{step.title}</span>
+            <div className={styles['step-text-container']}>
+              <span className={styles['step-title']}>{step.title}</span>
+              <span className={styles['step-subtitle']}>{step.subtitle}</span>
+            </div>
           </div>
         )}
       />
