@@ -9,7 +9,3 @@
   font-size: 13px;
   color: #333;
 }
-
-:global(.ant-switch-checked .ant-switch-handle) {
-  inset-inline-start: calc(100% - 20px);
-}
