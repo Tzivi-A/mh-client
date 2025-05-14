@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { RegistrationProgress } from '~/components/registration/registration-progress/registration-progress';
+import { Progress } from '@ui/progress/progress';
+import { registrationStepsMapper } from '~/mappers/registration/registration-progress-mapper';
 import MHHeader from '~/components/mh-header/mh-header';
 import Section from '@ui/section/section';
 import { StepWizard } from '@ui/step-wizard/step-wizard';
@@ -39,7 +40,7 @@ export const RegistrationPage = () => {
     <div>
       <MHHeader title="מערכת לניהול חשבונות" isLink={false} />
       <Section header="טופס פניית מועמד לתחילת דיווח">
-        <RegistrationProgress currentStep={currentStep + 1} />
+        <Progress steps={registrationStepsMapper} currentStep={currentStep + 1} />
         <StepWizard steps={steps} initialStep={currentStep} />
       </Section>
     </div>
