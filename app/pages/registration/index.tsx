@@ -7,7 +7,7 @@ export const RegistrationPage = () => {
 
   return (
     <div>
-      <MHHeader title="רישום מועמד" isLink={true} />
+      <MHHeader title="רישום מועמד" isLink={false} />
       <RegistrationProgress currentStep={currentStep} />
       {/* Registration form components will be added here */}
     </div>
