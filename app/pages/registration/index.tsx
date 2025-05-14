@@ -8,7 +8,7 @@ export const RegistrationPage = () => {
   return (
     <div>
       <MHHeader title="מערכת לניהול חשבונות" isLink={false} />
-      <Section>
+      <Section header="טופס פניית מועמד לחילת דיווח">
         <RegistrationProgress currentStep={currentStep} />
       </Section>
       {/* Registration form components will be added here */}
