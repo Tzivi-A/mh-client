@@ -75,7 +75,7 @@ export const RegistrationForm = () => {
         </FormSection>
 
         <FormSection title="כתובת דוא״ל">
-          <Flex direction="row" justify="flex-start" align="flex-start">
+          <Flex direction="column" justify="flex-start" align="flex-start">
             <form.AppField
               name="email"
               validators={{
