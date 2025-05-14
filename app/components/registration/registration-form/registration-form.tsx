@@ -75,7 +75,7 @@ export const RegistrationForm = () => {
 
         <FormSection title="כתובת דוא״ל">
           <div className={styles['form-row']}>
-            <form.AppField 
+            <form.AppField
               name="email"
               validators={{
                 onChange: ({ value }) => isInputRequired(value)
@@ -91,7 +91,7 @@ export const RegistrationForm = () => {
 
         <FormSection title="כתובת">
           <div className={styles['form-row']}>
-            <form.AppField 
+            <form.AppField
               name="city"
               validators={{
                 onChange: ({ value }) => isInputRequired(value)
@@ -99,7 +99,7 @@ export const RegistrationForm = () => {
             >
               {field => <field.Input label="עיר" isRequired={true} />}
             </form.AppField>
-            <form.AppField 
+            <form.AppField
               name="street"
               validators={{
                 onChange: ({ value }) => isInputRequired(value)
@@ -107,7 +107,7 @@ export const RegistrationForm = () => {
             >
               {field => <field.Input label="רחוב" isRequired={true} />}
             </form.AppField>
-            <form.AppField 
+            <form.AppField
               name="houseNumber"
               validators={{
                 onChange: ({ value }) => isInputRequired(value)
@@ -124,7 +124,7 @@ export const RegistrationForm = () => {
 
         <FormSection title="טלפונים">
           <div className={styles['form-row']}>
-            <form.AppField 
+            <form.AppField
               name="primaryPhone"
               validators={{
                 onChange: ({ value }) => isInputRequired(value)
