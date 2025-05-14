@@ -1,9 +1,9 @@
-import { useState } from 'react';
+import { Suspense, lazy, useState } from 'react';
 import { RegistrationProgress } from '~/components/registration/registration-progress/registration-progress';
 import MHHeader from '~/components/mh-header/mh-header';
 import Section from '@ui/section/section';
-import RegistrationForm from '~/components/registration/registration-form/registration-form';
-import { StepWizard, type Step } from '@ui/step-wizard/step-wizard';
+import { StepWizard } from '@ui/step-wizard/step-wizard';
+import type { Step } from '~/types/registration/registration-step';
 
 export const RegistrationPage = () => {
   const [currentStep] = useState(0);
@@ -12,22 +12,22 @@ export const RegistrationPage = () => {
     {
       id: 1,
       title: 'פרטי המועמד והתמודדות',
-      component: <RegistrationForm />
+      component: () => import('~/components/registration/registration-form/registration-form')
     },
     {
       id: 2,
       title: 'פרטי הסיעה והבנק',
-      component: <div>Step 2 Content</div>
+      component: () => import('~/components/registration/party-details/party-details')
     },
     {
       id: 3,
       title: 'פרטי איש קשר',
-      component: <div>Step 3 Content</div>
+      component: () => import('~/components/registration/contact-details/contact-details')
     },
     {
       id: 4,
       title: 'אישור פרטים',
-      component: <MHHeader title="Step 4" isLink={false}/>
+      component: () => import('~/components/registration/approval/approval')
     }
   ];
 

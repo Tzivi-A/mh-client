@@ -1,13 +1,8 @@
-import { ReactNode, useState } from 'react';
+import { Suspense, lazy, useState } from 'react';
 import { Button } from '@ui/button/button';
 import { Flex } from '@ui/layout/flex/flex';
+import type { Step } from '~/types/registration/registration-step';
 import styles from './step-wizard.module.css';
-
-export interface Step {
-  id: number;
-  title: string;
-  component: ReactNode;
-}
 
 interface StepWizardProps {
   steps: Step[];
@@ -32,9 +27,15 @@ export const StepWizard = ({ steps, initialStep = 0 }: StepWizardProps) => {
   const isFirstStep = currentStep === 0;
   const isLastStep = currentStep === steps.length - 1;
 
+  const CurrentStepComponent = lazy(steps[currentStep].component);
+
   return (
     <Flex direction="column">
-      <div className={styles.content}>{steps[currentStep].component}</div>
+      <div className={styles.content}>
+        <Suspense fallback={<div>Loading...</div>}>
+          <CurrentStepComponent />
+        </Suspense>
+      </div>
       <Flex justify="flex-end" className={styles.buttons}>
         <Flex gap="20px">
           {!isFirstStep && (
@@ -55,4 +56,5 @@ export const StepWizard = ({ steps, initialStep = 0 }: StepWizardProps) => {
   );
 };
 
+export { type Step };
 export default StepWizard;
