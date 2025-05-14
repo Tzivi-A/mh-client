@@ -10,7 +10,7 @@ import Approval from '~/components/registration/approval/approval';
 import { Wizard } from '@ui/wizard/wizard';
 
 export const RegistrationPage = () => {
-  const [currentStep] = useState(0);
+  const [currentStep] = useState(1);
 
   const steps: Step[] = [
     {
