@@ -19,11 +19,6 @@
 .step.active {
   color: #003399;
 }
-
-.step.completed {
-  color: #28a745;
-}
-
 .step-number {
   width: 24px;
   height: 24px;
