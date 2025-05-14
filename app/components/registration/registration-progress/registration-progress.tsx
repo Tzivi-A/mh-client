@@ -23,12 +23,13 @@ export const RegistrationProgress = ({ currentStep }: RegistrationProgressProps)
       return styles.active;
     }
     if (currentStep > stepId) {
-      return styles.non-active;
+      return styles.non - active;
     }
     return '';
   };
 
-  const getStepIcon = (step: RegistrationStep) => currentStep >= step.id ? step.icon : step.inactiveIcon;
+  const getStepIcon = (step: RegistrationStep) =>
+    currentStep >= step.id ? step.icon : step.inactiveIcon;
 
   return (
     <div className={styles['progress-container']}>
@@ -36,7 +37,7 @@ export const RegistrationProgress = ({ currentStep }: RegistrationProgressProps)
         items={registrationStepsMapper}
         renderItem={step => (
           <div className={`${styles.step} ${getStepClassName(step.id)}`}>
-            <Image src={getStepIcon(step)} alt={step.subtitle} className={styles['step-icon']} />          
+            <Image src={getStepIcon(step)} alt={step.subtitle} className={styles['step-icon']} />
             <div className={styles['step-text-container']}>
               <span className={styles['step-title']}>{step.title}</span>
               <span className={styles['step-subtitle']}>{step.subtitle}</span>
