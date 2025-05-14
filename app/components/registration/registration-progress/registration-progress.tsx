@@ -63,18 +63,13 @@ export const RegistrationProgress = ({ currentStep }: RegistrationProgressProps)
     <div className={styles['progress-container']}>
       {steps.map((step, index) => (
         <>
-          <div
-            key={step.id}
-            className={`${styles.step} ${getStepClassName(step.id)}`}
-          >
+          <div key={step.id} className={`${styles.step} ${getStepClassName(step.id)}`}>
             <Image src={step.icon} alt={step.title} className={styles['step-icon']} />
             <span className={styles['step-number']}>{step.id}</span>
             <span className={styles['step-text']}>{step.title}</span>
           </div>
           {index < steps.length - 1 && (
-            <div
-              className={`${styles.divider} ${getDividerClassName(step.id)}`}
-            />
+            <div className={`${styles.divider} ${getDividerClassName(step.id)}`} />
           )}
         </>
       ))}
