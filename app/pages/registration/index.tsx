@@ -3,7 +3,7 @@ import { RegistrationProgress } from '~/components/registration/registration-pro
 import MHHeader from '~/components/mh-header/mh-header';
 import Section from '@ui/section/section';
 import RegistrationForm from '~/components/registration/registration-form/registration-form';
-import { Instructions, type Step } from '@ui/instructions/instructions';
+import { StepWizard, type Step } from '@ui/step-wizard/step-wizard';
 
 export const RegistrationPage = () => {
   const [currentStep] = useState(0);
@@ -36,7 +36,7 @@ export const RegistrationPage = () => {
       <MHHeader title="מערכת לניהול חשבונות" isLink={false} />
       <Section header="טופס פניית מועמד לתחילת דיווח">
         <RegistrationProgress currentStep={currentStep + 1} />
-        <Instructions steps={steps} initialStep={currentStep} />
+        <StepWizard steps={steps} initialStep={currentStep} />
       </Section>
     </div>
   );
