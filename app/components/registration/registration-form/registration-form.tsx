@@ -3,6 +3,7 @@ import useAppForm, { useStore } from '@hooks/use-app-form';
 import { Button } from '@ui/button/button';
 import { isInputRequired } from '~/validators/common/requierd-validators';
 import FormSection from '@ui/form-section/form-section';
+import { Flex } from '@ui/layout/flex/flex';
 import styles from './registration-form.module.css';
 
 interface RegistrationFormValues {
@@ -43,7 +44,7 @@ export const RegistrationForm = () => {
     >
       <Card>
         <FormSection title="פרטים אישיים" error={formErrorMap.onSubmit}>
-          <div className={styles['form-row']}>
+          <Flex direction="row" justify="flex-start" align="flex-start">
             <form.AppField
               name="idNumber"
               validators={{
@@ -70,11 +71,11 @@ export const RegistrationForm = () => {
             >
               {field => <field.Input label="שם משפחה" isRequired={true} />}
             </form.AppField>
-          </div>
+          </Flex>
         </FormSection>
 
         <FormSection title="כתובת דוא״ל">
-          <div className={styles['form-row']}>
+          <Flex direction="row" justify="flex-start" align="flex-start">
             <form.AppField
               name="email"
               validators={{
@@ -86,44 +87,46 @@ export const RegistrationForm = () => {
             <form.AppField name="isEmailConfirmed">
               {field => <field.CheckBox label="לאשר קבלת הודעות" />}
             </form.AppField>
-          </div>
+          </Flex>
         </FormSection>
 
         <FormSection title="כתובת">
-          <div className={styles['form-row']}>
-            <form.AppField
-              name="city"
-              validators={{
-                onChange: ({ value }) => isInputRequired(value)
-              }}
-            >
-              {field => <field.Input label="עיר" isRequired={true} />}
-            </form.AppField>
-            <form.AppField
-              name="street"
-              validators={{
-                onChange: ({ value }) => isInputRequired(value)
-              }}
-            >
-              {field => <field.Input label="רחוב" isRequired={true} />}
-            </form.AppField>
-            <form.AppField
-              name="houseNumber"
-              validators={{
-                onChange: ({ value }) => isInputRequired(value)
-              }}
-            >
-              {field => <field.Input label="מספר בית" isRequired={true} />}
-            </form.AppField>
-          </div>
-          <div className={styles['form-row']}>
-            <form.AppField name="apartment">{field => <field.Input label="דירה" />}</form.AppField>
-            <form.AppField name="zipCode">{field => <field.Input label="מיקוד" />}</form.AppField>
-          </div>
+          <Flex direction="column" justify="flex-start" align="stretch">
+            <Flex direction="row" justify="flex-start" align="flex-start">
+              <form.AppField
+                name="city"
+                validators={{
+                  onChange: ({ value }) => isInputRequired(value)
+                }}
+              >
+                {field => <field.Input label="עיר" isRequired={true} />}
+              </form.AppField>
+              <form.AppField
+                name="street"
+                validators={{
+                  onChange: ({ value }) => isInputRequired(value)
+                }}
+              >
+                {field => <field.Input label="רחוב" isRequired={true} />}
+              </form.AppField>
+              <form.AppField
+                name="houseNumber"
+                validators={{
+                  onChange: ({ value }) => isInputRequired(value)
+                }}
+              >
+                {field => <field.Input label="מספר בית" isRequired={true} />}
+              </form.AppField>
+            </Flex>
+            <Flex direction="row" justify="flex-start" align="flex-start">
+              <form.AppField name="apartment">{field => <field.Input label="דירה" />}</form.AppField>
+              <form.AppField name="zipCode">{field => <field.Input label="מיקוד" />}</form.AppField>
+            </Flex>
+          </Flex>
         </FormSection>
 
         <FormSection title="טלפונים">
-          <div className={styles['form-row']}>
+          <Flex direction="row" justify="flex-start" align="flex-start">
             <form.AppField
               name="primaryPhone"
               validators={{
@@ -135,13 +138,13 @@ export const RegistrationForm = () => {
             <form.AppField name="secondaryPhone">
               {field => <field.Input label="מספר טלפון משני" />}
             </form.AppField>
-          </div>
+          </Flex>
         </FormSection>
 
-        <div className={styles['form-buttons']}>
+        <Flex justify="space-between" className={styles['form-buttons']}>
           <Button variant="text">חזרה</Button>
           <Button type="submit">המשך</Button>
-        </div>
+        </Flex>
       </Card>
     </form>
   );
