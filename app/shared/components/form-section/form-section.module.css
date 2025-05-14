@@ -1,0 +1,16 @@
+.form-section {
+  margin-bottom: 1.5rem;
+}
+
+.form-section-header {
+  background-color: #f0f7ff;
+  padding: 0.5rem 1rem;
+  margin-bottom: 1rem;
+  font-weight: 500;
+  font-size: 0.9rem;
+  color: #333;
+}
+
+.form-section-content {
+  padding: 0 1rem;
+}
