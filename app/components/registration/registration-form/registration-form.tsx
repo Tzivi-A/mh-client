@@ -35,7 +35,7 @@ export const RegistrationForm = () => {
       }
     },
     onSubmit: ({ value }) => {
-      alert('Form submitted:', value);
+      console.log('Form submitted:', value);
     }
   });
 
