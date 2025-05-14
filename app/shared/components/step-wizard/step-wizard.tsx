@@ -33,7 +33,7 @@ export const StepWizard = ({ steps, initialStep = 0 }: StepWizardProps) => {
   const isLastStep = currentStep === steps.length - 1;
 
   return (
-    <div className={styles.stepWizard}>
+    <Flex direction="column">
       <div className={styles.content}>{steps[currentStep].component}</div>
       <Flex justify="flex-end" className={styles.buttons}>
         <Flex gap="20px">
