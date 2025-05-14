@@ -1,14 +1,13 @@
 import { useState } from 'react';
-import { Progress } from '@ui/progress/progress';
 import { registrationStepsMapper } from '~/mappers/registration/registration-progress-mapper';
 import MHHeader from '~/components/mh-header/mh-header';
 import Section from '@ui/section/section';
-import { StepWizard } from '@ui/step-wizard/step-wizard';
 import type { Step } from '@app-types/step-type';
 import RegistrationForm from '~/components/registration/registration-form/registration-form';
 import PartyDetails from '~/components/registration/party-details/party-details';
 import ContactDetails from '~/components/registration/contact-details/contact-details';
 import Approval from '~/components/registration/approval/approval';
+import { Wizard } from '@ui/wizard/wizard';
 
 export const RegistrationPage = () => {
   const [currentStep] = useState(0);
@@ -40,8 +39,7 @@ export const RegistrationPage = () => {
     <div>
       <MHHeader title="מערכת לניהול חשבונות" isLink={false} />
       <Section header="טופס פניית מועמד לתחילת דיווח">
-        <Progress steps={registrationStepsMapper} currentStep={currentStep + 1} />
-        <StepWizard steps={steps} initialStep={currentStep} />
+        <Wizard progressSteps={registrationStepsMapper} wizardSteps={steps} initialStep={currentStep} />
       </Section>
     </div>
   );
