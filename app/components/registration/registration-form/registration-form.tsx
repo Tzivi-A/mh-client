@@ -1,10 +1,8 @@
 import { Card } from '@ui/card/card';
 import useAppForm, { useStore } from '@hooks/use-app-form';
-import { Button } from '@ui/button/button';
-import { isInputRequired } from '~/validators/common/requierd-validators';
 import FormSection from '@ui/form-section/form-section';
 import { Flex } from '@ui/layout/flex/flex';
-import styles from './registration-form.module.css';
+import { isInputRequired } from '~/validators/common/requierd-validators';
 import type { RegistrationFormValues } from '~/types/registration/registration-form-values';
 
 export const RegistrationForm = () => {
@@ -124,11 +122,6 @@ export const RegistrationForm = () => {
             </form.AppField>
           </Flex>
         </FormSection>
-
-        <Flex justify="space-between" className={styles['form-buttons']}>
-          <Button variant="text">חזרה</Button>
-          <Button type="submit">המשך</Button>
-        </Flex>
       </Card>
     </form>
   );
