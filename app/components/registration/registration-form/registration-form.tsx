@@ -72,21 +72,13 @@ export const RegistrationForm = () => {
               {field => <field.Input label="דואר אלקטרוני" />}
             </form.AppField>
 
-            <form.AppField name="phone">
-              {field => <field.Input label="טלפון" />}
-            </form.AppField>
+            <form.AppField name="phone">{field => <field.Input label="טלפון" />}</form.AppField>
 
-            <form.AppField name="address">
-              {field => <field.Input label="כתובת" />}
-            </form.AppField>
+            <form.AppField name="address">{field => <field.Input label="כתובת" />}</form.AppField>
 
-            <form.AppField name="city">
-              {field => <field.Input label="עיר" />}
-            </form.AppField>
+            <form.AppField name="city">{field => <field.Input label="עיר" />}</form.AppField>
 
-            <form.AppField name="zipCode">
-              {field => <field.Input label="מיקוד" />}
-            </form.AppField>
+            <form.AppField name="zipCode">{field => <field.Input label="מיקוד" />}</form.AppField>
 
             <Flex justify="flex-end">
               <Button type="submit">המשך</Button>
