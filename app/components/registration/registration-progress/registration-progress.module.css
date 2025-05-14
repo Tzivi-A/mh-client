@@ -19,17 +19,6 @@
 .step.active {
   color: #003399;
 }
-.step-number {
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  background: #eee;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 14px;
-  font-weight: bold;
-}
 
 .active .step-number {
   background: #003399;
