@@ -40,14 +40,22 @@ interface RegistrationProgressProps {
 
 export const RegistrationProgress = ({ currentStep }: RegistrationProgressProps) => {
   const getStepClassName = (stepId: number) => {
-    if (currentStep === stepId) return styles.active;
-    if (currentStep > stepId) return styles.completed;
+    if (currentStep === stepId) {
+      return styles.active;
+    }
+    if (currentStep > stepId) {
+      return styles.completed;
+    }
     return '';
   };
 
   const getDividerClassName = (stepId: number) => {
-    if (currentStep > stepId) return styles.completed;
-    if (currentStep === stepId) return styles.active;
+    if (currentStep > stepId) {
+      return styles.completed;
+    }
+    if (currentStep === stepId) {
+      return styles.active;
+    }
     return '';
   };
 
