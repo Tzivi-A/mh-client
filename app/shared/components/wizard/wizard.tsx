@@ -11,7 +11,7 @@ interface WizardProps {
 export const Wizard = ({ progressSteps, wizardSteps, initialStep = 0 }: WizardProps) => {
   return (
     <>
-      <Progress steps={progressSteps} currentStep={initialStep} />
+      <Progress steps={progressSteps} currentStep={initialStep + 1} />
       <StepWizard steps={wizardSteps} initialStep={initialStep} />
     </>
   );
