@@ -27,7 +27,7 @@ export const RegistrationPage = () => {
     {
       id: 4,
       title: 'אישור פרטים',
-      component: <div>Step 4 Content</div>
+      component: <MHHeader title="Step 4" isLink={false}/>
     }
   ];
 
