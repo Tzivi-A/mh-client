@@ -1,17 +1,24 @@
 import { Switch as AntSwitch } from 'antd';
-import InputWrapper from '@ui/form/input-wrapper/input-wrapper';
 import type { FormFieldProps } from '@app-types/form-type';
+import styles from './switch.module.css';
 
 export interface SwitchProps extends FormFieldProps<boolean> {
   label?: string;
 }
 
-export const Switch = ({ id, label, value, onChange, error, isRequired }: SwitchProps) => {
+export const Switch = ({ id, label, value, onChange, error }: SwitchProps) => {
   return (
-    <InputWrapper id={id} label={label} error={error} isRequired={isRequired}>
+    <div className={styles['switch-wrapper']}>
+      {label && (
+        <label htmlFor={id} className={styles['switch-label']}>
+          {label}
+        </label>
+      )}
       <AntSwitch id={id} checked={value} onChange={checked => onChange?.(checked)} />
-    </InputWrapper>
+    </div>
   );
 };
 
 export default Switch;
+
+export { Switch };
