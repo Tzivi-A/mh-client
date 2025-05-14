@@ -82,7 +82,7 @@ export const RegistrationForm = () => {
                 onChange: ({ value }) => isInputRequired(value)
               }}
             >
-              {field => <field.Input label="כתובת דוא"\nל" isRequired={true} />}
+              {field => <field.Input label="כתובת דוא''ל'" isRequired={true} />}
             </form.AppField>
             <form.AppField name="isEmailConfirmed">
               {field => <field.CheckBox label="לאשר קבלת הודעות" />}
