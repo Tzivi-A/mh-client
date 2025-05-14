@@ -18,7 +18,3 @@ export const Switch = ({ id, label, value, onChange }: SwitchProps) => {
     </div>
   );
 };
-
-export default Switch;
-
-export { Switch };
