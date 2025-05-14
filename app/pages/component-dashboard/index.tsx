@@ -50,10 +50,14 @@ export const ComponentDashboardPage = () => {
 
   const getUserApi = useAppMutation({
     url: 'https://reqres.in/api/users',
-    method: 'POST', // Specify POST method
+    method: 'POST',
     mutationOptions: {
-      onSuccess: data => console.log('Mutation successful:', data),
-      onError: error => console.error('Mutation failed:', error)
+      onSuccess: () => {
+        // Handle success silently
+      },
+      onError: () => {
+        // Handle error silently
+      }
     }
   });
 
@@ -78,10 +82,9 @@ export const ComponentDashboardPage = () => {
       alert(JSON.stringify(value));
       todoApiFuture.refetch();
 
-      // Example of triggering the mutation with POST data
       getUserApi.mutate({
         requestData: {
-          name: 'John', // Data to be sent in the POST request body
+          name: 'John',
           job: 'developer'
         }
       });

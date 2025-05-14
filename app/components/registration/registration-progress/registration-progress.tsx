@@ -39,19 +39,25 @@ interface RegistrationProgressProps {
 }
 
 export const RegistrationProgress = ({ currentStep }: RegistrationProgressProps) => {
+  const getStepClassName = (stepId: number) => {
+    if (currentStep === stepId) return styles.active;
+    if (currentStep > stepId) return styles.completed;
+    return '';
+  };
+
+  const getDividerClassName = (stepId: number) => {
+    if (currentStep > stepId) return styles.completed;
+    if (currentStep === stepId) return styles.active;
+    return '';
+  };
+
   return (
     <div className={styles['progress-container']}>
       {steps.map((step, index) => (
         <>
           <div
             key={step.id}
-            className={`${styles.step} ${
-              currentStep === step.id
-                ? styles.active
-                : currentStep > step.id
-                ? styles.completed
-                : ''
-            }`}
+            className={`${styles.step} ${getStepClassName(step.id)}`}
           >
             <Image src={step.icon} alt={step.title} className={styles['step-icon']} />
             <span className={styles['step-number']}>{step.id}</span>
@@ -59,17 +65,11 @@ export const RegistrationProgress = ({ currentStep }: RegistrationProgressProps)
           </div>
           {index < steps.length - 1 && (
             <div
-              className={`${styles.divider} ${
-                currentStep > step.id
-                  ? styles.completed
-                  : currentStep === step.id
-                  ? styles.active
-                  : ''
-              }`}
+              className={`${styles.divider} ${getDividerClassName(step.id)}`}
             />
           )}
         </>
       ))}
     </div>
   );
-}
+};
