@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { RegistrationProgress } from '~/components/registration/registration-progress/registration-progress';
 import MHHeader from '~/components/mh-header/mh-header';
+import Section from '@ui/section/section';
 
 export const RegistrationPage = () => {
   const [currentStep] = useState(2);
