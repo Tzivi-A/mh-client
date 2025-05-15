@@ -5,9 +5,17 @@
   flex-direction: row-reverse;
 }
 
+.switch-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
 .switch-label {
   font-size: 13px;
   color: #333;
+  user-select: none;
 }
 
 .switch {
@@ -15,6 +23,7 @@
   display: inline-block;
   width: 44px;
   height: 22px;
+  flex-shrink: 0;
 }
 
 .input {
