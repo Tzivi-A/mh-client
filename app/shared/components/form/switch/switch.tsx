@@ -20,7 +20,7 @@ export const Switch = ({ id, label, value, onChange }: SwitchProps) => {
           checked={value}
           onChange={e => onChange?.(e.target.checked)}
         />
-        <span className={styles.slider}></span>
+        <span className={styles.slider} />
       </label>
     </div>
   );
