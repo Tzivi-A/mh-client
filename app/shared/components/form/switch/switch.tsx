@@ -1,4 +1,3 @@
-import { Switch as AntSwitch } from 'antd';
 import type { FormFieldProps } from '@app-types/form-type';
 import styles from './switch.module.css';
 
@@ -14,7 +13,15 @@ export const Switch = ({ id, label, value, onChange }: SwitchProps) => {
           {label}
         </label>
       )}
-      <AntSwitch id={id} checked={value} onChange={checked => onChange?.(checked)} />
+      <label className={styles.switch}>
+        <input
+          type="checkbox"
+          id={id}
+          checked={value}
+          onChange={e => onChange?.(e.target.checked)}
+        />
+        <span className={styles.slider}></span>
+      </label>
     </div>
   );
 };
