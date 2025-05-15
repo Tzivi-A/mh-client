@@ -13,14 +13,14 @@ export const Switch = ({ id, label, value, onChange }: SwitchProps) => {
           {label}
         </label>
       )}
-      <label className={styles.switch}>
+      <label className={styles.switch} htmlFor={id}>
         <input
           type="checkbox"
           id={id}
           checked={value}
           onChange={e => onChange?.(e.target.checked)}
         />
-        <span className={styles.slider} />
+        <span className={styles.slider}></span>
       </label>
     </div>
   );

@@ -8,8 +8,8 @@ import type { RegistrationFormValues } from '~/types/registration/registration-f
 export const RegistrationForm = () => {
   const form = useAppForm({
     defaultValues: {} as RegistrationFormValues,
-    onSubmit: ({ value }) => {
-      console.log('Form submitted:', value);
+    onSubmit: () => {
+      // Form submission logic will be handled here
     }
   });
 
