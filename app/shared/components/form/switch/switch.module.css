@@ -3,12 +3,12 @@
   align-items: center;
   gap: 8px;
   cursor: pointer;
+  user-select: none;
 }
 
 .switch-label {
   font-size: 13px;
   color: #333;
-  user-select: none;
 }
 
 .switch {
