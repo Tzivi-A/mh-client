@@ -1,6 +1,6 @@
 import { DividedRowList } from '@ui/divided-row-list/divided-row-list';
 import type { DividerTypeEnum } from '@app-types/enums/divider-type';
-import { StepItem } from '@ui/step-item/step-item';
+import { InfoBlock } from '@ui/info-block/info-block';
 import styles from './progress.module.css';
 
 export interface ProgressStep {
@@ -26,7 +26,7 @@ export const Progress = ({ steps, currentStep }: ProgressProps) => {
       <DividedRowList
         items={steps}
         renderItem={step => (
-          <StepItem
+          <InfoBlock
             icon={getStepIcon(step)}
             title={step.title}
             subtitle={step.subtitle}
