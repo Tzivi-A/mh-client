@@ -9,18 +9,18 @@ export interface SwitchProps extends FormFieldProps<boolean> {
 export const Switch = ({ id, label, value, onChange }: SwitchProps) => {
   return (
     <Flex direction="column">
-      <label className={styles['switch-container']}>
+      <label htmlFor={id} className={styles['switch-container']}>
         <input
           type="checkbox"
           id={id}
           checked={value}
           onChange={e => onChange?.(e.target.checked)}
           className={styles.input}
-          aria-label={label}
+          aria-label={label || 'Toggle switch'}
         />
-        <span className={styles.switch}>
-          <span className={styles.slider} />
-        </span>
+        <div className={styles.switch}>
+          <div className={styles.slider} />
+        </div>
         {label && <span className={styles['switch-label']}>{label}</span>}
       </label>
     </Flex>
