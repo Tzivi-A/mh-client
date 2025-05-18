@@ -1,5 +1,5 @@
 import { Image } from '@ui/image/image';
-import styles from './step-item.module.css';
+import styles from './info-block.module.css';
 
 export interface InfoBlockProps {
   icon: string;
