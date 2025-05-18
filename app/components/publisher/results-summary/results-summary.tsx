@@ -26,7 +26,7 @@ export const PublisherResultSummary = ({ items }: PublisherResultsSummaryProps) 
             icon={displayIcon}
             title={titleIncludesCount ? title : `${formatHebrewNumber(count ?? 0)} ${title}`}
             subtitle={currencyFormatter.format(sum)}
-            isActive = {!isZero}
+            isActive={!isZero}
           />
           // <div className={styles['results-summary-item']}>
           //   <div className={styles['results-summary-info']}>
