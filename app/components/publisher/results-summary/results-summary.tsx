@@ -4,7 +4,7 @@ import { DividedRowList } from '@ui/divided-row-list/divided-row-list';
 import { currencyFormatter, formatHebrewNumber } from '@utils/number-utils';
 import { Image } from '@ui/image/image';
 import { PublicationSearchIcons } from '~/utils/constants/publisher/publication-search';
-
+import {StepItem} from '@ui/step-item'
 interface PublisherResultsSummaryProps {
   items: PublishResultSummaryData[];
 }
@@ -21,19 +21,25 @@ export const PublisherResultSummary = ({ items }: PublisherResultsSummaryProps) 
         const getClassName = (baseClass: string) =>
           isZero ? styles[`${baseClass}-zero`] : styles[baseClass];
         return (
-          <div className={styles['results-summary-item']}>
-            <div className={styles['results-summary-info']}>
-              <div className={getClassName('results-summary-title')}>
-                {titleIncludesCount ? title : `${formatHebrewNumber(count ?? 0)} ${title}`}
-              </div>
-              <div className={getClassName('results-summary-sum')}>
-                {currencyFormatter.format(sum)}
-              </div>
-            </div>
-            <div className={styles['results-summary-icon']}>
-              <Image src={displayIcon} alt={`${title} icon`} />
-            </div>
-          </div>
+          <StepItem
+            icon={displayIcon}
+            title={titleIncludesCount ? title : `${formatHebrewNumber(count ?? 0)} ${title}`}
+            subtitle={currencyFormatter.format(sum)}
+            {/* isActive={currentStep === step.id} */}
+          />
+          // <div className={styles['results-summary-item']}>
+          //   <div className={styles['results-summary-info']}>
+          //     <div className={getClassName('results-summary-title')}>
+          //       {titleIncludesCount ? title : `${formatHebrewNumber(count ?? 0)} ${title}`}
+          //     </div>
+          //     <div className={getClassName('results-summary-sum')}>
+          //       {currencyFormatter.format(sum)}
+          //     </div>
+          //   </div>
+          //   <div className={styles['results-summary-icon']}>
+          //     <Image src={displayIcon} alt={`${title} icon`} />
+          //   </div>
+          // </div>
         );
       }}
     />
