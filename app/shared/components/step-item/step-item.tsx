@@ -8,7 +8,7 @@ export interface StepItemProps {
   isActive?: boolean;
 }
 
-export const StepItem = ({ icon, title, subtitle, isActive = false }: StepItemProps) => {
+export const InfoBlock = ({ icon, title, subtitle, isActive = false }: StepItemProps) => {
   const containerClassName = `${styles.step} ${isActive ? styles.active : ''}`;
 
   return (
@@ -22,4 +22,4 @@ export const StepItem = ({ icon, title, subtitle, isActive = false }: StepItemPr
   );
 };
 
-export default StepItem;
+export default InfoBlock;
