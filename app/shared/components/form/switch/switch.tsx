@@ -9,7 +9,7 @@ export interface SwitchProps extends FormFieldProps<boolean> {
 
 export const Switch = ({ id, label, value, onChange }: SwitchProps) => {
   const { t } = useTranslations();
-  
+
   return (
     <Flex direction="column">
       <label className={styles['switch-container']}>

@@ -4,7 +4,7 @@ import { DividedRowList } from '@ui/divided-row-list/divided-row-list';
 import { currencyFormatter, formatHebrewNumber } from '@utils/number-utils';
 import { Image } from '@ui/image/image';
 import { PublicationSearchIcons } from '~/utils/constants/publisher/publication-search';
-import {StepItem} from '@ui/step-item';
+import { StepItem } from '@ui/step-item';
 
 interface PublisherResultsSummaryProps {
   items: PublishResultSummaryData[];
