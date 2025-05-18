@@ -1,0 +1,97 @@
+{
+  "common": {
+    "back": "חזרה",
+    "continue": "המשך",
+    "finish": "סיום",
+    "required": "שדה חובה",
+    "search": "חפש",
+    "clearSearch": "נקה מאפייני חיפוש",
+    "noResults": "אין תוצאות"
+  },
+  "switch": {
+    "sendPassword": "לשלוח סיסמה"
+  },
+  "registration": {
+    "title": "מערכת לניהול חשבונות",
+    "formTitle": "טופס פניית מועמד לתחילת דיווח",
+    "steps": {
+      "step1": {
+        "title": "שלב 1",
+        "subtitle": "פרטי המועמד והתמודדות"
+      },
+      "step2": {
+        "title": "שלב 2",
+        "subtitle": "פרטי הסיעה והבנק"
+      },
+      "step3": {
+        "title": "שלב 3",
+        "subtitle": "פרטי איש קשר"
+      },
+      "step4": {
+        "title": "שלב 4",
+        "subtitle": "אישור פרטים"
+      }
+    },
+    "personalDetails": {
+      "title": "פרטים אישיים",
+      "idNumber": "תעודת זהות",
+      "firstName": "שם פרטי",
+      "lastName": "שם משפחה"
+    },
+    "email": {
+      "title": "כתובת דוא״ל",
+      "address": "כתובת דוא''ל'"
+    },
+    "address": {
+      "title": "כתובת",
+      "city": "עיר",
+      "street": "רחוב",
+      "houseNumber": "מספר בית",
+      "apartment": "דירה",
+      "zipCode": "מיקוד"
+    },
+    "phone": {
+      "title": "טלפונים",
+      "primary": "מספר טלפון נייד",
+      "secondary": "מספר טלפון נוסף"
+    }
+  },
+  "publisher": {
+    "title": "תרומות, ערבויות והלוואות לסיעות בבחירות לרשויות מקומיות",
+    "searchTitle": "חיפוש תרומה/ ערבות/ הלוואה",
+    "disclaimer": "המידע על התרומות מפורסם בהסתמך על הדיווח של המועמד בלבד ועל אחריותו.",
+    "electionCharacteristics": {
+      "title": "מאפייני הבחירות",
+      "electionDate": "תאריך בחירות",
+      "city": "ישוב",
+      "faction": "סיעה"
+    },
+    "contributionCharacteristics": {
+      "title": "מאפייני התרומה/ הערבות/ ההלוואה",
+      "fullName": "שם מלא",
+      "placeholder": "שם התורם/הערב/המלווה",
+      "city": "ישוב",
+      "country": "ארץ",
+      "fromDate": "מתאריך",
+      "toDate": "עד תאריך",
+      "fromSum": "מסכום",
+      "toSum": "עד סכום",
+      "searchType": "סוג חיפוש"
+    },
+    "table": {
+      "fundingType": "סוג מימון",
+      "electionCharacteristics": "מאפייני בחירות",
+      "contributorCharacteristics": "מאפייני התורם/ המלווה/ הערב",
+      "contributionCharacteristics": "מאפייני התרומה/ ההלוואה/ הערבות",
+      "faction": "סיעה",
+      "city": "ישוב",
+      "electionDate": "תאריך בחירות",
+      "fullName": "שם מלא",
+      "country": "ארץ",
+      "date": "תאריך",
+      "amount": "סכום",
+      "loanBalance": "יתרת הלוואה"
+    },
+    "maxRecordsNote": "שימו לב: ניתן להציג עד 1000 רשומות. מוצגות בטבלה 1000 האחרונות, נא לצמצם את נתוני החיפוש."
+  }
+}
