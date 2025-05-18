@@ -19,8 +19,6 @@ export const PublisherResultSummary = ({ items }: PublisherResultsSummaryProps) 
         const displayIcon = isZero
           ? PublicationSearchIcons[publicationSearchType].zero
           : PublicationSearchIcons[publicationSearchType].normal;
-        // const getClassName = (baseClass: string) =>
-        //   isZero ? styles[`${baseClass}-zero`] : styles[baseClass];
         return (
           <StepItem
             icon={displayIcon}
@@ -28,19 +26,6 @@ export const PublisherResultSummary = ({ items }: PublisherResultsSummaryProps) 
             subtitle={currencyFormatter.format(sum)}
             isActive={!isZero}
           />
-          // <div className={styles['results-summary-item']}>
-          //   <div className={styles['results-summary-info']}>
-          //     <div className={getClassName('results-summary-title')}>
-          //       {titleIncludesCount ? title : `${formatHebrewNumber(count ?? 0)} ${title}`}
-          //     </div>
-          //     <div className={getClassName('results-summary-sum')}>
-          //       {currencyFormatter.format(sum)}
-          //     </div>
-          //   </div>
-          //   <div className={styles['results-summary-icon']}>
-          //     <Image src={displayIcon} alt={`${title} icon`} />
-          //   </div>
-          // </div>
         );
       }}
     />
