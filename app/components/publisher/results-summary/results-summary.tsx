@@ -2,7 +2,7 @@ import type { PublisherResultSummaryData as PublishResultSummaryData } from '~/t
 import { DividedRowList } from '@ui/divided-row-list/divided-row-list';
 import { currencyFormatter, formatHebrewNumber } from '@utils/number-utils';
 import { PublicationSearchIcons } from '~/utils/constants/publisher/publication-search';
-import { StepItem } from '@ui/step-item/step-item';
+import { InfoBlock } from '@ui/info-block/info-block';
 
 interface PublisherResultsSummaryProps {
   items: PublishResultSummaryData[];
@@ -18,7 +18,7 @@ export const PublisherResultSummary = ({ items }: PublisherResultsSummaryProps) 
           ? PublicationSearchIcons[publicationSearchType].zero
           : PublicationSearchIcons[publicationSearchType].normal;
         return (
-          <StepItem
+          <InfoBlock
             icon={displayIcon}
             title={titleIncludesCount ? title : `${formatHebrewNumber(count ?? 0)} ${title}`}
             subtitle={currencyFormatter.format(sum)}
