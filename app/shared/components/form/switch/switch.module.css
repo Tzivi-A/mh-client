@@ -1,22 +1,7 @@
 .switch-container {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  cursor: pointer;
-}
-
-.switch-label {
-  font-size: 13px;
-  color: #333;
-  user-select: none;
-}
-
-.switch {
-  position: relative;
   display: inline-block;
-  width: 44px;
-  height: 22px;
-  flex-shrink: 0;
+  position: relative;
+  cursor: pointer;
 }
 
 .input {
@@ -26,19 +11,17 @@
   position: absolute;
 }
 
-.slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 44px;
+  height: 22px;
   background-color: #ccc;
-  transition: .4s;
   border-radius: 34px;
+  transition: .4s;
 }
 
-.slider:before {
+.slider {
   position: absolute;
   content: "";
   height: 16px;
@@ -50,14 +33,14 @@
   border-radius: 50%;
 }
 
-input:checked ~ .switch .slider {
+input:checked + .switch {
   background-color: #1890ff;
 }
 
-input:focus ~ .switch .slider {
+input:focus + .switch {
   box-shadow: 0 0 1px #1890ff;
 }
 
-input:checked ~ .switch .slider:before {
+input:checked + .switch .slider {
   transform: translateX(22px);
 }
