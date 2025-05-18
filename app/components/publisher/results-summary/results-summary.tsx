@@ -4,7 +4,8 @@ import { DividedRowList } from '@ui/divided-row-list/divided-row-list';
 import { currencyFormatter, formatHebrewNumber } from '@utils/number-utils';
 import { Image } from '@ui/image/image';
 import { PublicationSearchIcons } from '~/utils/constants/publisher/publication-search';
-import {StepItem} from '@ui/step-item'
+import {StepItem} from '@ui/step-item';
+
 interface PublisherResultsSummaryProps {
   items: PublishResultSummaryData[];
 }
@@ -25,7 +26,6 @@ export const PublisherResultSummary = ({ items }: PublisherResultsSummaryProps) 
             icon={displayIcon}
             title={titleIncludesCount ? title : `${formatHebrewNumber(count ?? 0)} ${title}`}
             subtitle={currencyFormatter.format(sum)}
-            {/* isActive={currentStep === step.id} */}
           />
           // <div className={styles['results-summary-item']}>
           //   <div className={styles['results-summary-info']}>
