@@ -19,8 +19,8 @@ export const PublisherResultSummary = ({ items }: PublisherResultsSummaryProps) 
         const displayIcon = isZero
           ? PublicationSearchIcons[publicationSearchType].zero
           : PublicationSearchIcons[publicationSearchType].normal;
-        const getClassName = (baseClass: string) =>
-          isZero ? styles[`${baseClass}-zero`] : styles[baseClass];
+        // const getClassName = (baseClass: string) =>
+        //   isZero ? styles[`${baseClass}-zero`] : styles[baseClass];
         return (
           <StepItem
             icon={displayIcon}
