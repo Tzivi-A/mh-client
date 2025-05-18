@@ -1,4 +1,4 @@
-import styles from './results-summary.module.css';
+// import styles from './results-summary.module.css';
 import type { PublisherResultSummaryData as PublishResultSummaryData } from '~/types/publisher/publisher-summary-result-type';
 import { DividedRowList } from '@ui/divided-row-list/divided-row-list';
 import { currencyFormatter, formatHebrewNumber } from '@utils/number-utils';
