@@ -1,6 +1,6 @@
 import type { FormFieldProps } from '@app-types/form-type';
+import InputWrapper from '@ui/form/input-wrapper/input-wrapper';
 import styles from './switch.module.css';
-import { Flex } from '@ui/layout/flex/flex';
 
 export interface SwitchProps extends FormFieldProps<boolean> {
   label?: string;
@@ -8,7 +8,7 @@ export interface SwitchProps extends FormFieldProps<boolean> {
 
 export const Switch = ({ id, label, value, onChange, error, isRequired }: SwitchProps) => {
   return (
-    <Flex direction="column">
+    <InputWrapper id={id} label={label} error={error} isRequired={isRequired}>
       <label className={styles['switch-container']} htmlFor={id}>
         <input
           type="checkbox"
@@ -16,13 +16,11 @@ export const Switch = ({ id, label, value, onChange, error, isRequired }: Switch
           checked={value}
           onChange={e => onChange?.(e.target.checked)}
           className={styles.input}
-          aria-label={label}
         />
         <span className={styles.switch}>
           <span className={styles.slider} />
         </span>
-        {label && <span className={styles['switch-label']}>{label}</span>}
       </label>
-    </Flex>
+    </InputWrapper>
   );
 };
