@@ -1,14 +1,14 @@
 import { Image } from '@ui/image/image';
 import styles from './step-item.module.css';
 
-export interface StepItemProps {
+export interface InfoBlockProps {
   icon: string;
   title: string;
   subtitle: string;
   isActive?: boolean;
 }
 
-export const InfoBlock = ({ icon, title, subtitle, isActive = false }: StepItemProps) => {
+export const InfoBlock = ({ icon, title, subtitle, isActive = false }: InfoBlockProps) => {
   const containerClassName = `${styles.step} ${isActive ? styles.active : ''}`;
 
   return (
